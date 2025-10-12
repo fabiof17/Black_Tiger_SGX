@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(Windows) Launch PCE",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "C:/PCEngine/huc/bin/hucc.exe",
+            "args": ["-v", "${fileBasename}"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [{"name": "PCE_INCLUDE", "value": "C:/PCEngine/huc/include/hucc"}, {"name": "Path", "value": "${env:Path};C:/PCEngine/huc/bin"}],
+            "console": "externalTerminal"
+        },
+    ]
+}

@@ -1,0 +1,119 @@
+#include "huc.h"
+#include "hucc-scroll.h"
+#include "hucc-chrmap.h"
+#include "hucc-blkmap.h"
+
+
+
+
+#include "include/constants.c"
+#include "include/variables.c"
+
+
+
+
+#include "include/gfx_BG.c"
+#include "include/gfx_SPRITES.c"
+
+
+
+#include "include/tables_player.c"
+#include "include/routines_LEVELS.c"
+#include "include/init.c"
+
+
+
+
+
+
+main()
+{
+	if(!sgx_detect())
+	{
+        put_string("Halt: SGX hardware not found", 2, 13);
+
+        for(;;)
+        {
+            // INFINITE LOOP //
+        }
+    }
+
+
+
+
+    init_VARIABLES();
+
+
+    init_PLAYER();
+
+
+
+
+    //**************************************************************************************//
+    //                                                                                      //
+    //                                      TITLE                                           //
+    //                                                                                      //
+    //**************************************************************************************//
+    for(;;)
+    {
+
+        if(sequence_id == SEQUENCE_TITLE)
+        {
+
+        }
+
+
+        else if(sequence_id == SEQUENCE_GAME)
+        {
+            // LOADING LOGO SCREEN //
+            if(sequence_loaded == FALSE)
+            {
+                init_LEVEL();
+
+                sequence_loaded = TRUE;
+            }
+
+
+            else
+            {
+                if(level_id == 1)
+                {
+                    vsync();
+
+                    joypad_BUTTONS();
+                    joypad_DIR();
+                    update_PLAYER();
+
+                    // UPDATE PCE SAT //
+                    satb_update();
+
+                    //put_number(map_blk_flag,1,32,0);
+                    //put_number(player_previous_axis,1,15,1);
+                }
+
+                else if(level_id == 2)
+                {
+                    //sequence_LV2();
+                }
+
+                else if(level_id == 3)
+                {
+                    //sequence_LV3();
+                }
+
+                else if(level_id == 4)
+                {
+                    //sequence_LV4();
+                }
+
+                else if(level_id == 5)
+                {
+                    //sequence_LV5();
+                }
+            }
+        }
+    }
+
+
+}
+
