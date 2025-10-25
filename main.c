@@ -83,8 +83,9 @@ main()
                     update_PLAYER_POSITION();
                     scroll_BG();
 
-                    joypad_BUTTONS();
+                    //joypad_BUTTONS();
                     joypad_DIR();
+                    joypad_BUTTONS();
 
                     satb_update();
 

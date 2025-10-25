@@ -39,3 +39,8 @@ const signed char       TABLE_PLAYER_JUMP_V[35]     =   {
                                                             4,
                                                             5
                                                         };
+
+
+const signed char       TABLE_PLAYER_FALL[10]       =   {
+                                                            1
+                                                        };

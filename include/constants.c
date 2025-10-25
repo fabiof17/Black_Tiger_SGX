@@ -37,6 +37,7 @@
 #define TILES_176 2816
 #define TILES_192 3072
 #define TILES_208 3328
+#define TILES_224 3584+256
 
 
 
@@ -78,6 +79,7 @@
 #define STATE_HANG          10
 #define STATE_CLIMB_UP      11
 #define STATE_CLIMB_DOWN    12
+#define STATE_JUMP_LADDER   13
 
 
 
