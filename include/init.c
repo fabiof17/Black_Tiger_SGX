@@ -96,7 +96,7 @@ void init_LEVEL()
 		// in pixels, and the draw width and height in terms of 8x8 characters.
 
 		sgx_map_pxl_x = 96;
-		sgx_map_pxl_y = 512;
+		sgx_map_pxl_y = 768;
 
 		sgx_map_draw_w = 63;
 		sgx_map_draw_h = 29;
@@ -213,7 +213,7 @@ void init_LEVEL()
 
 
 		player_pos_x = 112;
-		player_pos_y = 128;
+		player_pos_y = PLAYER_BASE_Y_POS;
 
 
 		spr_x(player_pos_x);
@@ -251,7 +251,7 @@ void init_LEVEL()
 		//                                                                                      //
 		//**************************************************************************************//
 
-        //
+        camera_max_y_position = 768;
 
 
 		// VSYNC //

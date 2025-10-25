@@ -32,6 +32,11 @@
 #define TILES_96  1536
 #define TILES_112 1792
 #define TILES_128 2048
+#define TILES_144 2304
+#define TILES_160 2560
+#define TILES_176 2816
+#define TILES_192 3072
+#define TILES_208 3328
 
 
 
@@ -41,6 +46,9 @@
 #define SEQUENCE_TITLE      0
 #define SEQUENCE_INTRO      1
 #define SEQUENCE_GAME       2
+
+
+#define CAMERA_RECENTER_VELOCITY    1
 
 
 
@@ -67,10 +75,15 @@
 #define STATE_CROUCH        7
 #define STATE_CROUCH_PUNCH  8
 #define STATE_FALL          9
+#define STATE_HANG          10
+#define STATE_CLIMB_UP      11
+#define STATE_CLIMB_DOWN    12
 
 
 
 #define PLAYER_VRAM_ADR     0x4800
+
+#define PLAYER_BASE_Y_POS   128
 
 
 
@@ -83,6 +96,7 @@
 
 #define TILE_EMPTY          0
 #define TILE_BG             1
+#define TILE_LADDER         2
 
 
 

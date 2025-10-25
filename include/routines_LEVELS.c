@@ -10,27 +10,54 @@
 
 
 
-int calculate_COLLISION_DEEP(unsigned char x , unsigned char y)
+int check_BG(unsigned char x_offset , unsigned char y_offset)
 {
     int player_COLL_X;
     int player_COLL_Y;
 
 
-    player_COLL_X = player_pos_x + x;
-    player_COLL_Y = player_pos_y + 32 - y;
+    player_COLL_X = player_pos_x + x_offset;
+    player_COLL_Y = player_pos_y + 32 - y_offset;
 
-
-    get_map_block(player_COLL_X + sgx_map_pxl_y, player_COLL_Y + sgx_map_pxl_y);
+    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
 }
 
 
-int check_WALL_R()
+int check_WALL_TR()
 {
     int player_COLL_X;
     int player_COLL_Y;
 
 
-    player_COLL_X = player_pos_x + 23;
+    player_COLL_X = player_pos_x + 24;
+    player_COLL_Y = player_pos_y + 15;
+
+
+    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
+}
+
+
+int check_WALL_TL()
+{
+    int player_COLL_X;
+    int player_COLL_Y;
+
+
+    player_COLL_X = player_pos_x + 8;
+    player_COLL_Y = player_pos_y + 15;
+
+
+    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
+}
+
+
+int check_WALL_BR()
+{
+    int player_COLL_X;
+    int player_COLL_Y;
+
+
+    player_COLL_X = player_pos_x + 24;
     player_COLL_Y = player_pos_y + 31;
 
 
@@ -38,7 +65,7 @@ int check_WALL_R()
 }
 
 
-int check_WALL_L()
+int check_WALL_BL()
 {
     int player_COLL_X;
     int player_COLL_Y;
@@ -80,6 +107,20 @@ int check_FLOOR_L()
 }
 
 
+int check_LADDER(unsigned char x_offset , unsigned char y_offset)
+{
+    int player_COLL_X;
+    int player_COLL_Y;
+
+
+    player_COLL_X = player_pos_x + x_offset;
+    player_COLL_Y = player_pos_y + y_offset;
+
+
+    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
+}
+
+
 
 
 
@@ -99,6 +140,58 @@ void scroll_BG()
 }
 
 
+void recenter_CAMERA()
+{
+    signed char camera_y_move;
+
+    spr_set(player_id);
+
+
+    if(player_pos_y < 128)
+    {
+        player_pos_y += CAMERA_RECENTER_VELOCITY;
+
+        if(player_pos_y > 128)
+        {
+            camera_y_move = (128 - player_pos_y);
+
+            player_pos_y = 128;
+        }
+
+        else
+        {
+            camera_y_move = CAMERA_RECENTER_VELOCITY;
+        }
+
+        spr_y(player_pos_y);
+
+        sgx_map_pxl_y -= camera_y_move;
+    }
+
+
+    else if(player_pos_y > 128)
+    {
+        player_pos_y -= CAMERA_RECENTER_VELOCITY;
+
+        if(player_pos_y < 128)
+        {
+            camera_y_move = (player_pos_y - 128);
+
+            player_pos_y = 128;
+        }
+
+        else
+        {
+            camera_y_move = CAMERA_RECENTER_VELOCITY;
+        }
+
+        spr_y(player_pos_y);
+
+        sgx_map_pxl_y += camera_y_move;
+    }
+}
+
+
 
 
 
@@ -111,11 +204,19 @@ void joypad_BUTTONS()
     {
         if(player_state == STATE_IDLE)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_112 , TILES_16);
-
             player_counter_anim = 0;
 
             player_state = STATE_JUMP;
+        }
+
+
+        else if(player_state == STATE_WALK || player_state == STATE_HANG)
+        {
+            player_counter_anim = 0;
+
+            //collision_side = FALSE;
+
+            player_state = STATE_JUMP_RIGHT + player_axis;
         }
     }
 }
@@ -131,14 +232,15 @@ void joypad_DIR()
     {
         if(player_state == STATE_WALK || player_state == STATE_CROUCH)
         {
-            // A OPTIMISER G_PREVIOUS_STATE //
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
-
-            player_counter_anim = 0;
-
+            player_counter_anim = 1;
             player_state = STATE_IDLE;
+        }
 
-            return;
+
+        else if(player_state == STATE_CLIMB_UP || player_state == STATE_CLIMB_DOWN)
+        {
+            player_counter_anim = 1;
+            player_state = STATE_HANG;
         }
     }
 
@@ -164,7 +266,7 @@ void joypad_DIR()
         }
 
 
-        else if(player_state == STATE_JUMP)
+        else if(player_state == STATE_JUMP || player_state == STATE_JUMP_LEFT || player_state == STATE_CROUCH || player_state == STATE_FALL || player_state == STATE_HANG)
         {
             if(player_axis == AXIS_LEFT)
             {
@@ -177,16 +279,10 @@ void joypad_DIR()
         }
 
 
-        else if(player_state == STATE_CROUCH)
+        else if(player_state == STATE_CLIMB_UP || player_state == STATE_CLIMB_DOWN)
         {
-            if(player_axis == AXIS_LEFT)
-            {
-                player_axis = AXIS_RIGHT;
-                player_previous_axis = player_axis;
-
-                spr_set(player_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
-            }
+            player_counter_anim = 1;
+            player_state = STATE_HANG;
         }
     }
 
@@ -212,7 +308,7 @@ void joypad_DIR()
         }
 
 
-        else if(player_state == STATE_JUMP)
+        else if(player_state == STATE_JUMP || player_state == STATE_JUMP_RIGHT || player_state == STATE_CROUCH || player_state == STATE_FALL || player_state == STATE_HANG)
         {
             if(player_axis == AXIS_RIGHT)
             {
@@ -225,16 +321,10 @@ void joypad_DIR()
         }
 
 
-        else if(player_state == STATE_CROUCH)
+        else if(player_state == STATE_CLIMB_UP || player_state == STATE_CLIMB_DOWN)
         {
-            if(player_axis == AXIS_RIGHT)
-            {
-                player_axis = AXIS_LEFT;
-                player_previous_axis = player_axis;
-
-                spr_set(player_id);
-                spr_ctrl(FLIP_MAS, FLIP_X);
-            }
+            player_counter_anim = 1;
+            player_state = STATE_HANG;
         }
     }
 
@@ -245,7 +335,33 @@ void joypad_DIR()
 
     else if(joy(JOYPAD_1) & JOY_UP)
     {
-        //
+       if(player_state == STATE_HANG || player_state == STATE_CLIMB_UP || player_state == STATE_CLIMB_DOWN)
+        {
+            unsigned char i;
+
+            check_LADDER( 15 , 8 );
+
+            if(map_blk_flag == TILE_EMPTY)
+            {
+                for(i=1 ; i<3 ; i++)
+                {
+                    check_LADDER( 15 , 8 + i );
+
+                    if(map_blk_flag == TILE_LADDER)
+                    {
+                        sgx_map_pxl_y -= (2 - i);
+                        break;
+                    }
+                }
+            }
+
+            else
+            {
+                sgx_map_pxl_y -= 2;
+            }
+
+            player_state = STATE_CLIMB_UP;
+        }
     }
 
 
@@ -257,9 +373,41 @@ void joypad_DIR()
     {
         if(player_state == STATE_IDLE || player_state == STATE_WALK)
         {
+            player_counter_anim = 1;
             player_state = STATE_CROUCH;
+        }
 
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_128 , TILES_16);
+
+        else if(player_state == STATE_HANG || player_state == STATE_CLIMB_UP || player_state == STATE_CLIMB_DOWN)
+        {
+            unsigned char i;
+
+            check_LADDER( 15 , 10 );
+
+            if(map_blk_flag == TILE_EMPTY)
+            {
+                for(i=1 ; i<3 ; i++)
+                {
+                    check_LADDER( 15 , 22 + i );
+
+                    if(map_blk_flag == TILE_LADDER)
+                    {
+                        sgx_map_pxl_y += (2 - i);
+                        break;
+                    }
+
+                    else
+                    {
+                        player_state = STATE_FALL;
+                    }
+                }
+            }
+
+            else
+            {
+                sgx_map_pxl_y += 2;
+                player_state = STATE_CLIMB_DOWN;
+            }
         }
     }
 }
@@ -267,36 +415,46 @@ void joypad_DIR()
 
 
 
-void update_PLAYER()
+void update_PLAYER_POSITION()
 {
-    if(player_state == STATE_WALK)
+    if(player_state == STATE_IDLE)
     {
+        if(player_counter_anim == 1)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+
+            player_counter_anim = 0;
+        }
+
+        recenter_CAMERA();
+    }
+
+
+    else if(player_state == STATE_WALK)
+    {
+        recenter_CAMERA();
+
+
         if(player_axis == AXIS_RIGHT)
         {
             // CHECK COLLISION WITH FLOOR //
-            check_FLOOR_R();
+            check_FLOOR_L();
 
             if(map_blk_flag == TILE_EMPTY)
             {
-                player_counter_anim = 0;
+                load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
 
                 player_state = STATE_FALL;
-
-                return;
             }
 
 
 
             // CHECK COLLISION WITH WALLS //
-            check_WALL_R();
+            check_WALL_BR();
 
             if(map_blk_flag == TILE_EMPTY)
             {
                 sgx_map_pxl_x += 2;
-
-                vdc_map_pxl_x = sgx_map_pxl_x;
-
-                scroll_BG();
             }
         }
 
@@ -304,28 +462,22 @@ void update_PLAYER()
         else if(player_axis == AXIS_LEFT)
         {
             // CHECK COLLISION WITH FLOOR //
-            check_FLOOR_L();
+            check_FLOOR_R();
 
             if(map_blk_flag == TILE_EMPTY)
             {
-                player_counter_anim = 0;
+                load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
 
                 player_state = STATE_FALL;
-
-                return;
             }
 
 
             // CHECK COLLISION WITH BG //
-            check_WALL_L();
+            check_WALL_BL();
 
             if(map_blk_flag == TILE_EMPTY)
             {
                 sgx_map_pxl_x -= 2;
-
-                vdc_map_pxl_x = sgx_map_pxl_x;
-
-                scroll_BG();
             }
         }
 
@@ -400,11 +552,20 @@ void update_PLAYER()
     else if(player_state == STATE_JUMP)
     {
         unsigned char i;
-        i = 0;
+        i = 1;
 
+
+        if(player_counter_anim == 0)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_112 , TILES_16);
+
+            player_counter_anim = 1;
+        }
+
+
+        player_pos_y += TABLE_PLAYER_JUMP_V[player_index_jump];
 
         spr_set(player_id);
-        player_pos_y += TABLE_PLAYER_JUMP_V[player_index_jump];
         spr_y(player_pos_y);
 
 
@@ -434,12 +595,12 @@ void update_PLAYER()
             {
                 if(player_axis == AXIS_RIGHT)
                 {
-                    calculate_COLLISION_DEEP( 11 , i);
+                    check_BG( 11 , i);
                 }
 
                 else
                 {
-                    calculate_COLLISION_DEEP( 10 , i);
+                    check_BG( 10 , i);
                 }
 
 
@@ -449,27 +610,626 @@ void update_PLAYER()
 
                     player_pos_y -= (i - 1);
                     spr_y(player_pos_y);
+                    break;
+                }
+
+            }
+
+            player_counter_anim = 1;
+            player_index_jump = 0;
+            player_state = STATE_IDLE;
+            return;
+        }
+    }
+
+
+    else if(player_state == STATE_JUMP_RIGHT)
+    {
+        unsigned char i, camera_y_move;
+        i = 1;
+
+
+        // UPDATE PLAYER TILES //
+        if(player_counter_anim == 0)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_112 , TILES_16);
+
+            player_counter_anim = 1;
+        }
+
+
+        // SELECT PLAYER SPRITE //
+        spr_set(player_id);
+
+
+		//--------------------------------------------------------------------------------------//
+		//                                        H MOVE                                        //
+		//--------------------------------------------------------------------------------------//
+
+        // CHECK COLLISION WITH RIGHT WALL //
+        // IF THE PLAYER HAS NOT YET COLLIDED WITH A WALL //
+        //if(collision_side == FALSE)
+        //{
+            check_WALL_BR();
+
+            if(map_blk_flag != TILE_BG)
+            {
+                check_WALL_TR();
+
+                if(map_blk_flag == TILE_BG)
+                {
+                    player_state = STATE_FALL;
+                }
+
+                else
+                {
+                    sgx_map_pxl_x += 2;
+                }
+            }
+        //}
+
+
+		//--------------------------------------------------------------------------------------//
+		//                                        V MOVE                                        //
+		//--------------------------------------------------------------------------------------//
+
+        // UPDATE PLAYER Y POSITION //
+        player_pos_y += TABLE_PLAYER_JUMP_V[player_index_jump];
+
+
+        // IF PLAYER GOES BELOW ITS BASE Y POSITION //
+        if(player_pos_y >= PLAYER_BASE_Y_POS)
+        {
+            // THE CAMERA MOVES //
+            // CALCULATE HOW MANY PIXELS THE CAMERA HAS TO MOVE DOWN //
+            camera_y_move = player_pos_y - PLAYER_BASE_Y_POS;
+            sgx_map_pxl_y += camera_y_move;
+
+            // IF THE CAMERA HAS REACHED ITS MAX (LOWEST) POSITION //
+            if(sgx_map_pxl_y > camera_max_y_position)
+            {
+                // THE CAMERA CAN NOT MOVE LOWER //
+                sgx_map_pxl_y = camera_max_y_position;
+            }
+
+            // THE PLAYER STAYS AT ITS BASE Y POSITION //
+            player_pos_y = PLAYER_BASE_Y_POS;
+
+            spr_y(player_pos_y);
+        }
+
+
+        // UPDATE JUMP INDEX IN THE ARRAY //
+        // ARRAY MAX ENTRY : 34 //
+        if(player_index_jump < 34)
+        {
+            player_index_jump += 1;
+        }
+
+
+        // CHECK COLLISION WITH THE FLOOR //
+        check_FLOOR_R();
+
+
+        if(map_blk_flag == TILE_BG)
+        {
+            // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
+            for(i=1; i<11 ; i++)
+            {
+                if(player_axis == AXIS_RIGHT)
+                {
+                    check_BG( 11 , i);
+                }
+
+                else
+                {
+                    check_BG( 10 , i);
+                }
+
+
+                if(map_blk_flag == TILE_EMPTY)
+                {
+                    if(player_pos_y != PLAYER_BASE_Y_POS)
+                    {
+                        player_pos_y -= (i - 1);
+                    }
+
+                    else
+                    {
+                        sgx_map_pxl_y -= (i - 1);
+                    }
+
+                    break;
+                }
+            }
+
+            // SET PLAYER SPRITE NEW POSITION //
+            spr_y(player_pos_y);
+
+            player_counter_anim = 1;
+            player_index_jump = 0;
+            player_state = STATE_IDLE;
+            return;
+        }
+
+
+        // CHECK COLLISION WITH LADDERS //
+        if(player_index_jump > 4)
+        {
+            check_LADDER( 16 , 16 );
+
+            // IF PLAYER HITS THE LADDER //
+            if(map_blk_flag == TILE_LADDER)
+            {
+                // CAMERA GOES 8 PX BACKWARD //
+                sgx_map_pxl_x = ( (sgx_map_pxl_x >> 3) << 3 );
+
+                // SO WE UPDATE THE MAP //
+                sgx_scroll_map();
+
+                // CHECK IF THE PLAYER STANDS RIGHT TO THE LADDER //
+                check_LADDER( 31 , 16 );
+
+                if(map_blk_flag == TILE_LADDER)
+                {
+                    sgx_map_pxl_x += 8;
+                }
+
+                /*else
+                {
+                    // CHECK IF THE PLAYER STANDS LEFT TO THE LADDER //
+                    check_LADDER( 0 , 16 );
+
+                    if(map_blk_flag == TILE_EMPTY)
+                    {
+                        sgx_map_pxl_x += 8;
+                    }
+                }*/
+
+                player_counter_anim = 1;
+                player_index_jump = 0;
+                player_state = STATE_HANG;
+            }
+        }
+
+
+        // SET PLAYER SPRITE NEW POSITION //
+        spr_y(player_pos_y);
+    }
+
+
+    else if(player_state == STATE_JUMP_LEFT)
+    {
+        unsigned char i, camera_y_move;
+        i = 1;
+
+
+        // UPDATE PLAYER TILES //
+        if(player_counter_anim == 0)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_112 , TILES_16);
+
+            player_counter_anim = 1;
+        }
+
+
+        // SELECT PLAYER SPRITE //
+        spr_set(player_id);
+
+
+		//--------------------------------------------------------------------------------------//
+		//                                        H MOVE                                        //
+		//--------------------------------------------------------------------------------------//
+
+        // CHECK COLLISION LEFT WALL //
+        // IF THE PLAYER HAS NOT YET COLLIDED WITH A WALL //
+        //if(collision_side == FALSE)
+        //{
+            check_WALL_BL();
+
+            if(map_blk_flag != TILE_BG)
+            {
+                check_WALL_TL();
+
+                if(map_blk_flag == TILE_BG)
+                {
+                    player_state = STATE_FALL;
+                }
+
+                else
+                {
+                    sgx_map_pxl_x -= 2;
+                }
+            }
+        //}
+
+
+		//--------------------------------------------------------------------------------------//
+		//                                        V MOVE                                        //
+		//--------------------------------------------------------------------------------------//
+
+        // UPDATE PLAYER Y POSITION //
+        player_pos_y += TABLE_PLAYER_JUMP_V[player_index_jump];
+
+
+        // IF PLAYER GOES BELOW ITS BASE Y POSITION //
+        if(player_pos_y >= PLAYER_BASE_Y_POS)
+        {
+            // THE CAMERA MOVES //
+            // CALCULATE HOW MANY PIXELS THE CAMERA HAS TO MOVE DOWN //
+            camera_y_move = player_pos_y - PLAYER_BASE_Y_POS;
+            sgx_map_pxl_y += camera_y_move;
+
+            // IF THE CAMERA HAS REACHED ITS MAX (LOWEST) POSITION //
+            if(sgx_map_pxl_y > camera_max_y_position)
+            {
+                // THE CAMERA CAN NOT MOVE LOWER //
+                sgx_map_pxl_y = camera_max_y_position;
+            }
+
+            // THE PLAYER STAYS AT ITS BASE Y POSITION //
+            player_pos_y = PLAYER_BASE_Y_POS;
+
+            spr_y(player_pos_y);
+        }
+
+
+        // UPDATE JUMP INDEX IN THE ARRAY //
+        // ARRAY MAX ENTRY : 34 //
+        if(player_index_jump < 34)
+        {
+            player_index_jump += 1;
+        }
+
+
+        // CHECK COLLISION WITH THE FLOOR //
+        check_FLOOR_L();
+
+
+        if(map_blk_flag == TILE_BG)
+        {
+            // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
+            for(i=1; i<11 ; i++ )
+            {
+                if(player_axis == AXIS_RIGHT)
+                {
+                    check_BG( 11 , i);
+                }
+
+                else
+                {
+                    check_BG( 10 , i);
+                }
+
+
+                if(map_blk_flag == TILE_EMPTY)
+                {
+                    if(player_pos_y != PLAYER_BASE_Y_POS)
+                    {
+                        player_pos_y -= (i - 1);
+                    }
+
+                    else
+                    {
+                        sgx_map_pxl_y -= (i - 1);
+                    }
+
+                    break;
+                }
+            }
+
+            // SET PLAYER SPRITE NEW POSITION //
+            spr_y(player_pos_y);
+
+            player_counter_anim = 1;
+            player_index_jump = 0;
+            player_state = STATE_IDLE;
+            return;
+        }
+
+
+        // CHECK COLLISION WITH LADDERS //
+        if(player_index_jump > 4)
+        {
+            check_LADDER( 16 , 16 );
+
+            if(map_blk_flag == TILE_LADDER)
+            {
+                // CAMERA GOES 8 PX BACKWARD //
+                sgx_map_pxl_x = ( (sgx_map_pxl_x >> 3) << 3 );
+
+                // SO WE UPDATE THE MAP //
+                sgx_scroll_map();
+
+                // CHECK IF THE PLAYER STANDS RIGHT TO THE LADDER //
+                check_LADDER( 31 , 16 );
+
+                if(map_blk_flag == TILE_LADDER)
+                {
+                    sgx_map_pxl_x += 8;
+                }
+
+                /*else
+                {
+                    // CHECK IF THE PLAYER STANDS LEFT TO THE LADDER //
+                    check_LADDER( 8 , 16 );
+
+                    if(map_blk_flag == TILE_LADDER)
+                    {
+                        sgx_map_pxl_x -= 8;
+                    }
+                }*/
+
+                player_counter_anim = 1;
+                player_index_jump = 0;
+                player_state = STATE_HANG;
+            }
+        }
+
+
+        // SET PLAYER SPRITE NEW POSITION //
+        spr_y(player_pos_y);
+    }
+
+
+    else if(player_state == STATE_CROUCH)
+    {
+        if(player_counter_anim == 1)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_128 , TILES_16);
+
+            player_counter_anim = 0;
+        }
+
+        recenter_CAMERA();
+    }
+
+
+    else if(player_state == STATE_FALL)
+    {
+        unsigned char i, camera_y_move;
+        i = 1;
+
+
+        /*if(player_counter_anim == 1)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+
+            player_counter_anim = 0;
+        }*/
+
+
+        spr_set(player_id);
+
+
+        //--------------------------------------------------------------------------------------//
+		//                                        V MOVE                                        //
+		//--------------------------------------------------------------------------------------//
+
+        // UPDATE PLAYER Y POSITION //
+        player_pos_y += 4;
+
+
+        // IF PLAYER GOES BELOW ITS BASE Y POSITION //
+        if(player_pos_y >= PLAYER_BASE_Y_POS)
+        {
+            // THE CAMERA MOVES //
+            // CALCULATE HOW MANY PIXELS THE CAMERA HAS TO MOVE DOWN //
+            camera_y_move = player_pos_y - PLAYER_BASE_Y_POS;
+            sgx_map_pxl_y += camera_y_move;
+
+            // IF THE CAMERA HAS REACHED ITS MAX (LOWEST) POSITION //
+            if(sgx_map_pxl_y > camera_max_y_position)
+            {
+                // THE CAMERA CAN NOT MOVE LOWER //
+                sgx_map_pxl_y = camera_max_y_position;
+            }
+
+            // THE PLAYER STAYS AT ITS BASE Y POSITION //
+            player_pos_y = PLAYER_BASE_Y_POS;
+        }
+
+
+        // UPDATE JUMP INDEX IN THE ARRAY //
+        // ARRAY MAX ENTRY : 34 //
+        if(player_index_jump < 34)
+        {
+            player_index_jump += 1;
+        }
+
+
+        check_FLOOR_R();
+
+
+        if(map_blk_flag == TILE_BG)
+        {
+            // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
+            for(i=1; i<11 ; i++ )
+            {
+                if(player_axis == AXIS_RIGHT)
+                {
+                    check_BG( 20 , i);
+                }
+
+                else
+                {
+                    check_BG( 10 , i);
+                }
+
+
+                if(map_blk_flag == TILE_EMPTY)
+                {
+                    if(player_pos_y != PLAYER_BASE_Y_POS)
+                    {
+                        player_pos_y -= (i - 1);
+                    }
+
+                    else
+                    {
+                        sgx_map_pxl_y -= (i - 1);
+                    }
+
 
                     break;
                 }
 
             }
 
+            spr_y(player_pos_y);
 
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
-
-            player_counter_anim = 0;
+            player_counter_anim = 1;
             player_index_jump = 0;
-
             player_state = STATE_IDLE;
-
             return;
         }
+
+
+        check_FLOOR_L();
+
+
+        if(map_blk_flag == TILE_BG)
+        {
+            // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
+            for(i=1; i<11 ; i++ )
+            {
+                if(player_axis == AXIS_RIGHT)
+                {
+                    check_BG( 11 , i);
+                }
+
+                else
+                {
+                    check_BG( 10 , i);
+                }
+
+
+                if(map_blk_flag == TILE_EMPTY)
+                {
+                    if(player_pos_y != PLAYER_BASE_Y_POS)
+                    {
+                        player_pos_y -= (i - 1);
+                    }
+
+                    else
+                    {
+                        sgx_map_pxl_y -= (i - 1);
+                    }
+
+
+                    break;
+                }
+
+            }
+
+            spr_y(player_pos_y);
+
+            player_counter_anim = 1;
+            player_index_jump = 0;
+            player_state = STATE_IDLE;
+            return;
+        }
+
+        spr_y(player_pos_y);
     }
 
 
-    else if(player_state == STATE_FALL)
+    else if(player_state == STATE_HANG)
     {
-        //
+        if(player_counter_anim == 1)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_144 , TILES_16);
+
+            player_counter_anim = 0;
+        }
+
+        recenter_CAMERA();
+    }
+
+
+    else if(player_state == STATE_CLIMB_UP)
+    {
+        if(player_counter_anim == 0)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_160 , TILES_16);
+        }
+
+        else if(player_counter_anim == 3)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_176 , TILES_16);
+        }
+
+        else if(player_counter_anim == 6)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_192 , TILES_16);
+        }
+
+        else if(player_counter_anim == 9)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_208 , TILES_16);
+        }
+
+        else if(player_counter_anim == 12)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_192 , TILES_16);
+        }
+
+        else if(player_counter_anim == 15)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_176 , TILES_16);
+        }
+
+
+        player_counter_anim += 1;
+
+        if(player_counter_anim == 17)
+        {
+            player_counter_anim = 0;
+        }
+
+        recenter_CAMERA();
+    }
+
+
+    else if(player_state == STATE_CLIMB_DOWN)
+    {
+        if(player_counter_anim == 0)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_176 , TILES_16);
+        }
+
+        else if(player_counter_anim == 3)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_192 , TILES_16);
+        }
+
+        else if(player_counter_anim == 6)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_208 , TILES_16);
+        }
+
+        else if(player_counter_anim == 9)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_192 , TILES_16);
+        }
+
+        else if(player_counter_anim == 12)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_176 , TILES_16);
+        }
+
+        else if(player_counter_anim == 15)
+        {
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_160 , TILES_16);
+        }
+
+
+        player_counter_anim += 1;
+
+        if(player_counter_anim == 17)
+        {
+            player_counter_anim = 0;
+        }
+
+        recenter_CAMERA();
     }
 }

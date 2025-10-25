@@ -80,15 +80,15 @@ main()
                 {
                     vsync();
 
+                    update_PLAYER_POSITION();
+                    scroll_BG();
+
                     joypad_BUTTONS();
                     joypad_DIR();
-                    update_PLAYER();
 
-                    // UPDATE PCE SAT //
                     satb_update();
 
-                    //put_number(map_blk_flag,1,32,0);
-                    //put_number(player_previous_axis,1,15,1);
+                    //put_number(sgx_map_pxl_x,3,0,1);
                 }
 
                 else if(level_id == 2)

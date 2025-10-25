@@ -22,11 +22,14 @@ unsigned char   sequence_id,
                 player_counter_anim,
                 player_index_jump;
 
+                //collision_side;
+
 
 
 
 signed int      player_pos_x,
-                player_pos_y;
+                player_pos_y,
+                camera_max_y_position;
 
 
 
