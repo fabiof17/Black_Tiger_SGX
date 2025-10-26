@@ -285,7 +285,6 @@ void joypad_DIR()
     {
         if(player_state == STATE_IDLE || player_state == STATE_WALK)
         {
-            player_state = STATE_WALK;
             player_axis = AXIS_RIGHT;
 
             if(player_previous_axis != player_axis)
@@ -295,6 +294,15 @@ void joypad_DIR()
                 spr_set(player_id);
                 spr_ctrl(FLIP_MAS, NO_FLIP_X);
             }
+
+            if(joy(JOYPAD_1) & JOY_DOWN)
+            {
+                player_counter_anim = 1;
+                player_state = STATE_CROUCH;
+                return;
+            }
+
+            player_state = STATE_WALK;
         }
 
 
@@ -327,7 +335,6 @@ void joypad_DIR()
     {
         if(player_state == STATE_IDLE || player_state == STATE_WALK)
         {
-            player_state = STATE_WALK;
             player_axis = AXIS_LEFT;
 
             if(player_previous_axis != player_axis)
@@ -337,6 +344,15 @@ void joypad_DIR()
                 spr_set(player_id);
                 spr_ctrl(FLIP_MAS, FLIP_X);
             }
+
+            if(joy(JOYPAD_1) & JOY_DOWN)
+            {
+                player_counter_anim = 1;
+                player_state = STATE_CROUCH;
+                return;
+            }
+
+            player_state = STATE_WALK;
         }
 
 
