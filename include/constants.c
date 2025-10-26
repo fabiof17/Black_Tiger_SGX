@@ -40,6 +40,14 @@
 #define TILES_224 3584+256
 
 
+#define OFFSET_PLAYER_WALK_1     256
+#define OFFSET_PLAYER_WALK_2     512
+#define OFFSET_PLAYER_WALK_3     768
+#define OFFSET_PLAYER_WALK_4     1024
+#define OFFSET_PLAYER_WALK_5     1280
+#define OFFSET_PLAYER_WALK_6     1536
+
+
 
 
 
@@ -49,7 +57,7 @@
 #define SEQUENCE_GAME       2
 
 
-#define CAMERA_RECENTER_VELOCITY    1
+#define CAMERA_RECENTER_VELOCITY    4
 
 
 

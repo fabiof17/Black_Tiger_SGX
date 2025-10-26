@@ -153,7 +153,8 @@ void recenter_CAMERA()
 
         if(player_pos_y > 128)
         {
-            camera_y_move = (128 - player_pos_y);
+            //camera_y_move = (128 - player_pos_y);
+            camera_y_move = (player_pos_y - 128);
 
             player_pos_y = 128;
         }
@@ -175,7 +176,8 @@ void recenter_CAMERA()
 
         if(player_pos_y < 128)
         {
-            camera_y_move = (player_pos_y - 128);
+            //camera_y_move = (player_pos_y - 128);
+            camera_y_move = (128 - player_pos_y);
 
             player_pos_y = 128;
         }
@@ -189,6 +191,8 @@ void recenter_CAMERA()
 
         sgx_map_pxl_y += camera_y_move;
     }
+    //put_number(player_pos_y,3,0,0);
+    //put_number(sgx_map_pxl_y,3,0,1);
 }
 
 
@@ -238,7 +242,12 @@ void joypad_BUTTONS()
             {
                 player_counter_anim = 0;
 
-                player_state = STATE_JUMP_LADDER;
+                check_LADDER( 15 , 8 );
+
+                if(map_blk_flag == TILE_EMPTY)
+                {
+                    player_state = STATE_JUMP_LADDER;
+                }
             }
         }
     }
@@ -439,7 +448,11 @@ void joypad_DIR()
 
 
 
-void update_PLAYER_POSITION()
+
+
+
+
+void update_PLAYER()
 {
     if(player_state == STATE_IDLE)
     {
@@ -520,19 +533,19 @@ void update_PLAYER_POSITION()
 
         else if(player_counter_anim == 2)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_16 , TILES_16);
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_1 , TILES_16);
         }
 
 
         else if(player_counter_anim == 5)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_32 , TILES_16);
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_2 , TILES_16);
         }
 
 
         else if(player_counter_anim == 8)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_48 , TILES_16);
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_3 , TILES_16);
         }
 
 
@@ -544,19 +557,19 @@ void update_PLAYER_POSITION()
 
         else if(player_counter_anim == 14)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_64 , TILES_16);
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_4 , TILES_16);
         }
 
 
         else if(player_counter_anim == 17)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_80 , TILES_16);
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_5 , TILES_16);
         }
 
 
         else if(player_counter_anim == 20)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_96 , TILES_16);
+            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_6 , TILES_16);
         }
 
 
@@ -1193,14 +1206,14 @@ void update_PLAYER_POSITION()
 
     else if(player_state == STATE_HANG)
     {
+        recenter_CAMERA();
+
         if(player_counter_anim == 1)
         {
             load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_144 , TILES_16);
 
             player_counter_anim = 0;
         }
-
-        recenter_CAMERA();
     }
 
 

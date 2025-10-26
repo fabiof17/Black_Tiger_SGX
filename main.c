@@ -80,14 +80,14 @@ main()
                 {
                     vsync();
 
-                    update_PLAYER_POSITION();
-                    scroll_BG();
+                    update_PLAYER();
+                    //scroll_BG();
 
-                    //joypad_BUTTONS();
                     joypad_DIR();
                     joypad_BUTTONS();
 
                     satb_update();
+                    scroll_BG();
 
                     //put_number(sgx_map_pxl_x,3,0,1);
                 }
