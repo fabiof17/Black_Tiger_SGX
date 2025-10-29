@@ -741,7 +741,7 @@ void update_PLAYER()
             {
                 check_BG( 15 , -16 );
 
-                if(map_blk_flag == TILE_EMPTY)
+                if(map_blk_flag == TILE_EMPTY && jump_ladder == TRUE)
                 {
                     jump_ladder = FALSE;
                     player_index_fall = 0;
@@ -761,7 +761,7 @@ void update_PLAYER()
         {
             check_BG( 15 , -16 );
 
-            if(map_blk_flag == TILE_EMPTY)
+            if(map_blk_flag == TILE_EMPTY && jump_ladder == TRUE)
             {
                 jump_ladder = FALSE;
                 player_index_fall = 0;
@@ -935,7 +935,7 @@ void update_PLAYER()
             {
                 check_BG( 15 , -16 );
 
-                if(map_blk_flag == TILE_EMPTY)
+                if(map_blk_flag == TILE_EMPTY && jump_ladder == TRUE)
                 {
                     jump_ladder = FALSE;
                     player_index_fall = 0;
@@ -954,7 +954,7 @@ void update_PLAYER()
         {
             check_BG( 15 , -16 );
 
-            if(map_blk_flag == TILE_EMPTY)
+            if(map_blk_flag == TILE_EMPTY && jump_ladder == TRUE)
             {
                 jump_ladder = FALSE;
                 player_index_fall = 0;
