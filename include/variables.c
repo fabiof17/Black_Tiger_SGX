@@ -20,7 +20,11 @@ unsigned char   sequence_id,
                 player_axis,
                 player_previous_axis,
                 player_counter_anim,
-                player_index_jump;
+                player_index_jump,
+                player_index_fall,
+
+                jump_ladder,
+                jump_max_index;
 
                 //collision_side;
 

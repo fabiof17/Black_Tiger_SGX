@@ -10,14 +10,14 @@
 
 
 
-int check_BG(unsigned char x_offset , unsigned char y_offset)
+int check_BG(signed char x_offset , signed char y_offset)
 {
     int player_COLL_X;
     int player_COLL_Y;
 
 
     player_COLL_X = player_pos_x + x_offset;
-    player_COLL_Y = player_pos_y + 32 - y_offset;
+    player_COLL_Y = player_pos_y + 32 - y_offset;//32
 
     get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
 }
@@ -86,7 +86,7 @@ int check_FLOOR_R()
 
 
     player_COLL_X = player_pos_x + 11;
-    player_COLL_Y = player_pos_y + 32;
+    player_COLL_Y = player_pos_y + 32;//32
 
 
     get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
@@ -100,7 +100,7 @@ int check_FLOOR_L()
 
 
     player_COLL_X = player_pos_x + 10;
-    player_COLL_Y = player_pos_y + 32;
+    player_COLL_Y = player_pos_y + 32;//32
 
 
     get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
@@ -191,8 +191,6 @@ void recenter_CAMERA()
 
         sgx_map_pxl_y += camera_y_move;
     }
-    //put_number(player_pos_y,3,0,0);
-    //put_number(sgx_map_pxl_y,3,0,1);
 }
 
 
@@ -447,6 +445,9 @@ void joypad_DIR()
                     else
                     {
                         load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_224 , TILES_16);
+
+                        jump_ladder = FALSE;
+                        player_index_jump = 0;
                         player_state = STATE_FALL;
                     }
                 }
@@ -497,6 +498,8 @@ void update_PLAYER()
             {
                 load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
 
+                jump_ladder = FALSE;
+                player_index_jump = 0;
                 player_state = STATE_FALL;
             }
 
@@ -504,7 +507,7 @@ void update_PLAYER()
 
             // CHECK COLLISION WITH WALLS //
             check_WALL_BR();
-
+            put_number(map_blk_flag,3,0,0);
             if(map_blk_flag == TILE_EMPTY)
             {
                 sgx_map_pxl_x += 2;
@@ -521,6 +524,8 @@ void update_PLAYER()
             {
                 load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
 
+                jump_ladder = FALSE;
+                player_index_jump = 0;
                 player_state = STATE_FALL;
             }
 
@@ -697,6 +702,7 @@ void update_PLAYER()
 
             player_counter_anim = 1;
             player_index_jump = 0;
+            jump_ladder = TRUE;
             player_state = STATE_HANG;
         }
     }
@@ -725,27 +731,45 @@ void update_PLAYER()
 		//                                        H MOVE                                        //
 		//--------------------------------------------------------------------------------------//
 
-        // CHECK COLLISION WITH RIGHT WALL //
-        // IF THE PLAYER HAS NOT YET COLLIDED WITH A WALL //
-        //if(collision_side == FALSE)
-        //{
-            check_WALL_BR();
+        check_WALL_BR();
 
-            if(map_blk_flag != TILE_BG)
+        if(map_blk_flag != TILE_BG)
+        {
+            check_WALL_TR();
+
+            if(map_blk_flag == TILE_BG)
             {
-                check_WALL_TR();
+                check_BG( 15 , -16 );
 
-                if(map_blk_flag == TILE_BG)
+                if(map_blk_flag == TILE_EMPTY)
                 {
+                    jump_ladder = FALSE;
+                    player_index_fall = 0;
                     player_state = STATE_FALL;
-                }
-
-                else
-                {
-                    sgx_map_pxl_x += 2;
+                    //put_number(8,1,0,0);
+                    return;
                 }
             }
-        //}
+
+            else
+            {
+                sgx_map_pxl_x += 2;
+            }
+        }
+
+        else
+        {
+            check_BG( 15 , -16 );
+
+            if(map_blk_flag == TILE_EMPTY)
+            {
+                jump_ladder = FALSE;
+                player_index_fall = 0;
+                player_state = STATE_FALL;
+                //put_number(map_blk_flag,1,0,1);
+                return;
+            }
+        }
 
 
 		//--------------------------------------------------------------------------------------//
@@ -753,7 +777,16 @@ void update_PLAYER()
 		//--------------------------------------------------------------------------------------//
 
         // UPDATE PLAYER Y POSITION //
-        player_pos_y += TABLE_PLAYER_JUMP_V[player_index_jump];
+        if(jump_ladder == FALSE)
+        {
+            player_pos_y += TABLE_PLAYER_JUMP_V[player_index_jump];
+        }
+
+        else
+        {
+            player_pos_y += TABLE_PLAYER_JUMP_LADDER[player_index_jump];
+        }
+
 
 
         // IF PLAYER GOES BELOW ITS BASE Y POSITION //
@@ -779,15 +812,14 @@ void update_PLAYER()
 
 
         // UPDATE JUMP INDEX IN THE ARRAY //
-        // ARRAY MAX ENTRY : 34 //
-        if(player_index_jump < 34)
+        if(player_index_jump < jump_max_index)
         {
             player_index_jump += 1;
         }
 
 
         // CHECK COLLISION WITH THE FLOOR //
-        check_FLOOR_R();
+        check_FLOOR_L();
 
 
         if(map_blk_flag == TILE_BG)
@@ -827,6 +859,8 @@ void update_PLAYER()
 
             player_counter_anim = 1;
             player_index_jump = 0;
+            jump_ladder = FALSE;
+            jump_max_index = 34;
             player_state = STATE_IDLE;
             return;
         }
@@ -856,6 +890,8 @@ void update_PLAYER()
 
                 player_counter_anim = 1;
                 player_index_jump = 0;
+                jump_ladder = TRUE;
+                jump_max_index = 29;
                 player_state = STATE_HANG;
             }
         }
@@ -889,27 +925,43 @@ void update_PLAYER()
 		//                                        H MOVE                                        //
 		//--------------------------------------------------------------------------------------//
 
-        // CHECK COLLISION LEFT WALL //
-        // IF THE PLAYER HAS NOT YET COLLIDED WITH A WALL //
-        //if(collision_side == FALSE)
-        //{
-            check_WALL_BL();
+        check_WALL_BL();
 
-            if(map_blk_flag != TILE_BG)
+        if(map_blk_flag != TILE_BG)
+        {
+            check_WALL_TL();
+
+            if(map_blk_flag == TILE_BG)
             {
-                check_WALL_TL();
+                check_BG( 15 , -16 );
 
-                if(map_blk_flag == TILE_BG)
+                if(map_blk_flag == TILE_EMPTY)
                 {
+                    jump_ladder = FALSE;
+                    player_index_fall = 0;
                     player_state = STATE_FALL;
-                }
-
-                else
-                {
-                    sgx_map_pxl_x -= 2;
+                    return;
                 }
             }
-        //}
+
+            else
+            {
+                sgx_map_pxl_x -= 2;
+            }
+        }
+
+        else
+        {
+            check_BG( 15 , -16 );
+
+            if(map_blk_flag == TILE_EMPTY)
+            {
+                jump_ladder = FALSE;
+                player_index_fall = 0;
+                player_state = STATE_FALL;
+                return;
+            }
+        }
 
 
 		//--------------------------------------------------------------------------------------//
@@ -917,7 +969,15 @@ void update_PLAYER()
 		//--------------------------------------------------------------------------------------//
 
         // UPDATE PLAYER Y POSITION //
-        player_pos_y += TABLE_PLAYER_JUMP_V[player_index_jump];
+        if(jump_ladder == FALSE)
+        {
+            player_pos_y += TABLE_PLAYER_JUMP_V[player_index_jump];
+        }
+
+        else
+        {
+            player_pos_y += TABLE_PLAYER_JUMP_LADDER[player_index_jump];
+        }
 
 
         // IF PLAYER GOES BELOW ITS BASE Y POSITION //
@@ -943,15 +1003,14 @@ void update_PLAYER()
 
 
         // UPDATE JUMP INDEX IN THE ARRAY //
-        // ARRAY MAX ENTRY : 34 //
-        if(player_index_jump < 34)
+        if(player_index_jump < jump_max_index)
         {
             player_index_jump += 1;
         }
 
 
         // CHECK COLLISION WITH THE FLOOR //
-        check_FLOOR_L();
+        check_FLOOR_R();
 
 
         if(map_blk_flag == TILE_BG)
@@ -991,6 +1050,8 @@ void update_PLAYER()
 
             player_counter_anim = 1;
             player_index_jump = 0;
+            jump_ladder = FALSE;
+            jump_max_index = 34;
             player_state = STATE_IDLE;
             return;
         }
@@ -1017,19 +1078,10 @@ void update_PLAYER()
                     sgx_map_pxl_x += 8;
                 }
 
-                /*else
-                {
-                    // CHECK IF THE PLAYER STANDS LEFT TO THE LADDER //
-                    check_LADDER( 8 , 16 );
-
-                    if(map_blk_flag == TILE_LADDER)
-                    {
-                        sgx_map_pxl_x -= 8;
-                    }
-                }*/
-
                 player_counter_anim = 1;
                 player_index_jump = 0;
+                jump_ladder = TRUE;
+                jump_max_index = 29;
                 player_state = STATE_HANG;
             }
         }
@@ -1067,7 +1119,7 @@ void update_PLAYER()
 		//--------------------------------------------------------------------------------------//
 
         // UPDATE PLAYER Y POSITION //
-        player_pos_y += 4;
+        player_pos_y += TABLE_PLAYER_FALL[player_index_fall];
 
 
         // IF PLAYER GOES BELOW ITS BASE Y POSITION //
@@ -1091,14 +1143,15 @@ void update_PLAYER()
 
 
         // UPDATE JUMP INDEX IN THE ARRAY //
-        // ARRAY MAX ENTRY : 34 //
-        if(player_index_jump < 34)
+        // ARRAY MAX ENTRY : 20//
+        if(player_index_fall < 20)
         {
-            player_index_jump += 1;
+            player_index_fall += 1;
         }
 
 
-        check_FLOOR_R();
+        //check_FLOOR_R();
+        check_BG( 15 , 0);
 
 
         if(map_blk_flag == TILE_BG)
@@ -1106,15 +1159,15 @@ void update_PLAYER()
             // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
             for(i=1; i<11 ; i++ )
             {
-                if(player_axis == AXIS_RIGHT)
-                {
-                    check_BG( 20 , i);
-                }
+                //if(player_axis == AXIS_RIGHT)
+                //{
+                    check_BG( 15 , i);//20
+                //}
 
-                else
+                /*else
                 {
                     check_BG( 10 , i);
-                }
+                }*/
 
 
                 if(map_blk_flag == TILE_EMPTY)
@@ -1139,52 +1192,9 @@ void update_PLAYER()
 
             player_counter_anim = 1;
             player_index_jump = 0;
-            player_state = STATE_IDLE;
-            return;
-        }
-
-
-        check_FLOOR_L();
-
-
-        if(map_blk_flag == TILE_BG)
-        {
-            // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
-            for(i=1; i<11 ; i++ )
-            {
-                if(player_axis == AXIS_RIGHT)
-                {
-                    check_BG( 11 , i);
-                }
-
-                else
-                {
-                    check_BG( 10 , i);
-                }
-
-
-                if(map_blk_flag == TILE_EMPTY)
-                {
-                    if(player_pos_y != PLAYER_BASE_Y_POS)
-                    {
-                        player_pos_y -= (i - 1);
-                    }
-
-                    else
-                    {
-                        sgx_map_pxl_y -= (i - 1);
-                    }
-
-
-                    break;
-                }
-
-            }
-
-            spr_y(player_pos_y);
-
-            player_counter_anim = 1;
-            player_index_jump = 0;
+            player_index_fall = 0;
+            jump_ladder = FALSE;
+            jump_max_index = 34;
             player_state = STATE_IDLE;
             return;
         }
@@ -1211,6 +1221,9 @@ void update_PLAYER()
 
             player_counter_anim = 1;
             player_index_jump = 0;
+            player_index_fall = 0;
+            jump_ladder = TRUE;
+            jump_max_index = 29;
             player_state = STATE_HANG;
             return;
         }
@@ -1389,6 +1402,8 @@ void update_PLAYER()
 
             player_counter_anim = 1;
             player_index_jump = 0;
+            jump_ladder = FALSE;
+            jump_max_index = 34;
             player_state = STATE_IDLE;
             return;
         }
@@ -1418,8 +1433,11 @@ void update_PLAYER()
 
                 player_counter_anim = 1;
                 player_index_jump = 0;
+                jump_ladder = TRUE;
+                jump_max_index = 29;
                 player_state = STATE_HANG;
             }
         }
     }
+
 }

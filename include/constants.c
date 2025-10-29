@@ -75,19 +75,19 @@
 
 
 
-#define STATE_IDLE          0
-#define STATE_WALK          1
-#define STATE_PUNCH         2
-#define STATE_JUMP          4
-#define STATE_JUMP_RIGHT    5
-#define STATE_JUMP_LEFT     6
-#define STATE_CROUCH        7
-#define STATE_CROUCH_PUNCH  8
-#define STATE_FALL          9
-#define STATE_HANG          10
-#define STATE_CLIMB_UP      11
-#define STATE_CLIMB_DOWN    12
-#define STATE_JUMP_LADDER   13
+#define STATE_IDLE                  0
+#define STATE_WALK                  1
+#define STATE_PUNCH                 2
+#define STATE_JUMP                  4
+#define STATE_JUMP_RIGHT            5
+#define STATE_JUMP_LEFT             6
+#define STATE_CROUCH                7
+#define STATE_CROUCH_PUNCH          8
+#define STATE_FALL                  9
+#define STATE_HANG                  10
+#define STATE_CLIMB_UP              11
+#define STATE_CLIMB_DOWN            12
+#define STATE_JUMP_LADDER           13
 
 
 

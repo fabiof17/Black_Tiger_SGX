@@ -41,6 +41,62 @@ const signed char       TABLE_PLAYER_JUMP_V[35]     =   {
                                                         };
 
 
-const signed char       TABLE_PLAYER_FALL[10]       =   {
-                                                            1
+const signed char       TABLE_PLAYER_FALL[21]       =   {
+                                                            0,
+                                                            0,
+                                                            0,
+                                                            0,
+                                                            1,
+                                                            1,
+                                                            1,
+                                                            1,
+                                                            2,
+                                                            2,
+                                                            2,
+                                                            2,
+                                                            3,
+                                                            3,
+                                                            3,
+                                                            4,
+                                                            4,
+                                                            4,
+                                                            4,
+                                                            4,
+                                                            5
                                                         };
+
+
+const signed char       TABLE_PLAYER_JUMP_LADDER[30]    =   {
+                                                                // UPWARD
+                                                                -4,
+                                                                -4,
+                                                                -3,
+                                                                -3,
+                                                                -3,
+                                                                -2,
+                                                                -2,
+                                                                -2,
+                                                                -1,
+                                                                -1,
+                                                                -1,
+                                                                -1,
+                                                                -1,
+                                                                0,
+                                                                0,
+                                                                0,
+                                                                0,
+                                                                // DOWNWARD
+                                                                1,
+                                                                1,
+                                                                1,
+                                                                1,
+                                                                1,
+                                                                2,
+                                                                2,
+                                                                2,
+                                                                3,
+                                                                3,
+                                                                3,
+                                                                4,
+                                                                4
+                                                            };

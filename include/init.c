@@ -27,6 +27,7 @@ init_PLAYER()
 	player_previous_axis = player_axis;
 	player_counter_anim = 0;
 	player_index_jump = 0;
+	player_index_fall = 0;
 	player_state = STATE_IDLE;
 }
 
@@ -252,6 +253,8 @@ void init_LEVEL()
 		//**************************************************************************************//
 
         camera_max_y_position = 768;
+		jump_max_index = 34;
+		jump_ladder = FALSE;
 
 
 		// VSYNC //
