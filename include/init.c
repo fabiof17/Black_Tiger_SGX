@@ -20,7 +20,7 @@ void init_VARIABLES()
 }
 
 
-init_PLAYER()
+void init_PLAYER()
 {
 	player_id = 0;
 	player_axis = AXIS_RIGHT;
@@ -30,7 +30,6 @@ init_PLAYER()
 	player_index_fall = 0;
 	player_state = STATE_IDLE;
 }
-
 
 
 void init_LEVEL()

@@ -81,10 +81,10 @@ main()
                     vsync();
 
                     update_PLAYER();
-                    /*put_number(player_state,1,0,0);
-                    put_number(player_index_jump,2,0,1);
-                    put_number(TABLE_PLAYER_FALL[player_index_jump],2,0,2);
-                    put_number(player_pos_y,3,0,3);*/
+                    //put_number(player_state,1,0,0);
+                    //put_number(player_pos_y,3,0,1);
+                    //put_number(sgx_map_pxl_y,3,0,2);
+
 
                     joypad_DIR();
                     joypad_BUTTONS();
