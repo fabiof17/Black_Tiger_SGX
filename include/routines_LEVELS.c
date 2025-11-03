@@ -10,7 +10,7 @@
 
 
 
-int check_BG_v1(signed char x_offset , signed char y_offset)
+int check_TILE_DEPTH(signed char x_offset , signed char y_offset)
 {
     int player_COLL_X;
     int player_COLL_Y;
@@ -22,6 +22,7 @@ int check_BG_v1(signed char x_offset , signed char y_offset)
     get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
 }
 
+
 int check_BG(signed char x_offset , signed char y_offset)
 {
     int player_COLL_X;
@@ -30,104 +31,6 @@ int check_BG(signed char x_offset , signed char y_offset)
 
     player_COLL_X = player_pos_x + x_offset;
     player_COLL_Y = player_pos_y + y_offset;
-
-    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
-}
-
-
-int check_WALL_TR()
-{
-    int player_COLL_X;
-    int player_COLL_Y;
-
-
-    player_COLL_X = player_pos_x + 24;
-    player_COLL_Y = player_pos_y + 15;
-
-
-    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
-}
-
-
-int check_WALL_TL()
-{
-    int player_COLL_X;
-    int player_COLL_Y;
-
-
-    player_COLL_X = player_pos_x + 8;
-    player_COLL_Y = player_pos_y + 15;
-
-
-    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
-}
-
-
-int check_WALL_BR()
-{
-    int player_COLL_X;
-    int player_COLL_Y;
-
-
-    player_COLL_X = player_pos_x + 24;
-    player_COLL_Y = player_pos_y + 31;
-
-
-    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
-}
-
-
-int check_WALL_BL()
-{
-    int player_COLL_X;
-    int player_COLL_Y;
-
-
-    player_COLL_X = player_pos_x + 8;
-    player_COLL_Y = player_pos_y + 31;
-
-
-    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
-}
-
-
-int check_FLOOR_R()
-{
-    int player_COLL_X;
-    int player_COLL_Y;
-
-
-    player_COLL_X = player_pos_x + 22;
-    player_COLL_Y = player_pos_y + 32;
-
-
-    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
-}
-
-
-int check_FLOOR_L()
-{
-    int player_COLL_X;
-    int player_COLL_Y;
-
-
-    player_COLL_X = player_pos_x + 10;
-    player_COLL_Y = player_pos_y + 32;
-
-
-    get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
-}
-
-
-int check_LADDER(unsigned char x_offset , unsigned char y_offset)
-{
-    int player_COLL_X;
-    int player_COLL_Y;
-
-
-    player_COLL_X = player_pos_x + x_offset;
-    player_COLL_Y = player_pos_y + y_offset;
-
 
     get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
 }
@@ -250,7 +153,7 @@ void joypad_BUTTONS()
             {
                 player_counter_anim = 0;
 
-                check_LADDER( 15 , 8 );
+                check_BG( 15 , 8 );
 
                 if(map_blk_flag == TILE_EMPTY)
                 {
@@ -395,13 +298,13 @@ void joypad_DIR()
         {
             unsigned char i;
 
-            check_LADDER( 15 , 8 );
+            check_BG( 15 , 8 );
 
             if(map_blk_flag == TILE_EMPTY)
             {
                 for(i=1 ; i<3 ; i++)
                 {
-                    check_LADDER( 15 , 8 + i );
+                    check_BG( 15 , 8 + i );
 
                     if(map_blk_flag == TILE_LADDER)
                     {
@@ -438,13 +341,13 @@ void joypad_DIR()
         {
             unsigned char i;
 
-            check_LADDER( 15 , 10 );
+            check_BG( 15 , 10 );
 
             if(map_blk_flag == TILE_EMPTY)
             {
                 for(i=1 ; i<3 ; i++)
                 {
-                    check_LADDER( 15 , 22 + i );
+                    check_BG( 15 , 22 + i );
 
                     if(map_blk_flag == TILE_LADDER)
                     {
@@ -458,6 +361,7 @@ void joypad_DIR()
 
                         jump_ladder = FALSE;
                         player_index_jump = 0;
+                        player_index_fall = 0;
                         player_state = STATE_FALL;
                     }
                 }
@@ -491,6 +395,26 @@ void update_PLAYER()
         }
 
         recenter_CAMERA();
+
+
+        // CHECK COLLISION WITH LEFT FLOOR //
+        check_BG( 10 , 32 );//8
+
+        if(map_blk_flag == TILE_EMPTY)
+        {
+            // CHECK COLLISION WITH RIGHT FLOOR //
+            check_BG( 22 , 32 );//24
+
+            if(map_blk_flag == TILE_EMPTY)
+            {
+                load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+
+                jump_ladder = FALSE;
+                player_index_jump = 0;
+                player_index_fall = 0;
+                player_state = STATE_FALL;
+            }
+        }
     }
 
 
@@ -499,13 +423,17 @@ void update_PLAYER()
         recenter_CAMERA();
 
 
+		//--------------------------------------------------------------------------------------//
+		//                                   FLOOR COLLISION                                    //
+		//--------------------------------------------------------------------------------------//
+
         // CHECK COLLISION WITH LEFT FLOOR //
-        check_BG( 8 , 32 );
+        check_BG( 10 , 32 );//8
 
         if(map_blk_flag == TILE_EMPTY)
         {
             // CHECK COLLISION WITH RIGHT FLOOR //
-            check_BG( 24 , 32 );
+            check_BG( 22 , 32 );//24
 
             if(map_blk_flag == TILE_EMPTY)
             {
@@ -513,6 +441,7 @@ void update_PLAYER()
 
                 jump_ladder = FALSE;
                 player_index_jump = 0;
+                player_index_fall = 0;
                 player_state = STATE_FALL;
             }
 
@@ -521,7 +450,7 @@ void update_PLAYER()
                 if(player_axis == AXIS_RIGHT)
                 {
                     // CHECK COLLISION WITH RIGHT WALL //
-                    check_BG( 26 , 31 ); // 24+2
+                    check_BG( 24 , 31 ); // 24+2
 
                     if(map_blk_flag == TILE_EMPTY)
                     {
@@ -532,7 +461,7 @@ void update_PLAYER()
                 else
                 {
                     // CHECK COLLISION WITH LEFT WALL //
-                    check_BG( 6 , 31 ); // 8-2
+                    check_BG( 8 , 31 ); // 8-2
 
                     if(map_blk_flag == TILE_EMPTY)
                     {
@@ -547,7 +476,7 @@ void update_PLAYER()
             if(player_axis == AXIS_RIGHT)
             {
                 // CHECK COLLISION WITH RIGHT WALL //
-                check_BG( 26 , 31 ); // 24+2
+                check_BG( 24 , 31 ); // 24+2
 
                 if(map_blk_flag == TILE_EMPTY)
                 {
@@ -558,7 +487,7 @@ void update_PLAYER()
             else
             {
                 // CHECK COLLISION WITH LEFT WALL //
-                check_BG( 6 , 31 ); // 8-2
+                check_BG( 8 , 31 ); // 8-2
 
                 if(map_blk_flag == TILE_EMPTY)
                 {
@@ -670,7 +599,8 @@ void update_PLAYER()
 
         if(player_index_jump > 14)
         {
-            check_FLOOR_L();
+            // CHECK COLLISION WITH LEFT FLOOR //
+            check_BG( 10 , 32 );
 
             // IF PLAYER TOUCHES THE GROUND TO THE LEFT //
             if(map_blk_flag == TILE_BG)
@@ -678,7 +608,7 @@ void update_PLAYER()
                 // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
                 for(i=1; i<11 ; i++ )
                 {
-                    check_BG_v1( 10 , i);
+                    check_TILE_DEPTH( 10 , i);
 
                     if(map_blk_flag == TILE_EMPTY)
                     {
@@ -700,14 +630,15 @@ void update_PLAYER()
             // IF PLAYER TOUCHES THE GROUND TO THE RIGHT //
             else
             {
-                check_FLOOR_R();
+                // CHECK COLLISION WITH RIGHT FLOOR //
+                check_BG( 22 , 32 );
 
                 if(map_blk_flag == TILE_BG)
                 {
                     // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
                     for(i=1; i<11 ; i++ )
                     {
-                        check_BG_v1( 22 , i);
+                        check_TILE_DEPTH( 22 , i);
 
                         if(map_blk_flag == TILE_EMPTY)
                         {
@@ -731,7 +662,7 @@ void update_PLAYER()
 
 
         // CHECK COLLISION WITH LADDERS //
-        check_LADDER( 16 , 16 );
+        check_BG( 16 , 16 );
 
         // IF PLAYER HITS THE LADDER //
         if(map_blk_flag == TILE_LADDER)
@@ -743,7 +674,7 @@ void update_PLAYER()
             sgx_scroll_map();
 
             // CHECK IF THE PLAYER STANDS RIGHT TO THE LADDER //
-            check_LADDER( 31 , 16 );
+            check_BG( 31 , 16 );
 
             if(map_blk_flag == TILE_LADDER)
             {
@@ -781,15 +712,21 @@ void update_PLAYER()
 		//                                        H MOVE                                        //
 		//**************************************************************************************//
 
-        check_WALL_BR();
+		//--------------------------------------------------------------------------------------//
+		//                                    WALL COLLISION                                    //
+		//--------------------------------------------------------------------------------------//
+
+        // CHECK COLLISION WITH BOTTOM RIGHT WALL //
+        check_BG( 24 , 31 );
 
         if(map_blk_flag != TILE_BG)
         {
-            check_WALL_TR();
+            // CHECK COLLISION WITH TOP RIGHT WALL //
+            check_BG( 24 , 15 );
 
             if(map_blk_flag == TILE_BG)
             {
-                check_BG_v1( 15 , -16 );
+                check_TILE_DEPTH( 15 , -16 );
 
                 if(map_blk_flag == TILE_EMPTY && jump_ladder == TRUE)
                 {
@@ -808,7 +745,7 @@ void update_PLAYER()
 
         else
         {
-            check_BG_v1( 15 , -16 );
+            check_TILE_DEPTH( 15 , -16 );
 
             if(map_blk_flag == TILE_EMPTY && jump_ladder == TRUE)
             {
@@ -876,7 +813,8 @@ void update_PLAYER()
 
         if(player_index_jump > 14)
         {
-            check_FLOOR_L();
+            // CHECK COLLISION WITH LEFT FLOOR //
+            check_BG( 10 , 32 );
 
             // IF PLAYER TOUCHES THE GROUND TO THE LEFT //
             if(map_blk_flag == TILE_BG)
@@ -884,7 +822,7 @@ void update_PLAYER()
                 // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
                 for(i=1; i<11 ; i++)
                 {
-                    check_BG_v1( 10 , i);
+                    check_TILE_DEPTH( 10 , i);
 
                     if(map_blk_flag == TILE_EMPTY)
                     {
@@ -916,14 +854,15 @@ void update_PLAYER()
             // IF PLAYER TOUCHES THE GROUND TO THE RIGHT //
             else
             {
-                check_FLOOR_R();
+                // CHECK COLLISION WITH RIGHT FLOOR //
+                check_BG( 22 , 32 );
 
                 if(map_blk_flag == TILE_BG)
                 {
                     // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
                     for(i=1; i<11 ; i++)
                     {
-                        check_BG_v1( 22 , i);
+                        check_TILE_DEPTH( 22 , i);
 
                         if(map_blk_flag == TILE_EMPTY)
                         {
@@ -963,7 +902,7 @@ void update_PLAYER()
 
         if(player_index_jump > 4)
         {
-            check_LADDER( 16 , 16 );
+            check_BG( 16 , 16 );
 
             // IF PLAYER HITS THE LADDER //
             if(map_blk_flag == TILE_LADDER)
@@ -975,7 +914,7 @@ void update_PLAYER()
                 sgx_scroll_map();
 
                 // CHECK IF THE PLAYER STANDS RIGHT TO THE LADDER //
-                check_LADDER( 31 , 16 );
+                check_BG( 31 , 16 );
 
                 if(map_blk_flag == TILE_LADDER)
                 {
@@ -1023,15 +962,17 @@ void update_PLAYER()
 		//                                    WALL COLLISION                                    //
 		//--------------------------------------------------------------------------------------//
 
-        check_WALL_BL();
+        // CHECK COLLISION WITH BOTTOM LEFT WALL //
+        check_BG( 8 , 31 );
 
         if(map_blk_flag != TILE_BG)
         {
-            check_WALL_TL();
+            // CHECK COLLISION WITH TOP RIGHT WALL //
+            check_BG( 8 , 15 );
 
             if(map_blk_flag == TILE_BG)
             {
-                check_BG_v1( 15 , -16 );
+                check_TILE_DEPTH( 15 , -16 );
 
                 if(map_blk_flag == TILE_EMPTY && jump_ladder == TRUE)
                 {
@@ -1050,7 +991,7 @@ void update_PLAYER()
 
         else
         {
-            check_BG_v1( 15 , -16 );
+            check_TILE_DEPTH( 15 , -16 );
 
             if(map_blk_flag == TILE_EMPTY && jump_ladder == TRUE)
             {
@@ -1117,14 +1058,15 @@ void update_PLAYER()
 
         if(player_index_jump > 14)
         {
-            check_FLOOR_L();
+            // CHECK COLLISION WITH LEFT FLOOR //
+            check_BG( 10 , 32 );
 
             if(map_blk_flag == TILE_BG)
             {
                 // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
                 for(i=1; i<11 ; i++)
                 {
-                    check_BG_v1( 10 , i);
+                    check_TILE_DEPTH( 10 , i);
 
                     if(map_blk_flag == TILE_EMPTY)
                     {
@@ -1155,14 +1097,15 @@ void update_PLAYER()
 
             else
             {
-                check_FLOOR_R();
+                // CHECK COLLISION WITH RIGHT FLOOR //
+                check_BG( 22 , 32 );
 
                 if(map_blk_flag == TILE_BG)
                 {
                     // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
                     for(i=1; i<11 ; i++)
                     {
-                        check_BG_v1( 22 , i);
+                        check_TILE_DEPTH( 22 , i);
 
                         if(map_blk_flag == TILE_EMPTY)
                         {
@@ -1202,7 +1145,7 @@ void update_PLAYER()
 
         if(player_index_jump > 4)
         {
-            check_LADDER( 16 , 16 );
+            check_BG( 16 , 16 );
 
             if(map_blk_flag == TILE_LADDER)
             {
@@ -1213,7 +1156,7 @@ void update_PLAYER()
                 sgx_scroll_map();
 
                 // CHECK IF THE PLAYER STANDS RIGHT TO THE LADDER //
-                check_LADDER( 31 , 16 );
+                check_BG( 31 , 16 );
 
                 if(map_blk_flag == TILE_LADDER)
                 {
@@ -1292,8 +1235,7 @@ void update_PLAYER()
         }
 
 
-        //check_FLOOR_R();
-        check_BG_v1( 15 , 0);
+        check_TILE_DEPTH( 15 , 0);
 
 
         if(map_blk_flag == TILE_BG)
@@ -1303,12 +1245,12 @@ void update_PLAYER()
             {
                 //if(player_axis == AXIS_RIGHT)
                 //{
-                    check_BG_v1( 15 , i);//20
+                    check_TILE_DEPTH( 15 , i);//20
                 //}
 
                 /*else
                 {
-                    check_BG_v1( 10 , i);
+                    check_TILE_DEPTH( 10 , i);
                 }*/
 
 
@@ -1342,7 +1284,7 @@ void update_PLAYER()
         }
 
 
-        check_LADDER( 16 , 16 );
+        check_BG( 16 , 16 );
 
         // IF PLAYER HITS THE LADDER //
         if(map_blk_flag == TILE_LADDER)
@@ -1354,7 +1296,7 @@ void update_PLAYER()
             sgx_scroll_map();
 
             // CHECK IF THE PLAYER STANDS RIGHT TO THE LADDER //
-            check_LADDER( 31 , 16 );
+            check_BG( 31 , 16 );
 
             if(map_blk_flag == TILE_LADDER)
             {
@@ -1503,58 +1445,105 @@ void update_PLAYER()
         }
 
 
-        // CHECK COLLISION WITH FLOOR //
-        if(player_axis == AXIS_RIGHT)
-        {
-            check_FLOOR_R();
-        }
-
-        else
-        {
-            check_FLOOR_L();
-        }
 
 
-        if(map_blk_flag == TILE_BG)
+		//--------------------------------------------------------------------------------------//
+		//                                   FLOOR COLLISION                                    //
+		//--------------------------------------------------------------------------------------//
+
+        /*if(player_index_jump > 14)
         {
-            // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
-            for(i=1; i<11 ; i++ )
+            // CHECK COLLISION WITH LEFT FLOOR //
+            check_BG( 10 , 32 );
+
+            // IF PLAYER TOUCHES THE GROUND TO THE LEFT //
+            if(map_blk_flag == TILE_BG)
             {
-                if(player_axis == AXIS_RIGHT)
+                // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
+                for(i=1; i<11 ; i++)
                 {
-                    check_BG_v1( 11 , i);
+                    check_TILE_DEPTH( 10 , i);
+
+                    if(map_blk_flag == TILE_EMPTY)
+                    {
+                        if(player_pos_y != PLAYER_BASE_Y_POS)
+                        {
+                            player_pos_y -= (i - 1);
+                        }
+
+                        else
+                        {
+                            sgx_map_pxl_y -= (i - 1);
+                        }
+
+                        break;
+                    }
                 }
 
-                else
-                {
-                    check_BG_v1( 10 , i);
-                }
+                // SET PLAYER SPRITE NEW POSITION //
+                spr_y(player_pos_y);
 
-
-                if(map_blk_flag == TILE_EMPTY)
-                {
-                    load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
-
-                    player_pos_y -= (i - 1);
-                    spr_y(player_pos_y);
-                    break;
-                }
-
+                player_counter_anim = 1;
+                player_index_jump = 0;
+                jump_ladder = FALSE;
+                jump_max_index = 34;
+                player_state = STATE_IDLE;
+                return;
             }
 
-            player_counter_anim = 1;
-            player_index_jump = 0;
-            jump_ladder = FALSE;
-            jump_max_index = 34;
-            player_state = STATE_IDLE;
-            return;
-        }
+            // IF PLAYER TOUCHES THE GROUND TO THE RIGHT //
+            else
+            {
+                // CHECK COLLISION WITH RIGHT FLOOR //
+                check_BG( 22 , 32 );
 
+                if(map_blk_flag == TILE_BG)
+                {
+                    // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
+                    for(i=1; i<11 ; i++)
+                    {
+                        check_TILE_DEPTH( 22 , i);
+
+                        if(map_blk_flag == TILE_EMPTY)
+                        {
+                            if(player_pos_y != PLAYER_BASE_Y_POS)
+                            {
+                                player_pos_y -= (i - 1);
+                            }
+
+                            else
+                            {
+                                sgx_map_pxl_y -= (i - 1);
+                            }
+
+                            break;
+                        }
+                    }
+
+                    // SET PLAYER SPRITE NEW POSITION //
+                    spr_y(player_pos_y);
+
+                    player_counter_anim = 1;
+                    player_index_jump = 0;
+                    jump_ladder = FALSE;
+                    jump_max_index = 34;
+                    player_state = STATE_IDLE;
+                    return;
+                }
+            }
+        }*/
+
+
+
+
+		//--------------------------------------------------------------------------------------//
+		//                                   LADDER COLLISION                                   //
+		//--------------------------------------------------------------------------------------//
 
         if(player_index_jump > 18)
         {
             // CHECK COLLISION WITH LADDERS //
-            check_LADDER( 16 , 8 );
+            check_BG( 16 , 8 );
 
             // IF PLAYER HITS THE LADDER //
             if(map_blk_flag == TILE_LADDER)
@@ -1566,7 +1555,7 @@ void update_PLAYER()
                 sgx_scroll_map();
 
                 // CHECK IF THE PLAYER STANDS RIGHT TO THE LADDER //
-                check_LADDER( 31 , 8 );
+                check_BG( 31 , 8 );
 
                 if(map_blk_flag == TILE_LADDER)
                 {
