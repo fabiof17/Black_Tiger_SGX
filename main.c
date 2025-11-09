@@ -17,6 +17,7 @@
 
 
 
+#include "include/tables_objects.c"
 #include "include/tables_player.c"
 #include "include/routines_LEVELS.c"
 #include "include/init.c"

@@ -24,17 +24,30 @@ unsigned char   sequence_id,
                 player_index_fall,
 
                 jump_ladder,
-                jump_max_index;
+                jump_max_index,
 
-                //collision_side;
+                objects_max;
 
 
 
 
 signed int      player_pos_x,
                 player_pos_y,
-                camera_max_y_position;
+                camera_max_y_position,
 
+                list_objects_type[25],
+                list_objects_state[25],
+                list_objects_x_pos[25],
+                list_objects_y_pos[25],
+                list_objects_x_pos_ref[25],
+                list_objects_y_pos_ref[25],
+                list_objects_energy[25];
+
+
+
+
+signed int      *ptr_objects_pos_x_ref;
+signed int      *ptr_objects_pos_y_ref;
 
 
 

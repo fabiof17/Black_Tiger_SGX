@@ -91,7 +91,7 @@
 
 
 
-#define PLAYER_VRAM_ADR     0x4800
+#define PLAYER_VRAM_ADR     0x1800
 
 #define PLAYER_BASE_Y_POS   128
 
@@ -137,6 +137,61 @@
 
 #define LV1_WALL_VRAM_ADR       0x1000
 #define LV1_DOOR_VRAM_ADR       LV1_WALL_VRAM_ADR+256
+
+
+#define OBJECTS_NUMBER_LV1      25
+
+
+
+
+//-----------------------------------------------------------------------------//
+//                                                                             //
+//                                   OBJECTS                                   //
+//                                                                             //
+//-----------------------------------------------------------------------------//
+
+#define TYPE_HOURGLASS          0
+#define TYPE_POT                1
+#define TYPE_POW                2
+#define TYPE_CHEST              3
+#define TYPE_GRAY_KEY           4
+#define TYPE_GOLD_KEY           5
+#define TYPE_1UP                6
+
+#define STATE_ACTIVE            0
+#define STATE_INACTIVE          1
+
+
+#define POT1_VRAM_ADR           0x1C00
+#define POT2_VRAM_ADR           POT1_VRAM_ADR+TILES_4
+#define POT3_VRAM_ADR           POT2_VRAM_ADR+TILES_4
+#define POT4_VRAM_ADR           POT3_VRAM_ADR+TILES_4
+#define POT5_VRAM_ADR           POT4_VRAM_ADR+TILES_4
+#define POT6_VRAM_ADR           POT5_VRAM_ADR+TILES_4
+#define POT7_VRAM_ADR           POT6_VRAM_ADR+TILES_4
+#define POT8_VRAM_ADR           POT7_VRAM_ADR+TILES_4
+
+#define POW_VRAM_ADR            POT8_VRAM_ADR+TILES_4
+#define GRAY_KEY_VRAM_ADR       POW_VRAM_ADR+TILES_4
+#define GOLD_KEY_VRAM_ADR       GRAY_KEY_VRAM_ADR+TILES_4
+#define LIFE_VRAM_ADR           GOLD_KEY_VRAM_ADR+TILES_4
+
+#define COIN_1_VRAM_ADR         LIFE_VRAM_ADR+TILES_4
+#define COIN_5_VRAM_ADR         COIN_1_VRAM_ADR+TILES_4
+#define COIN_10_VRAM_ADR        COIN_5_VRAM_ADR+TILES_4
+#define COIN_50_VRAM_ADR        COIN_10_VRAM_ADR+TILES_4
+#define COIN_100_VRAM_ADR       COIN_50_VRAM_ADR+TILES_4
+#define COIN_500_VRAM_ADR       COIN_100_VRAM_ADR+TILES_4
+#define COIN_1000_VRAM_ADR      COIN_500_VRAM_ADR+TILES_4
+
+#define STAR_VRAM_ADR           COIN_1000_VRAM_ADR+TILES_4
+#define OCTOPUS_VRAM_ADR        STAR_VRAM_ADR+TILES_4
+#define FRUIT_VRAM_ADR          OCTOPUS_VRAM_ADR+TILES_4
+#define BARREL_VRAM_ADR         FRUIT_VRAM_ADR+TILES_4
+
+#define CHEST_VRAM_ADR          0x2400
+
+
 
 
 

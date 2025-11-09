@@ -10,6 +10,12 @@
 
 
 
+void scroll_OBJECTS()
+{
+    //
+}
+
+
 int check_TILE_DEPTH(signed char x_offset , signed char y_offset)
 {
     int player_COLL_X;
@@ -580,6 +586,24 @@ void update_PLAYER()
 
         player_pos_y += TABLE_PLAYER_JUMP_V[player_index_jump];
 
+        // CHECK COLLISION WITH CEILING //
+        check_BG( 15 , 8 );
+
+        if(map_blk_flag == TILE_BG)
+        {
+            for(i=1 ; i<8 ; i++)
+            {
+                check_BG( 15 , 8 + i );
+                {
+                    if(map_blk_flag == TILE_EMPTY)
+                    {
+                        player_pos_y += i;
+                        break;
+                    }
+                }
+            }
+        }
+
         spr_set(player_id);
         spr_y(player_pos_y);
 
@@ -587,6 +611,7 @@ void update_PLAYER()
 
         if(player_index_jump < 34)
         {
+
             player_index_jump += 1;
         }
 
@@ -1434,6 +1459,24 @@ void update_PLAYER()
 
         player_pos_y += TABLE_PLAYER_JUMP_V[player_index_jump];
 
+        // CHECK COLLISION WITH CEILING //
+        check_BG( 15 , 8 );
+
+        if(map_blk_flag == TILE_BG)
+        {
+            for(i=1 ; i<8 ; i++)
+            {
+                check_BG( 15 , 8 + i );
+                {
+                    if(map_blk_flag == TILE_EMPTY)
+                    {
+                        player_pos_y += i;
+                        break;
+                    }
+                }
+            }
+        }
+
         spr_set(player_id);
         spr_y(player_pos_y);
 
@@ -1443,95 +1486,6 @@ void update_PLAYER()
         {
             player_index_jump += 1;
         }
-
-
-
-
-		//--------------------------------------------------------------------------------------//
-		//                                   FLOOR COLLISION                                    //
-		//--------------------------------------------------------------------------------------//
-
-        /*if(player_index_jump > 14)
-        {
-            // CHECK COLLISION WITH LEFT FLOOR //
-            check_BG( 10 , 32 );
-
-            // IF PLAYER TOUCHES THE GROUND TO THE LEFT //
-            if(map_blk_flag == TILE_BG)
-            {
-                // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
-                for(i=1; i<11 ; i++)
-                {
-                    check_TILE_DEPTH( 10 , i);
-
-                    if(map_blk_flag == TILE_EMPTY)
-                    {
-                        if(player_pos_y != PLAYER_BASE_Y_POS)
-                        {
-                            player_pos_y -= (i - 1);
-                        }
-
-                        else
-                        {
-                            sgx_map_pxl_y -= (i - 1);
-                        }
-
-                        break;
-                    }
-                }
-
-                // SET PLAYER SPRITE NEW POSITION //
-                spr_y(player_pos_y);
-
-                player_counter_anim = 1;
-                player_index_jump = 0;
-                jump_ladder = FALSE;
-                jump_max_index = 34;
-                player_state = STATE_IDLE;
-                return;
-            }
-
-            // IF PLAYER TOUCHES THE GROUND TO THE RIGHT //
-            else
-            {
-                // CHECK COLLISION WITH RIGHT FLOOR //
-                check_BG( 22 , 32 );
-
-                if(map_blk_flag == TILE_BG)
-                {
-                    // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
-                    for(i=1; i<11 ; i++)
-                    {
-                        check_TILE_DEPTH( 22 , i);
-
-                        if(map_blk_flag == TILE_EMPTY)
-                        {
-                            if(player_pos_y != PLAYER_BASE_Y_POS)
-                            {
-                                player_pos_y -= (i - 1);
-                            }
-
-                            else
-                            {
-                                sgx_map_pxl_y -= (i - 1);
-                            }
-
-                            break;
-                        }
-                    }
-
-                    // SET PLAYER SPRITE NEW POSITION //
-                    spr_y(player_pos_y);
-
-                    player_counter_anim = 1;
-                    player_index_jump = 0;
-                    jump_ladder = FALSE;
-                    jump_max_index = 34;
-                    player_state = STATE_IDLE;
-                    return;
-                }
-            }
-        }*/
 
 
 
