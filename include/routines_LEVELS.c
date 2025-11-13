@@ -10,6 +10,78 @@
 
 
 
+void display_LIFE()
+{
+    //
+}
+
+
+void display_TIME()
+{
+    put_number(minutes,1,1,3);
+
+    if(seconds < 10)
+    {
+        put_number(0,1,3,3);
+        put_number(seconds,1,4,3);
+    }
+
+    else
+    {
+        put_number(seconds,2,3,3);
+    }
+
+    time_counter += 1;
+
+    if(time_counter == 60)
+    {
+        time_counter = 0;
+
+        if(seconds > 0)
+        {
+            seconds -= 1;
+        }
+
+        else
+        {
+            if(minutes > 0)
+            {
+                seconds = 59;
+                minutes -= 1;
+            }
+
+            else
+            {
+                seconds = 0;
+                minutes = 0;
+                // TIME OUT //
+            }
+        }
+    }
+    
+}
+
+
+void display_KEY()
+{
+    put_number(key_number,2,7,27);
+}
+
+
+void display_POTION()
+{
+    put_number(potion_number,2,19,27);
+}
+
+
+void display_ZENNY()
+{
+    put_number(zenny_number,5,26,4);
+}
+
+
+
+
 void scroll_object()
 {
     char i;
@@ -192,7 +264,7 @@ int check_TILE_DEPTH(signed char x_offset , signed char y_offset)
     get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
 }
 
-
+// CHECK COLLISION WITH BG //
 int check_BG(signed char x_offset , signed char y_offset)
 {
     int player_COLL_X;
@@ -205,8 +277,73 @@ int check_BG(signed char x_offset , signed char y_offset)
     get_map_block(player_COLL_X + sgx_map_pxl_x, player_COLL_Y + sgx_map_pxl_y);
 }
 
+// CHECK COLLISION WITH OBJECTS //
+void check_OBJECTS()
+{
+    if(onscreen_object_number != 0)
+    {
+        char i;
+        char current_object_id;
+        char current_object_type;
 
+        for(i=0 ; i<onscreen_object_number ; i++)
+        {
+            // RETRIEVE OBJECT INDEX IN THE LIST //
+            current_object_id = list_onscreen_object[i];
+            // RETRIEVE OBJECT TYPE //
+            current_object_type = list_object_type[current_object_id];
 
+            if(current_object_type != TYPE_POT)
+            {
+                if(abs( (player_pos_x + 16) - (list_object_x_pos[current_object_id] + 8) ) < OBJECT_MARGIN)
+                {
+                    if(abs( (player_pos_y + 16) - (list_object_y_pos[current_object_id] + 8) ) < OBJECT_MARGIN)
+                    {
+                        // THE OBJECT DISAPPEARS //
+                        list_object_x_pos[current_object_id] = -16;
+                        list_object_y_pos[current_object_id] = -16;
+                        list_object_state[current_object_id] = STATE_INACTIVE;
+
+                        spr_set(current_object_id + object_start_index);
+                        spr_x(list_object_x_pos[current_object_id]);
+                        spr_y(list_object_y_pos[current_object_id]);
+                        
+
+                        switch(current_object_type)
+                        {
+                            case TYPE_HOURGLASS:
+                                if(seconds + 30 > 59)
+                                {
+                                    seconds = seconds + 30 - 60;
+                                    minutes += 1;
+                                }
+
+                                else
+                                {
+                                    seconds += 30;
+                                }
+
+                                break;
+
+                            case TYPE_POW:
+                                //
+                                break;
+
+                            case TYPE_GRAY_KEY:
+                                key_number += 1;
+                                display_KEY();
+                                break;
+
+                            case TYPE_YASHICHI:
+                                life_number += 1;
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 

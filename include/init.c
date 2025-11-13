@@ -16,6 +16,14 @@ void init_VARIABLES()
 
     level_id = 1;
 
+	key_number = 0;
+	potion_number = 0;
+	zenny_number = 200;
+
+	minutes = 1;
+	seconds = 59;
+	time_counter = 0;
+
     sequence_loaded = FALSE;
 }
 
@@ -53,6 +61,12 @@ void load_OBJECT_TILES()
 	load_vram(FRUIT_VRAM_ADR, tiles_SPR_FRUIT , TILES_4);
 	load_vram(BARREL_VRAM_ADR, tiles_SPR_BARREL , TILES_4);
 	load_vram(HOURGLASS_VRAM_ADR, tiles_SPR_HOURGLASS , TILES_4);
+	load_vram(BAMBOO_VRAM_ADR, tiles_SPR_BAMBOO , TILES_4);
+	load_vram(YASHICHI_VRAM_ADR, tiles_SPR_YASHICHI , TILES_4);
+	load_vram(ELEPHANT_VRAM_ADR, tiles_SPR_ELEPHANT , TILES_4);
+	load_vram(DRAGONFLY_VRAM_ADR, tiles_SPR_DRAGONFLY , TILES_4);
+	load_vram(COW_VRAM_ADR, tiles_SPR_COW , TILES_4);
+	load_vram(MOBICHAN_VRAM_ADR, tiles_SPR_MOBICHAN , TILES_4);
 }
 
 
@@ -276,6 +290,15 @@ void init_LEVEL()
 		//**************************************************************************************//
 
 		//--------------------------------------------------------------------------------------//
+		//                                      LOAD FONT                                       //
+		//--------------------------------------------------------------------------------------//
+
+		load_vram( NUMBERS_FONT_VRAM_ADR, tileset_NUMBERS_FONT, SIZEOF(tileset_NUMBERS_FONT) >> 1 );
+
+		set_font_pal(15);
+
+
+		//--------------------------------------------------------------------------------------//
 		//                                    LOAD TILESET                                      //
 		//--------------------------------------------------------------------------------------//
 
@@ -323,6 +346,10 @@ void init_LEVEL()
 		vdc_map_draw_h = 28;
 
 		draw_map();
+
+		display_KEY();
+		display_POTION();
+		display_ZENNY();
 
 
 

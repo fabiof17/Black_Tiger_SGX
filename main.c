@@ -93,9 +93,13 @@ main()
                     scroll_chest();
                     scroll_npc();
 
+                    check_OBJECTS();
+
                     satb_update();
 
                     scroll_BG();
+
+                    display_TIME();
                 }
 
                 else if(level_id == 2)

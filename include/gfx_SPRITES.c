@@ -14,6 +14,9 @@
 #incpal(palette_PLAYER,"res/palettes/palette_PLAYER.png");
 
 
+#incspr(tiles_SPR_HIT,"res/sprites/tiles_SPR_HIT.png")
+
+
 // EXTRACT OBJECTS TILES //
 #incspr(tiles_SPR_BARREL,"res/sprites/tiles_SPR_BARREL.png")
 #incspr(tiles_SPR_CHEST,"res/sprites/tiles_SPR_CHEST.png")
@@ -33,13 +36,16 @@
 #incspr(tiles_SPR_POT,"res/sprites/tiles_SPR_POT.png")
 #incspr(tiles_SPR_POW,"res/sprites/tiles_SPR_POW.png")
 #incspr(tiles_SPR_STAR,"res/sprites/tiles_SPR_STAR.png")
+#incspr(tiles_SPR_BAMBOO,"res/sprites/tiles_SPR_BAMBOO.png")
+#incspr(tiles_SPR_YASHICHI,"res/sprites/tiles_SPR_YASHICHI.png")
+#incspr(tiles_SPR_ELEPHANT,"res/sprites/tiles_SPR_ELEPHANT.png")
+#incspr(tiles_SPR_DRAGONFLY,"res/sprites/tiles_SPR_DRAGONFLY.png")
+#incspr(tiles_SPR_COW,"res/sprites/tiles_SPR_COW.png")
+#incspr(tiles_SPR_MOBICHAN,"res/sprites/tiles_SPR_MOBICHAN.png")
 
 // EXTRACT OBJECTS PALETTE //
 #incpal(palette_objects_1,"res/palettes/palette_objects_1.png");
 #incpal(palette_objects_2,"res/palettes/palette_objects_2.png");
-
-
-#incspr(tiles_SPR_HIT,"res/sprites/tiles_SPR_HIT.png")
 
 
 // EXTRACT NPCS TILES //

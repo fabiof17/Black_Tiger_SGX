@@ -26,6 +26,16 @@ unsigned char   sequence_id,
                 jump_ladder,
                 jump_max_index,
 
+                life_number,
+                key_number,
+                potion_number,
+                zenny_number,
+
+                minutes,
+                seconds,
+                time_counter,
+
+
                 // OBJECTS //
                 object_start_index,
                 level_object_number,

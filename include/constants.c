@@ -16,6 +16,8 @@
 #define BAT_SIZE_W 2048 // IN PIXELS
 #define BAT_SIZE_H 256  // IN PIXELS
 
+#define NUMBERS_FONT_VRAM_ADR   0x0900
+
 #define JOY_DIR_PRESSED (JOY_DOWN | JOY_UP | JOY_RIGHT | JOY_LEFT)
 
 
@@ -170,10 +172,13 @@
 #define TYPE_COIN_100           11
 #define TYPE_COIN_500           12
 #define TYPE_COIN_1000          13
+#define TYPE_YASHICHI           14
 
 
 #define STATE_ACTIVE            0
 #define STATE_INACTIVE          1
+
+#define OBJECT_MARGIN           10//9
 
 
 #define POT1_VRAM_ADR           0x1C00
@@ -203,8 +208,14 @@
 #define FRUIT_VRAM_ADR          OCTOPUS_VRAM_ADR+TILES_4
 #define BARREL_VRAM_ADR         FRUIT_VRAM_ADR+TILES_4
 #define HOURGLASS_VRAM_ADR      BARREL_VRAM_ADR+TILES_4
+#define BAMBOO_VRAM_ADR         HOURGLASS_VRAM_ADR+TILES_4
+#define YASHICHI_VRAM_ADR       BAMBOO_VRAM_ADR+TILES_4
+#define ELEPHANT_VRAM_ADR       YASHICHI_VRAM_ADR+TILES_4
+#define DRAGONFLY_VRAM_ADR      ELEPHANT_VRAM_ADR+TILES_4
+#define COW_VRAM_ADR            DRAGONFLY_VRAM_ADR+TILES_4
+#define MOBICHAN_VRAM_ADR       COW_VRAM_ADR+TILES_4
 
-#define CHEST_VRAM_ADR          0x2400//0x7800
+#define CHEST_VRAM_ADR          0x2400
 #define NPC_VRAM_ADR            CHEST_VRAM_ADR+TILES_96
 
 
