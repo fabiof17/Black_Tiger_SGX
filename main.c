@@ -17,8 +17,9 @@
 
 
 
-#include "include/tables_objects.c"
-#include "include/tables_player.c"
+#include "include/tables_NPC.c"
+#include "include/tables_OBJECT.c"
+#include "include/tables_PLAYER.c"
 #include "include/routines_LEVELS.c"
 #include "include/init.c"
 
@@ -82,15 +83,18 @@ main()
                     vsync();
 
                     update_PLAYER();
-                    //put_number(player_state,1,0,0);
-                    //put_number(player_pos_y,3,0,1);
-                    //put_number(sgx_map_pxl_y,3,0,2);
-
+                    
+                    //put_number(onscreen_object_number + onscreen_chest_number,1,0,0);
 
                     joypad_DIR();
                     joypad_BUTTONS();
 
+                    scroll_object();
+                    scroll_chest();
+                    scroll_npc();
+
                     satb_update();
+
                     scroll_BG();
                 }
 

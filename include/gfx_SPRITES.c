@@ -35,15 +35,15 @@
 #incspr(tiles_SPR_STAR,"res/sprites/tiles_SPR_STAR.png")
 
 // EXTRACT OBJECTS PALETTE //
-#incpal(palette_OBJECTS_1,"res/palettes/palette_OBJECTS_1.png");
-#incpal(palette_OBJECTS_2,"res/palettes/palette_OBJECTS_2.png");
+#incpal(palette_objects_1,"res/palettes/palette_objects_1.png");
+#incpal(palette_objects_2,"res/palettes/palette_objects_2.png");
 
 
 #incspr(tiles_SPR_HIT,"res/sprites/tiles_SPR_HIT.png")
 
 
-
-
+// EXTRACT NPCS TILES //
+#incspr(tiles_SPR_NPC,"res/sprites/tiles_SPR_NPC.png")
 
 
 

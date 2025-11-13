@@ -139,7 +139,13 @@
 #define LV1_DOOR_VRAM_ADR       LV1_WALL_VRAM_ADR+256
 
 
-#define OBJECTS_NUMBER_LV1      25
+#define OBJECT_NUMBER_LV1       23
+#define CHEST_NUMBER_LV1        2
+#define NPC_NUMBER_LV1          2
+
+#define OBJECT_START_INDEX_LV1  3
+#define CHEST_START_INDEX_LV1   OBJECT_START_INDEX_LV1+OBJECT_NUMBER_LV1
+#define NPC_START_INDEX_LV1     CHEST_START_INDEX_LV1+CHEST_NUMBER_LV1
 
 
 
@@ -157,6 +163,14 @@
 #define TYPE_GRAY_KEY           4
 #define TYPE_GOLD_KEY           5
 #define TYPE_1UP                6
+#define TYPE_COIN_1             7
+#define TYPE_COIN_5             8
+#define TYPE_COIN_10            9
+#define TYPE_COIN_50            10
+#define TYPE_COIN_100           11
+#define TYPE_COIN_500           12
+#define TYPE_COIN_1000          13
+
 
 #define STATE_ACTIVE            0
 #define STATE_INACTIVE          1
@@ -188,9 +202,10 @@
 #define OCTOPUS_VRAM_ADR        STAR_VRAM_ADR+TILES_4
 #define FRUIT_VRAM_ADR          OCTOPUS_VRAM_ADR+TILES_4
 #define BARREL_VRAM_ADR         FRUIT_VRAM_ADR+TILES_4
+#define HOURGLASS_VRAM_ADR      BARREL_VRAM_ADR+TILES_4
 
-#define CHEST_VRAM_ADR          0x2400
-
+#define CHEST_VRAM_ADR          0x2400//0x7800
+#define NPC_VRAM_ADR            CHEST_VRAM_ADR+TILES_96
 
 
 

@@ -10,10 +10,174 @@
 
 
 
-void scroll_OBJECTS()
+void scroll_object()
 {
-    //
+    char i;
+    onscreen_object_number = 0;
+
+    for(i=0 ; i<level_object_number ; i++)
+    {
+        if(list_object_state[i] != STATE_INACTIVE)
+        {
+            char scroll_allowed = FALSE;
+            
+            // IF OBJECT X POSITION IS INFERIOR TO SCREEN RIGHT SIDE //
+            if(list_object_x_pos_ref[i] < sgx_map_pxl_x + 256)
+            {
+                // IF OBJECT X POSITION IS SUPERIOR TO SCREEN LEFT SIDE PLUS 16 PX //
+                if(list_object_x_pos_ref[i] - sgx_map_pxl_x + 16 > 0)
+                {
+                    // IF OBJECT Y POSITION IS INFERIOR TO SCREEN BOTTOM //
+                    if(list_object_y_pos_ref[i] < sgx_map_pxl_y + 224)
+                    {
+                        // IF OBJECT Y POSITION IS SUPERIOR TO SCREEN TOP PLUS 16 PX //
+                        if(list_object_y_pos_ref[i] - sgx_map_pxl_y + 16 > 0)
+                        {
+                            // WE STORE THE OBJECT ID //
+                            //put_number(i,2,0,2+onscreen_object_number);
+                            list_onscreen_object[onscreen_object_number] = i;
+                            onscreen_object_number += 1;
+                            
+                            //list_object_visibility[i] = ON_SCREEN;
+                            scroll_allowed = TRUE;
+                        }
+                    }
+                }
+            }
+
+            // IF OBJECTS IS WITHIN THE SCREEN LIMITS //
+            if(scroll_allowed == TRUE)
+            {
+                list_object_x_pos[i] = list_object_x_pos_ref[i] - sgx_map_pxl_x;
+                list_object_y_pos[i] = list_object_y_pos_ref[i] - sgx_map_pxl_y;
+            }
+
+            else
+            {
+                list_object_x_pos[i] = -16;
+                list_object_y_pos[i] = -16;
+                //list_object_visibility[i] = OFF_SCREEN;
+            }
+
+            spr_set(i + object_start_index);
+
+			spr_x(list_object_x_pos[i]);
+			spr_y(list_object_y_pos[i]);
+        }
+    }
 }
+
+
+void scroll_chest()
+{
+    char i;
+    onscreen_chest_number = 0;
+
+    for(i=0 ; i<level_chest_number ; i++)
+    {
+        if(list_chest_state[i] != STATE_INACTIVE)
+        {
+            char scroll_allowed = FALSE;
+            
+            // IF CHEST X POSITION IS INFERIOR TO SCREEN RIGHT SIDE //
+            if(list_chest_x_pos_ref[i] < sgx_map_pxl_x + 256)
+            {
+                // IF CHEST X POSITION IS SUPERIOR TO SCREEN LEFT SIDE PLUS 32 PX //
+                if(list_chest_x_pos_ref[i] - sgx_map_pxl_x + 32 > 0)
+                {
+                    // IF CHEST Y POSITION IS INFERIOR TO SCREEN BOTTOM //
+                    if(list_chest_y_pos_ref[i] < sgx_map_pxl_y + 224)
+                    {
+                        // IF CHEST Y POSITION IS SUPERIOR TO SCREEN TOP PLUS 32 PX //
+                        if(list_chest_y_pos_ref[i] - sgx_map_pxl_y + 32 > 0)
+                        {
+                            // WE STORE THE CHEST ID //
+                            list_onscreen_chest[onscreen_chest_number] = i;
+                            onscreen_chest_number += 1;
+                            
+                            scroll_allowed = TRUE;
+                        }
+                    }
+                }
+            }
+
+            // IF CHEST IS WITHIN THE SCREEN LIMITS //
+            if(scroll_allowed == TRUE)
+            {
+                list_chest_x_pos[i] = list_chest_x_pos_ref[i] - sgx_map_pxl_x;
+                list_chest_y_pos[i] = list_chest_y_pos_ref[i] - sgx_map_pxl_y;
+            }
+
+            else
+            {
+                list_chest_x_pos[i] = -32;
+                list_chest_y_pos[i] = -32;
+            }
+
+            spr_set(i + chest_start_index);
+
+			spr_x(list_chest_x_pos[i]);
+			spr_y(list_chest_y_pos[i]);
+        }
+    }
+}
+
+
+void scroll_npc()
+{
+    char i;
+    onscreen_npc_number = 0;
+
+    for(i=0 ; i<level_npc_number ; i++)
+    {
+        if(list_npc_state[i] != STATE_INACTIVE)
+        {
+            char scroll_allowed = FALSE;
+            
+            // IF NPC X POSITION IS INFERIOR TO SCREEN RIGHT SIDE //
+            if(list_npc_x_pos_ref[i] < sgx_map_pxl_x + 256)
+            {
+                // IF NPC X POSITION IS SUPERIOR TO SCREEN LEFT SIDE PLUS 32 PX //
+                if(list_npc_x_pos_ref[i] - sgx_map_pxl_x + 32 > 0)
+                {
+                    // IF NPC Y POSITION IS INFERIOR TO SCREEN BOTTOM //
+                    if(list_npc_y_pos_ref[i] < sgx_map_pxl_y + 224)
+                    {
+                        // IF NPC Y POSITION IS SUPERIOR TO SCREEN TOP PLUS 32 PX //
+                        if(list_npc_y_pos_ref[i] - sgx_map_pxl_y + 32 > 0)
+                        {
+                            // WE STORE THE NPC ID //
+                            list_onscreen_npc[onscreen_npc_number] = i;
+                            onscreen_npc_number += 1;
+                            
+                            scroll_allowed = TRUE;
+                        }
+                    }
+                }
+            }
+
+            // IF NPC IS WITHIN THE SCREEN LIMITS //
+            if(scroll_allowed == TRUE)
+            {
+                list_npc_x_pos[i] = list_npc_x_pos_ref[i] - sgx_map_pxl_x;
+                list_npc_y_pos[i] = list_npc_y_pos_ref[i] - sgx_map_pxl_y;
+            }
+
+            else
+            {
+                list_npc_x_pos[i] = -32;
+                list_npc_y_pos[i] = -32;
+            }
+
+            spr_set(i + npc_start_index);
+
+			spr_x(list_npc_x_pos[i]);
+			spr_y(list_npc_y_pos[i]);
+        }
+    }
+}
+
+
 
 
 int check_TILE_DEPTH(signed char x_offset , signed char y_offset)

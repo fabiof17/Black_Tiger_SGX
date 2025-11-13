@@ -32,11 +32,154 @@ void init_PLAYER()
 }
 
 
+
+
+void load_OBJECT_TILES()
+{
+	load_vram(POT1_VRAM_ADR, tiles_SPR_POT , SIZEOF(tiles_SPR_POT) >> 1);
+	load_vram(POW_VRAM_ADR, tiles_SPR_POW , TILES_4);
+	load_vram(GRAY_KEY_VRAM_ADR, tiles_SPR_GRAY_KEY , TILES_4);
+	load_vram(GOLD_KEY_VRAM_ADR, tiles_SPR_GOLD_KEY , TILES_4);
+	load_vram(LIFE_VRAM_ADR, tiles_SPR_LIFE , TILES_4);
+	load_vram(COIN_1_VRAM_ADR, tiles_SPR_COIN_1 , TILES_4);
+	load_vram(COIN_5_VRAM_ADR, tiles_SPR_COIN_5 , TILES_4);
+	load_vram(COIN_10_VRAM_ADR, tiles_SPR_COIN_10 , TILES_4);
+	load_vram(COIN_50_VRAM_ADR, tiles_SPR_COIN_50 , TILES_4);
+	load_vram(COIN_100_VRAM_ADR, tiles_SPR_COIN_100 , TILES_4);
+	load_vram(COIN_500_VRAM_ADR, tiles_SPR_COIN_500 , TILES_4);
+	load_vram(COIN_1000_VRAM_ADR, tiles_SPR_COIN_1000 , TILES_4);
+	load_vram(STAR_VRAM_ADR, tiles_SPR_STAR , TILES_4);
+	load_vram(OCTOPUS_VRAM_ADR, tiles_SPR_OCTOPUS , TILES_4);
+	load_vram(FRUIT_VRAM_ADR, tiles_SPR_FRUIT , TILES_4);
+	load_vram(BARREL_VRAM_ADR, tiles_SPR_BARREL , TILES_4);
+	load_vram(HOURGLASS_VRAM_ADR, tiles_SPR_HOURGLASS , TILES_4);
+}
+
+
+void load_CHEST_TILES()
+{
+	load_vram(CHEST_VRAM_ADR, tiles_SPR_CHEST , SIZEOF(tiles_SPR_CHEST) >> 1);
+}
+
+
+void load_NPC_TILES()
+{
+	load_vram(NPC_VRAM_ADR, tiles_SPR_NPC , SIZEOF(tiles_SPR_NPC) >> 1);
+}
+
+
+void init_OBJECT_LV1()
+{
+	signed char i;
+
+	for(i=0 ; i<level_object_number ; i++)
+	{
+		// SET OBJECT PROPERTIES //
+		list_object_type[i] = TABLE_OBJECT_TYPE_LV1[i];
+		list_object_x_pos_ref[i] = TABLE_OBJECT_X_POS_REF_LV1[i];
+		list_object_y_pos_ref[i] = TABLE_OBJECT_Y_POS_REF_LV1[i];
+		list_object_x_pos[i] = -16;
+		list_object_y_pos[i] = -16;
+		list_object_state[i] = STATE_ACTIVE;
+
+
+		// SET OBJECT SPRITE //
+		spr_set(i + object_start_index);
+		spr_x(list_object_x_pos[i]);
+		spr_y(list_object_y_pos[i]);
+		spr_pri(FALSE);
+
+
+		if(list_object_type[i] == TYPE_HOURGLASS)
+		{
+			list_object_energy[i] = 0;
+			spr_pal(18);
+			spr_pattern(HOURGLASS_VRAM_ADR);
+			spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
+		}
+
+		else if(list_object_type[i] == TYPE_POT)
+		{
+			list_object_energy[i] = 2;
+			spr_pal(17);
+			spr_pattern(POT1_VRAM_ADR);
+			spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
+		}
+
+		else if(list_object_type[i] == TYPE_POW)
+		{
+			list_object_energy[i] = 0;
+			spr_pal(18);
+			spr_pattern(POW_VRAM_ADR);
+			spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
+		}
+	}
+}
+
+
+void init_CHEST_LV1()
+{
+	signed char i;
+
+	for(i=0 ; i<level_chest_number ; i++)
+	{
+		// SET CHEST PROPERTIES //
+		list_chest_x_pos_ref[i] = TABLE_CHEST_X_POS_REF_LV1[i];
+		list_chest_y_pos_ref[i] = TABLE_CHEST_Y_POS_REF_LV1[i];
+		list_chest_x_pos[i] = -32;
+		list_chest_y_pos[i] = -32;
+		list_chest_state[i] = STATE_ACTIVE;
+
+
+		// SET CHEST SPRITE //
+		spr_set(i + chest_start_index);
+		spr_x(list_chest_x_pos[i]);
+		spr_y(list_chest_y_pos[i]);
+		spr_pri(FALSE);
+
+
+		spr_pal(18);
+		spr_pattern(CHEST_VRAM_ADR);
+		spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
+	}
+}
+
+
+void init_NPC_LV1()
+{
+	signed char i;
+
+	for(i=0 ; i<level_npc_number ; i++)
+	{
+		// SET CHEST PROPERTIES //
+		list_npc_x_pos_ref[i] = TABLE_NPC_X_POS_REF_LV1[i];
+		list_npc_y_pos_ref[i] = TABLE_NPC_Y_POS_REF_LV1[i];
+		list_npc_x_pos[i] = -32;
+		list_npc_y_pos[i] = -32;
+		list_npc_state[i] = STATE_ACTIVE;
+
+
+		// SET CHEST SPRITE //
+		spr_set(i + npc_start_index);
+		spr_x(list_npc_x_pos[i]);
+		spr_y(list_npc_y_pos[i]);
+		spr_pri(FALSE);
+
+
+		spr_pal(17);
+		spr_pattern(NPC_VRAM_ADR);
+		spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
+	}
+}
+
+
+
+
 void init_LEVEL()
 {
     if(level_id == 1)
     {
-		signed char i;
+		//signed char i;
 
 		// VSYNC //
 		vsync();
@@ -66,15 +209,15 @@ void init_LEVEL()
 		//                                                                                      //
 		//**************************************************************************************//
 
-        //signed char i;
-
 		camera_max_y_position = 768;
 		jump_max_index = 34;
-		objects_max = 25;
+		level_object_number = OBJECT_NUMBER_LV1;
+		level_chest_number = CHEST_NUMBER_LV1;
+		level_npc_number = NPC_NUMBER_LV1;
+		object_start_index = OBJECT_START_INDEX_LV1;
+		chest_start_index = CHEST_START_INDEX_LV1;
+		npc_start_index = NPC_START_INDEX_LV1;
 		jump_ladder = FALSE;
-
-		ptr_objects_pos_x_ref = TABLE_OBJECTS_X_POS_REF_LV1;
-		ptr_objects_pos_y_ref = TABLE_OBJECTS_Y_POS_REF_LV1;
 
 
 
@@ -250,88 +393,33 @@ void init_LEVEL()
 		spr_pri(TRUE);
 
 
-
-
 		//--------------------------------------------------------------------------------------//
 		//                                       OBJECTS                                        //
 		//--------------------------------------------------------------------------------------//
 
-		// LOAD OBJECTS TILES //
-		load_vram(POT1_VRAM_ADR, tiles_SPR_POT , TILES_32);
-		load_vram(POW_VRAM_ADR, tiles_SPR_POW , TILES_4);
-		load_vram(GRAY_KEY_VRAM_ADR, tiles_SPR_GRAY_KEY , TILES_4);
-		load_vram(GOLD_KEY_VRAM_ADR, tiles_SPR_GOLD_KEY , TILES_4);
-		load_vram(LIFE_VRAM_ADR, tiles_SPR_LIFE , TILES_4);
-		load_vram(COIN_1_VRAM_ADR, tiles_SPR_COIN_1 , TILES_4);
-		load_vram(COIN_5_VRAM_ADR, tiles_SPR_COIN_5 , TILES_4);
-		load_vram(COIN_10_VRAM_ADR, tiles_SPR_COIN_10 , TILES_4);
-		load_vram(COIN_50_VRAM_ADR, tiles_SPR_COIN_50 , TILES_4);
-		load_vram(COIN_100_VRAM_ADR, tiles_SPR_COIN_100 , TILES_4);
-		load_vram(COIN_500_VRAM_ADR, tiles_SPR_COIN_500 , TILES_4);
-		load_vram(COIN_1000_VRAM_ADR, tiles_SPR_COIN_1000 , TILES_4);
-		load_vram(STAR_VRAM_ADR, tiles_SPR_STAR , TILES_4);
-		load_vram(OCTOPUS_VRAM_ADR, tiles_SPR_OCTOPUS , TILES_4);
-		load_vram(FRUIT_VRAM_ADR, tiles_SPR_FRUIT , TILES_4);
-		load_vram(BARREL_VRAM_ADR, tiles_SPR_BARREL , TILES_4);
+		load_OBJECT_TILES();
+		init_OBJECT_LV1();
+		scroll_object();
 
 
-		load_vram(CHEST_VRAM_ADR, tiles_SPR_CHEST , TILES_16);
+		//--------------------------------------------------------------------------------------//
+		//                                        CHESTS                                        //
+		//--------------------------------------------------------------------------------------//
+
+		load_CHEST_TILES();
+		init_CHEST_LV1();
+		scroll_chest();
+
+
+		//--------------------------------------------------------------------------------------//
+		//                                         NPCS                                         //
+		//--------------------------------------------------------------------------------------//
+
+		load_NPC_TILES();
+		init_NPC_LV1();
 
 
 
-		for(i=0 ; i<objects_max ; i++)
-		{
-			// SET OBJECT PROPERTIES //
-			list_objects_type[i] = TABLE_OBJECTS_TYPE_LV1[i];
-			list_objects_x_pos_ref[i] = TABLE_OBJECTS_X_POS_REF_LV1[i];
-			list_objects_y_pos_ref[i] = TABLE_OBJECTS_Y_POS_REF_LV1[i];
-			list_objects_x_pos[i] = -32;
-			list_objects_y_pos[i] = -32;
-			list_objects_state[i] = STATE_ACTIVE;
-
-
-			// SET OBJECT SPRITE //
-			spr_set(i + 3);
-			spr_x(list_objects_x_pos[i]);
-			spr_y(list_objects_y_pos[i]);
-			spr_pri(TRUE);
-
-
-			if(list_objects_type[i] == TYPE_HOURGLASS)
-			{
-				list_objects_energy[i] = 0;
-				spr_pal(18);
-				spr_pattern(POT1_VRAM_ADR);
-				spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
-			}
-
-			else if(list_objects_type[i] == TYPE_POT)
-			{
-				list_objects_energy[i] = 2;
-				spr_pal(17);
-				spr_pattern(POT1_VRAM_ADR);
-				spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
-			}
-
-			else if(list_objects_type[i] == TYPE_POW)
-			{
-				list_objects_energy[i] = 0;
-				spr_pal(18);
-				spr_pattern(POW_VRAM_ADR);
-				spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
-			}
-
-			else if(list_objects_type[i] == TYPE_CHEST)
-			{
-				list_objects_energy[i] = 0;
-				spr_pal(18);
-				spr_pattern(CHEST_VRAM_ADR);
-				spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
-			}
-		}
-
-
-		scroll_OBJECTS();
 
 
 		// UPDATE PCE SAT //
@@ -344,9 +432,9 @@ void init_LEVEL()
 		//                                LOAD SPRITES PALETTES                                 //
 		//--------------------------------------------------------------------------------------//
 
-		load_palette( 16, palette_PLAYER,  1 );
-		load_palette( 17, palette_OBJECTS_1, 1 );
-		load_palette( 18, palette_OBJECTS_2, 1 );
+		load_palette( 16, palette_PLAYER,    1 );
+		load_palette( 17, palette_objects_1, 1 );
+		load_palette( 18, palette_objects_2, 1 );
 
 
 

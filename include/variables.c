@@ -26,7 +26,33 @@ unsigned char   sequence_id,
                 jump_ladder,
                 jump_max_index,
 
-                objects_max;
+                // OBJECTS //
+                object_start_index,
+                level_object_number,
+                onscreen_object_number,
+                
+                list_object_type[25],
+                list_object_state[25],
+                list_object_energy[25],
+                list_reward_type[25],
+                
+                list_onscreen_object[8],
+                
+                // CHESTS //
+                chest_start_index,
+                level_chest_number,
+                onscreen_chest_number,
+                
+                list_chest_state[8],
+                list_onscreen_chest[8],
+
+                // NPC //
+                npc_start_index,
+                level_npc_number,
+                onscreen_npc_number,
+
+                list_npc_state[9],
+                list_onscreen_npc[9];
 
 
 
@@ -35,19 +61,24 @@ signed int      player_pos_x,
                 player_pos_y,
                 camera_max_y_position,
 
-                list_objects_type[25],
-                list_objects_state[25],
-                list_objects_x_pos[25],
-                list_objects_y_pos[25],
-                list_objects_x_pos_ref[25],
-                list_objects_y_pos_ref[25],
-                list_objects_energy[25];
+
+                list_object_x_pos[25],
+                list_object_y_pos[25],
+                list_object_x_pos_ref[25],
+                list_object_y_pos_ref[25],
 
 
+                list_chest_x_pos[8],
+                list_chest_y_pos[8],
+                list_chest_x_pos_ref[8],
+                list_chest_y_pos_ref[8],
 
 
-signed int      *ptr_objects_pos_x_ref;
-signed int      *ptr_objects_pos_y_ref;
+                list_npc_x_pos[9],
+                list_npc_y_pos[9],
+                list_npc_x_pos_ref[9],
+                list_npc_y_pos_ref[9];
+                
 
 
 
