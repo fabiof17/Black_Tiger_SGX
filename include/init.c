@@ -10,9 +10,38 @@
 
 
 
+void init_SYSTEM()
+{
+	// DISABLE DISPLAY //
+	disp_off();
+
+	// VSYNC //
+	vsync();
+
+	// LOAD DEFAULT FONT //
+	load_default_font();
+
+
+	// SET VDC 1 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
+	set_screen_size(SCR_SIZE_32x32);
+
+
+	// SET VDC 2 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
+	sgx_set_screen_size(SCR_SIZE_32x32);
+
+
+	// INIT SPRITE ATTRIBUTE TABLE //
+	init_satb();
+
+
+	// ENABLE DISPLAY //
+	//disp_on();
+}
+
+
 void init_VARIABLES()
 {
-    sequence_id = SEQUENCE_GAME;
+    sequence_id = SEQUENCE_GAME; //SEQUENCE_GAME | SEQUENCE_SHOP
 
     level_id = 1;
 
@@ -38,6 +67,8 @@ void init_PLAYER()
 	player_index_fall = 0;
 	player_state = STATE_IDLE;
 }
+
+
 
 
 
@@ -165,7 +196,8 @@ void init_NPC_LV1()
 
 	for(i=0 ; i<level_npc_number ; i++)
 	{
-		// SET CHEST PROPERTIES //
+		// SET NPC PROPERTIES //
+		list_npc_type[i] = TABLE_NPC_TYPE_LV1[i];
 		list_npc_x_pos_ref[i] = TABLE_NPC_X_POS_REF_LV1[i];
 		list_npc_y_pos_ref[i] = TABLE_NPC_Y_POS_REF_LV1[i];
 		list_npc_x_pos[i] = -32;
@@ -173,7 +205,7 @@ void init_NPC_LV1()
 		list_npc_state[i] = STATE_ACTIVE;
 
 
-		// SET CHEST SPRITE //
+		// SET NPC SPRITE //
 		spr_set(i + npc_start_index);
 		spr_x(list_npc_x_pos[i]);
 		spr_y(list_npc_y_pos[i]);
@@ -189,19 +221,92 @@ void init_NPC_LV1()
 
 
 
+
+
+void init_HUD()
+{
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                        VDC 1                                         //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	//--------------------------------------------------------------------------------------//
+	//                                      LOAD FONT                                       //
+	//--------------------------------------------------------------------------------------//
+
+	load_vram( NUMBERS_FONT_VRAM_ADR, tileset_NUMBERS_FONT, SIZEOF(tileset_NUMBERS_FONT) >> 1 );
+
+	set_font_pal(15);
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                    LOAD TILESET                                      //
+	//--------------------------------------------------------------------------------------//
+
+	load_vram( 0x1000, tileset_LV1_BG_A, SIZEOF(tileset_LV1_BG_A) >> 1 );
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                 LOAD LIFEBAR TILES                                   //
+	//--------------------------------------------------------------------------------------//
+
+	load_vram( LIFEBAR_1_VRAM_ADR, tileset_LIFE_RED, SIZEOF(tileset_LIFE_RED) >> 1 );
+	load_vram( LIFEBAR_2_VRAM_ADR, tileset_LIFE_ORANGE, SIZEOF(tileset_LIFE_ORANGE) >> 1 );
+	load_vram( LIFEBAR_3_VRAM_ADR, tileset_LIFE_YELLOW, SIZEOF(tileset_LIFE_YELLOW) >> 1 );
+	load_vram( LIFEBAR_4_VRAM_ADR, tileset_LIFE_YELLOW, SIZEOF(tileset_LIFE_YELLOW) >> 1 );
+	load_vram( LIFEBAR_5_VRAM_ADR, tileset_LIFE_EMPTY, SIZEOF(tileset_LIFE_EMPTY) >> 1 );
+
+
+	//--------------------------------------------------------------------------------------//
+	//                               LOAD WEAPON + ARMOR TILES                              //
+	//--------------------------------------------------------------------------------------//
+
+	load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_1, SIZEOF(tileset_WEAPON_1) >> 1 );
+	load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_2, SIZEOF(tileset_ARMOR_2) >> 1 );
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                     SET MULTIMAP                                     //
+	//--------------------------------------------------------------------------------------//
+
+	// multimap is 2 screens wide //
+	set_multimap( multimap_LV1_BG_A , 5 );
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                    DRAW TILEMAP                                      //
+	//--------------------------------------------------------------------------------------//
+
+	// The blkmap is drawn using global variables for the top-left coordinate
+	// in pixels, and the draw width and height in terms of 8x8 characters.
+
+	vdc_map_pxl_x = 0;
+	vdc_map_pxl_y = 0;
+
+	vdc_map_draw_w = 32;
+	vdc_map_draw_h = 28;
+
+	draw_map();
+
+	display_SCORE();
+	display_TIME();
+	display_KEY();
+	display_POTION();
+	display_ZENNY();
+}
+
+
 void init_LEVEL()
 {
     if(level_id == 1)
     {
-		//signed char i;
-
 		// VSYNC //
 		vsync();
 
-        // LOAD DEFAULT FONT //
-		load_default_font();
 
-
+		// DISABLE DISPLAY //
+		disp_off();
 
 
 		// SET VDC 1 SCREEN SIZE (IN TILES) - 64x32 = 512x256 PIXELS
@@ -213,7 +318,8 @@ void init_LEVEL()
 
 
 		// INIT SPRITE ATTRIBUTE TABLE //
-		init_satb();
+		//init_satb();
+
 
 
 
@@ -225,6 +331,7 @@ void init_LEVEL()
 
 		camera_max_y_position = 768;
 		jump_max_index = 34;
+		score = 0;
 		level_object_number = OBJECT_NUMBER_LV1;
 		level_chest_number = CHEST_NUMBER_LV1;
 		level_npc_number = NPC_NUMBER_LV1;
@@ -261,7 +368,7 @@ void init_LEVEL()
 		//                                     SET MULTIMAP                                     //
 		//--------------------------------------------------------------------------------------//
 
-		// multimap is 2 screens wide //
+		// multimap is 5 screens wide //
 		sgx_set_multimap( multimap_LV1_BG_B , 5 );
 
 
@@ -285,71 +392,11 @@ void init_LEVEL()
 
 		//**************************************************************************************//
 		//                                                                                      //
-		//                                        VDC 1                                         //
+		//                                         HUD                                          //
 		//                                                                                      //
 		//**************************************************************************************//
 
-		//--------------------------------------------------------------------------------------//
-		//                                      LOAD FONT                                       //
-		//--------------------------------------------------------------------------------------//
-
-		load_vram( NUMBERS_FONT_VRAM_ADR, tileset_NUMBERS_FONT, SIZEOF(tileset_NUMBERS_FONT) >> 1 );
-
-		set_font_pal(15);
-
-
-		//--------------------------------------------------------------------------------------//
-		//                                    LOAD TILESET                                      //
-		//--------------------------------------------------------------------------------------//
-
-		load_vram( 0x1000, tileset_LV1_BG_A, SIZEOF(tileset_LV1_BG_A) >> 1 );
-
-
-		//--------------------------------------------------------------------------------------//
-		//                                 LOAD LIFABAR TILES                                   //
-		//--------------------------------------------------------------------------------------//
-
-		load_vram( LIFEBAR_1_VRAM_ADR, tileset_LIFE_RED, SIZEOF(tileset_LIFE_RED) >> 1 );
-		load_vram( LIFEBAR_2_VRAM_ADR, tileset_LIFE_ORANGE, SIZEOF(tileset_LIFE_ORANGE) >> 1 );
-		load_vram( LIFEBAR_3_VRAM_ADR, tileset_LIFE_YELLOW, SIZEOF(tileset_LIFE_YELLOW) >> 1 );
-		load_vram( LIFEBAR_4_VRAM_ADR, tileset_LIFE_YELLOW, SIZEOF(tileset_LIFE_YELLOW) >> 1 );
-		load_vram( LIFEBAR_5_VRAM_ADR, tileset_LIFE_EMPTY, SIZEOF(tileset_LIFE_EMPTY) >> 1 );
-
-
-		//--------------------------------------------------------------------------------------//
-		//                               LOAD WEAPON + ARMOR TILES                              //
-		//--------------------------------------------------------------------------------------//
-
-		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_1, SIZEOF(tileset_WEAPON_1) >> 1 );
-		load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_2, SIZEOF(tileset_ARMOR_2) >> 1 );
-
-
-		//--------------------------------------------------------------------------------------//
-		//                                     SET MULTIMAP                                     //
-		//--------------------------------------------------------------------------------------//
-
-		// multimap is 2 screens wide //
-		set_multimap( multimap_LV1_BG_A , 5 );
-
-
-		//--------------------------------------------------------------------------------------//
-		//                                    DRAW TILEMAP                                      //
-		//--------------------------------------------------------------------------------------//
-
-		// The blkmap is drawn using global variables for the top-left coordinate
-		// in pixels, and the draw width and height in terms of 8x8 characters.
-
-		vdc_map_pxl_x = 0;
-		vdc_map_pxl_y = 0;
-
-		vdc_map_draw_w = 32;
-		vdc_map_draw_h = 28;
-
-		draw_map();
-
-		display_KEY();
-		display_POTION();
-		display_ZENNY();
+		init_HUD();
 
 
 
@@ -478,9 +525,215 @@ void init_LEVEL()
 }
 
 
+void init_SHOP()
+{
+	char i;
+	char item_id;
+
+
+	// DISABLE DISPLAY //
+	disp_off();
+	
+
+	// VSYNC //
+	vsync();
+
+
+	// HIDE ALL LEVEL SPRITES //
+	hide_LEVEL_SPRITES();
+
+
+	// SET VDC 1 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
+	set_screen_size(SCR_SIZE_64x32);
+
+
+	// SET VDC 2 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
+	sgx_set_screen_size(SCR_SIZE_32x32);
 
 
 
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                      VARIABLES                                       //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	index_x = 0;
+	index_y = 0;
+	item_index = 0;
+
+	ptr_SHOP_ITEM_PRICES = TABLE_SHOP_PRICES_LV1;
+
+
+
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                        VDC 2                                         //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	//--------------------------------------------------------------------------------------//
+	//                                      LOAD FONT                                       //
+	//--------------------------------------------------------------------------------------//
+
+	load_vram( NUMBERS_FONT_VRAM_ADR, tileset_NUMBERS_FONT, SIZEOF(tileset_NUMBERS_FONT) >> 1 );
+
+	set_font_pal(15);
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                    LOAD TILESET                                      //
+	//--------------------------------------------------------------------------------------//
+
+	sgx_load_vram( 0x1000, tileset_SHOP_BG_B, SIZEOF(tileset_SHOP_BG_B) >> 1 );
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                      LOAD ITEMS                                      //
+	//--------------------------------------------------------------------------------------//
+
+	for(i=0 ; i<10 ; i++)
+	{
+		set_far_base(TABLE_SHOP_ITEMS_TILES_BANK[i],TABLE_SHOP_ITEMS_TILES_ADR[i]);
+		sgx_far_load_vram( 0x1000 + (i * TILES_4), TILES_4 );
+	}
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                      SET BLOCKS                                      //
+	//--------------------------------------------------------------------------------------//
+
+	sgx_set_blocks( blocks_SHOP_BG_B , tilemap_mask , 256 );
+
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                       SET MAP                                        //
+	//--------------------------------------------------------------------------------------//
+
+	sgx_set_blkmap( map_SHOP_BG_B, COUNTOF(map_SHOP_BG_B) );
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                    DRAW TILEMAP                                      //
+	//--------------------------------------------------------------------------------------//
+
+	// The blkmap is drawn using global variables for the top-left coordinate
+	// in pixels, and the draw width and height in terms of 8x8 characters.
+
+	sgx_map_pxl_x = 0;
+	sgx_map_pxl_y = 0;
+
+	sgx_map_draw_w = 32;
+	sgx_map_draw_h = 28;
+
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                  SETUP SCROLL_SPLIT                                  //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	sgx_draw_map();
+
+	sgx_scroll_split(0,   0, sgx_map_pxl_x & (BAT_SIZE_W - 1), sgx_map_pxl_y & (BAT_SIZE_H - 1), BKG_ON | SPR_ON);
+
+
+
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                         HUD                                          //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	init_HUD();
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                     DRAW PRICES                                      //
+	//--------------------------------------------------------------------------------------//
+
+	put_number(*(TABLE_SHOP_PRICES_LV1)  ,4,2,20);
+	put_number(*(TABLE_SHOP_PRICES_LV1+1),4,7,20);
+	put_number(*(TABLE_SHOP_PRICES_LV1+2),4,12,20);
+	put_number(*(TABLE_SHOP_PRICES_LV1+3),4,17,20);
+	put_number(*(TABLE_SHOP_PRICES_LV1+4),4,22,20);
+
+	put_number(*(TABLE_SHOP_PRICES_LV1+5),4,2,23);
+	put_number(*(TABLE_SHOP_PRICES_LV1+6),4,7,23);
+	put_number(*(TABLE_SHOP_PRICES_LV1+7),4,12,23);
+	put_number(*(TABLE_SHOP_PRICES_LV1+8),4,17,23);
+	put_number(*(TABLE_SHOP_PRICES_LV1+9),4,22,23);
+
+
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                   LOAD BG PALETTES                                   //
+	//--------------------------------------------------------------------------------------//
+
+	load_palette( 0, palette_SHOP, 16 );
+
+
+
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                       SPRITES                                        //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	//--------------------------------------------------------------------------------------//
+	//                                        CURSOR                                        //
+	//--------------------------------------------------------------------------------------//
+
+	// LOAD PLAYER TILES //
+	// 0x2000
+	// 32 TILES = 512 //
+	// LOAD PLAYER FIRST FRAME OF ANIMATION (IDLE)
+	load_vram(0x2000, tiles_SPR_CURSOR , TILES_16);
+
+
+	// SELECT CURSOR SPRITE //
+	spr_set(0);
+
+
+	spr_x(24);
+	spr_y(144);
+
+	// SET TILES DATA FOR THE PLAYER //
+	spr_pattern(0x2000);
+
+
+	spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
+
+
+	spr_pal(16);
+	spr_pri(TRUE);
+
+
+	// UPDATE PCE SAT //
+	satb_update();
+
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                LOAD SPRITES PALETTES                                 //
+	//--------------------------------------------------------------------------------------//
+
+	load_palette( 16, palette_objects_2, 1 );
+
+
+
+	// VSYNC //
+	vsync();
+
+	// ENABLE DISPLAY //
+	disp_on();
+}
 
 
 

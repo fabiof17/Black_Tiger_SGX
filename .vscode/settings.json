@@ -4,5 +4,6 @@
         "constants.h": "c",
         "variables.h": "c",
         "resources.h": "c"
-    }
+    },
+    "C_Cpp.default.compilerPath": ""
 }

@@ -10,9 +10,29 @@
 
 
 
+void hide_LEVEL_SPRITES()
+{
+    char i;
+
+    for(i=0 ; i<64 ; i++)
+    {
+        spr_set(i);
+        spr_hide();
+    }
+}
+
+
+
+
 void display_LIFE()
 {
     //
+}
+
+
+void display_SCORE()
+{
+    put_number(score,6,14,1);
 }
 
 
@@ -278,7 +298,7 @@ int check_BG(signed char x_offset , signed char y_offset)
 }
 
 // CHECK COLLISION WITH OBJECTS //
-void check_OBJECTS()
+void check_OBJECT()
 {
     if(onscreen_object_number != 0)
     {
@@ -336,6 +356,48 @@ void check_OBJECTS()
 
                             case TYPE_YASHICHI:
                                 life_number += 1;
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// CHECK COLLISION WITH NPCS //
+void check_NPC()
+{
+    if(player_state == STATE_WALK)
+    {
+        if(onscreen_npc_number != 0)
+        {
+            char i;
+            char current_npc_id;
+            char current_npc_type;
+
+            for(i=0 ; i<onscreen_npc_number ; i++)
+            {
+                // RETRIEVE NPC INDEX IN THE LIST //
+                current_npc_id = list_onscreen_npc[i];
+                // RETRIEVE NPC TYPE //
+                current_npc_type = list_npc_type[current_npc_id];
+
+                if(abs( (player_pos_x + 16) - (list_npc_x_pos[current_npc_id] + 16) ) < OBJECT_MARGIN)
+                {
+                    if(abs( (player_pos_y + 16) - (list_npc_y_pos[current_npc_id] + 16) ) < OBJECT_MARGIN)
+                    {               
+                        switch(current_npc_type)
+                        {
+                            case TYPE_NPC_REWARD:
+                                //
+                                break;
+
+                            case TYPE_NPC_SHOP:
+                                camera_pos_x_backup = sgx_map_pxl_x;
+                                camera_pos_y_backup = sgx_map_pxl_y;
+                                sequence_loaded = FALSE;
+                                sequence_id = SEQUENCE_SHOP;
                                 break;
                         }
                     }

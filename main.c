@@ -4,23 +4,23 @@
 #include "hucc-blkmap.h"
 
 
-
-
 #include "include/constants.c"
 #include "include/variables.c"
-
-
 
 
 #include "include/gfx_BG.c"
 #include "include/gfx_SPRITES.c"
 
 
-
 #include "include/tables_NPC.c"
 #include "include/tables_OBJECT.c"
 #include "include/tables_PLAYER.c"
+#include "include/tables_SHOP.c"
+
+
+
 #include "include/routines_LEVELS.c"
+#include "include/routines_SHOP.c"
 #include "include/init.c"
 
 
@@ -43,6 +43,9 @@ main()
 
 
 
+    init_SYSTEM();
+    
+    
     init_VARIABLES();
 
 
@@ -53,78 +56,124 @@ main()
 
     //**************************************************************************************//
     //                                                                                      //
-    //                                      TITLE                                           //
+    //                                         MAIN                                         //
     //                                                                                      //
     //**************************************************************************************//
     for(;;)
     {
-
-        if(sequence_id == SEQUENCE_TITLE)
+        switch(sequence_id)
         {
-
-        }
-
-
-        else if(sequence_id == SEQUENCE_GAME)
-        {
-            // LOADING LOGO SCREEN //
-            if(sequence_loaded == FALSE)
-            {
-                init_LEVEL();
-
-                sequence_loaded = TRUE;
-            }
+            //-----------------------------------------------------------------------------//
+            //                                    TITLE                                    //
+            //-----------------------------------------------------------------------------//
+            case SEQUENCE_TITLE:
+                break;
 
 
-            else
-            {
-                if(level_id == 1)
+            //-----------------------------------------------------------------------------//
+            //                                    INTRO                                    //
+            //-----------------------------------------------------------------------------//
+            case SEQUENCE_INTRO:
+                break;
+
+
+            //-----------------------------------------------------------------------------//
+            //                                    GAME                                     //
+            //-----------------------------------------------------------------------------//
+            case SEQUENCE_GAME:
+                if(sequence_loaded == FALSE)
+                {
+                    init_LEVEL();
+
+                    sequence_loaded = TRUE;
+                }
+
+
+                else
+                {
+                    switch(level_id)
+                    {
+                        case 1:
+                            vsync();
+
+                            update_PLAYER();
+                            
+                            //put_number(onscreen_npc_number,1,0,0);
+
+                            joypad_DIR();
+                            joypad_BUTTONS();
+
+                            scroll_object();
+                            scroll_chest();
+                            scroll_npc();
+
+                            check_OBJECT();
+                            check_NPC();
+
+                            display_TIME();
+
+                            satb_update();
+
+                            scroll_BG();
+                            break;
+
+
+                        case 2:
+                            vsync();
+                            break;
+
+
+                        case 3:
+                            vsync();
+                            break;
+
+
+                        case 4:
+                            vsync();
+                            break;
+
+
+                        case 5:
+                            vsync();
+                            break;
+
+                    }
+                }
+
+                break;
+
+
+            //-----------------------------------------------------------------------------//
+            //                                     NPC                                     //
+            //-----------------------------------------------------------------------------//
+            case SEQUENCE_NPC:
+                break;
+
+
+            //-----------------------------------------------------------------------------//
+            //                                    SHOP                                     //
+            //-----------------------------------------------------------------------------//
+            case SEQUENCE_SHOP:
+                if(sequence_loaded == FALSE)
+                {
+                    init_SHOP();
+
+                    sequence_loaded = TRUE;
+                }
+                
+                else
                 {
                     vsync();
 
-                    update_PLAYER();
-                    
-                    //put_number(onscreen_object_number + onscreen_chest_number,1,0,0);
+                    joypad_BUTTONS_SHOP();
 
-                    joypad_DIR();
-                    joypad_BUTTONS();
-
-                    scroll_object();
-                    scroll_chest();
-                    scroll_npc();
-
-                    check_OBJECTS();
+                    //put_number(item_index,1,0,0);
 
                     satb_update();
-
-                    scroll_BG();
-
-                    display_TIME();
                 }
 
-                else if(level_id == 2)
-                {
-                    //sequence_LV2();
-                }
-
-                else if(level_id == 3)
-                {
-                    //sequence_LV3();
-                }
-
-                else if(level_id == 4)
-                {
-                    //sequence_LV4();
-                }
-
-                else if(level_id == 5)
-                {
-                    //sequence_LV5();
-                }
-            }
+                break;
         }
     }
-
-
 }
 

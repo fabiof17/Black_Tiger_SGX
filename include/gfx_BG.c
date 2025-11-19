@@ -212,6 +212,78 @@ _multimap_LV1_BG_A:
 //                                   EXTRACT PALETTES                                   //
 //--------------------------------------------------------------------------------------//
 
-// EXTRACT PALETTE //
 #incpal(palette_LV1,"res/maps/tilemap_LV1_BG_B.png");
+
+
+
+
+
+
+
+
+//**************************************************************************************//
+//                                                                                      //
+//                                         SHOP                                         //
+//                                                                                      //
+//**************************************************************************************//
+
+#asm
+OPTIMIZE	=	1
+		.data
+
+
+;//--------------------------------------------------------------------------------------//
+;//                                        VDC 1                                         //
+;//--------------------------------------------------------------------------------------//
+
+; EXTRACT TILESET
+;----------------
+_tileset_SHOP_BG_B:		incchr	"res/maps/template_ITEM_1.png"
+						incchr	"res/maps/template_ITEM_2.png"
+						incchr	"res/maps/template_ITEM_3.png"
+						incchr	"res/maps/template_ITEM_4.png"
+						incchr	"res/maps/template_ITEM_5.png"
+						incchr	"res/maps/template_ITEM_6.png"
+						incchr	"res/maps/template_ITEM_7.png"
+						incchr	"res/maps/template_ITEM_8.png"
+						incchr	"res/maps/template_ITEM_9.png"
+						incchr	"res/maps/template_ITEM_10.png"
+						incchr	"res/maps/tilemap_SHOP_BG_B.png", OPTIMIZE
+
+		.code
+#endasm
+
+
+// EXTRACT BLOCKS //
+#incblk(blocks_SHOP_BG_B, "res/maps/tilemap_SHOP_BG_B.png", 0x1000, tileset_SHOP_BG_B);
+
+// EXTRACT MAP //
+#incmap(map_SHOP_BG_B, "res/maps/tilemap_SHOP_BG_B.png", blocks_SHOP_BG_B);
+
+
+//--------------------------------------------------------------------------------------//
+//                                        ITEMS                                         //
+//--------------------------------------------------------------------------------------//
+
+#incchr(tiles_ITEM_WEAPON_2,"res/maps/tiles_ITEM_WEAPON_2.png", 2 , 2);
+#incchr(tiles_ITEM_WEAPON_3,"res/maps/tiles_ITEM_WEAPON_3.png", 2 , 2);
+#incchr(tiles_ITEM_WEAPON_4,"res/maps/tiles_ITEM_WEAPON_4.png", 2 , 2);
+#incchr(tiles_ITEM_WEAPON_5,"res/maps/tiles_ITEM_WEAPON_5.png", 2 , 2);
+#incchr(tiles_ITEM_KEY,"res/maps/tiles_ITEM_KEY.png", 2 , 2);
+#incchr(tiles_ITEM_ARMOR_2,"res/maps/tiles_ITEM_ARMOR_2.png", 2 , 2);
+#incchr(tiles_ITEM_ARMOR_3,"res/maps/tiles_ITEM_ARMOR_3.png", 2 , 2);
+#incchr(tiles_ITEM_ARMOR_4,"res/maps/tiles_ITEM_ARMOR_4.png", 2 , 2);
+#incchr(tiles_ITEM_ARMOR_5,"res/maps/tiles_ITEM_ARMOR_5.png", 2 , 2);
+#incchr(tiles_ITEM_POTION,"res/maps/tiles_ITEM_POTION.png", 2 , 2);
+
+//#incchr(tileset_NUMBERS_SHOP_FONT,"res/maps/tiles_NUMBERS_SHOP_FONT.png");
+
+
+//--------------------------------------------------------------------------------------//
+//                                   EXTRACT PALETTES                                   //
+//--------------------------------------------------------------------------------------//
+
+#incpal(palette_SHOP,"res/maps/tilemap_SHOP_BG_B.png");
+#incpal(palette_SHOP_ITEMS,"res/palettes/palette_SHOP_ITEMS.png");
+
 

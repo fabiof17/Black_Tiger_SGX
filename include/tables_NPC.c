@@ -4,35 +4,10 @@
 //                                                                             //
 //-----------------------------------------------------------------------------//
 
-/*const char              TABLE_OBJECT_TYPE_LV1[NPC_NUMBER_LV1]      =   {
-                                                                                TYPE_HOURGLASS,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POW,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-
-                                                                                //
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-
-                                                                                //
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT
-                                                                            };*/
+const char              TABLE_NPC_TYPE_LV1[NPC_NUMBER_LV1]              =   {
+                                                                                TYPE_NPC_SHOP,
+                                                                                TYPE_NPC_REWARD
+                                                                            };
 
 
 const signed int        TABLE_NPC_X_POS_REF_LV1[NPC_NUMBER_LV1]         =   {

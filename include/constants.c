@@ -57,6 +57,8 @@
 #define SEQUENCE_TITLE      0
 #define SEQUENCE_INTRO      1
 #define SEQUENCE_GAME       2
+#define SEQUENCE_NPC        3
+#define SEQUENCE_SHOP       4
 
 
 #define CAMERA_RECENTER_VELOCITY    4
@@ -154,7 +156,7 @@
 
 //-----------------------------------------------------------------------------//
 //                                                                             //
-//                                   OBJECTS                                   //
+//                                   OBJECT                                    //
 //                                                                             //
 //-----------------------------------------------------------------------------//
 
@@ -217,6 +219,42 @@
 
 #define CHEST_VRAM_ADR          0x2400
 #define NPC_VRAM_ADR            CHEST_VRAM_ADR+TILES_96
+
+
+
+
+//-----------------------------------------------------------------------------//
+//                                                                             //
+//                                    NPC                                      //
+//                                                                             //
+//-----------------------------------------------------------------------------//
+
+#define TYPE_NPC_REWARD         0
+#define TYPE_NPC_SHOP           1
+
+
+
+
+//-----------------------------------------------------------------------------//
+//                                                                             //
+//                                    SHOP                                     //
+//                                                                             //
+//-----------------------------------------------------------------------------//
+
+#define TYPE_ITEM_WEAPON_2      0
+#define TYPE_ITEM_WEAPON_3      1
+#define TYPE_ITEM_WEAPON_4      2
+#define TYPE_ITEM_WEAPON_5      3
+#define TYPE_ITEM_KEY           4
+
+#define TYPE_ITEM_ARMOR_2       5
+#define TYPE_ITEM_ARMOR_3       6
+#define TYPE_ITEM_ARMOR_4       7
+#define TYPE_ITEM_ARMOR_5       8
+#define TYPE_ITEM_POTION        9
+
+
+
 
 
 

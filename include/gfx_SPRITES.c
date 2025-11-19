@@ -53,5 +53,6 @@
 
 
 
-
+// EXTRACT CURSOR TILES //
+#incspr(tiles_SPR_CURSOR,"res/sprites/tiles_SPR_CURSOR.png")
 
