@@ -18497,9 +18497,9 @@
  9701    11:C87C             		.proc		_init_VARIABLES
  9702                        		__enter		_init_VARIABLES
  9703                        	
- 9704                        		.dbg	line,	"include\init.c", 44; sequence_id = SEQUENCE_SHOP; //SEQUENCE_GAME | SEQUENCE_SHOP
- 9705                        		__st.umiq	4, _sequence_id
-         11:C87C  A9 04      			lda.l	#4
+ 9704                        		.dbg	line,	"include\init.c", 44; sequence_id = SEQUENCE_GAME; //SEQUENCE_GAME | SEQUENCE_SHOP
+ 9705                        		__st.umiq	2, _sequence_id
+         11:C87C  A9 02      			lda.l	#2
          11:C87E  8D 10 23   			sta	_sequence_id
  9706                        	
  9707                        		.dbg	line,	"include\init.c", 46; level_id = 1;

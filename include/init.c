@@ -41,7 +41,7 @@ void init_SYSTEM()
 
 void init_VARIABLES()
 {
-    sequence_id = SEQUENCE_SHOP; //SEQUENCE_GAME | SEQUENCE_SHOP
+    sequence_id = SEQUENCE_GAME; //SEQUENCE_GAME | SEQUENCE_SHOP
 
     level_id = 1;
 
