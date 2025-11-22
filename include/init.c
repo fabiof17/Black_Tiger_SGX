@@ -47,7 +47,7 @@ void init_VARIABLES()
 
 	key_amount = 0;
 	potion_amount = 0;
-	zenny_amount = 90000;
+	zenny_amount = 32768;
 
 	weapon_level = 1;
 	armor_level = 1;

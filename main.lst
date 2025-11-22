@@ -6402,54 +6402,54 @@
  3079                        	;***********************
  3080                        	
  3081                        		.hucc
- 3082    11:C959             		.proc		_hide_LEVEL_SPRITES
+ 3082    11:C957             		.proc		_hide_LEVEL_SPRITES
  3083                        		__enter		_hide_LEVEL_SPRITES
  3084                        	
  3085                        		.dbg	line,	"include\routines_LEVELS.c", 15; char i;
  3086                        	
  3087                        		.dbg	line,	"include\routines_LEVELS.c", 17; for(i=0 ; i<64 ; i++)
  3088                        		__st.umiq	0, __hide_LEVEL_SPRITES_end - 1  /* i */
-         11:C959  9C 3F 26   			stz	__hide_LEVEL_SPRITES_end - 1
- 3089    11:C95C             	.LL3:
+         11:C957  9C 3F 26   			stz	__hide_LEVEL_SPRITES_end - 1
+ 3089    11:C95A             	.LL3:
  3090                        		__ld.umq	__hide_LEVEL_SPRITES_end - 1  /* i */
-         11:C95C  AD 3F 26   			lda	__hide_LEVEL_SPRITES_end - 1
+         11:C95A  AD 3F 26   			lda	__hide_LEVEL_SPRITES_end - 1
  3091                        		__ult_b.uiq	64
-         11:C95F  C9 40      			cmp	#64		; Subtract integer from A.
-         11:C961  6A         			ror	a		; CC if A < integer.
-         11:C962  49 80      			eor	#$80
-         11:C964  2A         			rol	a
+         11:C95D  C9 40      			cmp	#64		; Subtract integer from A.
+         11:C95F  6A         			ror	a		; CC if A < integer.
+         11:C960  49 80      			eor	#$80
+         11:C962  2A         			rol	a
  3092                        		__btrue		.LL5
-         11:C965  B0 07      			bcs	.LL5
+         11:C963  B0 07      			bcs	.LL5
  3093                        		__bra		.LL6
-         11:C967  80 10      			bra	.LL6
- 3094    11:C969             	.LL4:
+         11:C965  80 10      			bra	.LL6
+ 3094    11:C967             	.LL4:
  3095                        		__inc.umq	__hide_LEVEL_SPRITES_end - 1  /* i */
-         11:C969  EE 3F 26   			inc	__hide_LEVEL_SPRITES_end - 1
+         11:C967  EE 3F 26   			inc	__hide_LEVEL_SPRITES_end - 1
  3096                        		__bra		.LL3
-         11:C96C  80 EE      			bra	.LL3
- 3097    11:C96E             	.LL5:
+         11:C96A  80 EE      			bra	.LL3
+ 3097    11:C96C             	.LL5:
  3098                        	
  3099                        		.dbg	line,	"include\routines_LEVELS.c", 18; {
  3100                        	
  3101                        		.dbg	line,	"include\routines_LEVELS.c", 19; spr_set(i);
  3102                        		__ld.umq	__hide_LEVEL_SPRITES_end - 1  /* i */
-         11:C96E  AD 3F 26   			lda	__hide_LEVEL_SPRITES_end - 1
+         11:C96C  AD 3F 26   			lda	__hide_LEVEL_SPRITES_end - 1
  3103                        		__call		_spr_set.1
-         11:C971  20 DD E7   			call	_spr_set.1
+         11:C96F  20 DD E7   			call	_spr_set.1
  3104                        	
  3105                        		.dbg	line,	"include\routines_LEVELS.c", 20; spr_hide();
  3106                        		__call		_spr_hide
-         11:C974  20 F8 E7   			call	_spr_hide
+         11:C972  20 F8 E7   			call	_spr_hide
  3107                        	
  3108                        		.dbg	line,	"include\routines_LEVELS.c", 21; }
  3109                        		__bra		.LL4
-         11:C977  80 F0      			bra	.LL4
- 3110    11:C979             	.LL6:
+         11:C975  80 F0      			bra	.LL4
+ 3110    11:C977             	.LL6:
  3111                        	
  3112                        		.dbg	line,	"include\routines_LEVELS.c", 22; }
- 3113    11:C979             	.LL2:
+ 3113    11:C977             	.LL2:
  3114                        		__return	0
-         11:C979  4C EF FF   			jmp	leave_proc
+         11:C977  4C EF FF   			jmp	leave_proc
  3115                        		.dbg	clear
  3116                        		.endp
  3117                        		.pceas
@@ -6470,32 +6470,32 @@
  3140                        	;***********************
  3141                        	
  3142                        		.hucc
- 3143    11:C99A             		.proc		_display_SCORE
+ 3143    11:C998             		.proc		_display_SCORE
  3144                        		__enter		_display_SCORE
  3145                        	
  3146                        		.dbg	line,	"include\routines_LEVELS.c", 35; put_number(score,6,14,1);
  3147                        		__ld.wm		_score
-         11:C99A  AD 24 26   			lda.l	_score
-         11:C99D  AC 25 26   			ldy.h	_score
+         11:C998  AD 24 26   			lda.l	_score
+         11:C99B  AC 25 26   			ldy.h	_score
  3148                        		__st.wmq	_bx
-         11:C9A0  85 FA      			sta.l	_bx
-         11:C9A2  84 FB      			sty.h	_bx
+         11:C99E  85 FA      			sta.l	_bx
+         11:C9A0  84 FB      			sty.h	_bx
  3149                        		__st.umiq	6, _cl
-         11:C9A4  A9 06      			lda.l	#6
-         11:C9A6  85 FC      			sta	_cl
+         11:C9A2  A9 06      			lda.l	#6
+         11:C9A4  85 FC      			sta	_cl
  3150                        		__st.umiq	14, _dil
-         11:C9A8  A9 0E      			lda.l	#14
-         11:C9AA  85 F0      			sta	_dil
+         11:C9A6  A9 0E      			lda.l	#14
+         11:C9A8  85 F0      			sta	_dil
  3151                        		__st.umiq	1, _dih
-         11:C9AC  A9 01      			lda.l	#1
-         11:C9AE  85 F1      			sta	_dih
+         11:C9AA  A9 01      			lda.l	#1
+         11:C9AC  85 F1      			sta	_dih
  3152                        		__call		_put_number.4
-         11:C9B0  20 9F FF   			call	_put_number.4
+         11:C9AE  20 9F FF   			call	_put_number.4
  3153                        	
  3154                        		.dbg	line,	"include\routines_LEVELS.c", 36; }
- 3155    11:C9B3             	.LL8:
+ 3155    11:C9B1             	.LL8:
  3156                        		__return	0
-         11:C9B3  4C EF FF   			jmp	leave_proc
+         11:C9B1  4C EF FF   			jmp	leave_proc
  3157                        		.dbg	clear
  3158                        		.endp
  3159                        		.pceas
@@ -6716,32 +6716,32 @@
  3300                        	;***********************
  3301                        	
  3302                        		.hucc
- 3303    11:C9EE             		.proc		_display_KEY
+ 3303    11:C9EC             		.proc		_display_KEY
  3304                        		__enter		_display_KEY
  3305                        	
  3306                        		.dbg	line,	"include\routines_LEVELS.c", 87; put_number(key_amount,2,7,27);
  3307                        		__ld.um		_key_amount
-         11:C9EE  AD 20 23   			lda	_key_amount
-         11:C9F1  C2         			cly
+         11:C9EC  AD 20 23   			lda	_key_amount
+         11:C9EF  C2         			cly
  3308                        		__st.wmq	_bx
-         11:C9F2  85 FA      			sta.l	_bx
-         11:C9F4  84 FB      			sty.h	_bx
+         11:C9F0  85 FA      			sta.l	_bx
+         11:C9F2  84 FB      			sty.h	_bx
  3309                        		__st.umiq	2, _cl
-         11:C9F6  A9 02      			lda.l	#2
-         11:C9F8  85 FC      			sta	_cl
+         11:C9F4  A9 02      			lda.l	#2
+         11:C9F6  85 FC      			sta	_cl
  3310                        		__st.umiq	7, _dil
-         11:C9FA  A9 07      			lda.l	#7
-         11:C9FC  85 F0      			sta	_dil
+         11:C9F8  A9 07      			lda.l	#7
+         11:C9FA  85 F0      			sta	_dil
  3311                        		__st.umiq	27, _dih
-         11:C9FE  A9 1B      			lda.l	#27
-         11:CA00  85 F1      			sta	_dih
+         11:C9FC  A9 1B      			lda.l	#27
+         11:C9FE  85 F1      			sta	_dih
  3312                        		__call		_put_number.4
-         11:CA02  20 9F FF   			call	_put_number.4
+         11:CA00  20 9F FF   			call	_put_number.4
  3313                        	
  3314                        		.dbg	line,	"include\routines_LEVELS.c", 88; }
- 3315    11:CA05             	.LL17:
+ 3315    11:CA03             	.LL17:
  3316                        		__return	0
-         11:CA05  4C EF FF   			jmp	leave_proc
+         11:CA03  4C EF FF   			jmp	leave_proc
  3317                        		.dbg	clear
  3318                        		.endp
  3319                        		.pceas
@@ -6752,32 +6752,32 @@
  3324                        	;***********************
  3325                        	
  3326                        		.hucc
- 3327    11:CA08             		.proc		_display_POTION
+ 3327    11:CA06             		.proc		_display_POTION
  3328                        		__enter		_display_POTION
  3329                        	
  3330                        		.dbg	line,	"include\routines_LEVELS.c", 93; put_number(potion_amount,2,19,27);
  3331                        		__ld.um		_potion_amount
-         11:CA08  AD 21 23   			lda	_potion_amount
-         11:CA0B  C2         			cly
+         11:CA06  AD 21 23   			lda	_potion_amount
+         11:CA09  C2         			cly
  3332                        		__st.wmq	_bx
-         11:CA0C  85 FA      			sta.l	_bx
-         11:CA0E  84 FB      			sty.h	_bx
+         11:CA0A  85 FA      			sta.l	_bx
+         11:CA0C  84 FB      			sty.h	_bx
  3333                        		__st.umiq	2, _cl
-         11:CA10  A9 02      			lda.l	#2
-         11:CA12  85 FC      			sta	_cl
+         11:CA0E  A9 02      			lda.l	#2
+         11:CA10  85 FC      			sta	_cl
  3334                        		__st.umiq	19, _dil
-         11:CA14  A9 13      			lda.l	#19
-         11:CA16  85 F0      			sta	_dil
+         11:CA12  A9 13      			lda.l	#19
+         11:CA14  85 F0      			sta	_dil
  3335                        		__st.umiq	27, _dih
-         11:CA18  A9 1B      			lda.l	#27
-         11:CA1A  85 F1      			sta	_dih
+         11:CA16  A9 1B      			lda.l	#27
+         11:CA18  85 F1      			sta	_dih
  3336                        		__call		_put_number.4
-         11:CA1C  20 9F FF   			call	_put_number.4
+         11:CA1A  20 9F FF   			call	_put_number.4
  3337                        	
  3338                        		.dbg	line,	"include\routines_LEVELS.c", 94; }
- 3339    11:CA1F             	.LL18:
+ 3339    11:CA1D             	.LL18:
  3340                        		__return	0
-         11:CA1F  4C EF FF   			jmp	leave_proc
+         11:CA1D  4C EF FF   			jmp	leave_proc
  3341                        		.dbg	clear
  3342                        		.endp
  3343                        		.pceas
@@ -6788,32 +6788,32 @@
  3348                        	;***********************
  3349                        	
  3350                        		.hucc
- 3351    11:C9B6             		.proc		_display_ZENNY
+ 3351    11:C9B4             		.proc		_display_ZENNY
  3352                        		__enter		_display_ZENNY
  3353                        	
  3354                        		.dbg	line,	"include\routines_LEVELS.c", 99; put_number(zenny_amount,5,26,4);
  3355                        		__ld.wm		_zenny_amount
-         11:C9B6  AD 22 26   			lda.l	_zenny_amount
-         11:C9B9  AC 23 26   			ldy.h	_zenny_amount
+         11:C9B4  AD 22 26   			lda.l	_zenny_amount
+         11:C9B7  AC 23 26   			ldy.h	_zenny_amount
  3356                        		__st.wmq	_bx
-         11:C9BC  85 FA      			sta.l	_bx
-         11:C9BE  84 FB      			sty.h	_bx
+         11:C9BA  85 FA      			sta.l	_bx
+         11:C9BC  84 FB      			sty.h	_bx
  3357                        		__st.umiq	5, _cl
-         11:C9C0  A9 05      			lda.l	#5
-         11:C9C2  85 FC      			sta	_cl
+         11:C9BE  A9 05      			lda.l	#5
+         11:C9C0  85 FC      			sta	_cl
  3358                        		__st.umiq	26, _dil
-         11:C9C4  A9 1A      			lda.l	#26
-         11:C9C6  85 F0      			sta	_dil
+         11:C9C2  A9 1A      			lda.l	#26
+         11:C9C4  85 F0      			sta	_dil
  3359                        		__st.umiq	4, _dih
-         11:C9C8  A9 04      			lda.l	#4
-         11:C9CA  85 F1      			sta	_dih
+         11:C9C6  A9 04      			lda.l	#4
+         11:C9C8  85 F1      			sta	_dih
  3360                        		__call		_put_number.4
-         11:C9CC  20 9F FF   			call	_put_number.4
+         11:C9CA  20 9F FF   			call	_put_number.4
  3361                        	
  3362                        		.dbg	line,	"include\routines_LEVELS.c", 100; }
- 3363    11:C9CF             	.LL19:
+ 3363    11:C9CD             	.LL19:
  3364                        		__return	0
-         11:C9CF  4C EF FF   			jmp	leave_proc
+         11:C9CD  4C EF FF   			jmp	leave_proc
  3365                        		.dbg	clear
  3366                        		.endp
  3367                        		.pceas
@@ -8896,14 +8896,14 @@
  4418                        	;***********************
  4419                        	
  4420                        		.hucc
- 4421    11:C8B6             		.proc		_scroll_BG
+ 4421    11:C8B4             		.proc		_scroll_BG
  4422                        		__enter		_scroll_BG
  4423                        	
  4424                        		.dbg	line,	"include\routines_LEVELS.c", 421; // UPDATE VDC2 BG //
  4425                        	
  4426                        		.dbg	line,	"include\routines_LEVELS.c", 422; sgx_scroll_map();
  4427                        		__call		_sgx_scroll_map
-         11:C8B6  20 81 FF   			call	_sgx_scroll_map
+         11:C8B4  20 81 FF   			call	_sgx_scroll_map
  4428                        	
  4429                        		.dbg	line,	"include\routines_LEVELS.c", 424; //--------------------------------------------------------------------------------------//
  4430                        	
@@ -8913,39 +8913,39 @@
  4434                        	
  4435                        		.dbg	line,	"include\routines_LEVELS.c", 428; sgx_scroll_split(0,   0, sgx_map_pxl_x & (BAT_SIZE_W - 1), sgx_map_pxl_y & (BAT_SIZE_H - 1), BKG_ON | SPR_ON);
  4436                        		__st.umiq	0, _al
-         11:C8B9  64 F8      			stz	_al
+         11:C8B7  64 F8      			stz	_al
  4437                        		__st.umiq	0, _ah
-         11:C8BB  64 F9      			stz	_ah
+         11:C8B9  64 F9      			stz	_ah
  4438                        		__ld.wm		_sgx_map_pxl_x
-         11:C8BD  AD 84 26   			lda.l	_sgx_map_pxl_x
-         11:C8C0  AC 85 26   			ldy.h	_sgx_map_pxl_x
+         11:C8BB  AD 84 26   			lda.l	_sgx_map_pxl_x
+         11:C8BE  AC 85 26   			ldy.h	_sgx_map_pxl_x
  4439                        		__and.wi	2047
-         11:C8C3  29 FF      			and.l	#2047
-         11:C8C5  42         			say
-         11:C8C6  29 07      			and.h	#2047
-         11:C8C8  42         			say
+         11:C8C1  29 FF      			and.l	#2047
+         11:C8C3  42         			say
+         11:C8C4  29 07      			and.h	#2047
+         11:C8C6  42         			say
  4440                        		__st.wmq	_bx
-         11:C8C9  85 FA      			sta.l	_bx
-         11:C8CB  84 FB      			sty.h	_bx
+         11:C8C7  85 FA      			sta.l	_bx
+         11:C8C9  84 FB      			sty.h	_bx
  4441                        		__ld.wm		_sgx_map_pxl_y
-         11:C8CD  AD 86 26   			lda.l	_sgx_map_pxl_y
-         11:C8D0  AC 87 26   			ldy.h	_sgx_map_pxl_y
+         11:C8CB  AD 86 26   			lda.l	_sgx_map_pxl_y
+         11:C8CE  AC 87 26   			ldy.h	_sgx_map_pxl_y
  4442                        		__and.wi	255
-         11:C8D3  29 FF      			and	#255
-         11:C8D5  C2         			cly
+         11:C8D1  29 FF      			and	#255
+         11:C8D3  C2         			cly
  4443                        		__st.wmq	_cx
-         11:C8D6  85 FC      			sta.l	_cx
-         11:C8D8  84 FD      			sty.h	_cx
+         11:C8D4  85 FC      			sta.l	_cx
+         11:C8D6  84 FD      			sty.h	_cx
  4444                        		__st.umiq	192, _dl
-         11:C8DA  A9 C0      			lda.l	#192
-         11:C8DC  85 FE      			sta	_dl
+         11:C8D8  A9 C0      			lda.l	#192
+         11:C8DA  85 FE      			sta	_dl
  4445                        		__call		_sgx_scroll_split.5
-         11:C8DE  20 77 FF   			call	_sgx_scroll_split.5
+         11:C8DC  20 77 FF   			call	_sgx_scroll_split.5
  4446                        	
  4447                        		.dbg	line,	"include\routines_LEVELS.c", 429; }
- 4448    11:C8E1             	.LL90:
+ 4448    11:C8DF             	.LL90:
  4449                        		__return	0
-         11:C8E1  4C EF FF   			jmp	leave_proc
+         11:C8DF  4C EF FF   			jmp	leave_proc
  4450                        		.dbg	clear
  4451                        		.endp
  4452                        		.pceas
@@ -18432,58 +18432,58 @@
  9646                        	;***********************
  9647                        	
  9648                        		.hucc
- 9649    11:CA22             		.proc		_init_SYSTEM
+ 9649    11:CA20             		.proc		_init_SYSTEM
  9650                        		__enter		_init_SYSTEM
  9651                        	
  9652                        		.dbg	line,	"include\init.c", 15; // DISABLE DISPLAY //
  9653                        	
  9654                        		.dbg	line,	"include\init.c", 16; disp_off();
  9655                        		__call		_disp_off
-         11:CA22  20 29 E4   			call	_disp_off
+         11:CA20  20 29 E4   			call	_disp_off
  9656                        	
  9657                        		.dbg	line,	"include\init.c", 18; // VSYNC //
  9658                        	
  9659                        		.dbg	line,	"include\init.c", 19; vsync();
  9660                        		__call		_vsync
-         11:CA25  20 09 E3   			call	_vsync
+         11:CA23  20 09 E3   			call	_vsync
  9661                        	
  9662                        		.dbg	line,	"include\init.c", 21; // LOAD DEFAULT FONT //
  9663                        	
  9664                        		.dbg	line,	"include\init.c", 22; load_default_font();
  9665                        		 _load_default_font
-         11:CA28  82         			clx				; Offset to PCE VDC.
-         11:CA29  20 C7 FF   			call	huc_monofont_x
+         11:CA26  82         			clx				; Offset to PCE VDC.
+         11:CA27  20 C7 FF   			call	huc_monofont_x
  9666                        	
  9667                        		.dbg	line,	"include\init.c", 25; // SET VDC 1 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
  9668                        	
  9669                        		.dbg	line,	"include\init.c", 26; set_screen_size(SCR_SIZE_32x32);
  9670                        		__st.umiq	0, _al
-         11:CA2C  64 F8      			stz	_al
+         11:CA2A  64 F8      			stz	_al
  9671                        		__call		_set_screen_size.1
-         11:CA2E  20 27 FF   			call	_set_screen_size.1
+         11:CA2C  20 27 FF   			call	_set_screen_size.1
  9672                        	
  9673                        		.dbg	line,	"include\init.c", 29; // SET VDC 2 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
  9674                        	
  9675                        		.dbg	line,	"include\init.c", 30; sgx_set_screen_size(SCR_SIZE_32x32);
  9676                        		__st.umiq	0, _al
-         11:CA31  64 F8      			stz	_al
+         11:CA2F  64 F8      			stz	_al
  9677                        		__call		_sgx_set_screen_size.1
-         11:CA33  20 1D FF   			call	_sgx_set_screen_size.1
+         11:CA31  20 1D FF   			call	_sgx_set_screen_size.1
  9678                        	
  9679                        		.dbg	line,	"include\init.c", 33; // INIT SPRITE ATTRIBUTE TABLE //
  9680                        	
  9681                        		.dbg	line,	"include\init.c", 34; init_satb();
  9682                        		__call		_init_satb
-         11:CA36  20 B7 E7   			call	_init_satb
+         11:CA34  20 B7 E7   			call	_init_satb
  9683                        	
  9684                        		.dbg	line,	"include\init.c", 37; // ENABLE DISPLAY //
  9685                        	
  9686                        		.dbg	line,	"include\init.c", 38; //disp_on();
  9687                        	
  9688                        		.dbg	line,	"include\init.c", 39; }
- 9689    11:CA39             	.LL426:
+ 9689    11:CA37             	.LL426:
  9690                        		__return	0
-         11:CA39  4C EF FF   			jmp	leave_proc
+         11:CA37  4C EF FF   			jmp	leave_proc
  9691                        		.dbg	clear
  9692                        		.endp
  9693                        		.pceas
@@ -18515,49 +18515,48 @@
  9714                        		__st.umiq	0, _potion_amount
          11:C889  9C 21 23   			stz	_potion_amount
  9715                        	
- 9716                        		.dbg	line,	"include\init.c", 50; zenny_amount = 90000;
- 9717                        		__st.wmiq	90000, _zenny_amount
-         11:C88C  A9 90      			lda.l	#90000
-         11:C88E  8D 22 26   			sta.l	_zenny_amount
-         11:C891  A9 5F      			lda.h	#90000
-         11:C893  8D 23 26   			sta.h	_zenny_amount
+ 9716                        		.dbg	line,	"include\init.c", 50; zenny_amount = 32768;
+ 9717                        		__st.wmiq	32768, _zenny_amount
+         11:C88C  9C 22 26   			stz.l	_zenny_amount
+         11:C88F  A9 80      			lda.h	#32768
+         11:C891  8D 23 26   			sta.h	_zenny_amount
  9718                        	
  9719                        		.dbg	line,	"include\init.c", 52; weapon_level = 1;
  9720                        		__st.umiq	1, _weapon_level
-         11:C896  A9 01      			lda.l	#1
-         11:C898  8D 1E 23   			sta	_weapon_level
+         11:C894  A9 01      			lda.l	#1
+         11:C896  8D 1E 23   			sta	_weapon_level
  9721                        	
  9722                        		.dbg	line,	"include\init.c", 53; armor_level = 1;
  9723                        		__st.umiq	1, _armor_level
-         11:C89B  A9 01      			lda.l	#1
-         11:C89D  8D 1D 23   			sta	_armor_level
+         11:C899  A9 01      			lda.l	#1
+         11:C89B  8D 1D 23   			sta	_armor_level
  9724                        	
  9725                        		.dbg	line,	"include\init.c", 55; minutes = 1;
  9726                        		__st.umiq	1, _minutes
-         11:C8A0  A9 01      			lda.l	#1
-         11:C8A2  8D 22 23   			sta	_minutes
+         11:C89E  A9 01      			lda.l	#1
+         11:C8A0  8D 22 23   			sta	_minutes
  9727                        	
  9728                        		.dbg	line,	"include\init.c", 56; seconds = 59;
  9729                        		__st.umiq	59, _seconds
-         11:C8A5  A9 3B      			lda.l	#59
-         11:C8A7  8D 23 23   			sta	_seconds
+         11:C8A3  A9 3B      			lda.l	#59
+         11:C8A5  8D 23 23   			sta	_seconds
  9730                        	
  9731                        		.dbg	line,	"include\init.c", 57; time_counter = 0;
  9732                        		__st.umiq	0, _time_counter
-         11:C8AA  9C 24 23   			stz	_time_counter
+         11:C8A8  9C 24 23   			stz	_time_counter
  9733                        	
  9734                        		.dbg	line,	"include\init.c", 59; respawn = FALSE;
  9735                        		__st.umiq	0, _respawn
-         11:C8AD  9C 13 23   			stz	_respawn
+         11:C8AB  9C 13 23   			stz	_respawn
  9736                        	
  9737                        		.dbg	line,	"include\init.c", 61; sequence_loaded = FALSE;
  9738                        		__st.umiq	0, _sequence_loaded
-         11:C8B0  9C 11 23   			stz	_sequence_loaded
+         11:C8AE  9C 11 23   			stz	_sequence_loaded
  9739                        	
  9740                        		.dbg	line,	"include\init.c", 62; }
- 9741    11:C8B3             	.LL427:
+ 9741    11:C8B1             	.LL427:
  9742                        		__return	0
-         11:C8B3  4C EF FF   			jmp	leave_proc
+         11:C8B1  4C EF FF   			jmp	leave_proc
  9743                        		.dbg	clear
  9744                        		.endp
  9745                        		.pceas
@@ -18568,45 +18567,45 @@
  9750                        	;***********************
  9751                        	
  9752                        		.hucc
- 9753    11:C97C             		.proc		_init_PLAYER
+ 9753    11:C97A             		.proc		_init_PLAYER
  9754                        		__enter		_init_PLAYER
  9755                        	
  9756                        		.dbg	line,	"include\init.c", 67; player_id = 2;
  9757                        		__st.umiq	2, _player_id
-         11:C97C  A9 02      			lda.l	#2
-         11:C97E  8D 14 23   			sta	_player_id
+         11:C97A  A9 02      			lda.l	#2
+         11:C97C  8D 14 23   			sta	_player_id
  9758                        	
  9759                        		.dbg	line,	"include\init.c", 68; player_axis = AXIS_RIGHT;
  9760                        		__st.umiq	0, _player_axis
-         11:C981  9C 16 23   			stz	_player_axis
+         11:C97F  9C 16 23   			stz	_player_axis
  9761                        	
  9762                        		.dbg	line,	"include\init.c", 69; player_previous_axis = player_axis;
  9763                        		__ld.um		_player_axis
-         11:C984  AD 16 23   			lda	_player_axis
-         11:C987  C2         			cly
+         11:C982  AD 16 23   			lda	_player_axis
+         11:C985  C2         			cly
  9764                        		__st.umq	_player_previous_axis
-         11:C988  8D 17 23   			sta	_player_previous_axis
+         11:C986  8D 17 23   			sta	_player_previous_axis
  9765                        	
  9766                        		.dbg	line,	"include\init.c", 70; player_counter_anim = 0;
  9767                        		__st.umiq	0, _player_counter_anim
-         11:C98B  9C 18 23   			stz	_player_counter_anim
+         11:C989  9C 18 23   			stz	_player_counter_anim
  9768                        	
  9769                        		.dbg	line,	"include\init.c", 71; player_index_jump = 0;
  9770                        		__st.umiq	0, _player_index_jump
-         11:C98E  9C 19 23   			stz	_player_index_jump
+         11:C98C  9C 19 23   			stz	_player_index_jump
  9771                        	
  9772                        		.dbg	line,	"include\init.c", 72; player_index_fall = 0;
  9773                        		__st.umiq	0, _player_index_fall
-         11:C991  9C 1A 23   			stz	_player_index_fall
+         11:C98F  9C 1A 23   			stz	_player_index_fall
  9774                        	
  9775                        		.dbg	line,	"include\init.c", 73; player_state = STATE_IDLE;
  9776                        		__st.umiq	0, _player_state
-         11:C994  9C 15 23   			stz	_player_state
+         11:C992  9C 15 23   			stz	_player_state
  9777                        	
  9778                        		.dbg	line,	"include\init.c", 74; }
- 9779    11:C997             	.LL428:
+ 9779    11:C995             	.LL428:
  9780                        		__return	0
-         11:C997  4C EF FF   			jmp	leave_proc
+         11:C995  4C EF FF   			jmp	leave_proc
  9781                        		.dbg	clear
  9782                        		.endp
  9783                        		.pceas
@@ -19117,40 +19116,40 @@
  9944                        	;***********************
  9945                        	
  9946                        		.hucc
- 9947    11:C90F             		.proc		_load_CHEST_TILES
+ 9947    11:C90D             		.proc		_load_CHEST_TILES
  9948                        		__enter		_load_CHEST_TILES
  9949                        	
  9950                        		.dbg	line,	"include\init.c", 111; load_vram(CHEST_VRAM_ADR, tiles_SPR_CHEST , SIZEOF(tiles_SPR_CHEST) >> 1);
  9951                        		__st.wmiq	9216, _di
-         11:C90F  64 F0      			stz.l	_di
-         11:C911  A9 24      			lda.h	#9216
-         11:C913  85 F1      			sta.h	_di
+         11:C90D  64 F0      			stz.l	_di
+         11:C90F  A9 24      			lda.h	#9216
+         11:C911  85 F1      			sta.h	_di
  9952                        		__farptr	_tiles_SPR_CHEST, _bp_bank, _bp
-         11:C915  A9 E0      			lda.l	#$6000 + ($1FFF & (_tiles_SPR_CHEST))
-         11:C917  85 EC      			sta.l	_bp
-         11:C919  A9 6C      			lda.h	#$6000 + ($1FFF & (_tiles_SPR_CHEST))
-         11:C91B  85 ED      			sta.h	_bp
-         11:C91D  A9 0F      			lda	#bank(_tiles_SPR_CHEST)
-         11:C91F  85 02      			sta	_bp_bank
+         11:C913  A9 E0      			lda.l	#$6000 + ($1FFF & (_tiles_SPR_CHEST))
+         11:C915  85 EC      			sta.l	_bp
+         11:C917  A9 6C      			lda.h	#$6000 + ($1FFF & (_tiles_SPR_CHEST))
+         11:C919  85 ED      			sta.h	_bp
+         11:C91B  A9 0F      			lda	#bank(_tiles_SPR_CHEST)
+         11:C91D  85 02      			sta	_bp_bank
  9953                        		__ld.wi		___sizeof__tiles_SPR_CHEST
-         11:C921  A9 00      			lda.l	#___sizeof__tiles_SPR_CHEST
-         11:C923  A0 0C      			ldy.h	#___sizeof__tiles_SPR_CHEST
+         11:C91F  A9 00      			lda.l	#___sizeof__tiles_SPR_CHEST
+         11:C921  A0 0C      			ldy.h	#___sizeof__tiles_SPR_CHEST
  9954                        		__lsr.wi	1
+         11:C923  42         			say
+         11:C924  4A         			lsr	a
          11:C925  42         			say
-         11:C926  4A         			lsr	a
-         11:C927  42         			say
-         11:C928  6A         			ror	a
+         11:C926  6A         			ror	a
  9955                        		__st.wmq	_ax
-         11:C929  85 F8      			sta.l	_ax
-         11:C92B  84 F9      			sty.h	_ax
+         11:C927  85 F8      			sta.l	_ax
+         11:C929  84 F9      			sty.h	_ax
  9956                        		 _load_vram.3
-         11:C92D  82         			clx				; Offset to PCE VDC.
-         11:C92E  20 63 FF   			call	load_vram_x
+         11:C92B  82         			clx				; Offset to PCE VDC.
+         11:C92C  20 63 FF   			call	load_vram_x
  9957                        	
  9958                        		.dbg	line,	"include\init.c", 112; }
- 9959    11:C931             	.LL430:
+ 9959    11:C92F             	.LL430:
  9960                        		__return	0
-         11:C931  4C EF FF   			jmp	leave_proc
+         11:C92F  4C EF FF   			jmp	leave_proc
  9961                        		.dbg	clear
  9962                        		.endp
  9963                        		.pceas
@@ -19161,40 +19160,40 @@
  9968                        	;***********************
  9969                        	
  9970                        		.hucc
- 9971    11:C934             		.proc		_load_NPC_TILES
+ 9971    11:C932             		.proc		_load_NPC_TILES
  9972                        		__enter		_load_NPC_TILES
  9973                        	
  9974                        		.dbg	line,	"include\init.c", 117; load_vram(NPC_VRAM_ADR, tiles_SPR_NPC , SIZEOF(tiles_SPR_NPC) >> 1);
  9975                        		__st.wmiq	10752, _di
-         11:C934  64 F0      			stz.l	_di
-         11:C936  A9 2A      			lda.h	#10752
-         11:C938  85 F1      			sta.h	_di
+         11:C932  64 F0      			stz.l	_di
+         11:C934  A9 2A      			lda.h	#10752
+         11:C936  85 F1      			sta.h	_di
  9976                        		__farptr	_tiles_SPR_NPC, _bp_bank, _bp
-         11:C93A  A9 60      			lda.l	#$6000 + ($1FFF & (_tiles_SPR_NPC))
-         11:C93C  85 EC      			sta.l	_bp
-         11:C93E  A9 6B      			lda.h	#$6000 + ($1FFF & (_tiles_SPR_NPC))
-         11:C940  85 ED      			sta.h	_bp
-         11:C942  A9 10      			lda	#bank(_tiles_SPR_NPC)
-         11:C944  85 02      			sta	_bp_bank
+         11:C938  A9 60      			lda.l	#$6000 + ($1FFF & (_tiles_SPR_NPC))
+         11:C93A  85 EC      			sta.l	_bp
+         11:C93C  A9 6B      			lda.h	#$6000 + ($1FFF & (_tiles_SPR_NPC))
+         11:C93E  85 ED      			sta.h	_bp
+         11:C940  A9 10      			lda	#bank(_tiles_SPR_NPC)
+         11:C942  85 02      			sta	_bp_bank
  9977                        		__ld.wi		___sizeof__tiles_SPR_NPC
-         11:C946  A9 00      			lda.l	#___sizeof__tiles_SPR_NPC
-         11:C948  A0 0C      			ldy.h	#___sizeof__tiles_SPR_NPC
+         11:C944  A9 00      			lda.l	#___sizeof__tiles_SPR_NPC
+         11:C946  A0 0C      			ldy.h	#___sizeof__tiles_SPR_NPC
  9978                        		__lsr.wi	1
+         11:C948  42         			say
+         11:C949  4A         			lsr	a
          11:C94A  42         			say
-         11:C94B  4A         			lsr	a
-         11:C94C  42         			say
-         11:C94D  6A         			ror	a
+         11:C94B  6A         			ror	a
  9979                        		__st.wmq	_ax
-         11:C94E  85 F8      			sta.l	_ax
-         11:C950  84 F9      			sty.h	_ax
+         11:C94C  85 F8      			sta.l	_ax
+         11:C94E  84 F9      			sty.h	_ax
  9980                        		 _load_vram.3
-         11:C952  82         			clx				; Offset to PCE VDC.
-         11:C953  20 63 FF   			call	load_vram_x
+         11:C950  82         			clx				; Offset to PCE VDC.
+         11:C951  20 63 FF   			call	load_vram_x
  9981                        	
  9982                        		.dbg	line,	"include\init.c", 118; }
- 9983    11:C956             	.LL431:
+ 9983    11:C954             	.LL431:
  9984                        		__return	0
-         11:C956  4C EF FF   			jmp	leave_proc
+         11:C954  4C EF FF   			jmp	leave_proc
  9985                        		.dbg	clear
  9986                        		.endp
  9987                        		.pceas
@@ -23634,23 +23633,23 @@
   186                        	; clear_vce - Clear all 512 of the VCE's palette entries.
   187                        	;
   188                        	
-  189    11:C9D2             	clear_vce	.proc
+  189    11:C9D0             	clear_vce	.proc
   190                        	
-  191    11:C9D2  08         			php				; Disable interrupts to avoid
-  192    11:C9D3  78         			sei				; VBLANK palette upload.
-  193    11:C9D4  C2         			cly
-  194    11:C9D5  9C 02 04   			stz	VCE_CTA+0		; Set VCE write address.
-  195    11:C9D8  9C 03 04   			stz	VCE_CTA+1
-  196    11:C9DB  9C 04 04   	.loop:		stz	VCE_CTW+0		; Set lo-byte of color.
-  197    11:C9DE  9C 05 04   			stz	VCE_CTW+1		; Write 1 color value.
-  198    11:C9E1  9C 04 04   			stz	VCE_CTW+0		; Set lo-byte of color.
-  199    11:C9E4  9C 05 04   			stz	VCE_CTW+1		; Write 1 color value.
-  200    11:C9E7  88         			dey
-  201    11:C9E8  D0 F1      			bne	.loop
-  202    11:C9EA  28         			plp
+  191    11:C9D0  08         			php				; Disable interrupts to avoid
+  192    11:C9D1  78         			sei				; VBLANK palette upload.
+  193    11:C9D2  C2         			cly
+  194    11:C9D3  9C 02 04   			stz	VCE_CTA+0		; Set VCE write address.
+  195    11:C9D6  9C 03 04   			stz	VCE_CTA+1
+  196    11:C9D9  9C 04 04   	.loop:		stz	VCE_CTW+0		; Set lo-byte of color.
+  197    11:C9DC  9C 05 04   			stz	VCE_CTW+1		; Write 1 color value.
+  198    11:C9DF  9C 04 04   			stz	VCE_CTW+0		; Set lo-byte of color.
+  199    11:C9E2  9C 05 04   			stz	VCE_CTW+1		; Write 1 color value.
+  200    11:C9E5  88         			dey
+  201    11:C9E6  D0 F1      			bne	.loop
+  202    11:C9E8  28         			plp
   203                        	
   204                        			leave				; All done, phew!
-         11:C9EB  4C EF FF   			jmp	leave_proc
+         11:C9E9  4C EF FF   			jmp	leave_proc
   205                        	
   206                        			.endp
   207                        	
@@ -25531,33 +25530,33 @@
   562                        	;
   563                        	; void __fastcall far_load_palette( unsigned char palette<_al>, unsigned char num_palettes<_ah> );
   564                        	
-  565    11:C8E4             			.proc	_load_palette.3
-  566    11:C8E4             			.alias	_far_load_palette.2	= _load_palette.3
+  565    11:C8E2             			.proc	_load_palette.3
+  566    11:C8E2             			.alias	_far_load_palette.2	= _load_palette.3
   567                        	
-  568    11:C8E4  AC 42 26   			ldy	color_queue_w		; Get the queue's write index.
+  568    11:C8E2  AC 42 26   			ldy	color_queue_w		; Get the queue's write index.
   569                        	
-  570    11:C8E7  A5 EC      			lda.l	<_bp			; Add this set of palettes to
-  571    11:C8E9  99 53 26   			sta	color_addr_l, y		; the queue.
-  572    11:C8EC  A5 ED      			lda.h	<_bp
-  573    11:C8EE  99 5B 26   			sta	color_addr_h, y
-  574    11:C8F1  A5 02      			lda	<_bp_bank
-  575    11:C8F3  99 63 26   			sta	color_bank, y
-  576    11:C8F6  A5 F8      			lda	<_al
-  577    11:C8F8  99 43 26   			sta	color_index, y
-  578    11:C8FB  A5 F9      			lda	<_ah
-  579    11:C8FD  99 4B 26   			sta	color_count, y
+  570    11:C8E5  A5 EC      			lda.l	<_bp			; Add this set of palettes to
+  571    11:C8E7  99 53 26   			sta	color_addr_l, y		; the queue.
+  572    11:C8EA  A5 ED      			lda.h	<_bp
+  573    11:C8EC  99 5B 26   			sta	color_addr_h, y
+  574    11:C8EF  A5 02      			lda	<_bp_bank
+  575    11:C8F1  99 63 26   			sta	color_bank, y
+  576    11:C8F4  A5 F8      			lda	<_al
+  577    11:C8F6  99 43 26   			sta	color_index, y
+  578    11:C8F9  A5 F9      			lda	<_ah
+  579    11:C8FB  99 4B 26   			sta	color_count, y
   580                        	
-  581    11:C900  C8         			iny				; Increment the queue index.
-  582    11:C901  98         			tya
-  583    11:C902  29 07      			and	#7
+  581    11:C8FE  C8         			iny				; Increment the queue index.
+  582    11:C8FF  98         			tya
+  583    11:C900  29 07      			and	#7
   584                        	
-  585    11:C904  CD 41 26   	.wait:		cmp	color_queue_r		; If the queue is full, wait
-  586    11:C907  F0 FB      			beq	.wait			; for the next VBLANK.
+  585    11:C902  CD 41 26   	.wait:		cmp	color_queue_r		; If the queue is full, wait
+  586    11:C905  F0 FB      			beq	.wait			; for the next VBLANK.
   587                        	
-  588    11:C909  8D 42 26   			sta	color_queue_w		; Signal item is in the queue.
+  588    11:C907  8D 42 26   			sta	color_queue_w		; Signal item is in the queue.
   589                        	
   590                        			leave				; All done, phew!
-         11:C90C  4C EF FF   			jmp	leave_proc
+         11:C90A  4C EF FF   			jmp	leave_proc
   591                        	
   592                        			.endp
   593                        	
@@ -30724,16 +30723,16 @@ Size: $0043, Addr: $11:C781,      .proc sgx_detect
 Size: $003F, Addr: $11:C7C4, .procgroup load_bat_group
 Size: $003E, Addr: $11:C803,      .proc _vram2vram.3
 Size: $003B, Addr: $11:C841,      .proc init_random
-Size: $003A, Addr: $11:C87C,      .proc _init_VARIABLES
-Size: $002E, Addr: $11:C8B6,      .proc _scroll_BG
-Size: $002B, Addr: $11:C8E4,      .proc _load_palette.3
-Size: $0025, Addr: $11:C90F,      .proc _load_CHEST_TILES
-Size: $0025, Addr: $11:C934,      .proc _load_NPC_TILES
-Size: $0023, Addr: $11:C959,      .proc _hide_LEVEL_SPRITES
-Size: $001E, Addr: $11:C97C,      .proc _init_PLAYER
-Size: $001C, Addr: $11:C99A,      .proc _display_SCORE
-Size: $001C, Addr: $11:C9B6,      .proc _display_ZENNY
-Size: $001C, Addr: $11:C9D2,      .proc clear_vce
-Size: $001A, Addr: $11:C9EE,      .proc _display_KEY
-Size: $001A, Addr: $11:CA08,      .proc _display_POTION
-Size: $001A, Addr: $11:CA22,      .proc _init_SYSTEM
+Size: $0038, Addr: $11:C87C,      .proc _init_VARIABLES
+Size: $002E, Addr: $11:C8B4,      .proc _scroll_BG
+Size: $002B, Addr: $11:C8E2,      .proc _load_palette.3
+Size: $0025, Addr: $11:C90D,      .proc _load_CHEST_TILES
+Size: $0025, Addr: $11:C932,      .proc _load_NPC_TILES
+Size: $0023, Addr: $11:C957,      .proc _hide_LEVEL_SPRITES
+Size: $001E, Addr: $11:C97A,      .proc _init_PLAYER
+Size: $001C, Addr: $11:C998,      .proc _display_SCORE
+Size: $001C, Addr: $11:C9B4,      .proc _display_ZENNY
+Size: $001C, Addr: $11:C9D0,      .proc clear_vce
+Size: $001A, Addr: $11:C9EC,      .proc _display_KEY
+Size: $001A, Addr: $11:CA06,      .proc _display_POTION
+Size: $001A, Addr: $11:CA20,      .proc _init_SYSTEM
