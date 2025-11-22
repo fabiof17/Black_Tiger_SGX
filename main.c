@@ -98,7 +98,7 @@ main()
 
                             update_PLAYER();
                             
-                            //put_number(onscreen_npc_number,1,0,0);
+                            //put_number(player_state,1,0,0);
 
                             joypad_DIR();
                             joypad_BUTTONS();

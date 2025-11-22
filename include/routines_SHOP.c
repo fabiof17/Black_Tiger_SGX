@@ -77,6 +77,190 @@ void joypad_BUTTONS_SHOP()
             spr_y(168);
         }
     }
+
+
+    else if(joytrg(JOYPAD_1) & JOY_I)
+    {
+        switch(item_index)
+        {
+            // WEAPON 2 //
+            case 0:
+                if(zenny_amount >= shop_prices[0])
+                {
+                    if(weapon_level < 2)
+                    {
+                        weapon_level = 2;
+                        load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_2, SIZEOF(tileset_WEAPON_2) >> 1 );
+
+                        zenny_amount -= shop_prices[0];
+                        display_ZENNY();
+                    }
+                }
+
+                break;   
+
+
+            // WEAPON 4 //
+            case 1:
+                if(zenny_amount >= shop_prices[1])
+                {
+                    if(weapon_level < 4)
+                    {
+                        weapon_level = 4;
+                        load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_4, SIZEOF(tileset_WEAPON_4) >> 1 );
+
+                        zenny_amount -= shop_prices[1];
+                        display_ZENNY();
+                    }
+                }
+
+                break; 
+
+
+            // WEAPON 5 //
+            case 2:
+                if(zenny_amount >= shop_prices[2])
+                {
+                    if(weapon_level < 5)
+                    {
+                        weapon_level = 5;
+                        load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_5, SIZEOF(tileset_WEAPON_5) >> 1 );
+
+                        zenny_amount -= shop_prices[2];
+                        display_ZENNY();
+                    }
+                }
+
+                break;   
+
+
+            // WEAPON 8 //
+            case 3:
+                if(zenny_amount >= shop_prices[3])
+                {
+                    if(weapon_level < 8)
+                    {
+                        weapon_level = 8;
+                        load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_8, SIZEOF(tileset_WEAPON_8) >> 1 );
+
+                        zenny_amount -= shop_prices[3];
+                        display_ZENNY();
+                    }
+                }
+
+                break;  
+
+
+            // KEY //
+            case 4:
+                if(zenny_amount >= shop_prices[4])
+                {
+                    key_amount += 1;
+
+                    zenny_amount -= shop_prices[4];
+                    display_KEY();
+                }
+
+                break;   
+
+
+            // ARMOR 1 //
+            case 5:
+                if(zenny_amount >= shop_prices[5])
+                {
+                    if(armor_level < 1)
+                    {
+                        armor_level = 1;
+                        load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_1, SIZEOF(tileset_ARMOR_1) >> 1 );
+
+                        zenny_amount -= shop_prices[5];
+                        display_ZENNY();
+                    }
+                }
+
+                break;   
+
+
+            // ARMOR 2 //
+            case 6:
+                if(zenny_amount >= shop_prices[5])
+                {
+                    if(armor_level < 2)
+                    {
+                        armor_level = 2;
+                        load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_2, SIZEOF(tileset_ARMOR_2) >> 1 );
+
+                        zenny_amount -= shop_prices[6];
+                        display_ZENNY();
+                    }
+                }
+
+                break;    
+
+
+            // ARMOR 4 //
+            case 7:
+                if(zenny_amount >= shop_prices[5])
+                {
+                    if(armor_level < 4)
+                    {
+                        armor_level = 4;
+                        load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_4, SIZEOF(tileset_ARMOR_4) >> 1 );
+
+                        zenny_amount -= shop_prices[7];
+                        display_ZENNY();
+                    }
+                }
+
+                break;   
+
+
+            // ARMOR 8 //
+            case 8:
+                if(zenny_amount >= shop_prices[5])
+                {
+                    if(armor_level < 8)
+                    {
+                        armor_level = 8;
+                        load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_8, SIZEOF(tileset_ARMOR_8) >> 1 );
+
+                        zenny_amount -= shop_prices[8];
+                        display_ZENNY();
+                    }
+                }
+
+                break;   
+
+
+            // POTION //
+            case 9:
+                if(zenny_amount >= shop_prices[9])
+                {
+                    potion_amount += 1;
+
+                    zenny_amount -= shop_prices[9];
+                    display_POTION();
+                }
+
+                break;   
+
+
+            // EXIT //
+            case 10:
+                // HIDE CURSOR //
+                spr_set(0);
+                spr_hide();
+
+                // REINIT PLAYER //
+                init_PLAYER();
+
+
+                respawn = RESPAWN_SHOP;
+                sequence_loaded = FALSE;
+                sequence_id = SEQUENCE_GAME;
+                break;                  
+        }
+    }
 }
 
 

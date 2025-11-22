@@ -84,19 +84,19 @@ void display_TIME()
 
 void display_KEY()
 {
-    put_number(key_number,2,7,27);
+    put_number(key_amount,2,7,27);
 }
 
 
 void display_POTION()
 {
-    put_number(potion_number,2,19,27);
+    put_number(potion_amount,2,19,27);
 }
 
 
 void display_ZENNY()
 {
-    put_number(zenny_number,5,26,4);
+    put_number(zenny_amount,5,26,4);
 }
 
 
@@ -350,12 +350,12 @@ void check_OBJECT()
                                 break;
 
                             case TYPE_GRAY_KEY:
-                                key_number += 1;
+                                key_amount += 1;
                                 display_KEY();
                                 break;
 
                             case TYPE_YASHICHI:
-                                life_number += 1;
+                                life_amount += 1;
                                 break;
                         }
                     }
@@ -368,9 +368,9 @@ void check_OBJECT()
 // CHECK COLLISION WITH NPCS //
 void check_NPC()
 {
-    if(player_state == STATE_WALK)
+    if(onscreen_npc_number != 0)
     {
-        if(onscreen_npc_number != 0)
+        if(player_state == STATE_IDLE || player_state == STATE_WALK)
         {
             char i;
             char current_npc_id;
@@ -380,25 +380,30 @@ void check_NPC()
             {
                 // RETRIEVE NPC INDEX IN THE LIST //
                 current_npc_id = list_onscreen_npc[i];
-                // RETRIEVE NPC TYPE //
-                current_npc_type = list_npc_type[current_npc_id];
 
-                if(abs( (player_pos_x + 16) - (list_npc_x_pos[current_npc_id] + 16) ) < OBJECT_MARGIN)
+                if(list_npc_state[current_npc_id] == STATE_ACTIVE)
                 {
-                    if(abs( (player_pos_y + 16) - (list_npc_y_pos[current_npc_id] + 16) ) < OBJECT_MARGIN)
-                    {               
-                        switch(current_npc_type)
-                        {
-                            case TYPE_NPC_REWARD:
-                                //
-                                break;
+                    // RETRIEVE NPC TYPE //
+                    current_npc_type = list_npc_type[current_npc_id];
 
-                            case TYPE_NPC_SHOP:
-                                camera_pos_x_backup = sgx_map_pxl_x;
-                                camera_pos_y_backup = sgx_map_pxl_y;
-                                sequence_loaded = FALSE;
-                                sequence_id = SEQUENCE_SHOP;
-                                break;
+                    if(abs( (player_pos_x + 16) - (list_npc_x_pos[current_npc_id] + 16) ) < OBJECT_MARGIN)
+                    {
+                        if(abs( (player_pos_y + 16) - (list_npc_y_pos[current_npc_id] + 16) ) < OBJECT_MARGIN)
+                        {               
+                            switch(current_npc_type)
+                            {
+                                case TYPE_NPC_REWARD:
+                                    //
+                                    break;
+
+                                case TYPE_NPC_SHOP:
+                                    list_npc_state[current_npc_id] = STATE_INACTIVE;
+                                    camera_pos_x_backup = sgx_map_pxl_x;
+                                    camera_pos_y_backup = list_npc_y_pos_ref[current_npc_id] - 128;
+                                    sequence_loaded = FALSE;
+                                    sequence_id = SEQUENCE_SHOP;
+                                    break;
+                            }
                         }
                     }
                 }

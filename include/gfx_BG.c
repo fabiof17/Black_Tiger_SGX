@@ -10,7 +10,8 @@
 
 
 
-#incchr(tileset_NUMBERS_FONT,"res/maps/tiles_NUMBERS_FONT.png");
+#incchr(tileset_FONT,"res/maps/tiles_FONT.png");
+//#incchr(tileset_NUMBERS_FONT,"res/maps/tiles_NUMBERS_FONT.png");
 
 
 //**************************************************************************************//
@@ -135,72 +136,72 @@ _multimap_LV1_BG_B:
 
 ; EXTRACT TILESET
 ;----------------
-_tileset_LV1_BG_A:	incchr	"res/maps/template_LIFEBAR_1.png"
+_tileset_HUD:	incchr	"res/maps/template_LIFEBAR_1.png"
 					incchr	"res/maps/template_LIFEBAR_2.png"
 					incchr	"res/maps/template_LIFEBAR_3.png"
 					incchr	"res/maps/template_LIFEBAR_4.png"
 					incchr	"res/maps/template_LIFEBAR_5.png"
 					incchr	"res/maps/tileset_WEAPON_1.png"
-					incchr	"res/maps/tileset_ARMOR_1.png"
-					incchr	"res/maps/tilemap_LV1_BG_A.png", OPTIMIZE
+					incchr	"res/maps/tileset_ARMOR_2.png"
+					incchr	"res/maps/tilemap_HUD.png", OPTIMIZE
 
 
 ; EXTRACT BLOCKS
 ;--------------
-blocks_LV1_BG_A1:	incblk	"res/maps/tilemap_LV1_BG_A.png" , 0x1000 ,    0 ,   0 , 128 , 64 , _tileset_LV1_BG_A ; // 128x16 = 2048 | 64x16 = 1024
-blocks_LV1_BG_A2:	incblk	"res/maps/tilemap_LV1_BG_A.png" , 0x1000 , 2048 ,   0 ,  32 , 64 , _tileset_LV1_BG_A ; //  32x16 =  512 | 64x16 = 1024
+blocks_HUD1:	incblk	"res/maps/tilemap_HUD.png" , 0x1000 ,    0 ,   0 , 128 , 64 , _tileset_HUD ; // 128x16 = 2048 | 64x16 = 1024
+blocks_HUD2:	incblk	"res/maps/tilemap_HUD.png" , 0x1000 , 2048 ,   0 ,  32 , 64 , _tileset_HUD ; //  32x16 =  512 | 64x16 = 1024
 
 
 ; EXTRACT MAPS
 ;------------
 		align	256
-MAP_LV1_BG_A1:		incmap	"res/maps/tilemap_LV1_BG_A.png",    0 ,   0 , 128 , 64 , blocks_LV1_BG_A1 ; // 128x16 = 2048 | 64x16 = 1024
-					flagmap "res/maps/collision_LV1.png",       0 ,   0 , 128 , 64 , MAP_LV1_BG_A1
+MAP_HUD1:		incmap	"res/maps/tilemap_HUD.png",    0 ,   0 , 128 , 64 , blocks_HUD1 ; // 128x16 = 2048 | 64x16 = 1024
+					flagmap "res/maps/collision_LV1.png",       0 ,   0 , 128 , 64 , MAP_HUD1
 
 		align	256
-MAP_LV1_BG_A2:		incmap	"res/maps/tilemap_LV1_BG_A.png", 2048 ,   0 ,  32 , 64 , blocks_LV1_BG_A2 ; //  32x16 =  512 | 64x16 = 1024
-					flagmap "res/maps/collision_LV1.png",    2048 ,   0 ,  32 , 64 , MAP_LV1_BG_A2
+MAP_HUD2:		incmap	"res/maps/tilemap_HUD.png", 2048 ,   0 ,  32 , 64 , blocks_HUD2 ; //  32x16 =  512 | 64x16 = 1024
+					flagmap "res/maps/collision_LV1.png",    2048 ,   0 ,  32 , 64 , MAP_HUD2
 
 
 ; SWIZZLE MAPS
 ;-------------
-swizzle	MAP_LV1_BG_A1,  32, 16 ;
-swizzle	MAP_LV1_BG_A2,  32, 16 ;
+swizzle	MAP_HUD1,  32, 16 ;
+swizzle	MAP_HUD2,  32, 16 ;
 
 
 ; BUILD MULTIMAP
 ;---------------
 _multimap_LV1_BG_A:
 	; 1st line of 5 screens (512x256)
-	SCREEN MAP_LV1_BG_A1 + 0x0000, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x0200, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x0400, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x0600, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A2 + 0x0000, blocks_LV1_BG_A2, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x0000, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x0200, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x0400, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x0600, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD2 + 0x0000, blocks_HUD2, dummy_tbl, 0
 
 
 	; 2nd line of 5 screens (512x256)
-	SCREEN MAP_LV1_BG_A1 + 0x0800, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x0A00, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x0C00, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x0E00, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A2 + 0x0200, blocks_LV1_BG_A2, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x0800, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x0A00, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x0C00, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x0E00, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD2 + 0x0200, blocks_HUD2, dummy_tbl, 0
 
 
 	; 3rd line of 5 screens (512x256)
-	SCREEN MAP_LV1_BG_A1 + 0x1000, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x1200, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x1400, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x1600, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A2 + 0x0400, blocks_LV1_BG_A2, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x1000, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x1200, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x1400, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x1600, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD2 + 0x0400, blocks_HUD2, dummy_tbl, 0
 
 
 	; 4th line of 5 screens (512x256)
-	SCREEN MAP_LV1_BG_A1 + 0x1800, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x1A00, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x1C00, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A1 + 0x1E00, blocks_LV1_BG_A1, dummy_tbl, 0
-	SCREEN MAP_LV1_BG_A2 + 0x0600, blocks_LV1_BG_A2, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x1800, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x1A00, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x1C00, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD1 + 0x1E00, blocks_HUD1, dummy_tbl, 0
+	SCREEN MAP_HUD2 + 0x0600, blocks_HUD2, dummy_tbl, 0
 
 
 		.code

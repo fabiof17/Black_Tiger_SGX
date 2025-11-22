@@ -41,17 +41,22 @@ void init_SYSTEM()
 
 void init_VARIABLES()
 {
-    sequence_id = SEQUENCE_GAME; //SEQUENCE_GAME | SEQUENCE_SHOP
+    sequence_id = SEQUENCE_SHOP; //SEQUENCE_GAME | SEQUENCE_SHOP
 
     level_id = 1;
 
-	key_number = 0;
-	potion_number = 0;
-	zenny_number = 200;
+	key_amount = 0;
+	potion_amount = 0;
+	zenny_amount = 90000;
+
+	weapon_level = 1;
+	armor_level = 1;
 
 	minutes = 1;
 	seconds = 59;
 	time_counter = 0;
+
+	respawn = FALSE;
 
     sequence_loaded = FALSE;
 }
@@ -125,7 +130,13 @@ void init_OBJECT_LV1()
 		list_object_y_pos_ref[i] = TABLE_OBJECT_Y_POS_REF_LV1[i];
 		list_object_x_pos[i] = -16;
 		list_object_y_pos[i] = -16;
-		list_object_state[i] = STATE_ACTIVE;
+		
+		// IF THE PLAYERS ENTERS THE LEVEL FOR THE 1RST TIME //
+		// ALL OBJECTS ARE ACTIVE //
+		if(respawn == FALSE)
+		{
+			list_object_state[i] = STATE_ACTIVE;
+		}
 
 
 		// SET OBJECT SPRITE //
@@ -173,7 +184,11 @@ void init_CHEST_LV1()
 		list_chest_y_pos_ref[i] = TABLE_CHEST_Y_POS_REF_LV1[i];
 		list_chest_x_pos[i] = -32;
 		list_chest_y_pos[i] = -32;
-		list_chest_state[i] = STATE_ACTIVE;
+
+		if(respawn == FALSE)
+		{
+			list_chest_state[i] = STATE_ACTIVE;
+		}
 
 
 		// SET CHEST SPRITE //
@@ -202,7 +217,11 @@ void init_NPC_LV1()
 		list_npc_y_pos_ref[i] = TABLE_NPC_Y_POS_REF_LV1[i];
 		list_npc_x_pos[i] = -32;
 		list_npc_y_pos[i] = -32;
-		list_npc_state[i] = STATE_ACTIVE;
+
+		if(respawn == FALSE)
+		{
+			list_npc_state[i] = STATE_ACTIVE;
+		}
 
 
 		// SET NPC SPRITE //
@@ -235,7 +254,7 @@ void init_HUD()
 	//                                      LOAD FONT                                       //
 	//--------------------------------------------------------------------------------------//
 
-	load_vram( NUMBERS_FONT_VRAM_ADR, tileset_NUMBERS_FONT, SIZEOF(tileset_NUMBERS_FONT) >> 1 );
+	load_vram( 0x0800, tileset_FONT, SIZEOF(tileset_FONT) >> 1 );
 
 	set_font_pal(15);
 
@@ -244,7 +263,7 @@ void init_HUD()
 	//                                    LOAD TILESET                                      //
 	//--------------------------------------------------------------------------------------//
 
-	load_vram( 0x1000, tileset_LV1_BG_A, SIZEOF(tileset_LV1_BG_A) >> 1 );
+	load_vram( 0x1000, tileset_HUD, SIZEOF(tileset_HUD) >> 1 );
 
 
 	//--------------------------------------------------------------------------------------//
@@ -262,8 +281,55 @@ void init_HUD()
 	//                               LOAD WEAPON + ARMOR TILES                              //
 	//--------------------------------------------------------------------------------------//
 
-	load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_1, SIZEOF(tileset_WEAPON_1) >> 1 );
-	load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_2, SIZEOF(tileset_ARMOR_2) >> 1 );
+	if(weapon_level == 1)
+	{
+		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_1, SIZEOF(tileset_WEAPON_1) >> 1 );
+	}
+
+	else if(weapon_level == 2)
+	{
+		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_2, SIZEOF(tileset_WEAPON_2) >> 1 );
+	}
+
+	else if(weapon_level == 3)
+	{
+		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_4, SIZEOF(tileset_WEAPON_4) >> 1 );
+	}
+
+	else if(weapon_level == 4)
+	{
+		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_5, SIZEOF(tileset_WEAPON_5) >> 1 );
+	}
+
+	else if(weapon_level == 5)
+	{
+		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_8, SIZEOF(tileset_WEAPON_8) >> 1 );
+	}
+
+
+
+
+	if(armor_level == 1)
+	{
+		load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_1, SIZEOF(tileset_ARMOR_1) >> 1 );
+	}
+
+	else if(armor_level == 2)
+	{
+		load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_2, SIZEOF(tileset_ARMOR_2) >> 1 );
+	}
+
+	else if(armor_level == 3)
+	{
+		load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_4, SIZEOF(tileset_ARMOR_4) >> 1 );
+	}
+
+	else if(armor_level == 4)
+	{
+		load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_8, SIZEOF(tileset_ARMOR_8) >> 1 );
+	}
+
+
 
 
 	//--------------------------------------------------------------------------------------//
@@ -379,8 +445,18 @@ void init_LEVEL()
 		// The blkmap is drawn using global variables for the top-left coordinate
 		// in pixels, and the draw width and height in terms of 8x8 characters.
 
-		sgx_map_pxl_x = 96;
-		sgx_map_pxl_y = 768;
+		if(respawn == FALSE)
+		{
+			sgx_map_pxl_x = 96;
+			sgx_map_pxl_y = 768;
+		}
+
+		else if(respawn == RESPAWN_SHOP)
+		{
+			sgx_map_pxl_x = camera_pos_x_backup;
+			sgx_map_pxl_y = camera_pos_y_backup;
+		}
+
 
 		sgx_map_draw_w = 63;
 		sgx_map_draw_h = 29;
@@ -459,8 +535,10 @@ void init_LEVEL()
 		// SET TILES DATA FOR THE PLAYER //
 		spr_pattern(PLAYER_VRAM_ADR);
 
-
+		// SET SPRITE FLIP //
 		spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
+
+		
 
 
 		spr_pal(0);
@@ -563,7 +641,14 @@ void init_SHOP()
 	index_y = 0;
 	item_index = 0;
 
-	ptr_SHOP_ITEM_PRICES = TABLE_SHOP_PRICES_LV1;
+	minutes = 0;
+	seconds = 30;
+
+	if(level_id == 1)
+	{
+		ptr_SHOP_ITEM_PRICES = &TABLE_SHOP_PRICES_LV1[0];
+	}
+	
 
 
 
@@ -578,7 +663,7 @@ void init_SHOP()
 	//                                      LOAD FONT                                       //
 	//--------------------------------------------------------------------------------------//
 
-	load_vram( NUMBERS_FONT_VRAM_ADR, tileset_NUMBERS_FONT, SIZEOF(tileset_NUMBERS_FONT) >> 1 );
+	load_vram( 0x0800, tileset_FONT, SIZEOF(tileset_FONT) >> 1 );
 
 	set_font_pal(15);
 
@@ -656,17 +741,30 @@ void init_SHOP()
 	//                                     DRAW PRICES                                      //
 	//--------------------------------------------------------------------------------------//
 
-	put_number(*(TABLE_SHOP_PRICES_LV1)  ,4,2,20);
-	put_number(*(TABLE_SHOP_PRICES_LV1+1),4,7,20);
-	put_number(*(TABLE_SHOP_PRICES_LV1+2),4,12,20);
-	put_number(*(TABLE_SHOP_PRICES_LV1+3),4,17,20);
-	put_number(*(TABLE_SHOP_PRICES_LV1+4),4,22,20);
+	shop_prices[0] = *(ptr_SHOP_ITEM_PRICES);
+	shop_prices[1] = *(ptr_SHOP_ITEM_PRICES+1);
+	shop_prices[2] = *(ptr_SHOP_ITEM_PRICES+2);
+	shop_prices[3] = *(ptr_SHOP_ITEM_PRICES+3);
+	shop_prices[4] = *(ptr_SHOP_ITEM_PRICES+4);
+	
+	shop_prices[5] = *(ptr_SHOP_ITEM_PRICES+5);
+	shop_prices[6] = *(ptr_SHOP_ITEM_PRICES+6);
+	shop_prices[7] = *(ptr_SHOP_ITEM_PRICES+7);
+	shop_prices[8] = *(ptr_SHOP_ITEM_PRICES+8);
+	shop_prices[9] = *(ptr_SHOP_ITEM_PRICES+9);
 
-	put_number(*(TABLE_SHOP_PRICES_LV1+5),4,2,23);
-	put_number(*(TABLE_SHOP_PRICES_LV1+6),4,7,23);
-	put_number(*(TABLE_SHOP_PRICES_LV1+7),4,12,23);
-	put_number(*(TABLE_SHOP_PRICES_LV1+8),4,17,23);
-	put_number(*(TABLE_SHOP_PRICES_LV1+9),4,22,23);
+
+	put_number(shop_prices[0],4,2,20);
+	put_number(shop_prices[1],4,7,20);
+	put_number(shop_prices[2],4,12,20);
+	put_number(shop_prices[3],4,17,20);
+	put_number(shop_prices[4],4,22,20);
+
+	put_number(shop_prices[5],4,2,23);
+	put_number(shop_prices[6],4,7,23);
+	put_number(shop_prices[7],4,12,23);
+	put_number(shop_prices[8],4,17,23);
+	put_number(shop_prices[9],4,22,23);
 
 
 
@@ -690,10 +788,7 @@ void init_SHOP()
 	//                                        CURSOR                                        //
 	//--------------------------------------------------------------------------------------//
 
-	// LOAD PLAYER TILES //
-	// 0x2000
-	// 32 TILES = 512 //
-	// LOAD PLAYER FIRST FRAME OF ANIMATION (IDLE)
+	// LOAD CURSOR TILES //
 	load_vram(0x2000, tiles_SPR_CURSOR , TILES_16);
 
 
@@ -704,7 +799,7 @@ void init_SHOP()
 	spr_x(24);
 	spr_y(144);
 
-	// SET TILES DATA FOR THE PLAYER //
+	// SET TILES DATA FOR THE CURSOR //
 	spr_pattern(0x2000);
 
 

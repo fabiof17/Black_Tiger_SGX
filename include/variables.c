@@ -28,9 +28,14 @@ unsigned char   sequence_id,
                 jump_ladder,
                 jump_max_index,
 
-                life_number,
-                key_number,
-                potion_number,                
+                // ARMOR + WEAPON //
+                armor_level,
+                weapon_level,
+
+                // HUD //
+                life_amount,
+                key_amount,
+                potion_amount,
 
                 // TIME //
                 minutes,
@@ -100,25 +105,30 @@ signed int      player_pos_x,
                 list_npc_x_pos[9],
                 list_npc_y_pos[9],
                 list_npc_x_pos_ref[9],
-                list_npc_y_pos_ref[9],
+                list_npc_y_pos_ref[9];
                 
-                zenny_number,
-                score;
-                
+
+
+
+int             zenny_amount,
+                score,
+
+                shop_prices[10];
+
 
 
 
 extern unsigned char tileset_LV1_BG_B[];
 extern unsigned char multimap_LV1_BG_B[];
 
-extern unsigned char tileset_LV1_BG_A[];
+extern unsigned char tileset_HUD[];
 extern unsigned char multimap_LV1_BG_A[];
 
 extern unsigned char tileset_SHOP_BG_B[];
 
 
 
-const int *ptr_SHOP_ITEM_PRICES;
+int *ptr_SHOP_ITEM_PRICES;
 
 
 
