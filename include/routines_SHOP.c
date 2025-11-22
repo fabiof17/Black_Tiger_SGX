@@ -183,7 +183,7 @@ void joypad_BUTTONS_SHOP()
 
             // ARMOR 2 //
             case 6:
-                if(zenny_amount >= shop_prices[5])
+                if(zenny_amount >= shop_prices[6])
                 {
                     if(armor_level < 2)
                     {
@@ -200,7 +200,7 @@ void joypad_BUTTONS_SHOP()
 
             // ARMOR 4 //
             case 7:
-                if(zenny_amount >= shop_prices[5])
+                if(zenny_amount >= shop_prices[7])
                 {
                     if(armor_level < 4)
                     {
@@ -217,7 +217,7 @@ void joypad_BUTTONS_SHOP()
 
             // ARMOR 8 //
             case 8:
-                if(zenny_amount >= shop_prices[5])
+                if(zenny_amount >= shop_prices[8])
                 {
                     if(armor_level < 8)
                     {
