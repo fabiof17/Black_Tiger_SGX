@@ -11,7 +11,10 @@
 #incspr(tiles_SPR_PLAYER,"res/sprites/tiles_SPR_PLAYER.png")
 
 // EXTRACT PLAYER PALETTE //
-#incpal(palette_PLAYER,"res/palettes/palette_PLAYER.png");
+#incpal(palette_PLAYER_1,"res/palettes/palette_PLAYER_1.png");
+#incpal(palette_PLAYER_4,"res/palettes/palette_PLAYER_4.png");
+#incpal(palette_PLAYER_5,"res/palettes/palette_PLAYER_5.png");
+#incpal(palette_PLAYER_8,"res/palettes/palette_PLAYER_8.png");
 
 
 #incspr(tiles_SPR_HIT,"res/sprites/tiles_SPR_HIT.png")

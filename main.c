@@ -110,7 +110,7 @@ main()
                             check_OBJECT();
                             check_NPC();
 
-                            display_TIME();
+                            display_TIME_LEVEL();
 
                             satb_update();
 
@@ -163,13 +163,74 @@ main()
                 
                 else
                 {
-                    vsync();
+                    switch(shop_phase)
+                    {
+                        case SHOP_PHASE_ENTER:
+                            vsync();
 
-                    joypad_BUTTONS_SHOP();
+                            if(shop_counter == 0)
+                            {
+                                put_string("Maybe, i can sell you" ,  2 , 15);
+                                put_string("something..." , 18 , 16);
+                            }
 
-                    //put_number(item_index,1,0,0);
+                            else if(shop_counter == 120)
+                            {
+                                put_string("                     " ,  2 , 15);
+                                put_string("            " , 18 , 16);
 
-                    satb_update();
+                                spr_x(24);
+                                spr_y(144);
+                                satb_update();
+
+                                shop_phase = SHOP_PHASE_BUY;
+                            }
+
+                            shop_counter++;
+
+                            break;
+                    
+
+                        case SHOP_PHASE_BUY:
+                            vsync();
+
+                            joypad_BUTTONS_SHOP();
+                            display_TIME_SHOP();
+                            satb_update();
+
+                            break;
+
+
+                        case SHOP_PHASE_EXIT:
+                            vsync();
+
+                            if(shop_counter == 0)
+                            {
+                                put_string("GOOD LUCK!" , 11 , 16);
+
+                                // HIDE CURSOR //
+                                spr_set(0);
+                                spr_hide();
+                                satb_update();
+                            }
+
+                            else if(shop_counter == 120)
+                            {
+                                disp_off();
+
+                                // REINIT PLAYER //
+                                init_PLAYER();
+
+                                shop_phase = SHOP_PHASE_EXIT;
+                                respawn = RESPAWN_SHOP;
+                                sequence_loaded = FALSE;
+                                sequence_id = SEQUENCE_GAME;
+                            }
+
+                            shop_counter++;
+
+                            break;
+                    }
                 }
 
                 break;

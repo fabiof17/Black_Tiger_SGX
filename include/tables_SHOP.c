@@ -76,9 +76,15 @@ const char              TABLE_CURSOR_POS_X[11]              =   {
                                                                 };
 
 
+/*const char              TABLE_SHOP_DIALOGUE_1[21]           =   {
+                                                                    "Maybe, i can sell you"
+                                                                };
 
+const char              TABLE_SHOP_DIALOGUE_2[12]           =   {
+                                                                    "something..."
+                                                                };
 
-
-
-
+const char              TABLE_SHOP_DIALOGUE_3[10]           =   {
+                                                                    "GOOD LUCK!"
+                                                                };*/
 

@@ -9,6 +9,52 @@
 
 
 
+void display_TIME_SHOP()
+{
+    put_number(minutes,1,1,3);
+
+    if(seconds < 10)
+    {
+        put_number(0,1,3,3);
+        put_number(seconds,1,4,3);
+    }
+
+    else
+    {
+        put_number(seconds,2,3,3);
+    }
+
+    time_counter += 1;
+
+    if(time_counter == 60)
+    {
+        time_counter = 0;
+
+        if(seconds > 0)
+        {
+            seconds -= 1;
+        }
+
+        else
+        {
+            if(minutes > 0)
+            {
+                seconds = 59;
+                minutes -= 1;
+            }
+
+            else
+            {
+                seconds = 0;
+                minutes = 0;
+                shop_counter = 0;    
+                shop_phase = SHOP_PHASE_EXIT;
+            }
+        }
+    } 
+}
+
+
 
 void joypad_BUTTONS_SHOP()
 {
@@ -185,9 +231,9 @@ void joypad_BUTTONS_SHOP()
             case 6:
                 if(zenny_amount >= shop_prices[6])
                 {
-                    if(armor_level < 2)
+                    if(armor_level < 4)
                     {
-                        armor_level = 2;
+                        armor_level = 4;
                         load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_2, SIZEOF(tileset_ARMOR_2) >> 1 );
 
                         zenny_amount -= shop_prices[6];
@@ -202,9 +248,9 @@ void joypad_BUTTONS_SHOP()
             case 7:
                 if(zenny_amount >= shop_prices[7])
                 {
-                    if(armor_level < 4)
+                    if(armor_level < 5)
                     {
-                        armor_level = 4;
+                        armor_level = 5;
                         load_vram( ARMOR_VRAM_ADR, tileset_ARMOR_4, SIZEOF(tileset_ARMOR_4) >> 1 );
 
                         zenny_amount -= shop_prices[7];
@@ -247,17 +293,9 @@ void joypad_BUTTONS_SHOP()
 
             // EXIT //
             case 10:
-                // HIDE CURSOR //
-                spr_set(0);
-                spr_hide();
+                shop_counter = 0;    
+                shop_phase = SHOP_PHASE_EXIT;
 
-                // REINIT PLAYER //
-                init_PLAYER();
-
-
-                respawn = RESPAWN_SHOP;
-                sequence_loaded = FALSE;
-                sequence_id = SEQUENCE_GAME;
                 break;                  
         }
     }

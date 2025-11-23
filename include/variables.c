@@ -42,6 +42,9 @@ unsigned char   sequence_id,
                 seconds,
                 time_counter,
 
+                minutes_backup,
+                seconds_backup,
+
 
                 // OBJECTS //
                 object_start_index,
@@ -76,6 +79,9 @@ unsigned char   sequence_id,
                 index_x,
                 index_y,
                 item_index,
+
+                shop_phase,
+                shop_counter,
                 
                 tilemap_mask[256];
 
@@ -125,7 +131,6 @@ extern unsigned char tileset_HUD[];
 extern unsigned char multimap_LV1_BG_A[];
 
 extern unsigned char tileset_SHOP_BG_B[];
-
 
 
 int *ptr_SHOP_ITEM_PRICES;

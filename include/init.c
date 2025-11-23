@@ -47,14 +47,13 @@ void init_VARIABLES()
 
 	key_amount = 0;
 	potion_amount = 0;
-	zenny_amount = 32768;
+	zenny_amount = 25000;
 
 	weapon_level = 1;
-	armor_level = 1;
+	armor_level = 2;
 
-	minutes = 1;
-	seconds = 59;
-	time_counter = 0;
+	shop_counter = 0;
+	shop_phase = SHOP_PHASE_ENTER;
 
 	respawn = FALSE;
 
@@ -356,7 +355,7 @@ void init_HUD()
 	draw_map();
 
 	display_SCORE();
-	display_TIME();
+	display_TIME_LEVEL();
 	display_KEY();
 	display_POTION();
 	display_ZENNY();
@@ -394,6 +393,20 @@ void init_LEVEL()
 		//                                      VARIABLES                                       //
 		//                                                                                      //
 		//**************************************************************************************//
+
+		time_counter = 0;
+		
+		if(respawn == RESPAWN_SHOP)
+		{
+			minutes = minutes_backup;
+			seconds = seconds_backup;
+		}
+
+		else
+		{
+			minutes = 1;
+			seconds = 59;
+		}
 
 		camera_max_y_position = 768;
 		jump_max_index = 34;
@@ -584,7 +597,27 @@ void init_LEVEL()
 		//                                LOAD SPRITES PALETTES                                 //
 		//--------------------------------------------------------------------------------------//
 
-		load_palette( 16, palette_PLAYER,    1 );
+		if(armor_level == 8)
+		{
+			load_palette( 16, palette_PLAYER_8, 1 );
+		}
+
+		else if(armor_level == 5)
+		{
+			load_palette( 16, palette_PLAYER_5, 1 );
+		}
+
+		else if(armor_level == 4)
+		{
+			load_palette( 16, palette_PLAYER_4, 1 );
+		}
+
+		else
+		{
+			load_palette( 16, palette_PLAYER_1, 1 );
+		}
+
+
 		load_palette( 17, palette_objects_1, 1 );
 		load_palette( 18, palette_objects_2, 1 );
 
@@ -643,6 +676,9 @@ void init_SHOP()
 
 	minutes = 0;
 	seconds = 30;
+
+	shop_counter = 0;
+	shop_phase = SHOP_PHASE_ENTER;
 
 	if(level_id == 1)
 	{
@@ -794,10 +830,11 @@ void init_SHOP()
 
 	// SELECT CURSOR SPRITE //
 	spr_set(0);
+	spr_hide();
 
 
-	spr_x(24);
-	spr_y(144);
+	//spr_x(24);
+	//spr_y(144);
 
 	// SET TILES DATA FOR THE CURSOR //
 	spr_pattern(0x2000);

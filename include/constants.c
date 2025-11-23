@@ -245,6 +245,10 @@
 //                                                                             //
 //-----------------------------------------------------------------------------//
 
+#define SHOP_PHASE_ENTER        0
+#define SHOP_PHASE_BUY          1
+#define SHOP_PHASE_EXIT         2
+
 #define TYPE_ITEM_WEAPON_2      0
 #define TYPE_ITEM_WEAPON_3      1
 #define TYPE_ITEM_WEAPON_4      2

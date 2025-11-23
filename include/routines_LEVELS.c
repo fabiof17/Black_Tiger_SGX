@@ -36,7 +36,7 @@ void display_SCORE()
 }
 
 
-void display_TIME()
+void display_TIME_LEVEL()
 {
     put_number(minutes,1,1,3);
 
@@ -77,8 +77,7 @@ void display_TIME()
                 // TIME OUT //
             }
         }
-    }
-    
+    } 
 }
 
 
@@ -397,9 +396,12 @@ void check_NPC()
                                     break;
 
                                 case TYPE_NPC_SHOP:
+                                    disp_off();
+                                    minutes_backup = minutes;
+                                    seconds_backup = seconds;
                                     list_npc_state[current_npc_id] = STATE_INACTIVE;
                                     camera_pos_x_backup = sgx_map_pxl_x;
-                                    camera_pos_y_backup = list_npc_y_pos_ref[current_npc_id] - 128;
+                                    camera_pos_y_backup = list_npc_y_pos_ref[current_npc_id] - 128;                                    
                                     sequence_loaded = FALSE;
                                     sequence_id = SEQUENCE_SHOP;
                                     break;
