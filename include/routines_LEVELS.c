@@ -733,7 +733,8 @@ void joypad_DIR()
 
                     else
                     {
-                        load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_224 , TILES_16);
+                        set_far_offset(OFFSET_PLAYER_FALL,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+                        far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
                         jump_ladder = FALSE;
                         player_index_jump = 0;
@@ -765,7 +766,8 @@ void update_PLAYER()
     {
         if(player_counter_anim == 1)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+            set_far_base(TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
             player_counter_anim = 0;
         }
@@ -783,7 +785,8 @@ void update_PLAYER()
 
             if(map_blk_flag == TILE_EMPTY)
             {
-                load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+                set_far_base(TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+                far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
                 jump_ladder = FALSE;
                 player_index_jump = 0;
@@ -813,7 +816,8 @@ void update_PLAYER()
 
             if(map_blk_flag == TILE_EMPTY)
             {
-                load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+                set_far_base(TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+                far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
                 jump_ladder = FALSE;
                 player_index_jump = 0;
@@ -881,49 +885,57 @@ void update_PLAYER()
         // UPDATE PLAYER TILES //
         if(player_counter_anim == 0)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+            set_far_base(TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
 
         else if(player_counter_anim == 2)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_1 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_WALK_1,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);            
         }
 
 
         else if(player_counter_anim == 5)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_2 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_WALK_2,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);             
         }
 
 
         else if(player_counter_anim == 8)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_3 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_WALK_3,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);              
         }
 
 
         else if(player_counter_anim == 11)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+            set_far_base(TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);            
         }
 
 
         else if(player_counter_anim == 14)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_4 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_WALK_4,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);            
         }
 
 
         else if(player_counter_anim == 17)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_5 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_WALK_5,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
 
         else if(player_counter_anim == 20)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + OFFSET_PLAYER_WALK_6 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_WALK_6,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
 
@@ -948,7 +960,8 @@ void update_PLAYER()
 
         if(player_counter_anim == 0)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_112 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_JUMP,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
             player_counter_anim = 1;
         }
@@ -1007,7 +1020,8 @@ void update_PLAYER()
 
                     if(map_blk_flag == TILE_EMPTY)
                     {
-                        load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+                        set_far_base(TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+                        far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
                         player_pos_y -= (i - 1);
                         spr_y(player_pos_y);
@@ -1037,7 +1051,8 @@ void update_PLAYER()
 
                         if(map_blk_flag == TILE_EMPTY)
                         {
-                            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+                            set_far_base(TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+                            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
                             player_pos_y -= (i - 1);
                             spr_y(player_pos_y);
@@ -1093,7 +1108,8 @@ void update_PLAYER()
         // UPDATE PLAYER TILES //
         if(player_counter_anim == 0)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_112 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_JUMP,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
             player_counter_anim = 1;
         }
@@ -1339,7 +1355,8 @@ void update_PLAYER()
         // UPDATE PLAYER TILES //
         if(player_counter_anim == 0)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_112 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_JUMP,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
             player_counter_anim = 1;
         }
@@ -1576,7 +1593,8 @@ void update_PLAYER()
     {
         if(player_counter_anim == 1)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_128 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CROUCH,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
             player_counter_anim = 0;
         }
@@ -1718,7 +1736,8 @@ void update_PLAYER()
 
         if(player_counter_anim == 1)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_144 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_HANG,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
             player_counter_anim = 0;
         }
@@ -1729,32 +1748,38 @@ void update_PLAYER()
     {
         if(player_counter_anim == 0)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_160 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_1,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
         else if(player_counter_anim == 3)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_176 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_2,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
         else if(player_counter_anim == 6)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_192 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_3,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
         else if(player_counter_anim == 9)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_208 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_4,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
         else if(player_counter_anim == 12)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_192 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_3,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
         else if(player_counter_anim == 15)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_176 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_2,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
 
@@ -1773,32 +1798,38 @@ void update_PLAYER()
     {
         if(player_counter_anim == 0)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_176 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_2,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
         else if(player_counter_anim == 3)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_192 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_3,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
         else if(player_counter_anim == 6)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_208 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_4,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
         else if(player_counter_anim == 9)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_192 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_3,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
         else if(player_counter_anim == 12)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_176 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_2,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
         else if(player_counter_anim == 15)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_160 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_CLIMB_1,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
         }
 
 
@@ -1821,7 +1852,8 @@ void update_PLAYER()
 
         if(player_counter_anim == 0)
         {
-            load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER + TILES_112 , TILES_16);
+            set_far_offset(OFFSET_PLAYER_JUMP,TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+            far_load_vram(PLAYER_VRAM_ADR,TILES_16);
 
             player_counter_anim = 1;
         }

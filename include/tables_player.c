@@ -1,5 +1,17 @@
 
 
+const unsigned char     *TABLE_PLAYER_TILES_ADR[2]     =   {
+                                                                    &tiles_SPR_PLAYER_ARMOR,
+                                                                    &tiles_SPR_PLAYER_ARMOR
+                                                                };
+
+
+const unsigned char     TABLE_PLAYER_TILES_BANK[2]     =   {
+                                                                    ^tiles_SPR_PLAYER_ARMOR,
+                                                                    ^tiles_SPR_PLAYER_ARMOR
+                                                                };
+
+
 const signed char       TABLE_PLAYER_JUMP_V[35]     =   {
                                                             // UPWARD
                                                             -4,

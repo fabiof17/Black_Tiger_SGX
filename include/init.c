@@ -63,6 +63,11 @@ void init_VARIABLES()
 
 void init_PLAYER()
 {
+	if(player_naked != RESPAWN_SHOP)
+	{
+		player_naked = FALSE;
+	}
+	
 	player_id = 2;
 	player_axis = AXIS_RIGHT;
 	player_previous_axis = player_axis;
@@ -531,7 +536,9 @@ void init_LEVEL()
 		// 0x2000
 		// 32 TILES = 512 //
 		// LOAD PLAYER FIRST FRAME OF ANIMATION (IDLE)
-		load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER , TILES_16);
+	    set_far_base(TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
+        far_load_vram(PLAYER_VRAM_ADR,TILES_16);
+		//load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER_ARMOR , TILES_16);
 
 
 		// SELECT PLAYER CORE SPRITE //

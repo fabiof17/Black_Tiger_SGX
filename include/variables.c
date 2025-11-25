@@ -25,6 +25,8 @@ unsigned char   sequence_id,
                 player_index_jump,
                 player_index_fall,
 
+                player_naked,
+
                 jump_ladder,
                 jump_max_index,
 
