@@ -34,23 +34,29 @@
 #define TILES_96  1536
 
 
-#define OFFSET_PLAYER_WALK_1     512
-#define OFFSET_PLAYER_WALK_2     1024
-#define OFFSET_PLAYER_WALK_3     1536
-#define OFFSET_PLAYER_WALK_4     2048
-#define OFFSET_PLAYER_WALK_5     2560
-#define OFFSET_PLAYER_WALK_6     3072
+#define OFFSET_PLAYER_WALK_1            512
+#define OFFSET_PLAYER_WALK_2            1024
+#define OFFSET_PLAYER_WALK_3            1536
+#define OFFSET_PLAYER_WALK_4            2048
+#define OFFSET_PLAYER_WALK_5            2560
+#define OFFSET_PLAYER_WALK_6            3072
 
-#define OFFSET_PLAYER_JUMP       3584
-#define OFFSET_PLAYER_CROUCH     4096
-#define OFFSET_PLAYER_HANG       4608
+#define OFFSET_PLAYER_JUMP              3584
+#define OFFSET_PLAYER_CROUCH            4096
+#define OFFSET_PLAYER_HANG              4608
 
-#define OFFSET_PLAYER_CLIMB_1    5120
-#define OFFSET_PLAYER_CLIMB_2    5632
-#define OFFSET_PLAYER_CLIMB_3    6144
-#define OFFSET_PLAYER_CLIMB_4    6656
+#define OFFSET_PLAYER_CLIMB_1           5120
+#define OFFSET_PLAYER_CLIMB_2           5632
+#define OFFSET_PLAYER_CLIMB_3           6144
+#define OFFSET_PLAYER_CLIMB_4           6656
 
-#define OFFSET_PLAYER_FALL       7680
+#define OFFSET_PLAYER_FALL              7680
+
+#define OFFSET_PLAYER_ATTACK_1          8192
+#define OFFSET_PLAYER_ATTACK_2          8704
+
+#define OFFSET_PLAYER_ATTACK_CROUCH_1   9216
+#define OFFSET_PLAYER_ATTACK_CROUCH_2   9728
 
 
 
@@ -84,12 +90,12 @@
 
 #define STATE_IDLE          0
 #define STATE_WALK          1
-#define STATE_PUNCH         2
+#define STATE_ATTACK        2
 #define STATE_JUMP          4
 #define STATE_JUMP_RIGHT    5
 #define STATE_JUMP_LEFT     6
 #define STATE_CROUCH        7
-#define STATE_CROUCH_PUNCH  8
+#define STATE_CROUCH_ATTACK 8
 #define STATE_FALL          9
 #define STATE_HANG          10
 #define STATE_CLIMB_UP      11

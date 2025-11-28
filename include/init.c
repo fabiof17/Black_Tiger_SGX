@@ -51,6 +51,7 @@ void init_VARIABLES()
 
 	weapon_level = 1;
 	armor_level = 2;
+	player_naked = FALSE;
 
 	shop_counter = 0;
 	shop_phase = SHOP_PHASE_ENTER;
@@ -74,6 +75,7 @@ void init_PLAYER()
 	player_counter_anim = 0;
 	player_index_jump = 0;
 	player_index_fall = 0;
+	player_attack = FALSE;
 	player_state = STATE_IDLE;
 }
 
@@ -423,7 +425,7 @@ void init_LEVEL()
 		chest_start_index = CHEST_START_INDEX_LV1;
 		npc_start_index = NPC_START_INDEX_LV1;
 		jump_ladder = FALSE;
-
+		//player_naked = TRUE;
 
 
 

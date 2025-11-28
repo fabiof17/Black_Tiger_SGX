@@ -9,6 +9,7 @@
 
 // EXTRACT PLAYER TILES //
 #incspr(tiles_SPR_PLAYER_ARMOR,"res/sprites/tiles_SPR_PLAYER_ARMOR.png")
+#incspr(tiles_SPR_PLAYER_NAKED,"res/sprites/tiles_SPR_PLAYER_NAKED.png")
 
 // EXTRACT PLAYER PALETTE //
 #incpal(palette_PLAYER_1,"res/palettes/palette_PLAYER_1.png");
