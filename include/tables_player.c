@@ -112,3 +112,27 @@ const signed char       TABLE_PLAYER_JUMP_LADDER[30]    =   {
                                                                 4,
                                                                 4
                                                             };
+
+
+
+
+
+
+
+
+const unsigned char     *TABLE_WEAPON_TILES_ADR[5]     =   {
+                                                                    &tiles_SPR_WEAPON_0,
+                                                                    &tiles_SPR_WEAPON_1,
+                                                                    &tiles_SPR_WEAPON_2,
+                                                                    &tiles_SPR_WEAPON_3,
+                                                                    &tiles_SPR_WEAPON_4
+                                                                };
+
+
+const unsigned char     TABLE_WEAPON_TILES_BANK[5]     =   {
+                                                                    ^tiles_SPR_WEAPON_0,
+                                                                    ^tiles_SPR_WEAPON_1,
+                                                                    ^tiles_SPR_WEAPON_2,
+                                                                    ^tiles_SPR_WEAPON_3,
+                                                                    ^tiles_SPR_WEAPON_4
+                                                                };

@@ -32,6 +32,7 @@ void init_SYSTEM()
 
 	// INIT SPRITE ATTRIBUTE TABLE //
 	init_satb();
+	sgx_init_satb();
 
 
 	// ENABLE DISPLAY //
@@ -49,8 +50,9 @@ void init_VARIABLES()
 	potion_amount = 0;
 	zenny_amount = 25000;
 
-	weapon_level = 1;
+	weapon_level = 0;
 	armor_level = 2;
+	
 	player_naked = FALSE;
 
 	shop_counter = 0;
@@ -69,7 +71,7 @@ void init_PLAYER()
 		player_naked = FALSE;
 	}
 	
-	player_id = 2;
+	player_id = PLAYER_START_INDEX;
 	player_axis = AXIS_RIGHT;
 	player_previous_axis = player_axis;
 	player_counter_anim = 0;
@@ -77,6 +79,8 @@ void init_PLAYER()
 	player_index_fall = 0;
 	player_attack = FALSE;
 	player_state = STATE_IDLE;
+
+	chain_id = player_id - 3;
 }
 
 
@@ -86,41 +90,41 @@ void init_PLAYER()
 
 void load_OBJECT_TILES()
 {
-	load_vram(POT1_VRAM_ADR, tiles_SPR_POT , SIZEOF(tiles_SPR_POT) >> 1);
-	load_vram(POW_VRAM_ADR, tiles_SPR_POW , TILES_4);
-	load_vram(GRAY_KEY_VRAM_ADR, tiles_SPR_GRAY_KEY , TILES_4);
-	load_vram(GOLD_KEY_VRAM_ADR, tiles_SPR_GOLD_KEY , TILES_4);
-	load_vram(LIFE_VRAM_ADR, tiles_SPR_LIFE , TILES_4);
-	load_vram(COIN_1_VRAM_ADR, tiles_SPR_COIN_1 , TILES_4);
-	load_vram(COIN_5_VRAM_ADR, tiles_SPR_COIN_5 , TILES_4);
-	load_vram(COIN_10_VRAM_ADR, tiles_SPR_COIN_10 , TILES_4);
-	load_vram(COIN_50_VRAM_ADR, tiles_SPR_COIN_50 , TILES_4);
-	load_vram(COIN_100_VRAM_ADR, tiles_SPR_COIN_100 , TILES_4);
-	load_vram(COIN_500_VRAM_ADR, tiles_SPR_COIN_500 , TILES_4);
-	load_vram(COIN_1000_VRAM_ADR, tiles_SPR_COIN_1000 , TILES_4);
-	load_vram(STAR_VRAM_ADR, tiles_SPR_STAR , TILES_4);
-	load_vram(OCTOPUS_VRAM_ADR, tiles_SPR_OCTOPUS , TILES_4);
-	load_vram(FRUIT_VRAM_ADR, tiles_SPR_FRUIT , TILES_4);
-	load_vram(BARREL_VRAM_ADR, tiles_SPR_BARREL , TILES_4);
-	load_vram(HOURGLASS_VRAM_ADR, tiles_SPR_HOURGLASS , TILES_4);
-	load_vram(BAMBOO_VRAM_ADR, tiles_SPR_BAMBOO , TILES_4);
-	load_vram(YASHICHI_VRAM_ADR, tiles_SPR_YASHICHI , TILES_4);
-	load_vram(ELEPHANT_VRAM_ADR, tiles_SPR_ELEPHANT , TILES_4);
-	load_vram(DRAGONFLY_VRAM_ADR, tiles_SPR_DRAGONFLY , TILES_4);
-	load_vram(COW_VRAM_ADR, tiles_SPR_COW , TILES_4);
-	load_vram(MOBICHAN_VRAM_ADR, tiles_SPR_MOBICHAN , TILES_4);
+	sgx_load_vram(POT1_VRAM_ADR, tiles_SPR_POT , SIZEOF(tiles_SPR_POT) >> 1);
+	sgx_load_vram(POW_VRAM_ADR, tiles_SPR_POW , TILES_4);
+	sgx_load_vram(GRAY_KEY_VRAM_ADR, tiles_SPR_GRAY_KEY , TILES_4);
+	sgx_load_vram(GOLD_KEY_VRAM_ADR, tiles_SPR_GOLD_KEY , TILES_4);
+	sgx_load_vram(LIFE_VRAM_ADR, tiles_SPR_LIFE , TILES_4);
+	sgx_load_vram(COIN_1_VRAM_ADR, tiles_SPR_COIN_1 , TILES_4);
+	sgx_load_vram(COIN_5_VRAM_ADR, tiles_SPR_COIN_5 , TILES_4);
+	sgx_load_vram(COIN_10_VRAM_ADR, tiles_SPR_COIN_10 , TILES_4);
+	sgx_load_vram(COIN_50_VRAM_ADR, tiles_SPR_COIN_50 , TILES_4);
+	sgx_load_vram(COIN_100_VRAM_ADR, tiles_SPR_COIN_100 , TILES_4);
+	sgx_load_vram(COIN_500_VRAM_ADR, tiles_SPR_COIN_500 , TILES_4);
+	sgx_load_vram(COIN_1000_VRAM_ADR, tiles_SPR_COIN_1000 , TILES_4);
+	sgx_load_vram(STAR_VRAM_ADR, tiles_SPR_STAR , TILES_4);
+	sgx_load_vram(OCTOPUS_VRAM_ADR, tiles_SPR_OCTOPUS , TILES_4);
+	sgx_load_vram(FRUIT_VRAM_ADR, tiles_SPR_FRUIT , TILES_4);
+	sgx_load_vram(BARREL_VRAM_ADR, tiles_SPR_BARREL , TILES_4);
+	sgx_load_vram(HOURGLASS_VRAM_ADR, tiles_SPR_HOURGLASS , TILES_4);
+	sgx_load_vram(BAMBOO_VRAM_ADR, tiles_SPR_BAMBOO , TILES_4);
+	sgx_load_vram(YASHICHI_VRAM_ADR, tiles_SPR_YASHICHI , TILES_4);
+	sgx_load_vram(ELEPHANT_VRAM_ADR, tiles_SPR_ELEPHANT , TILES_4);
+	sgx_load_vram(DRAGONFLY_VRAM_ADR, tiles_SPR_DRAGONFLY , TILES_4);
+	sgx_load_vram(COW_VRAM_ADR, tiles_SPR_COW , TILES_4);
+	sgx_load_vram(MOBICHAN_VRAM_ADR, tiles_SPR_MOBICHAN , TILES_4);
 }
 
 
 void load_CHEST_TILES()
 {
-	load_vram(CHEST_VRAM_ADR, tiles_SPR_CHEST , SIZEOF(tiles_SPR_CHEST) >> 1);
+	sgx_load_vram(CHEST_VRAM_ADR, tiles_SPR_CHEST , SIZEOF(tiles_SPR_CHEST) >> 1);
 }
 
 
 void load_NPC_TILES()
 {
-	load_vram(NPC_VRAM_ADR, tiles_SPR_NPC , SIZEOF(tiles_SPR_NPC) >> 1);
+	sgx_load_vram(NPC_VRAM_ADR, tiles_SPR_NPC , SIZEOF(tiles_SPR_NPC) >> 1);
 }
 
 
@@ -146,34 +150,34 @@ void init_OBJECT_LV1()
 
 
 		// SET OBJECT SPRITE //
-		spr_set(i + object_start_index);
-		spr_x(list_object_x_pos[i]);
-		spr_y(list_object_y_pos[i]);
-		spr_pri(FALSE);
+		sgx_spr_set(i + object_start_index);
+		sgx_spr_x(list_object_x_pos[i]);
+		sgx_spr_y(list_object_y_pos[i]);
+		sgx_spr_pri(TRUE);
 
 
 		if(list_object_type[i] == TYPE_HOURGLASS)
 		{
 			list_object_energy[i] = 0;
-			spr_pal(18);
-			spr_pattern(HOURGLASS_VRAM_ADR);
-			spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
+			sgx_spr_pal(18);
+			sgx_spr_pattern(HOURGLASS_VRAM_ADR);
+			sgx_spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
 		}
 
 		else if(list_object_type[i] == TYPE_POT)
 		{
 			list_object_energy[i] = 2;
-			spr_pal(17);
-			spr_pattern(POT1_VRAM_ADR);
-			spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
+			sgx_spr_pal(17);
+			sgx_spr_pattern(POT1_VRAM_ADR);
+			sgx_spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
 		}
 
 		else if(list_object_type[i] == TYPE_POW)
 		{
 			list_object_energy[i] = 0;
-			spr_pal(18);
-			spr_pattern(POW_VRAM_ADR);
-			spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
+			sgx_spr_pal(18);
+			sgx_spr_pattern(POW_VRAM_ADR);
+			sgx_spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
 		}
 	}
 }
@@ -198,15 +202,15 @@ void init_CHEST_LV1()
 
 
 		// SET CHEST SPRITE //
-		spr_set(i + chest_start_index);
-		spr_x(list_chest_x_pos[i]);
-		spr_y(list_chest_y_pos[i]);
-		spr_pri(FALSE);
+		sgx_spr_set(i + chest_start_index);
+		sgx_spr_x(list_chest_x_pos[i]);
+		sgx_spr_y(list_chest_y_pos[i]);
+		sgx_spr_pri(TRUE);
 
 
-		spr_pal(18);
-		spr_pattern(CHEST_VRAM_ADR);
-		spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
+		sgx_spr_pal(18);
+		sgx_spr_pattern(CHEST_VRAM_ADR);
+		sgx_spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
 	}
 }
 
@@ -231,15 +235,15 @@ void init_NPC_LV1()
 
 
 		// SET NPC SPRITE //
-		spr_set(i + npc_start_index);
-		spr_x(list_npc_x_pos[i]);
-		spr_y(list_npc_y_pos[i]);
-		spr_pri(FALSE);
+		sgx_spr_set(i + npc_start_index);
+		sgx_spr_x(list_npc_x_pos[i]);
+		sgx_spr_y(list_npc_y_pos[i]);
+		sgx_spr_pri(TRUE);
 
 
-		spr_pal(17);
-		spr_pattern(NPC_VRAM_ADR);
-		spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
+		sgx_spr_pal(17);
+		sgx_spr_pattern(NPC_VRAM_ADR);
+		sgx_spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
 	}
 }
 
@@ -289,27 +293,27 @@ void init_HUD()
 
 	if(weapon_level == 1)
 	{
-		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_1, SIZEOF(tileset_WEAPON_1) >> 1 );
+		load_vram( WEAPON_ICON_VRAM_ADR, tileset_WEAPON_1, SIZEOF(tileset_WEAPON_1) >> 1 );
 	}
 
 	else if(weapon_level == 2)
 	{
-		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_2, SIZEOF(tileset_WEAPON_2) >> 1 );
+		load_vram( WEAPON_ICON_VRAM_ADR, tileset_WEAPON_2, SIZEOF(tileset_WEAPON_2) >> 1 );
 	}
 
 	else if(weapon_level == 3)
 	{
-		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_4, SIZEOF(tileset_WEAPON_4) >> 1 );
+		load_vram( WEAPON_ICON_VRAM_ADR, tileset_WEAPON_4, SIZEOF(tileset_WEAPON_4) >> 1 );
 	}
 
 	else if(weapon_level == 4)
 	{
-		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_5, SIZEOF(tileset_WEAPON_5) >> 1 );
+		load_vram( WEAPON_ICON_VRAM_ADR, tileset_WEAPON_5, SIZEOF(tileset_WEAPON_5) >> 1 );
 	}
 
 	else if(weapon_level == 5)
 	{
-		load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_8, SIZEOF(tileset_WEAPON_8) >> 1 );
+		load_vram( WEAPON_ICON_VRAM_ADR, tileset_WEAPON_8, SIZEOF(tileset_WEAPON_8) >> 1 );
 	}
 
 
@@ -373,6 +377,8 @@ void init_LEVEL()
 {
     if(level_id == 1)
     {
+		char i;
+		
 		// VSYNC //
 		vsync();
 
@@ -425,7 +431,6 @@ void init_LEVEL()
 		chest_start_index = CHEST_START_INDEX_LV1;
 		npc_start_index = NPC_START_INDEX_LV1;
 		jump_ladder = FALSE;
-		//player_naked = TRUE;
 
 
 
@@ -534,17 +539,13 @@ void init_LEVEL()
 		//                                        PLAYER                                        //
 		//--------------------------------------------------------------------------------------//
 
-		// LOAD PLAYER TILES //
-		// 0x2000
-		// 32 TILES = 512 //
-		// LOAD PLAYER FIRST FRAME OF ANIMATION (IDLE)
+		// LOAD ALL PLAYER TILES //
 	    set_far_base(TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
-        far_load_vram(PLAYER_VRAM_ADR,TILES_16);
-		//load_vram(PLAYER_VRAM_ADR, tiles_SPR_PLAYER_ARMOR , TILES_16);
+        far_load_vram(PLAYER_VRAM_ADR,TILES_352);
 
 
 		// SELECT PLAYER CORE SPRITE //
-		spr_set(player_id); // ID : 2
+		spr_set(player_id); // PLAYER_START_INDEX
 
 
 		player_pos_x = 112;
@@ -565,6 +566,77 @@ void init_LEVEL()
 
 		spr_pal(0);
 		spr_pri(TRUE);
+
+
+		//--------------------------------------------------------------------------------------//
+		//                                        CHAIN                                         //
+		//--------------------------------------------------------------------------------------//
+
+		load_vram(CHAIN_VRAM_ADR, tiles_SPR_CHAIN , TILES_4);
+
+		for(i=0 ; i<3 ; i++)
+		{
+			spr_set(chain_id+i);
+			spr_pattern(CHAIN_VRAM_ADR);
+			spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
+			spr_hide();
+
+			spr_pal(0);
+			spr_pri(TRUE);
+		}
+		
+
+		//--------------------------------------------------------------------------------------//
+		//                                        WEAPON                                        //
+		//--------------------------------------------------------------------------------------//
+
+		if(weapon_level == 0)
+		{
+			load_vram(WEAPON_VRAM_ADR, tiles_SPR_WEAPON_0 , SIZEOF(tiles_SPR_WEAPON_0) >> 1);
+		}
+
+		else if(weapon_level == 1)
+		{
+			load_vram(WEAPON_VRAM_ADR, tiles_SPR_WEAPON_1 , SIZEOF(tiles_SPR_WEAPON_1) >> 1);
+		}
+
+		else if(weapon_level == 2)
+		{
+			load_vram(WEAPON_VRAM_ADR, tiles_SPR_WEAPON_2 , SIZEOF(tiles_SPR_WEAPON_2) >> 1);
+		}
+
+		else if(weapon_level == 3)
+		{
+			load_vram(WEAPON_VRAM_ADR, tiles_SPR_WEAPON_3 , SIZEOF(tiles_SPR_WEAPON_3) >> 1);
+		}
+
+		else if(weapon_level == 4)
+		{
+			load_vram(WEAPON_VRAM_ADR, tiles_SPR_WEAPON_4 , SIZEOF(tiles_SPR_WEAPON_4) >> 1);
+		}		
+
+		
+		weapon_id = chain_id-1;
+		spr_set(weapon_id);
+		spr_pattern(WEAPON_VRAM_ADR);
+		spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
+
+		spr_x(player_pos_x+8);
+		spr_y(player_pos_y+16);
+		spr_pri(TRUE);
+
+		// WEAPON 4 USES PAL2
+		if(weapon_level == 4)
+		{
+			spr_pal(2);
+		}
+		// ALL OTHERS USE PAL0
+		else
+		{
+			spr_pal(0);
+		}
+				
+		
 
 
 		//--------------------------------------------------------------------------------------//
@@ -591,7 +663,6 @@ void init_LEVEL()
 
 		load_NPC_TILES();
 		init_NPC_LV1();
-
 
 
 
@@ -629,9 +700,6 @@ void init_LEVEL()
 
 		load_palette( 17, palette_objects_1, 1 );
 		load_palette( 18, palette_objects_2, 1 );
-
-
-
 
 
 
@@ -830,6 +898,19 @@ void init_SHOP()
 	//**************************************************************************************//
 
 	//--------------------------------------------------------------------------------------//
+	//                                   HIDE ALL SPRITES                                   //
+	//--------------------------------------------------------------------------------------//
+
+	for(i=0 ; i<63 ; i++)
+	{
+		spr_set(i);
+		spr_hide();
+
+		sgx_spr_set(i);
+		sgx_spr_hide();
+	}
+
+	//--------------------------------------------------------------------------------------//
 	//                                        CURSOR                                        //
 	//--------------------------------------------------------------------------------------//
 
@@ -858,6 +939,7 @@ void init_SHOP()
 
 	// UPDATE PCE SAT //
 	satb_update();
+	sgx_satb_update();
 
 
 

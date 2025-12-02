@@ -32,6 +32,8 @@ unsigned char   sequence_id,
                 jump_max_index,
 
                 // ARMOR + WEAPON //
+                chain_id,
+                weapon_id,
                 armor_level,
                 weapon_level,
 

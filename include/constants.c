@@ -26,39 +26,14 @@
 #define TILES_3   48
 #define TILES_4   64
 #define TILES_8   128
+#define TILES_12  192
 #define TILES_16  256
 #define TILES_32  512
 #define TILES_48  768
 #define TILES_64  1024
 #define TILES_80  1280
 #define TILES_96  1536
-
-
-#define OFFSET_PLAYER_WALK_1            512
-#define OFFSET_PLAYER_WALK_2            1024
-#define OFFSET_PLAYER_WALK_3            1536
-#define OFFSET_PLAYER_WALK_4            2048
-#define OFFSET_PLAYER_WALK_5            2560
-#define OFFSET_PLAYER_WALK_6            3072
-
-#define OFFSET_PLAYER_JUMP              3584
-#define OFFSET_PLAYER_CROUCH            4096
-#define OFFSET_PLAYER_HANG              4608
-
-#define OFFSET_PLAYER_CLIMB_1           5120
-#define OFFSET_PLAYER_CLIMB_2           5632
-#define OFFSET_PLAYER_CLIMB_3           6144
-#define OFFSET_PLAYER_CLIMB_4           6656
-
-#define OFFSET_PLAYER_FALL              7680
-
-#define OFFSET_PLAYER_ATTACK_1          8192
-#define OFFSET_PLAYER_ATTACK_2          8704
-
-#define OFFSET_PLAYER_ATTACK_CROUCH_1   9216
-#define OFFSET_PLAYER_ATTACK_CROUCH_2   9728
-
-
+#define TILES_352 5632
 
 
 
@@ -104,13 +79,66 @@
 
 
 
-#define PLAYER_VRAM_ADR     0x1800
 
 #define PLAYER_BASE_Y_POS   128
 
-
 #define RESPAWN_DEAD        1
 #define RESPAWN_SHOP        2
+
+#define PLAYER_START_INDEX  14
+
+
+
+#define PLAYER_VRAM_ADR                 0x1600
+#define PLAYER_IDLE_VRAM_ADR            PLAYER_VRAM_ADR
+#define PLAYER_WALK_1_VRAM_ADR          PLAYER_VRAM_ADR+TILES_16
+#define PLAYER_WALK_2_VRAM_ADR          PLAYER_WALK_1_VRAM_ADR+TILES_16
+#define PLAYER_WALK_3_VRAM_ADR          PLAYER_WALK_2_VRAM_ADR+TILES_16
+#define PLAYER_WALK_4_VRAM_ADR          PLAYER_WALK_3_VRAM_ADR+TILES_16
+#define PLAYER_WALK_5_VRAM_ADR          PLAYER_WALK_4_VRAM_ADR+TILES_16
+#define PLAYER_WALK_6_VRAM_ADR          PLAYER_WALK_5_VRAM_ADR+TILES_16
+
+#define PLAYER_JUMP_VRAM_ADR            PLAYER_WALK_6_VRAM_ADR+TILES_16
+#define PLAYER_CROUCH_VRAM_ADR          PLAYER_JUMP_VRAM_ADR+TILES_16
+#define PLAYER_HANG_VRAM_ADR            PLAYER_CROUCH_VRAM_ADR+TILES_16
+
+#define PLAYER_CLIMB_1_VRAM_ADR         PLAYER_HANG_VRAM_ADR+TILES_16
+#define PLAYER_CLIMB_2_VRAM_ADR         PLAYER_CLIMB_1_VRAM_ADR+TILES_16
+#define PLAYER_CLIMB_3_VRAM_ADR         PLAYER_CLIMB_2_VRAM_ADR+TILES_16
+#define PLAYER_CLIMB_4_VRAM_ADR         PLAYER_CLIMB_3_VRAM_ADR+TILES_16
+#define PLAYER_CLIMB_5_VRAM_ADR         PLAYER_CLIMB_4_VRAM_ADR+TILES_16
+#define PLAYER_CLIMB_6_VRAM_ADR         PLAYER_CLIMB_5_VRAM_ADR+TILES_16
+
+#define PLAYER_FALL_VRAM_ADR            PLAYER_CLIMB_6_VRAM_ADR+TILES_16
+
+#define PLAYER_ATTACK_1_VRAM_ADR        PLAYER_FALL_VRAM_ADR+TILES_16
+#define PLAYER_ATTACK_2_VRAM_ADR        PLAYER_ATTACK_1_VRAM_ADR+TILES_16
+
+#define PLAYER_CROUCH_1_VRAM_ADR        PLAYER_ATTACK_2_VRAM_ADR+TILES_16
+#define PLAYER_CROUCH_2_VRAM_ADR        PLAYER_CROUCH_1_VRAM_ADR+TILES_16
+
+#define PLAYER_JUMP_1_VRAM_ADR          PLAYER_CROUCH_2_VRAM_ADR+TILES_16
+#define PLAYER_JUMP_2_VRAM_ADR          PLAYER_JUMP_1_VRAM_ADR+TILES_16
+
+
+
+
+//-----------------------------------------------------------------------------//
+//                                                                             //
+//                                  WEAPONS                                    //
+//                                                                             //
+//-----------------------------------------------------------------------------//
+
+#define CHAIN_VRAM_ADR                  0x1400
+#define WEAPON_VRAM_ADR                 CHAIN_VRAM_ADR+TILES_4
+#define CHAIN_START_INDEX               PLAYER_START_INDEX-3
+
+#define WEAPON_IDLE_VRAM_ADRESS         WEAPON_VRAM_ADR
+#define WEAPON_WALK_1_VRAM_ADRESS       WEAPON_IDLE_VRAM_ADRESS+TILES_4
+#define WEAPON_WALK_2_VRAM_ADRESS       WEAPON_WALK_1_VRAM_ADRESS+TILES_4
+
+#define WEAPON_ATTACK_1_VRAM_ADRESS     WEAPON_WALK_2_VRAM_ADRESS+TILES_4
+#define WEAPON_ATTACK_2_VRAM_ADRESS     WEAPON_ATTACK_1_VRAM_ADRESS+TILES_4
 
 
 
@@ -140,8 +168,8 @@
 #define LIFEBAR_4_VRAM_ADR      LIFEBAR_3_VRAM_ADR+TILES_2
 #define LIFEBAR_5_VRAM_ADR      LIFEBAR_4_VRAM_ADR+TILES_2
 
-#define WEAPON_VRAM_ADR         LIFEBAR_5_VRAM_ADR+TILES_2
-#define ARMOR_VRAM_ADR          WEAPON_VRAM_ADR+TILES_4
+#define WEAPON_ICON_VRAM_ADR    LIFEBAR_5_VRAM_ADR+TILES_2
+#define ARMOR_VRAM_ADR          WEAPON_ICON_VRAM_ADR+TILES_4
 
 
 
@@ -156,11 +184,13 @@
 #define LV1_DOOR_VRAM_ADR       LV1_WALL_VRAM_ADR+256
 
 
+
+
 #define OBJECT_NUMBER_LV1       23
 #define CHEST_NUMBER_LV1        2
 #define NPC_NUMBER_LV1          2
 
-#define OBJECT_START_INDEX_LV1  3
+#define OBJECT_START_INDEX_LV1  0
 #define CHEST_START_INDEX_LV1   OBJECT_START_INDEX_LV1+OBJECT_NUMBER_LV1
 #define NPC_START_INDEX_LV1     CHEST_START_INDEX_LV1+CHEST_NUMBER_LV1
 
@@ -196,7 +226,7 @@
 #define OBJECT_MARGIN           10//9
 
 
-#define POT1_VRAM_ADR           0x1C00
+#define POT1_VRAM_ADR           0x6800
 #define POT2_VRAM_ADR           POT1_VRAM_ADR+TILES_4
 #define POT3_VRAM_ADR           POT2_VRAM_ADR+TILES_4
 #define POT4_VRAM_ADR           POT3_VRAM_ADR+TILES_4
@@ -230,7 +260,7 @@
 #define COW_VRAM_ADR            DRAGONFLY_VRAM_ADR+TILES_4
 #define MOBICHAN_VRAM_ADR       COW_VRAM_ADR+TILES_4
 
-#define CHEST_VRAM_ADR          0x2400
+#define CHEST_VRAM_ADR          0x7000
 #define NPC_VRAM_ADR            CHEST_VRAM_ADR+TILES_96
 
 

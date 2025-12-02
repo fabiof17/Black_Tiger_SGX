@@ -133,10 +133,10 @@ void joypad_BUTTONS_SHOP()
             case 0:
                 if(zenny_amount >= shop_prices[0])
                 {
-                    if(weapon_level < 2)
+                    if(weapon_level < 1)
                     {
-                        weapon_level = 2;
-                        load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_2, SIZEOF(tileset_WEAPON_2) >> 1 );
+                        weapon_level = 1;
+                        load_vram( WEAPON_ICON_VRAM_ADR, tileset_WEAPON_2, SIZEOF(tileset_WEAPON_2) >> 1 );
 
                         zenny_amount -= shop_prices[0];
                         display_ZENNY();
@@ -150,10 +150,10 @@ void joypad_BUTTONS_SHOP()
             case 1:
                 if(zenny_amount >= shop_prices[1])
                 {
-                    if(weapon_level < 4)
+                    if(weapon_level < 2)
                     {
-                        weapon_level = 4;
-                        load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_4, SIZEOF(tileset_WEAPON_4) >> 1 );
+                        weapon_level = 2;
+                        load_vram( WEAPON_ICON_VRAM_ADR, tileset_WEAPON_4, SIZEOF(tileset_WEAPON_4) >> 1 );
 
                         zenny_amount -= shop_prices[1];
                         display_ZENNY();
@@ -167,10 +167,10 @@ void joypad_BUTTONS_SHOP()
             case 2:
                 if(zenny_amount >= shop_prices[2])
                 {
-                    if(weapon_level < 5)
+                    if(weapon_level < 3)
                     {
-                        weapon_level = 5;
-                        load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_5, SIZEOF(tileset_WEAPON_5) >> 1 );
+                        weapon_level = 3;
+                        load_vram( WEAPON_ICON_VRAM_ADR, tileset_WEAPON_5, SIZEOF(tileset_WEAPON_5) >> 1 );
 
                         zenny_amount -= shop_prices[2];
                         display_ZENNY();
@@ -184,10 +184,10 @@ void joypad_BUTTONS_SHOP()
             case 3:
                 if(zenny_amount >= shop_prices[3])
                 {
-                    if(weapon_level < 8)
+                    if(weapon_level < 4)
                     {
-                        weapon_level = 8;
-                        load_vram( WEAPON_VRAM_ADR, tileset_WEAPON_8, SIZEOF(tileset_WEAPON_8) >> 1 );
+                        weapon_level = 4;
+                        load_vram( WEAPON_ICON_VRAM_ADR, tileset_WEAPON_8, SIZEOF(tileset_WEAPON_8) >> 1 );
 
                         zenny_amount -= shop_prices[3];
                         display_ZENNY();

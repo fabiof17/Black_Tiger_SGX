@@ -97,11 +97,8 @@ main()
                             vsync();
 
                             update_PLAYER();
-                            
-                            //put_number(player_naked,1,0,0);
+                            //put_number(player_state,1,0,0);
 
-                            joypad_DIR();
-                            joypad_BUTTONS();
 
                             scroll_object();
                             scroll_chest();
@@ -113,8 +110,13 @@ main()
                             display_TIME_LEVEL();
 
                             satb_update();
+                            sgx_satb_update();
 
                             scroll_BG();
+
+                            joypad_DIR();
+                            joypad_BUTTONS();
+
                             break;
 
 

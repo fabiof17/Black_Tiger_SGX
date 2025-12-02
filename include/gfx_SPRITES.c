@@ -18,6 +18,15 @@
 #incpal(palette_PLAYER_8,"res/palettes/palette_PLAYER_8.png");
 
 
+// EXTRACT WEAPONS TILES //
+#incspr(tiles_SPR_CHAIN,"res/sprites/tiles_SPR_CHAIN.png")
+#incspr(tiles_SPR_WEAPON_0,"res/sprites/tiles_SPR_WEAPON_0.png")
+#incspr(tiles_SPR_WEAPON_1,"res/sprites/tiles_SPR_WEAPON_1.png")
+#incspr(tiles_SPR_WEAPON_2,"res/sprites/tiles_SPR_WEAPON_2.png")
+#incspr(tiles_SPR_WEAPON_3,"res/sprites/tiles_SPR_WEAPON_3.png")
+#incspr(tiles_SPR_WEAPON_4,"res/sprites/tiles_SPR_WEAPON_4.png")
+
+
 #incspr(tiles_SPR_HIT,"res/sprites/tiles_SPR_HIT.png")
 
 
