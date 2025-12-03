@@ -24,6 +24,7 @@ unsigned char   sequence_id,
                 player_counter_anim,
                 player_index_jump,
                 player_index_fall,
+                player_counter_attack,
 
                 player_naked,
                 player_attack,

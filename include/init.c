@@ -77,6 +77,7 @@ void init_PLAYER()
 	player_counter_anim = 0;
 	player_index_jump = 0;
 	player_index_fall = 0;
+	player_counter_attack = 0;
 	player_attack = FALSE;
 	player_state = STATE_IDLE;
 
