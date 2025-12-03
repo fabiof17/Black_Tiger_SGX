@@ -542,6 +542,9 @@ void joypad_BUTTONS()
                 player_counter_anim = 0;
 
                 player_state = STATE_JUMP_RIGHT;
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x-5);
             }
 
             else if(joy(JOYPAD_1) & JOY_LEFT)
@@ -549,6 +552,9 @@ void joypad_BUTTONS()
                 player_counter_anim = 0;
 
                 player_state = STATE_JUMP_LEFT;
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x+21);
             }
 
             else if(joy(JOYPAD_1) & JOY_UP)
@@ -560,6 +566,19 @@ void joypad_BUTTONS()
                 if(map_blk_flag == TILE_EMPTY)
                 {
                     player_state = STATE_JUMP_LADDER;
+
+                    spr_set(weapon_id);
+                    spr_y(player_pos_y+8);
+                    
+                    if(player_axis == AXIS_RIGHT)
+                    {
+                        spr_x(player_pos_x-5);
+                    }
+
+                    else
+                    {
+                        spr_x(player_pos_x+21);
+                    }
                 }
             }
         }
@@ -1082,6 +1101,7 @@ void joypad_DIR()
                         jump_ladder = FALSE;
                         player_index_jump = 0;
                         player_index_fall = 0;
+                        fall_ladder = TRUE;
                         player_state = STATE_FALL;
                     }
                 }
@@ -1115,10 +1135,10 @@ void update_PLAYER()
             spr_set(player_id);
             spr_pattern(PLAYER_IDLE_VRAM_ADR);
 
-            spr_set(weapon_id);
+            /*spr_set(weapon_id);
             spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
             spr_x(player_pos_x+8);
-            spr_y(player_pos_y+16);
+            spr_y(player_pos_y+16);*/
 
             player_counter_anim = 0;
         }
@@ -1145,6 +1165,11 @@ void update_PLAYER()
                 player_state = STATE_FALL;
             }
         }
+
+        spr_set(weapon_id);
+        spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
+        spr_x(player_pos_x+8);
+        spr_y(player_pos_y+16);
     }
 
 
@@ -1697,7 +1722,6 @@ void update_PLAYER()
         unsigned char i, camera_y_move;
         i = 1;
 
-
         // UPDATE PLAYER TILES //
         if(player_counter_anim == 0)
         {
@@ -1937,7 +1961,6 @@ void update_PLAYER()
 
         // SET PLAYER SPRITE NEW POSITION //
         spr_y(player_pos_y);
-
         spr_set(weapon_id);
         spr_y(player_pos_y+8);
     }
@@ -2224,7 +2247,7 @@ void update_PLAYER()
         if(player_counter_attack == 0)
         {
             spr_set(player_id);
-            spr_pattern(PLAYER_CROUCH_1_VRAM_ADR);
+            spr_pattern(PLAYER_CROUCH_ATTACK_1_VRAM_ADR);
 
             spr_set(weapon_id);
             spr_pattern(WEAPON_ATTACK_1_VRAM_ADRESS);
@@ -2245,7 +2268,7 @@ void update_PLAYER()
         else if(player_counter_attack == 6)
         {
             spr_set(player_id);
-            spr_pattern(PLAYER_CROUCH_2_VRAM_ADR);
+            spr_pattern(PLAYER_CROUCH_ATTACK_2_VRAM_ADR);
 
             spr_set(weapon_id);
             spr_pattern(WEAPON_ATTACK_2_VRAM_ADRESS);
@@ -2455,6 +2478,7 @@ void update_PLAYER()
             player_index_jump = 0;
             player_index_fall = 0;
             jump_ladder = FALSE;
+            fall_ladder = FALSE;
             jump_max_index = 34;
             player_state = STATE_IDLE;
             return;
@@ -2490,8 +2514,14 @@ void update_PLAYER()
             return;
         }
 
-
         spr_y(player_pos_y);
+
+        // IF PLAYER FALLS FROM A LADDER //
+        if(fall_ladder == TRUE)
+        {
+            spr_set(weapon_id);
+            spr_y(player_pos_y+8);
+        }
     }
 
 
@@ -2731,6 +2761,9 @@ void update_PLAYER()
                 player_state = STATE_HANG;
             }
         }
+
+        spr_set(weapon_id);
+        spr_y(player_pos_y+8);
     }
 
 }
