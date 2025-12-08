@@ -497,6 +497,8 @@ void joypad_BUTTONS()
     {
         if(player_state == STATE_IDLE)
         {
+            hit_wall = FALSE;
+            
             player_counter_anim = 0;
 
             player_state = STATE_JUMP;
@@ -517,6 +519,8 @@ void joypad_BUTTONS()
 
         else if(player_state == STATE_WALK)
         {
+            hit_wall = FALSE;
+            
             player_counter_anim = 0;
 
             player_state = STATE_JUMP_RIGHT + player_axis;
@@ -541,6 +545,8 @@ void joypad_BUTTONS()
             {
                 if(joy(JOYPAD_1) & JOY_RIGHT)
                 {
+                    hit_wall = FALSE;
+                    
                     player_counter_anim = 0;
 
                     player_state = STATE_JUMP_RIGHT;
@@ -551,6 +557,8 @@ void joypad_BUTTONS()
 
                 else if(joy(JOYPAD_1) & JOY_LEFT)
                 {
+                    hit_wall = FALSE;
+                    
                     player_counter_anim = 0;
 
                     player_state = STATE_JUMP_LEFT;
@@ -561,6 +569,8 @@ void joypad_BUTTONS()
 
                 else if(joy(JOYPAD_1) & JOY_UP)
                 {
+                    hit_wall = FALSE;
+                    
                     player_counter_anim = 0;
 
                     check_BG( 15 , 8 );
@@ -1711,6 +1721,7 @@ void update_PLAYER()
 
                 player_counter_anim = 1;
                 player_index_jump = 0;
+                //hit_wall = FALSE;
 
                 if(player_attack == FALSE)
                 {
@@ -1753,6 +1764,7 @@ void update_PLAYER()
 
                     player_counter_anim = 1;
                     player_index_jump = 0;
+                    //hit_wall = FALSE;
 
                     if(player_attack == FALSE)
                     {
@@ -1856,6 +1868,7 @@ void update_PLAYER()
             if(map_blk_flag == TILE_EMPTY && jump_ladder == TRUE)
             {
                 jump_ladder = FALSE;
+                hit_wall = TRUE;
                 player_index_fall = 0;
                 player_state = STATE_FALL;
                 return;
@@ -1955,6 +1968,7 @@ void update_PLAYER()
                 player_counter_anim = 1;
                 player_index_jump = 0;
                 jump_ladder = FALSE;
+                hit_wall = FALSE;
                 jump_max_index = 34;
                 player_state = STATE_IDLE;
                 return;
@@ -1998,6 +2012,7 @@ void update_PLAYER()
                     player_counter_anim = 1;
                     player_index_jump = 0;
                     jump_ladder = FALSE;
+                    hit_wall = FALSE;
                     jump_max_index = 34;
                     player_state = STATE_IDLE;
                     return;
@@ -2112,6 +2127,7 @@ void update_PLAYER()
             if(map_blk_flag == TILE_EMPTY && jump_ladder == TRUE)
             {
                 jump_ladder = FALSE;
+                hit_wall = TRUE;
                 player_index_fall = 0;
                 player_state = STATE_FALL;
                 return;
@@ -2209,6 +2225,7 @@ void update_PLAYER()
                 player_counter_anim = 1;
                 player_index_jump = 0;
                 jump_ladder = FALSE;
+                hit_wall = FALSE;
                 jump_max_index = 34;
                 player_state = STATE_IDLE;
                 return;
@@ -2251,6 +2268,7 @@ void update_PLAYER()
                     player_counter_anim = 1;
                     player_index_jump = 0;
                     jump_ladder = FALSE;
+                    hit_wall = FALSE;
                     jump_max_index = 34;
                     player_state = STATE_IDLE;
                     return;
@@ -2305,6 +2323,8 @@ void update_PLAYER()
 
     else if(player_state == STATE_CROUCH)
     {
+        recenter_CAMERA();
+        
         if(player_counter_anim == 1)
         {
             spr_set(player_id);
@@ -2323,12 +2343,14 @@ void update_PLAYER()
                 spr_x(player_pos_x+17);
             }
 
-            spr_y(player_pos_y+18);
+            //spr_y(player_pos_y+18);
             
             player_counter_anim = 0;
         }
 
-        recenter_CAMERA();
+        spr_set(weapon_id);
+        spr_y(player_pos_y+18);
+        //recenter_CAMERA();
     }
 
 
@@ -2413,6 +2435,7 @@ void update_PLAYER()
             player_index_fall = 0;
             jump_ladder = FALSE;
             fall_ladder = FALSE;
+            hit_wall = FALSE;
             jump_max_index = 34;
             player_state = STATE_IDLE;
             return;
@@ -2451,8 +2474,11 @@ void update_PLAYER()
         spr_y(player_pos_y);
 
         spr_set(weapon_id);
-        spr_y(player_pos_y+8);
 
+        if(fall_ladder == TRUE || hit_wall == TRUE)
+        {
+            spr_y(player_pos_y+8);
+        }
     }
 
 
@@ -2834,7 +2860,6 @@ void update_WEAPON()
             spr_y(player_pos_y+16);
 
             player_attack = FALSE;
-            //player_counter_attack = 0;
             player_counter_anim = 1;
             player_state = STATE_IDLE;
             return;
@@ -2861,6 +2886,8 @@ void update_WEAPON()
 
     else if(player_state == STATE_CROUCH_ATTACK)
     {
+        char i;
+        
         recenter_CAMERA();
 
         if(player_counter_attack == 0)
@@ -2881,7 +2908,7 @@ void update_WEAPON()
                 spr_x(player_pos_x+32);
             }
 
-            spr_y(player_pos_y);
+            weapon_y_offset = 0;
         }
 
         else if(player_counter_attack == 6)
@@ -2903,13 +2930,13 @@ void update_WEAPON()
                 spr_x(player_pos_x-16);
             }
 
-            spr_y(player_pos_y+14);
+            weapon_y_offset = 14;
         }
 
         else if(player_counter_attack == 7)
         {
+            list_chain_active[0] = TRUE;
             spr_set(chain_id);
-            spr_y(player_pos_y+8);
 
             if(player_axis == AXIS_RIGHT)
             {
@@ -2930,8 +2957,8 @@ void update_WEAPON()
 
         else if(player_counter_attack == 8)
         {
+            list_chain_active[1] = TRUE;
             spr_set(chain_id+1);
-            spr_y(player_pos_y+8);
 
             if(player_axis == AXIS_RIGHT)
             {
@@ -2952,8 +2979,8 @@ void update_WEAPON()
 
         else if(player_counter_attack == 9)
         {
+            list_chain_active[2] = TRUE;
             spr_set(chain_id+2);
-            spr_y(player_pos_y+8);
 
             if(player_axis == AXIS_RIGHT)
             {
@@ -3009,6 +3036,20 @@ void update_WEAPON()
 
 
         player_counter_attack += 1;
+
+
+        // SET WEAPON Y POSITION //
+        spr_set(weapon_id);
+        spr_y(player_pos_y + weapon_y_offset);
+
+
+        // SET CHAIN Y POSITION //
+        for(i=0 ; i<3 ; i++)
+        {
+            spr_set(chain_id+i);
+
+            spr_y( ((player_pos_y + 24) * list_chain_active[i]) - 16); //list_chain_active[0] = TRUE;
+        }
     }
 
 

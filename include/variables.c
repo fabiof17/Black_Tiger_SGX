@@ -32,6 +32,7 @@ unsigned char   sequence_id,
                 jump_ladder,
                 jump_max_index,
                 fall_ladder,
+                hit_wall,
 
                 // ARMOR + WEAPON //
                 chain_id,
