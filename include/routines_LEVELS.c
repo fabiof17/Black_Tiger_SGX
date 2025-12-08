@@ -592,6 +592,10 @@ void joypad_BUTTONS()
     {
         if(player_state == STATE_IDLE || player_state == STATE_WALK)
         {
+            list_chain_active[0] = FALSE;
+            list_chain_active[1] = FALSE;
+            list_chain_active[2] = FALSE;
+
             player_counter_attack = 0;
             player_state = STATE_ATTACK;
         }
@@ -607,6 +611,10 @@ void joypad_BUTTONS()
 
         else if(player_state == STATE_CROUCH)
         {
+            list_chain_active[0] = FALSE;
+            list_chain_active[1] = FALSE;
+            list_chain_active[2] = FALSE;
+
             player_counter_attack = 0;
             player_state = STATE_CROUCH_ATTACK;
         }
@@ -615,6 +623,10 @@ void joypad_BUTTONS()
         {
             if(player_attack == FALSE)
             {
+                list_chain_active[0] = FALSE;
+                list_chain_active[1] = FALSE;
+                list_chain_active[2] = FALSE;
+                
                 player_counter_attack = 0;
                 player_attack = TRUE;
                 player_state = STATE_HANG;
@@ -1296,25 +1308,30 @@ void update_PLAYER()
         spr_set(player_id);
 
 
+        player_counter_anim += 1;
+
+
         // UPDATE PLAYER TILES //
-        if(player_counter_anim == 0)
+        if(player_counter_anim == 1)
         {
             spr_pattern(PLAYER_IDLE_VRAM_ADR);
 
             spr_set(weapon_id);
             spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
             spr_x(player_pos_x+8);
-            spr_y(player_pos_y+16);
+            weapon_y_offset = 16;
+            //spr_y(player_pos_y+16);
         }
 
 
-        else if(player_counter_anim == 1)
+        else if(player_counter_anim == 2)
         {
             spr_pattern(PLAYER_WALK_1_VRAM_ADR);
 
             spr_set(weapon_id);
             spr_pattern(WEAPON_WALK_1_VRAM_ADRESS);
-            spr_y(player_pos_y+17);
+            weapon_y_offset = 17;
+            //spr_y(player_pos_y+17);
 
             if(player_axis == AXIS_RIGHT)
             {
@@ -1328,7 +1345,7 @@ void update_PLAYER()
         }
 
 
-        else if(player_counter_anim == 3)
+        else if(player_counter_anim == 4)
         {
             spr_pattern(PLAYER_WALK_2_VRAM_ADR);
             
@@ -1347,7 +1364,7 @@ void update_PLAYER()
         }
 
 
-        else if(player_counter_anim == 6)
+        else if(player_counter_anim == 7)
         {
             //spr_set(player_id);
             spr_pattern(PLAYER_WALK_3_VRAM_ADR);
@@ -1367,7 +1384,7 @@ void update_PLAYER()
         }
 
 
-        else if(player_counter_anim == 8)
+        else if(player_counter_anim == 9)
         {
             //spr_set(player_id);
             spr_pattern(PLAYER_IDLE_VRAM_ADR);
@@ -1375,16 +1392,18 @@ void update_PLAYER()
             spr_set(weapon_id);
             spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
             spr_x(player_pos_x+8);
-            spr_y(player_pos_y+16);
+            weapon_y_offset = 16;
+            //pr_y(player_pos_y+16);
         }
 
 
-        else if(player_counter_anim == 11)
+        else if(player_counter_anim == 12)
         {
             spr_pattern(PLAYER_WALK_4_VRAM_ADR);
 
             spr_set(weapon_id);
-            spr_y(player_pos_y+14);
+            weapon_y_offset = 14;
+            //spr_y(player_pos_y+14);
 
             if(player_axis == AXIS_RIGHT)
             {
@@ -1398,12 +1417,13 @@ void update_PLAYER()
         }
 
 
-        else if(player_counter_anim == 14)
+        else if(player_counter_anim == 15)
         {
             spr_pattern(PLAYER_WALK_5_VRAM_ADR);
 
             spr_set(weapon_id);
-            spr_y(player_pos_y+12);
+            weapon_y_offset = 12;
+            //spr_y(player_pos_y+12);
 
             if(player_axis == AXIS_RIGHT)
             {
@@ -1417,12 +1437,13 @@ void update_PLAYER()
         }
 
 
-        else if(player_counter_anim == 17)
+        else if(player_counter_anim == 18)
         {
             spr_pattern(PLAYER_WALK_6_VRAM_ADR);
 
             spr_set(weapon_id);
-            spr_y(player_pos_y+14);
+            weapon_y_offset = 14;
+            //spr_y(player_pos_y+14);
 
             if(player_axis == AXIS_RIGHT)
             {
@@ -1436,15 +1457,15 @@ void update_PLAYER()
         }
 
 
-        else if(player_counter_anim == 18)
+        else if(player_counter_anim == 19)
         {
             player_counter_anim = 0;
-
-            return;
         }
 
 
-        player_counter_anim += 1;
+        spr_set(weapon_id);
+        spr_y(player_pos_y + weapon_y_offset);
+        //player_counter_anim += 1;
 
     }
 
@@ -1928,6 +1949,9 @@ void update_PLAYER()
                 // SET PLAYER SPRITE NEW POSITION //
                 spr_y(player_pos_y);
 
+                spr_set(weapon_id);
+                spr_y(player_pos_y+8);
+
                 player_counter_anim = 1;
                 player_index_jump = 0;
                 jump_ladder = FALSE;
@@ -1967,6 +1991,9 @@ void update_PLAYER()
 
                     // SET PLAYER SPRITE NEW POSITION //
                     spr_y(player_pos_y);
+
+                    spr_set(weapon_id);
+                    spr_y(player_pos_y+8);
 
                     player_counter_anim = 1;
                     player_index_jump = 0;
@@ -2176,6 +2203,9 @@ void update_PLAYER()
                 // SET PLAYER SPRITE NEW POSITION //
                 spr_y(player_pos_y);
 
+                spr_set(weapon_id);
+                spr_y(player_pos_y+8);
+
                 player_counter_anim = 1;
                 player_index_jump = 0;
                 jump_ladder = FALSE;
@@ -2214,6 +2244,9 @@ void update_PLAYER()
 
                     // SET PLAYER SPRITE NEW POSITION //
                     spr_y(player_pos_y);
+
+                    spr_set(weapon_id);
+                    spr_y(player_pos_y+8);
 
                     player_counter_anim = 1;
                     player_index_jump = 0;
@@ -2668,6 +2701,10 @@ void update_WEAPON()
 {
     if(player_state == STATE_ATTACK)
     {
+        char i;
+        
+        recenter_CAMERA();
+
         if(player_counter_attack == 0)
         {
             spr_set(player_id);
@@ -2686,7 +2723,7 @@ void update_WEAPON()
                 spr_x(player_pos_x+29);
             }
 
-            spr_y(player_pos_y-8);
+            weapon_y_offset = -8;
         }
 
         else if(player_counter_attack == 6)
@@ -2708,13 +2745,13 @@ void update_WEAPON()
                 spr_x(player_pos_x-16);
             }
 
-            spr_y(player_pos_y+6);
+            weapon_y_offset = 6;
         }
 
         else if(player_counter_attack == 7)
         {
+            list_chain_active[0] = TRUE;
             spr_set(chain_id);
-            spr_y(player_pos_y);
 
             if(player_axis == AXIS_RIGHT)
             {
@@ -2735,8 +2772,8 @@ void update_WEAPON()
 
         else if(player_counter_attack == 8)
         {
+            list_chain_active[1] = TRUE;
             spr_set(chain_id+1);
-            spr_y(player_pos_y);
 
             if(player_axis == AXIS_RIGHT)
             {
@@ -2757,8 +2794,8 @@ void update_WEAPON()
 
         else if(player_counter_attack == 9)
         {
+            list_chain_active[2] = TRUE;
             spr_set(chain_id+2);
-            spr_y(player_pos_y);
 
             if(player_axis == AXIS_RIGHT)
             {
@@ -2797,7 +2834,7 @@ void update_WEAPON()
             spr_y(player_pos_y+16);
 
             player_attack = FALSE;
-            player_counter_attack = 0;
+            //player_counter_attack = 0;
             player_counter_anim = 1;
             player_state = STATE_IDLE;
             return;
@@ -2805,11 +2842,27 @@ void update_WEAPON()
 
 
         player_counter_attack += 1;
+
+
+        // SET WEAPON Y POSITION //
+        spr_set(weapon_id);
+        spr_y(player_pos_y + weapon_y_offset);
+
+
+        // SET CHAIN Y POSITION //
+        for(i=0 ; i<3 ; i++)
+        {
+            spr_set(chain_id+i);
+
+            spr_y( ((player_pos_y + 16) * list_chain_active[i]) - 16); //list_chain_active[0] = TRUE;
+        }
     }
 
 
     else if(player_state == STATE_CROUCH_ATTACK)
     {
+        recenter_CAMERA();
+
         if(player_counter_attack == 0)
         {
             spr_set(player_id);

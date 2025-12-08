@@ -37,7 +37,8 @@ unsigned char   sequence_id,
                 chain_id,
                 weapon_id,
                 armor_level,
-                weapon_level,
+                weapon_level,                
+                list_chain_active[3],
 
                 // HUD //
                 life_amount,
@@ -128,6 +129,11 @@ int             zenny_amount,
                 score,
 
                 shop_prices[10];
+
+
+
+
+signed char weapon_y_offset;
 
 
 
