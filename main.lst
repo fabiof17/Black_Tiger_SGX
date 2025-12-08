@@ -6894,54 +6894,54 @@
  3571                        	;***********************
  3572                        	
  3573                        		.hucc
- 3574    18:D386             		.proc		_hide_LEVEL_SPRITES
+ 3574    18:D371             		.proc		_hide_LEVEL_SPRITES
  3575                        		__enter		_hide_LEVEL_SPRITES
  3576                        	
  3577                        		.dbg	line,	"include\routines_LEVELS.c", 15; char i;
  3578                        	
  3579                        		.dbg	line,	"include\routines_LEVELS.c", 17; for(i=0 ; i<64 ; i++)
  3580                        		__st.umiq	0, __hide_LEVEL_SPRITES_end - 1  /* i */
-         18:D386  9C 52 26   			stz	__hide_LEVEL_SPRITES_end - 1
- 3581    18:D389             	.LL3:
+         18:D371  9C 52 26   			stz	__hide_LEVEL_SPRITES_end - 1
+ 3581    18:D374             	.LL3:
  3582                        		__ld.umq	__hide_LEVEL_SPRITES_end - 1  /* i */
-         18:D389  AD 52 26   			lda	__hide_LEVEL_SPRITES_end - 1
+         18:D374  AD 52 26   			lda	__hide_LEVEL_SPRITES_end - 1
  3583                        		__ult_b.uiq	64
-         18:D38C  C9 40      			cmp	#64		; Subtract integer from A.
-         18:D38E  6A         			ror	a		; CC if A < integer.
-         18:D38F  49 80      			eor	#$80
-         18:D391  2A         			rol	a
+         18:D377  C9 40      			cmp	#64		; Subtract integer from A.
+         18:D379  6A         			ror	a		; CC if A < integer.
+         18:D37A  49 80      			eor	#$80
+         18:D37C  2A         			rol	a
  3584                        		__btrue		.LL5
-         18:D392  B0 07      			bcs	.LL5
+         18:D37D  B0 07      			bcs	.LL5
  3585                        		__bra		.LL6
-         18:D394  80 10      			bra	.LL6
- 3586    18:D396             	.LL4:
+         18:D37F  80 10      			bra	.LL6
+ 3586    18:D381             	.LL4:
  3587                        		__inc.umq	__hide_LEVEL_SPRITES_end - 1  /* i */
-         18:D396  EE 52 26   			inc	__hide_LEVEL_SPRITES_end - 1
+         18:D381  EE 52 26   			inc	__hide_LEVEL_SPRITES_end - 1
  3588                        		__bra		.LL3
-         18:D399  80 EE      			bra	.LL3
- 3589    18:D39B             	.LL5:
+         18:D384  80 EE      			bra	.LL3
+ 3589    18:D386             	.LL5:
  3590                        	
  3591                        		.dbg	line,	"include\routines_LEVELS.c", 18; {
  3592                        	
  3593                        		.dbg	line,	"include\routines_LEVELS.c", 19; spr_set(i);
  3594                        		__ld.umq	__hide_LEVEL_SPRITES_end - 1  /* i */
-         18:D39B  AD 52 26   			lda	__hide_LEVEL_SPRITES_end - 1
+         18:D386  AD 52 26   			lda	__hide_LEVEL_SPRITES_end - 1
  3595                        		__call		_spr_set.1
-         18:D39E  20 DD E7   			call	_spr_set.1
+         18:D389  20 DD E7   			call	_spr_set.1
  3596                        	
  3597                        		.dbg	line,	"include\routines_LEVELS.c", 20; spr_hide();
  3598                        		__call		_spr_hide
-         18:D3A1  20 F8 E7   			call	_spr_hide
+         18:D38C  20 F8 E7   			call	_spr_hide
  3599                        	
  3600                        		.dbg	line,	"include\routines_LEVELS.c", 21; }
  3601                        		__bra		.LL4
-         18:D3A4  80 F0      			bra	.LL4
- 3602    18:D3A6             	.LL6:
+         18:D38F  80 F0      			bra	.LL4
+ 3602    18:D391             	.LL6:
  3603                        	
  3604                        		.dbg	line,	"include\routines_LEVELS.c", 22; }
- 3605    18:D3A6             	.LL2:
+ 3605    18:D391             	.LL2:
  3606                        		__return	0
-         18:D3A6  4C EF FF   			jmp	leave_proc
+         18:D391  4C EF FF   			jmp	leave_proc
  3607                        		.dbg	clear
  3608                        		.endp
  3609                        		.pceas
@@ -6962,32 +6962,32 @@
  3632                        	;***********************
  3633                        	
  3634                        		.hucc
- 3635    18:D3C6             		.proc		_display_SCORE
+ 3635    18:D3B1             		.proc		_display_SCORE
  3636                        		__enter		_display_SCORE
  3637                        	
  3638                        		.dbg	line,	"include\routines_LEVELS.c", 35; put_number(score,6,14,1);
  3639                        		__ld.wm		_score
-         18:D3C6  AD 36 26   			lda.l	_score
-         18:D3C9  AC 37 26   			ldy.h	_score
+         18:D3B1  AD 36 26   			lda.l	_score
+         18:D3B4  AC 37 26   			ldy.h	_score
  3640                        		__st.wmq	_bx
-         18:D3CC  85 FA      			sta.l	_bx
-         18:D3CE  84 FB      			sty.h	_bx
+         18:D3B7  85 FA      			sta.l	_bx
+         18:D3B9  84 FB      			sty.h	_bx
  3641                        		__st.umiq	6, _cl
-         18:D3D0  A9 06      			lda.l	#6
-         18:D3D2  85 FC      			sta	_cl
+         18:D3BB  A9 06      			lda.l	#6
+         18:D3BD  85 FC      			sta	_cl
  3642                        		__st.umiq	14, _dil
-         18:D3D4  A9 0E      			lda.l	#14
-         18:D3D6  85 F0      			sta	_dil
+         18:D3BF  A9 0E      			lda.l	#14
+         18:D3C1  85 F0      			sta	_dil
  3643                        		__st.umiq	1, _dih
-         18:D3D8  A9 01      			lda.l	#1
-         18:D3DA  85 F1      			sta	_dih
+         18:D3C3  A9 01      			lda.l	#1
+         18:D3C5  85 F1      			sta	_dih
  3644                        		__call		_put_number.4
-         18:D3DC  20 9F FF   			call	_put_number.4
+         18:D3C7  20 9F FF   			call	_put_number.4
  3645                        	
  3646                        		.dbg	line,	"include\routines_LEVELS.c", 36; }
- 3647    18:D3DF             	.LL8:
+ 3647    18:D3CA             	.LL8:
  3648                        		__return	0
-         18:D3DF  4C EF FF   			jmp	leave_proc
+         18:D3CA  4C EF FF   			jmp	leave_proc
  3649                        		.dbg	clear
  3650                        		.endp
  3651                        		.pceas
@@ -7206,32 +7206,32 @@
  3790                        	;***********************
  3791                        	
  3792                        		.hucc
- 3793    18:D41A             		.proc		_display_KEY
+ 3793    18:D405             		.proc		_display_KEY
  3794                        		__enter		_display_KEY
  3795                        	
  3796                        		.dbg	line,	"include\routines_LEVELS.c", 86; put_number(key_amount,2,7,27);
  3797                        		__ld.um		_key_amount
-         18:D41A  AD 2E 23   			lda	_key_amount
-         18:D41D  C2         			cly
+         18:D405  AD 2E 23   			lda	_key_amount
+         18:D408  C2         			cly
  3798                        		__st.wmq	_bx
-         18:D41E  85 FA      			sta.l	_bx
-         18:D420  84 FB      			sty.h	_bx
+         18:D409  85 FA      			sta.l	_bx
+         18:D40B  84 FB      			sty.h	_bx
  3799                        		__st.umiq	2, _cl
-         18:D422  A9 02      			lda.l	#2
-         18:D424  85 FC      			sta	_cl
+         18:D40D  A9 02      			lda.l	#2
+         18:D40F  85 FC      			sta	_cl
  3800                        		__st.umiq	7, _dil
-         18:D426  A9 07      			lda.l	#7
-         18:D428  85 F0      			sta	_dil
+         18:D411  A9 07      			lda.l	#7
+         18:D413  85 F0      			sta	_dil
  3801                        		__st.umiq	27, _dih
-         18:D42A  A9 1B      			lda.l	#27
-         18:D42C  85 F1      			sta	_dih
+         18:D415  A9 1B      			lda.l	#27
+         18:D417  85 F1      			sta	_dih
  3802                        		__call		_put_number.4
-         18:D42E  20 9F FF   			call	_put_number.4
+         18:D419  20 9F FF   			call	_put_number.4
  3803                        	
  3804                        		.dbg	line,	"include\routines_LEVELS.c", 87; }
- 3805    18:D431             	.LL17:
+ 3805    18:D41C             	.LL17:
  3806                        		__return	0
-         18:D431  4C EF FF   			jmp	leave_proc
+         18:D41C  4C EF FF   			jmp	leave_proc
  3807                        		.dbg	clear
  3808                        		.endp
  3809                        		.pceas
@@ -7242,32 +7242,32 @@
  3814                        	;***********************
  3815                        	
  3816                        		.hucc
- 3817    18:D434             		.proc		_display_POTION
+ 3817    18:D41F             		.proc		_display_POTION
  3818                        		__enter		_display_POTION
  3819                        	
  3820                        		.dbg	line,	"include\routines_LEVELS.c", 92; put_number(potion_amount,2,19,27);
  3821                        		__ld.um		_potion_amount
-         18:D434  AD 2F 23   			lda	_potion_amount
-         18:D437  C2         			cly
+         18:D41F  AD 2F 23   			lda	_potion_amount
+         18:D422  C2         			cly
  3822                        		__st.wmq	_bx
-         18:D438  85 FA      			sta.l	_bx
-         18:D43A  84 FB      			sty.h	_bx
+         18:D423  85 FA      			sta.l	_bx
+         18:D425  84 FB      			sty.h	_bx
  3823                        		__st.umiq	2, _cl
-         18:D43C  A9 02      			lda.l	#2
-         18:D43E  85 FC      			sta	_cl
+         18:D427  A9 02      			lda.l	#2
+         18:D429  85 FC      			sta	_cl
  3824                        		__st.umiq	19, _dil
-         18:D440  A9 13      			lda.l	#19
-         18:D442  85 F0      			sta	_dil
+         18:D42B  A9 13      			lda.l	#19
+         18:D42D  85 F0      			sta	_dil
  3825                        		__st.umiq	27, _dih
-         18:D444  A9 1B      			lda.l	#27
-         18:D446  85 F1      			sta	_dih
+         18:D42F  A9 1B      			lda.l	#27
+         18:D431  85 F1      			sta	_dih
  3826                        		__call		_put_number.4
-         18:D448  20 9F FF   			call	_put_number.4
+         18:D433  20 9F FF   			call	_put_number.4
  3827                        	
  3828                        		.dbg	line,	"include\routines_LEVELS.c", 93; }
- 3829    18:D44B             	.LL18:
+ 3829    18:D436             	.LL18:
  3830                        		__return	0
-         18:D44B  4C EF FF   			jmp	leave_proc
+         18:D436  4C EF FF   			jmp	leave_proc
  3831                        		.dbg	clear
  3832                        		.endp
  3833                        		.pceas
@@ -7278,32 +7278,32 @@
  3838                        	;***********************
  3839                        	
  3840                        		.hucc
- 3841    18:D3E2             		.proc		_display_ZENNY
+ 3841    18:D3CD             		.proc		_display_ZENNY
  3842                        		__enter		_display_ZENNY
  3843                        	
  3844                        		.dbg	line,	"include\routines_LEVELS.c", 98; put_number(zenny_amount,5,26,4);
  3845                        		__ld.wm		_zenny_amount
-         18:D3E2  AD 34 26   			lda.l	_zenny_amount
-         18:D3E5  AC 35 26   			ldy.h	_zenny_amount
+         18:D3CD  AD 34 26   			lda.l	_zenny_amount
+         18:D3D0  AC 35 26   			ldy.h	_zenny_amount
  3846                        		__st.wmq	_bx
-         18:D3E8  85 FA      			sta.l	_bx
-         18:D3EA  84 FB      			sty.h	_bx
+         18:D3D3  85 FA      			sta.l	_bx
+         18:D3D5  84 FB      			sty.h	_bx
  3847                        		__st.umiq	5, _cl
-         18:D3EC  A9 05      			lda.l	#5
-         18:D3EE  85 FC      			sta	_cl
+         18:D3D7  A9 05      			lda.l	#5
+         18:D3D9  85 FC      			sta	_cl
  3848                        		__st.umiq	26, _dil
-         18:D3F0  A9 1A      			lda.l	#26
-         18:D3F2  85 F0      			sta	_dil
+         18:D3DB  A9 1A      			lda.l	#26
+         18:D3DD  85 F0      			sta	_dil
  3849                        		__st.umiq	4, _dih
-         18:D3F4  A9 04      			lda.l	#4
-         18:D3F6  85 F1      			sta	_dih
+         18:D3DF  A9 04      			lda.l	#4
+         18:D3E1  85 F1      			sta	_dih
  3850                        		__call		_put_number.4
-         18:D3F8  20 9F FF   			call	_put_number.4
+         18:D3E3  20 9F FF   			call	_put_number.4
  3851                        	
  3852                        		.dbg	line,	"include\routines_LEVELS.c", 99; }
- 3853    18:D3FB             	.LL19:
+ 3853    18:D3E6             	.LL19:
  3854                        		__return	0
-         18:D3FB  4C EF FF   			jmp	leave_proc
+         18:D3E6  4C EF FF   			jmp	leave_proc
  3855                        		.dbg	clear
  3856                        		.endp
  3857                        		.pceas
@@ -9404,14 +9404,14 @@
  4919                        	;***********************
  4920                        	
  4921                        		.hucc
- 4922    08:DFD0             		.proc		_scroll_BG
+ 4922    18:D2CC             		.proc		_scroll_BG
  4923                        		__enter		_scroll_BG
  4924                        	
  4925                        		.dbg	line,	"include\routines_LEVELS.c", 424; // UPDATE VDC2 BG //
  4926                        	
  4927                        		.dbg	line,	"include\routines_LEVELS.c", 425; sgx_scroll_map();
  4928                        		__call		_sgx_scroll_map
-         08:DFD0  20 81 FF   			call	_sgx_scroll_map
+         18:D2CC  20 81 FF   			call	_sgx_scroll_map
  4929                        	
  4930                        		.dbg	line,	"include\routines_LEVELS.c", 427; //--------------------------------------------------------------------------------------//
  4931                        	
@@ -9421,39 +9421,39 @@
  4935                        	
  4936                        		.dbg	line,	"include\routines_LEVELS.c", 431; sgx_scroll_split(0,   0, sgx_map_pxl_x & (BAT_SIZE_W - 1), sgx_map_pxl_y & (BAT_SIZE_H - 1), BKG_ON | SPR_ON);
  4937                        		__st.umiq	0, _al
-         08:DFD3  64 F8      			stz	_al
+         18:D2CF  64 F8      			stz	_al
  4938                        		__st.umiq	0, _ah
-         08:DFD5  64 F9      			stz	_ah
+         18:D2D1  64 F9      			stz	_ah
  4939                        		__ld.wm		_sgx_map_pxl_x
-         08:DFD7  AD 97 26   			lda.l	_sgx_map_pxl_x
-         08:DFDA  AC 98 26   			ldy.h	_sgx_map_pxl_x
+         18:D2D3  AD 97 26   			lda.l	_sgx_map_pxl_x
+         18:D2D6  AC 98 26   			ldy.h	_sgx_map_pxl_x
  4940                        		__and.wi	2047
-         08:DFDD  29 FF      			and.l	#2047
-         08:DFDF  42         			say
-         08:DFE0  29 07      			and.h	#2047
-         08:DFE2  42         			say
+         18:D2D9  29 FF      			and.l	#2047
+         18:D2DB  42         			say
+         18:D2DC  29 07      			and.h	#2047
+         18:D2DE  42         			say
  4941                        		__st.wmq	_bx
-         08:DFE3  85 FA      			sta.l	_bx
-         08:DFE5  84 FB      			sty.h	_bx
+         18:D2DF  85 FA      			sta.l	_bx
+         18:D2E1  84 FB      			sty.h	_bx
  4942                        		__ld.wm		_sgx_map_pxl_y
-         08:DFE7  AD 99 26   			lda.l	_sgx_map_pxl_y
-         08:DFEA  AC 9A 26   			ldy.h	_sgx_map_pxl_y
+         18:D2E3  AD 99 26   			lda.l	_sgx_map_pxl_y
+         18:D2E6  AC 9A 26   			ldy.h	_sgx_map_pxl_y
  4943                        		__and.wi	255
-         08:DFED  29 FF      			and	#255
-         08:DFEF  C2         			cly
+         18:D2E9  29 FF      			and	#255
+         18:D2EB  C2         			cly
  4944                        		__st.wmq	_cx
-         08:DFF0  85 FC      			sta.l	_cx
-         08:DFF2  84 FD      			sty.h	_cx
+         18:D2EC  85 FC      			sta.l	_cx
+         18:D2EE  84 FD      			sty.h	_cx
  4945                        		__st.umiq	192, _dl
-         08:DFF4  A9 C0      			lda.l	#192
-         08:DFF6  85 FE      			sta	_dl
+         18:D2F0  A9 C0      			lda.l	#192
+         18:D2F2  85 FE      			sta	_dl
  4946                        		__call		_sgx_scroll_split.5
-         08:DFF8  20 77 FF   			call	_sgx_scroll_split.5
+         18:D2F4  20 77 FF   			call	_sgx_scroll_split.5
  4947                        	
  4948                        		.dbg	line,	"include\routines_LEVELS.c", 432; }
- 4949    08:DFFB             	.LL90:
+ 4949    18:D2F7             	.LL90:
  4950                        		__return	0
-         08:DFFB  4C EF FF   			jmp	leave_proc
+         18:D2F7  4C EF FF   			jmp	leave_proc
  4951                        		.dbg	clear
  4952                        		.endp
  4953                        		.pceas
@@ -26431,62 +26431,62 @@
 14661                        	;***********************
 14662                        	
 14663                        		.hucc
-14664    18:D3A9             		.proc		_init_SYSTEM
+14664    18:D394             		.proc		_init_SYSTEM
 14665                        		__enter		_init_SYSTEM
 14666                        	
 14667                        		.dbg	line,	"include\init.c", 15; // DISABLE DISPLAY //
 14668                        	
 14669                        		.dbg	line,	"include\init.c", 16; disp_off();
 14670                        		__call		_disp_off
-         18:D3A9  20 29 E4   			call	_disp_off
+         18:D394  20 29 E4   			call	_disp_off
 14671                        	
 14672                        		.dbg	line,	"include\init.c", 18; // VSYNC //
 14673                        	
 14674                        		.dbg	line,	"include\init.c", 19; vsync();
 14675                        		__call		_vsync
-         18:D3AC  20 09 E3   			call	_vsync
+         18:D397  20 09 E3   			call	_vsync
 14676                        	
 14677                        		.dbg	line,	"include\init.c", 21; // LOAD DEFAULT FONT //
 14678                        	
 14679                        		.dbg	line,	"include\init.c", 22; load_default_font();
 14680                        		 _load_default_font
-         18:D3AF  82         			clx				; Offset to PCE VDC.
-         18:D3B0  20 C7 FF   			call	huc_monofont_x
+         18:D39A  82         			clx				; Offset to PCE VDC.
+         18:D39B  20 C7 FF   			call	huc_monofont_x
 14681                        	
 14682                        		.dbg	line,	"include\init.c", 25; // SET VDC 1 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
 14683                        	
 14684                        		.dbg	line,	"include\init.c", 26; set_screen_size(SCR_SIZE_32x32);
 14685                        		__st.umiq	0, _al
-         18:D3B3  64 F8      			stz	_al
+         18:D39E  64 F8      			stz	_al
 14686                        		__call		_set_screen_size.1
-         18:D3B5  20 31 FF   			call	_set_screen_size.1
+         18:D3A0  20 31 FF   			call	_set_screen_size.1
 14687                        	
 14688                        		.dbg	line,	"include\init.c", 29; // SET VDC 2 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
 14689                        	
 14690                        		.dbg	line,	"include\init.c", 30; sgx_set_screen_size(SCR_SIZE_32x32);
 14691                        		__st.umiq	0, _al
-         18:D3B8  64 F8      			stz	_al
+         18:D3A3  64 F8      			stz	_al
 14692                        		__call		_sgx_set_screen_size.1
-         18:D3BA  20 27 FF   			call	_sgx_set_screen_size.1
+         18:D3A5  20 27 FF   			call	_sgx_set_screen_size.1
 14693                        	
 14694                        		.dbg	line,	"include\init.c", 33; // INIT SPRITE ATTRIBUTE TABLE //
 14695                        	
 14696                        		.dbg	line,	"include\init.c", 34; init_satb();
 14697                        		__call		_init_satb
-         18:D3BD  20 B7 E7   			call	_init_satb
+         18:D3A8  20 B7 E7   			call	_init_satb
 14698                        	
 14699                        		.dbg	line,	"include\init.c", 35; sgx_init_satb();
 14700                        		__call		_sgx_init_satb
-         18:D3C0  20 CA E7   			call	_sgx_init_satb
+         18:D3AB  20 CA E7   			call	_sgx_init_satb
 14701                        	
 14702                        		.dbg	line,	"include\init.c", 38; // ENABLE DISPLAY //
 14703                        	
 14704                        		.dbg	line,	"include\init.c", 39; //disp_on();
 14705                        	
 14706                        		.dbg	line,	"include\init.c", 40; }
-14707    18:D3C3             	.LL647:
+14707    18:D3AE             	.LL647:
 14708                        		__return	0
-         18:D3C3  4C EF FF   			jmp	leave_proc
+         18:D3AE  4C EF FF   			jmp	leave_proc
 14709                        		.dbg	clear
 14710                        		.endp
 14711                        		.pceas
@@ -26497,79 +26497,79 @@
 14716                        	;***********************
 14717                        	
 14718                        		.hucc
-14719    18:D258             		.proc		_init_VARIABLES
+14719    18:D215             		.proc		_init_VARIABLES
 14720                        		__enter		_init_VARIABLES
 14721                        	
 14722                        		.dbg	line,	"include\init.c", 45; sequence_id = SEQUENCE_GAME; // SEQUENCE_TITLE | SEQUENCE_GAME | SEQUENCE_SHOP
 14723                        		__st.umiq	2, _sequence_id
-         18:D258  A9 02      			lda.l	#2
-         18:D25A  8D 13 23   			sta	_sequence_id
+         18:D215  A9 02      			lda.l	#2
+         18:D217  8D 13 23   			sta	_sequence_id
 14724                        	
 14725                        		.dbg	line,	"include\init.c", 47; level_id = 1;
 14726                        		__st.umiq	1, _level_id
-         18:D25D  A9 01      			lda.l	#1
-         18:D25F  8D 15 23   			sta	_level_id
+         18:D21A  A9 01      			lda.l	#1
+         18:D21C  8D 15 23   			sta	_level_id
 14727                        	
 14728                        		.dbg	line,	"include\init.c", 49; life_amount = 3;
 14729                        		__st.umiq	3, _life_amount
-         18:D262  A9 03      			lda.l	#3
-         18:D264  8D 2C 23   			sta	_life_amount
+         18:D21F  A9 03      			lda.l	#3
+         18:D221  8D 2C 23   			sta	_life_amount
 14730                        	
 14731                        		.dbg	line,	"include\init.c", 50; credits_amount = 2;
 14732                        		__st.umiq	2, _credits_amount
-         18:D267  A9 02      			lda.l	#2
-         18:D269  8D 2D 23   			sta	_credits_amount
+         18:D224  A9 02      			lda.l	#2
+         18:D226  8D 2D 23   			sta	_credits_amount
 14733                        	
 14734                        		.dbg	line,	"include\init.c", 51; key_amount = 0;
 14735                        		__st.umiq	0, _key_amount
-         18:D26C  9C 2E 23   			stz	_key_amount
+         18:D229  9C 2E 23   			stz	_key_amount
 14736                        	
 14737                        		.dbg	line,	"include\init.c", 52; potion_amount = 0;
 14738                        		__st.umiq	0, _potion_amount
-         18:D26F  9C 2F 23   			stz	_potion_amount
+         18:D22C  9C 2F 23   			stz	_potion_amount
 14739                        	
 14740                        		.dbg	line,	"include\init.c", 53; zenny_amount = 25000;
 14741                        		__st.wmiq	25000, _zenny_amount
-         18:D272  A9 A8      			lda.l	#25000
-         18:D274  8D 34 26   			sta.l	_zenny_amount
-         18:D277  A9 61      			lda.h	#25000
-         18:D279  8D 35 26   			sta.h	_zenny_amount
+         18:D22F  A9 A8      			lda.l	#25000
+         18:D231  8D 34 26   			sta.l	_zenny_amount
+         18:D234  A9 61      			lda.h	#25000
+         18:D236  8D 35 26   			sta.h	_zenny_amount
 14742                        	
 14743                        		.dbg	line,	"include\init.c", 55; weapon_level = 0;
 14744                        		__st.umiq	0, _weapon_level
-         18:D27C  9C 28 23   			stz	_weapon_level
+         18:D239  9C 28 23   			stz	_weapon_level
 14745                        	
 14746                        		.dbg	line,	"include\init.c", 56; armor_level = 2;
 14747                        		__st.umiq	2, _armor_level
-         18:D27F  A9 02      			lda.l	#2
-         18:D281  8D 27 23   			sta	_armor_level
+         18:D23C  A9 02      			lda.l	#2
+         18:D23E  8D 27 23   			sta	_armor_level
 14748                        	
 14749                        		.dbg	line,	"include\init.c", 57; 
 14750                        	
 14751                        		.dbg	line,	"include\init.c", 58; player_naked = FALSE;
 14752                        		__st.umiq	0, _player_naked
-         18:D284  9C 1F 23   			stz	_player_naked
+         18:D241  9C 1F 23   			stz	_player_naked
 14753                        	
 14754                        		.dbg	line,	"include\init.c", 60; shop_counter = 0;
 14755                        		__st.umiq	0, _shop_counter
-         18:D287  9C D9 23   			stz	_shop_counter
+         18:D244  9C D9 23   			stz	_shop_counter
 14756                        	
 14757                        		.dbg	line,	"include\init.c", 61; shop_phase = SHOP_PHASE_ENTER;
 14758                        		__st.umiq	0, _shop_phase
-         18:D28A  9C D8 23   			stz	_shop_phase
+         18:D247  9C D8 23   			stz	_shop_phase
 14759                        	
 14760                        		.dbg	line,	"include\init.c", 63; respawn = FALSE;
 14761                        		__st.umiq	0, _respawn
-         18:D28D  9C 16 23   			stz	_respawn
+         18:D24A  9C 16 23   			stz	_respawn
 14762                        	
 14763                        		.dbg	line,	"include\init.c", 65; sequence_loaded = FALSE;
 14764                        		__st.umiq	0, _sequence_loaded
-         18:D290  9C 14 23   			stz	_sequence_loaded
+         18:D24D  9C 14 23   			stz	_sequence_loaded
 14765                        	
 14766                        		.dbg	line,	"include\init.c", 66; }
-14767    18:D293             	.LL648:
+14767    18:D250             	.LL648:
 14768                        		__return	0
-         18:D293  4C EF FF   			jmp	leave_proc
+         18:D250  4C EF FF   			jmp	leave_proc
 14769                        		.dbg	clear
 14770                        		.endp
 14771                        		.pceas
@@ -26580,93 +26580,93 @@
 14776                        	;***********************
 14777                        	
 14778                        		.hucc
-14779    18:D1D7             		.proc		_init_PLAYER
+14779    18:D194             		.proc		_init_PLAYER
 14780                        		__enter		_init_PLAYER
 14781                        	
 14782                        		.dbg	line,	"include\init.c", 71; if(player_naked != RESPAWN_SHOP)
 14783                        		__ld.umq	_player_naked
-         18:D1D7  AD 1F 23   			lda	_player_naked
+         18:D194  AD 1F 23   			lda	_player_naked
 14784                        		__neq_b.uiq	2
-         18:D1DA  38         			sec
-         18:D1DB  49 02      			eor	#2
-         18:D1DD  D0 01      			bne	!+
-         18:D1DF  18         			clc
-         18:D1E0             	!:
+         18:D197  38         			sec
+         18:D198  49 02      			eor	#2
+         18:D19A  D0 01      			bne	!+
+         18:D19C  18         			clc
+         18:D19D             	!:
 14785                        		__bfalse	.LL650
-         18:D1E0  90 03      			bcc	.LL650
+         18:D19D  90 03      			bcc	.LL650
 14786                        	
 14787                        		.dbg	line,	"include\init.c", 72; {
 14788                        	
 14789                        		.dbg	line,	"include\init.c", 73; player_naked = FALSE;
 14790                        		__st.umiq	0, _player_naked
-         18:D1E2  9C 1F 23   			stz	_player_naked
+         18:D19F  9C 1F 23   			stz	_player_naked
 14791                        	
 14792                        		.dbg	line,	"include\init.c", 74; }
 14793                        	
 14794                        		.dbg	line,	"include\init.c", 75; 
 14795                        	
 14796                        		.dbg	line,	"include\init.c", 76; player_id = PLAYER_START_INDEX;
-14797    18:D1E5             	.LL650:
+14797    18:D1A2             	.LL650:
 14798                        		__st.umiq	14, _player_id
-         18:D1E5  A9 0E      			lda.l	#14
-         18:D1E7  8D 17 23   			sta	_player_id
+         18:D1A2  A9 0E      			lda.l	#14
+         18:D1A4  8D 17 23   			sta	_player_id
 14799                        	
 14800                        		.dbg	line,	"include\init.c", 77; player_axis = AXIS_RIGHT;
 14801                        		__st.umiq	0, _player_axis
-         18:D1EA  9C 19 23   			stz	_player_axis
+         18:D1A7  9C 19 23   			stz	_player_axis
 14802                        	
 14803                        		.dbg	line,	"include\init.c", 78; player_previous_axis = player_axis;
 14804                        		__ld.um		_player_axis
-         18:D1ED  AD 19 23   			lda	_player_axis
-         18:D1F0  C2         			cly
+         18:D1AA  AD 19 23   			lda	_player_axis
+         18:D1AD  C2         			cly
 14805                        		__st.umq	_player_previous_axis
-         18:D1F1  8D 1A 23   			sta	_player_previous_axis
+         18:D1AE  8D 1A 23   			sta	_player_previous_axis
 14806                        	
 14807                        		.dbg	line,	"include\init.c", 79; player_counter_anim = 0;
 14808                        		__st.umiq	0, _player_counter_anim
-         18:D1F4  9C 1B 23   			stz	_player_counter_anim
+         18:D1B1  9C 1B 23   			stz	_player_counter_anim
 14809                        	
 14810                        		.dbg	line,	"include\init.c", 80; player_index_jump = 0;
 14811                        		__st.umiq	0, _player_index_jump
-         18:D1F7  9C 1C 23   			stz	_player_index_jump
+         18:D1B4  9C 1C 23   			stz	_player_index_jump
 14812                        	
 14813                        		.dbg	line,	"include\init.c", 81; player_index_fall = 0;
 14814                        		__st.umiq	0, _player_index_fall
-         18:D1FA  9C 1D 23   			stz	_player_index_fall
+         18:D1B7  9C 1D 23   			stz	_player_index_fall
 14815                        	
 14816                        		.dbg	line,	"include\init.c", 82; fall_ladder = FALSE;
 14817                        		__st.umiq	0, _fall_ladder
-         18:D1FD  9C 23 23   			stz	_fall_ladder
+         18:D1BA  9C 23 23   			stz	_fall_ladder
 14818                        	
 14819                        		.dbg	line,	"include\init.c", 83; player_counter_attack = 0;
 14820                        		__st.umiq	0, _player_counter_attack
-         18:D200  9C 1E 23   			stz	_player_counter_attack
+         18:D1BD  9C 1E 23   			stz	_player_counter_attack
 14821                        	
 14822                        		.dbg	line,	"include\init.c", 84; player_attack = FALSE;
 14823                        		__st.umiq	0, _player_attack
-         18:D203  9C 20 23   			stz	_player_attack
+         18:D1C0  9C 20 23   			stz	_player_attack
 14824                        	
 14825                        		.dbg	line,	"include\init.c", 85; player_state = STATE_IDLE;
 14826                        		__st.umiq	0, _player_state
-         18:D206  9C 18 23   			stz	_player_state
+         18:D1C3  9C 18 23   			stz	_player_state
 14827                        	
 14828                        		.dbg	line,	"include\init.c", 87; chain_id = player_id - 3;
 14829                        		__ld.um		_player_id
-         18:D209  AD 17 23   			lda	_player_id
-         18:D20C  C2         			cly
+         18:D1C6  AD 17 23   			lda	_player_id
+         18:D1C9  C2         			cly
 14830                        		__sub.wi	3
-         18:D20D  38         			sec
-         18:D20E  E9 03      			sbc.l	#3
-         18:D210  B0 01      			bcs	!+
-         18:D212  88         			dey
-         18:D213             	!:
+         18:D1CA  38         			sec
+         18:D1CB  E9 03      			sbc.l	#3
+         18:D1CD  B0 01      			bcs	!+
+         18:D1CF  88         			dey
+         18:D1D0             	!:
 14831                        		__st.umq	_chain_id
-         18:D213  8D 25 23   			sta	_chain_id
+         18:D1D0  8D 25 23   			sta	_chain_id
 14832                        	
 14833                        		.dbg	line,	"include\init.c", 88; }
-14834    18:D216             	.LL649:
+14834    18:D1D3             	.LL649:
 14835                        		__return	0
-         18:D216  4C EF FF   			jmp	leave_proc
+         18:D1D3  4C EF FF   			jmp	leave_proc
 14836                        		.dbg	clear
 14837                        		.endp
 14838                        		.pceas
@@ -27594,40 +27594,40 @@
 15233                        	;***********************
 15234                        	
 15235                        		.hucc
-15236    18:D33A             		.proc		_load_CHEST_TILES
+15236    18:D325             		.proc		_load_CHEST_TILES
 15237                        		__enter		_load_CHEST_TILES
 15238                        	
 15239                        		.dbg	line,	"include\init.c", 258; sgx_load_vram(CHEST_VRAM_ADR, tiles_SPR_CHEST , SIZEOF(tiles_SPR_CHEST) >> 1);
 15240                        		__st.wmiq	28672, _di
-         18:D33A  64 F0      			stz.l	_di
-         18:D33C  A9 70      			lda.h	#28672
-         18:D33E  85 F1      			sta.h	_di
+         18:D325  64 F0      			stz.l	_di
+         18:D327  A9 70      			lda.h	#28672
+         18:D329  85 F1      			sta.h	_di
 15241                        		__farptr	_tiles_SPR_CHEST, _bp_bank, _bp
-         18:D340  A9 60      			lda.l	#$6000 + ($1FFF & (_tiles_SPR_CHEST))
-         18:D342  85 EC      			sta.l	_bp
-         18:D344  A9 74      			lda.h	#$6000 + ($1FFF & (_tiles_SPR_CHEST))
-         18:D346  85 ED      			sta.h	_bp
-         18:D348  A9 13      			lda	#bank(_tiles_SPR_CHEST)
-         18:D34A  85 02      			sta	_bp_bank
+         18:D32B  A9 60      			lda.l	#$6000 + ($1FFF & (_tiles_SPR_CHEST))
+         18:D32D  85 EC      			sta.l	_bp
+         18:D32F  A9 74      			lda.h	#$6000 + ($1FFF & (_tiles_SPR_CHEST))
+         18:D331  85 ED      			sta.h	_bp
+         18:D333  A9 13      			lda	#bank(_tiles_SPR_CHEST)
+         18:D335  85 02      			sta	_bp_bank
 15242                        		__ld.wi		___sizeof__tiles_SPR_CHEST
-         18:D34C  A9 00      			lda.l	#___sizeof__tiles_SPR_CHEST
-         18:D34E  A0 0C      			ldy.h	#___sizeof__tiles_SPR_CHEST
+         18:D337  A9 00      			lda.l	#___sizeof__tiles_SPR_CHEST
+         18:D339  A0 0C      			ldy.h	#___sizeof__tiles_SPR_CHEST
 15243                        		__lsr.wi	1
-         18:D350  42         			say
-         18:D351  4A         			lsr	a
-         18:D352  42         			say
-         18:D353  6A         			ror	a
+         18:D33B  42         			say
+         18:D33C  4A         			lsr	a
+         18:D33D  42         			say
+         18:D33E  6A         			ror	a
 15244                        		__st.wmq	_ax
-         18:D354  85 F8      			sta.l	_ax
-         18:D356  84 F9      			sty.h	_ax
+         18:D33F  85 F8      			sta.l	_ax
+         18:D341  84 F9      			sty.h	_ax
 15245                        		 _sgx_load_vram.3
-         18:D358  A2 10      			ldx	#SGX_VDC_OFFSET		; Offset to SGX VDC.
-         18:D35A  20 4F FF   			call	load_vram_x
+         18:D343  A2 10      			ldx	#SGX_VDC_OFFSET		; Offset to SGX VDC.
+         18:D345  20 4F FF   			call	load_vram_x
 15246                        	
 15247                        		.dbg	line,	"include\init.c", 259; }
-15248    18:D35D             	.LL653:
+15248    18:D348             	.LL653:
 15249                        		__return	0
-         18:D35D  4C EF FF   			jmp	leave_proc
+         18:D348  4C EF FF   			jmp	leave_proc
 15250                        		.dbg	clear
 15251                        		.endp
 15252                        		.pceas
@@ -27638,40 +27638,40 @@
 15257                        	;***********************
 15258                        	
 15259                        		.hucc
-15260    18:D360             		.proc		_load_NPC_TILES
+15260    18:D34B             		.proc		_load_NPC_TILES
 15261                        		__enter		_load_NPC_TILES
 15262                        	
 15263                        		.dbg	line,	"include\init.c", 264; sgx_load_vram(NPC_VRAM_ADR, tiles_SPR_NPC , SIZEOF(tiles_SPR_NPC) >> 1);
 15264                        		__st.wmiq	30208, _di
-         18:D360  64 F0      			stz.l	_di
-         18:D362  A9 76      			lda.h	#30208
-         18:D364  85 F1      			sta.h	_di
+         18:D34B  64 F0      			stz.l	_di
+         18:D34D  A9 76      			lda.h	#30208
+         18:D34F  85 F1      			sta.h	_di
 15265                        		__farptr	_tiles_SPR_NPC, _bp_bank, _bp
-         18:D366  A9 E0      			lda.l	#$6000 + ($1FFF & (_tiles_SPR_NPC))
-         18:D368  85 EC      			sta.l	_bp
-         18:D36A  A9 72      			lda.h	#$6000 + ($1FFF & (_tiles_SPR_NPC))
-         18:D36C  85 ED      			sta.h	_bp
-         18:D36E  A9 14      			lda	#bank(_tiles_SPR_NPC)
-         18:D370  85 02      			sta	_bp_bank
+         18:D351  A9 E0      			lda.l	#$6000 + ($1FFF & (_tiles_SPR_NPC))
+         18:D353  85 EC      			sta.l	_bp
+         18:D355  A9 72      			lda.h	#$6000 + ($1FFF & (_tiles_SPR_NPC))
+         18:D357  85 ED      			sta.h	_bp
+         18:D359  A9 14      			lda	#bank(_tiles_SPR_NPC)
+         18:D35B  85 02      			sta	_bp_bank
 15266                        		__ld.wi		___sizeof__tiles_SPR_NPC
-         18:D372  A9 00      			lda.l	#___sizeof__tiles_SPR_NPC
-         18:D374  A0 0C      			ldy.h	#___sizeof__tiles_SPR_NPC
+         18:D35D  A9 00      			lda.l	#___sizeof__tiles_SPR_NPC
+         18:D35F  A0 0C      			ldy.h	#___sizeof__tiles_SPR_NPC
 15267                        		__lsr.wi	1
-         18:D376  42         			say
-         18:D377  4A         			lsr	a
-         18:D378  42         			say
-         18:D379  6A         			ror	a
+         18:D361  42         			say
+         18:D362  4A         			lsr	a
+         18:D363  42         			say
+         18:D364  6A         			ror	a
 15268                        		__st.wmq	_ax
-         18:D37A  85 F8      			sta.l	_ax
-         18:D37C  84 F9      			sty.h	_ax
+         18:D365  85 F8      			sta.l	_ax
+         18:D367  84 F9      			sty.h	_ax
 15269                        		 _sgx_load_vram.3
-         18:D37E  A2 10      			ldx	#SGX_VDC_OFFSET		; Offset to SGX VDC.
-         18:D380  20 4F FF   			call	load_vram_x
+         18:D369  A2 10      			ldx	#SGX_VDC_OFFSET		; Offset to SGX VDC.
+         18:D36B  20 4F FF   			call	load_vram_x
 15270                        	
 15271                        		.dbg	line,	"include\init.c", 265; }
-15272    18:D383             	.LL654:
+15272    18:D36E             	.LL654:
 15273                        		__return	0
-         18:D383  4C EF FF   			jmp	leave_proc
+         18:D36E  4C EF FF   			jmp	leave_proc
 15274                        		.dbg	clear
 15275                        		.endp
 15276                        		.pceas
@@ -31739,7 +31739,7 @@
 17448                        		__ld.umq	_sequence_id
          08:DDEC  AD 13 23   			lda	_sequence_id
 17449                        		__bra		.LL743
-         08:DDEF  4C B2 DF   			bra	.LL743
+         08:DDEF  4C 99 DF   			bra	.LL743
 17450                        	
 17451                        		.dbg	line,	"main.c", 67; {
 17452                        	
@@ -31860,7 +31860,7 @@
 17542                        		__ld.umq	_level_id
          08:DE25  AD 15 23   			lda	_level_id
 17543                        		__bra		.LL752
-         08:DE28  80 59      			bra	.LL752
+         08:DE28  80 40      			bra	.LL752
 17544                        	
 17545                        		.dbg	line,	"main.c", 112; {
 17546                        	
@@ -31880,1014 +31880,998 @@
 17558                        		__call		_update_WEAPON
          08:DE30  20 23 FE   			call	_update_WEAPON
 17559                        	
-17560                        		.dbg	line,	"main.c", 118; put_number(hit_wall,1,0,1);
-17561                        		__ld.um		_hit_wall
-         08:DE33  AD 24 23   			lda	_hit_wall
-         08:DE36  C2         			cly
-17562                        		__st.wmq	_bx
-         08:DE37  85 FA      			sta.l	_bx
-         08:DE39  84 FB      			sty.h	_bx
-17563                        		__st.umiq	1, _cl
-         08:DE3B  A9 01      			lda.l	#1
-         08:DE3D  85 FC      			sta	_cl
-17564                        		__st.umiq	0, _dil
-         08:DE3F  64 F0      			stz	_dil
-17565                        		__st.umiq	1, _dih
-         08:DE41  A9 01      			lda.l	#1
-         08:DE43  85 F1      			sta	_dih
-17566                        		__call		_put_number.4
-         08:DE45  20 9F FF   			call	_put_number.4
+17560                        		.dbg	line,	"main.c", 118; //put_number(hit_wall,1,0,1);
+17561                        	
+17562                        		.dbg	line,	"main.c", 121; scroll_object();
+17563                        		__call		_scroll_object
+         08:DE33  20 C3 FE   			call	_scroll_object
+17564                        	
+17565                        		.dbg	line,	"main.c", 122; scroll_chest();
+17566                        		__call		_scroll_chest
+         08:DE36  20 A5 FE   			call	_scroll_chest
 17567                        	
-17568                        		.dbg	line,	"main.c", 121; scroll_object();
-17569                        		__call		_scroll_object
-         08:DE48  20 C3 FE   			call	_scroll_object
+17568                        		.dbg	line,	"main.c", 123; scroll_npc();
+17569                        		__call		_scroll_npc
+         08:DE39  20 19 FE   			call	_scroll_npc
 17570                        	
-17571                        		.dbg	line,	"main.c", 122; scroll_chest();
-17572                        		__call		_scroll_chest
-         08:DE4B  20 A5 FE   			call	_scroll_chest
+17571                        		.dbg	line,	"main.c", 125; check_OBJECT();
+17572                        		__call		_check_OBJECT
+         08:DE3C  20 0F FE   			call	_check_OBJECT
 17573                        	
-17574                        		.dbg	line,	"main.c", 123; scroll_npc();
-17575                        		__call		_scroll_npc
-         08:DE4E  20 19 FE   			call	_scroll_npc
+17574                        		.dbg	line,	"main.c", 126; check_NPC();
+17575                        		__call		_check_NPC
+         08:DE3F  20 05 FE   			call	_check_NPC
 17576                        	
-17577                        		.dbg	line,	"main.c", 125; check_OBJECT();
-17578                        		__call		_check_OBJECT
-         08:DE51  20 0F FE   			call	_check_OBJECT
+17577                        		.dbg	line,	"main.c", 128; display_TIME_LEVEL();
+17578                        		__call		_display_TIME_LEVEL
+         08:DE42  20 F5 FE   			call	_display_TIME_LEVEL
 17579                        	
-17580                        		.dbg	line,	"main.c", 126; check_NPC();
-17581                        		__call		_check_NPC
-         08:DE54  20 05 FE   			call	_check_NPC
+17580                        		.dbg	line,	"main.c", 130; satb_update();
+17581                        		__call		_satb_update
+         08:DE45  20 13 FF   			call	_satb_update
 17582                        	
-17583                        		.dbg	line,	"main.c", 128; display_TIME_LEVEL();
-17584                        		__call		_display_TIME_LEVEL
-         08:DE57  20 F5 FE   			call	_display_TIME_LEVEL
+17583                        		.dbg	line,	"main.c", 131; sgx_satb_update();
+17584                        		__call		_sgx_satb_update
+         08:DE48  20 73 FE   			call	_sgx_satb_update
 17585                        	
-17586                        		.dbg	line,	"main.c", 130; satb_update();
-17587                        		__call		_satb_update
-         08:DE5A  20 13 FF   			call	_satb_update
+17586                        		.dbg	line,	"main.c", 133; scroll_BG();
+17587                        		__call		_scroll_BG
+         08:DE4B  20 FB FD   			call	_scroll_BG
 17588                        	
-17589                        		.dbg	line,	"main.c", 131; sgx_satb_update();
-17590                        		__call		_sgx_satb_update
-         08:DE5D  20 73 FE   			call	_sgx_satb_update
+17589                        		.dbg	line,	"main.c", 135; joypad_DIR();
+17590                        		__call		_joypad_DIR
+         08:DE4E  20 F1 FD   			call	_joypad_DIR
 17591                        	
-17592                        		.dbg	line,	"main.c", 133; scroll_BG();
-17593                        		__call		_scroll_BG
-         08:DE60  20 FB FD   			call	_scroll_BG
+17592                        		.dbg	line,	"main.c", 136; joypad_BUTTONS();
+17593                        		__call		_joypad_BUTTONS
+         08:DE51  20 E7 FD   			call	_joypad_BUTTONS
 17594                        	
-17595                        		.dbg	line,	"main.c", 135; joypad_DIR();
-17596                        		__call		_joypad_DIR
-         08:DE63  20 F1 FD   			call	_joypad_DIR
+17595                        		.dbg	line,	"main.c", 138; break;
+17596                        		__bra		.LL753
+         08:DE54  80 96      			bra	.LL753
 17597                        	
-17598                        		.dbg	line,	"main.c", 136; joypad_BUTTONS();
-17599                        		__call		_joypad_BUTTONS
-         08:DE66  20 E7 FD   			call	_joypad_BUTTONS
-17600                        	
-17601                        		.dbg	line,	"main.c", 138; break;
-17602                        		__bra		.LL753
-         08:DE69  80 81      			bra	.LL753
-17603                        	
-17604                        		.dbg	line,	"main.c", 141; case 2:
-17605    08:DE6B             	.LL755:
-17606                        		__case		2
+17598                        		.dbg	line,	"main.c", 141; case 2:
+17599    08:DE56             	.LL755:
+17600                        		__case		2
+17601                        	
+17602                        		.dbg	line,	"main.c", 142; vsync();
+17603                        		__call		_vsync
+         08:DE56  20 09 E3   			call	_vsync
+17604                        	
+17605                        		.dbg	line,	"main.c", 143; break;
+17606                        		__bra		.LL753
+         08:DE59  80 91      			bra	.LL753
 17607                        	
-17608                        		.dbg	line,	"main.c", 142; vsync();
-17609                        		__call		_vsync
-         08:DE6B  20 09 E3   			call	_vsync
-17610                        	
-17611                        		.dbg	line,	"main.c", 143; break;
-17612                        		__bra		.LL753
-         08:DE6E  4C EC DD   			bra	.LL753
-17613                        	
-17614                        		.dbg	line,	"main.c", 146; case 3:
-17615    08:DE71             	.LL756:
-17616                        		__case		3
+17608                        		.dbg	line,	"main.c", 146; case 3:
+17609    08:DE5B             	.LL756:
+17610                        		__case		3
+17611                        	
+17612                        		.dbg	line,	"main.c", 147; vsync();
+17613                        		__call		_vsync
+         08:DE5B  20 09 E3   			call	_vsync
+17614                        	
+17615                        		.dbg	line,	"main.c", 148; break;
+17616                        		__bra		.LL753
+         08:DE5E  80 8C      			bra	.LL753
 17617                        	
-17618                        		.dbg	line,	"main.c", 147; vsync();
-17619                        		__call		_vsync
-         08:DE71  20 09 E3   			call	_vsync
-17620                        	
-17621                        		.dbg	line,	"main.c", 148; break;
-17622                        		__bra		.LL753
-         08:DE74  4C EC DD   			bra	.LL753
-17623                        	
-17624                        		.dbg	line,	"main.c", 151; case 4:
-17625    08:DE77             	.LL757:
-17626                        		__case		4
+17618                        		.dbg	line,	"main.c", 151; case 4:
+17619    08:DE60             	.LL757:
+17620                        		__case		4
+17621                        	
+17622                        		.dbg	line,	"main.c", 152; vsync();
+17623                        		__call		_vsync
+         08:DE60  20 09 E3   			call	_vsync
+17624                        	
+17625                        		.dbg	line,	"main.c", 153; break;
+17626                        		__bra		.LL753
+         08:DE63  80 87      			bra	.LL753
 17627                        	
-17628                        		.dbg	line,	"main.c", 152; vsync();
-17629                        		__call		_vsync
-         08:DE77  20 09 E3   			call	_vsync
-17630                        	
-17631                        		.dbg	line,	"main.c", 153; break;
-17632                        		__bra		.LL753
-         08:DE7A  4C EC DD   			bra	.LL753
-17633                        	
-17634                        		.dbg	line,	"main.c", 156; case 5:
-17635    08:DE7D             	.LL758:
-17636                        		__case		5
+17628                        		.dbg	line,	"main.c", 156; case 5:
+17629    08:DE65             	.LL758:
+17630                        		__case		5
+17631                        	
+17632                        		.dbg	line,	"main.c", 157; vsync();
+17633                        		__call		_vsync
+         08:DE65  20 09 E3   			call	_vsync
+17634                        	
+17635                        		.dbg	line,	"main.c", 158; break;
+17636                        		__bra		.LL753
+         08:DE68  80 82      			bra	.LL753
 17637                        	
-17638                        		.dbg	line,	"main.c", 157; vsync();
-17639                        		__call		_vsync
-         08:DE7D  20 09 E3   			call	_vsync
-17640                        	
-17641                        		.dbg	line,	"main.c", 158; break;
-17642                        		__bra		.LL753
-         08:DE80  4C EC DD   			bra	.LL753
-17643                        	
-17644                        		.dbg	line,	"main.c", 160; }
-17645    08:DE83             	.LL752:
-17646                        		__switch_r.ur	0, 5
-         08:DE83  C9 06      			cmp	#(5 - 0) + 1
-         08:DE85  90 02      			bcc	!found+
-         08:DE87  A9 06      	!default:	lda	#(5 - 0) + 1
-         08:DE89  0A         	!found:		asl	a
-         08:DE8A  AA         			tax
-         08:DE8B  7C 8E DE   			jmp	[!table+, x]
-17647                        	
-17648    08:DE8E  EC DD      	!table:		dw	.LL753, .LL754, .LL755, .LL756, .LL757, .LL758
-         08:DE90  2A DE       
-         08:DE92  6B DE       
-         08:DE94  71 DE       
-         08:DE96  77 DE       
-         08:DE98  7D DE       
-17649    08:DE9A  EC DD      			dw	.LL753
-17650    08:DE9C             	.LL753	.alias		.LL744
+17638                        		.dbg	line,	"main.c", 160; }
+17639    08:DE6A             	.LL752:
+17640                        		__switch_r.ur	0, 5
+         08:DE6A  C9 06      			cmp	#(5 - 0) + 1
+         08:DE6C  90 02      			bcc	!found+
+         08:DE6E  A9 06      	!default:	lda	#(5 - 0) + 1
+         08:DE70  0A         	!found:		asl	a
+         08:DE71  AA         			tax
+         08:DE72  7C 75 DE   			jmp	[!table+, x]
+17641                        	
+17642    08:DE75  EC DD      	!table:		dw	.LL753, .LL754, .LL755, .LL756, .LL757, .LL758
+         08:DE77  2A DE       
+         08:DE79  56 DE       
+         08:DE7B  5B DE       
+         08:DE7D  60 DE       
+         08:DE7F  65 DE       
+17643    08:DE81  EC DD      			dw	.LL753
+17644    08:DE83             	.LL753	.alias		.LL744
+17645                        	
+17646                        		.dbg	line,	"main.c", 161; }
+17647    08:DE83             	.LL751	.alias		.LL744
+17648                        	
+17649                        		.dbg	line,	"main.c", 163; break;
+17650                        		__bra		.LL744
+         08:DE83  4C EC DD   			bra	.LL744
 17651                        	
-17652                        		.dbg	line,	"main.c", 161; }
-17653    08:DE9C             	.LL751	.alias		.LL744
-17654                        	
-17655                        		.dbg	line,	"main.c", 163; break;
-17656                        		__bra		.LL744
-         08:DE9C  4C EC DD   			bra	.LL744
+17652                        		.dbg	line,	"main.c", 166; //-----------------------------------------------------------------------------//
+17653                        	
+17654                        		.dbg	line,	"main.c", 167; //                                     NPC                                     //
+17655                        	
+17656                        		.dbg	line,	"main.c", 168; //-----------------------------------------------------------------------------//
 17657                        	
-17658                        		.dbg	line,	"main.c", 166; //-----------------------------------------------------------------------------//
-17659                        	
-17660                        		.dbg	line,	"main.c", 167; //                                     NPC                                     //
+17658                        		.dbg	line,	"main.c", 169; case SEQUENCE_NPC:
+17659    08:DE86             	.LL759:
+17660                        		__case		3
 17661                        	
-17662                        		.dbg	line,	"main.c", 168; //-----------------------------------------------------------------------------//
-17663                        	
-17664                        		.dbg	line,	"main.c", 169; case SEQUENCE_NPC:
-17665    08:DE9F             	.LL759:
-17666                        		__case		3
-17667                        	
-17668                        		.dbg	line,	"main.c", 170; break;
-17669                        		__bra		.LL744
-         08:DE9F  4C EC DD   			bra	.LL744
+17662                        		.dbg	line,	"main.c", 170; break;
+17663                        		__bra		.LL744
+         08:DE86  4C EC DD   			bra	.LL744
+17664                        	
+17665                        		.dbg	line,	"main.c", 173; //-----------------------------------------------------------------------------//
+17666                        	
+17667                        		.dbg	line,	"main.c", 174; //                                    SHOP                                     //
+17668                        	
+17669                        		.dbg	line,	"main.c", 175; //-----------------------------------------------------------------------------//
 17670                        	
-17671                        		.dbg	line,	"main.c", 173; //-----------------------------------------------------------------------------//
-17672                        	
-17673                        		.dbg	line,	"main.c", 174; //                                    SHOP                                     //
+17671                        		.dbg	line,	"main.c", 176; case SEQUENCE_SHOP:
+17672    08:DE89             	.LL760:
+17673                        		__case		4
 17674                        	
-17675                        		.dbg	line,	"main.c", 175; //-----------------------------------------------------------------------------//
-17676                        	
-17677                        		.dbg	line,	"main.c", 176; case SEQUENCE_SHOP:
-17678    08:DEA2             	.LL760:
-17679                        		__case		4
+17675                        		.dbg	line,	"main.c", 177; if(sequence_loaded == FALSE)
+17676                        		__not.um	_sequence_loaded
+         08:DE89  AD 14 23   			lda	_sequence_loaded
+         08:DE8C  18         			clc
+         08:DE8D  D0 01      			bne	!+
+         08:DE8F  38         			sec
+         08:DE90             	!:
+17677                        		__bfalse	.LL761
+         08:DE90  90 0B      			bcc	.LL761
+17678                        	
+17679                        		.dbg	line,	"main.c", 178; {
 17680                        	
-17681                        		.dbg	line,	"main.c", 177; if(sequence_loaded == FALSE)
-17682                        		__not.um	_sequence_loaded
-         08:DEA2  AD 14 23   			lda	_sequence_loaded
-         08:DEA5  18         			clc
-         08:DEA6  D0 01      			bne	!+
-         08:DEA8  38         			sec
-         08:DEA9             	!:
-17683                        		__bfalse	.LL761
-         08:DEA9  90 0B      			bcc	.LL761
-17684                        	
-17685                        		.dbg	line,	"main.c", 178; {
+17681                        		.dbg	line,	"main.c", 179; init_SHOP();
+17682                        		__call		_init_SHOP
+         08:DE92  20 DD FD   			call	_init_SHOP
+17683                        	
+17684                        		.dbg	line,	"main.c", 181; sequence_loaded = TRUE;
+17685                        		__st.umiq	1, _sequence_loaded
+         08:DE95  A9 01      			lda.l	#1
+         08:DE97  8D 14 23   			sta	_sequence_loaded
 17686                        	
-17687                        		.dbg	line,	"main.c", 179; init_SHOP();
-17688                        		__call		_init_SHOP
-         08:DEAB  20 DD FD   			call	_init_SHOP
-17689                        	
-17690                        		.dbg	line,	"main.c", 181; sequence_loaded = TRUE;
-17691                        		__st.umiq	1, _sequence_loaded
-         08:DEAE  A9 01      			lda.l	#1
-         08:DEB0  8D 14 23   			sta	_sequence_loaded
-17692                        	
-17693                        		.dbg	line,	"main.c", 182; }
+17687                        		.dbg	line,	"main.c", 182; }
+17688                        	
+17689                        		.dbg	line,	"main.c", 183; 
+17690                        	
+17691                        		.dbg	line,	"main.c", 184; else
+17692                        		__bra		.LL762
+         08:DE9A  4C EC DD   			bra	.LL762
+17693    08:DE9D             	.LL761:
 17694                        	
-17695                        		.dbg	line,	"main.c", 183; 
+17695                        		.dbg	line,	"main.c", 185; {
 17696                        	
-17697                        		.dbg	line,	"main.c", 184; else
-17698                        		__bra		.LL762
-         08:DEB3  4C EC DD   			bra	.LL762
-17699    08:DEB6             	.LL761:
+17697                        		.dbg	line,	"main.c", 186; switch(shop_phase)
+17698                        		__ld.umq	_shop_phase
+         08:DE9D  AD D8 23   			lda	_shop_phase
+17699                        		__bra		.LL763
+         08:DEA0  4C 83 DF   			bra	.LL763
 17700                        	
-17701                        		.dbg	line,	"main.c", 185; {
+17701                        		.dbg	line,	"main.c", 187; {
 17702                        	
-17703                        		.dbg	line,	"main.c", 186; switch(shop_phase)
-17704                        		__ld.umq	_shop_phase
-         08:DEB6  AD D8 23   			lda	_shop_phase
-17705                        		__bra		.LL763
-         08:DEB9  4C 9C DF   			bra	.LL763
+17703                        		.dbg	line,	"main.c", 188; case SHOP_PHASE_ENTER:
+17704    08:DEA3             	.LL765:
+17705                        		__case		0
 17706                        	
-17707                        		.dbg	line,	"main.c", 187; {
-17708                        	
-17709                        		.dbg	line,	"main.c", 188; case SHOP_PHASE_ENTER:
-17710    08:DEBC             	.LL765:
-17711                        		__case		0
-17712                        	
-17713                        		.dbg	line,	"main.c", 189; vsync();
-17714                        		__call		_vsync
-         08:DEBC  20 09 E3   			call	_vsync
+17707                        		.dbg	line,	"main.c", 189; vsync();
+17708                        		__call		_vsync
+         08:DEA3  20 09 E3   			call	_vsync
+17709                        	
+17710                        		.dbg	line,	"main.c", 191; if(shop_counter == 0)
+17711                        		__not.um	_shop_counter
+         08:DEA6  AD D9 23   			lda	_shop_counter
+         08:DEA9  18         			clc
+         08:DEAA  D0 01      			bne	!+
+         08:DEAC  38         			sec
+         08:DEAD             	!:
+17712                        		__bfalse	.LL766
+         08:DEAD  90 28      			bcc	.LL766
+17713                        	
+17714                        		.dbg	line,	"main.c", 192; {
 17715                        	
-17716                        		.dbg	line,	"main.c", 191; if(shop_counter == 0)
-17717                        		__not.um	_shop_counter
-         08:DEBF  AD D9 23   			lda	_shop_counter
-         08:DEC2  18         			clc
-         08:DEC3  D0 01      			bne	!+
-         08:DEC5  38         			sec
-         08:DEC6             	!:
-17718                        		__bfalse	.LL766
-         08:DEC6  90 28      			bcc	.LL766
-17719                        	
-17720                        		.dbg	line,	"main.c", 192; {
-17721                        	
-17722                        		.dbg	line,	"main.c", 193; put_string("Maybe, i can sell you" ,  2 , 15);
-17723                        		__ld.wi		__const1+65
-         08:DEC8  A9 41      			lda.l	#__const1+65
-         08:DECA  A0 60      			ldy.h	#__const1+65
-17724                        		__st.wmq	_bp
-         08:DECC  85 EC      			sta.l	_bp
-         08:DECE  84 ED      			sty.h	_bp
-17725                        		__st.umiq	2, _dil
-         08:DED0  A9 02      			lda.l	#2
-         08:DED2  85 F0      			sta	_dil
-17726                        		__st.umiq	15, _dih
-         08:DED4  A9 0F      			lda.l	#15
-         08:DED6  85 F1      			sta	_dih
-17727                        		__call		_put_string.3
-         08:DED8  20 68 E6   			call	_put_string.3
-17728                        	
-17729                        		.dbg	line,	"main.c", 194; put_string("something..." , 18 , 16);
-17730                        		__ld.wi		__const1+87
-         08:DEDB  A9 57      			lda.l	#__const1+87
-         08:DEDD  A0 60      			ldy.h	#__const1+87
-17731                        		__st.wmq	_bp
-         08:DEDF  85 EC      			sta.l	_bp
-         08:DEE1  84 ED      			sty.h	_bp
-17732                        		__st.umiq	18, _dil
-         08:DEE3  A9 12      			lda.l	#18
-         08:DEE5  85 F0      			sta	_dil
-17733                        		__st.umiq	16, _dih
-         08:DEE7  A9 10      			lda.l	#16
-         08:DEE9  85 F1      			sta	_dih
-17734                        		__call		_put_string.3
-         08:DEEB  20 68 E6   			call	_put_string.3
-17735                        	
-17736                        		.dbg	line,	"main.c", 195; }
-17737                        	
-17738                        		.dbg	line,	"main.c", 197; else if(shop_counter == 120)
-17739                        		__bra		.LL767
-         08:DEEE  80 44      			bra	.LL767
-17740    08:DEF0             	.LL766:
-17741                        		__ld.umq	_shop_counter
-         08:DEF0  AD D9 23   			lda	_shop_counter
-17742                        		__equ_b.uiq	120
-         08:DEF3  C9 78      			cmp	#120
-         08:DEF5  F0 01      			beq	!+
-         08:DEF7  18         			clc
-         08:DEF8             	!:
-17743                        		__bfalse	.LL768
-         08:DEF8  90 3A      			bcc	.LL768
-17744                        	
-17745                        		.dbg	line,	"main.c", 198; {
-17746                        	
-17747                        		.dbg	line,	"main.c", 199; put_string("                     " ,  2 , 15);
-17748                        		__ld.wi		__const1+100
-         08:DEFA  A9 64      			lda.l	#__const1+100
-         08:DEFC  A0 60      			ldy.h	#__const1+100
-17749                        		__st.wmq	_bp
-         08:DEFE  85 EC      			sta.l	_bp
-         08:DF00  84 ED      			sty.h	_bp
-17750                        		__st.umiq	2, _dil
-         08:DF02  A9 02      			lda.l	#2
-         08:DF04  85 F0      			sta	_dil
-17751                        		__st.umiq	15, _dih
-         08:DF06  A9 0F      			lda.l	#15
-         08:DF08  85 F1      			sta	_dih
-17752                        		__call		_put_string.3
-         08:DF0A  20 68 E6   			call	_put_string.3
-17753                        	
-17754                        		.dbg	line,	"main.c", 200; put_string("            " , 18 , 16);
-17755                        		__ld.wi		__const1+122
-         08:DF0D  A9 7A      			lda.l	#__const1+122
-         08:DF0F  A0 60      			ldy.h	#__const1+122
-17756                        		__st.wmq	_bp
-         08:DF11  85 EC      			sta.l	_bp
-         08:DF13  84 ED      			sty.h	_bp
-17757                        		__st.umiq	18, _dil
-         08:DF15  A9 12      			lda.l	#18
-         08:DF17  85 F0      			sta	_dil
-17758                        		__st.umiq	16, _dih
-         08:DF19  A9 10      			lda.l	#16
-         08:DF1B  85 F1      			sta	_dih
-17759                        		__call		_put_string.3
-         08:DF1D  20 68 E6   			call	_put_string.3
-17760                        	
-17761                        		.dbg	line,	"main.c", 202; spr_x(24);
-17762                        		__ld.wi		24
-         08:DF20  A9 18      			lda.l	#24
-         08:DF22  C2         			cly
-17763                        		__call		_spr_x.1
-         08:DF23  20 0A E8   			call	_spr_x.1
-17764                        	
-17765                        		.dbg	line,	"main.c", 203; spr_y(144);
-17766                        		__ld.wi		144
-         08:DF26  A9 90      			lda.l	#144
-         08:DF28  C2         			cly
-17767                        		__call		_spr_y.1
-         08:DF29  20 19 E8   			call	_spr_y.1
+17716                        		.dbg	line,	"main.c", 193; put_string("Maybe, i can sell you" ,  2 , 15);
+17717                        		__ld.wi		__const1+65
+         08:DEAF  A9 41      			lda.l	#__const1+65
+         08:DEB1  A0 60      			ldy.h	#__const1+65
+17718                        		__st.wmq	_bp
+         08:DEB3  85 EC      			sta.l	_bp
+         08:DEB5  84 ED      			sty.h	_bp
+17719                        		__st.umiq	2, _dil
+         08:DEB7  A9 02      			lda.l	#2
+         08:DEB9  85 F0      			sta	_dil
+17720                        		__st.umiq	15, _dih
+         08:DEBB  A9 0F      			lda.l	#15
+         08:DEBD  85 F1      			sta	_dih
+17721                        		__call		_put_string.3
+         08:DEBF  20 68 E6   			call	_put_string.3
+17722                        	
+17723                        		.dbg	line,	"main.c", 194; put_string("something..." , 18 , 16);
+17724                        		__ld.wi		__const1+87
+         08:DEC2  A9 57      			lda.l	#__const1+87
+         08:DEC4  A0 60      			ldy.h	#__const1+87
+17725                        		__st.wmq	_bp
+         08:DEC6  85 EC      			sta.l	_bp
+         08:DEC8  84 ED      			sty.h	_bp
+17726                        		__st.umiq	18, _dil
+         08:DECA  A9 12      			lda.l	#18
+         08:DECC  85 F0      			sta	_dil
+17727                        		__st.umiq	16, _dih
+         08:DECE  A9 10      			lda.l	#16
+         08:DED0  85 F1      			sta	_dih
+17728                        		__call		_put_string.3
+         08:DED2  20 68 E6   			call	_put_string.3
+17729                        	
+17730                        		.dbg	line,	"main.c", 195; }
+17731                        	
+17732                        		.dbg	line,	"main.c", 197; else if(shop_counter == 120)
+17733                        		__bra		.LL767
+         08:DED5  80 44      			bra	.LL767
+17734    08:DED7             	.LL766:
+17735                        		__ld.umq	_shop_counter
+         08:DED7  AD D9 23   			lda	_shop_counter
+17736                        		__equ_b.uiq	120
+         08:DEDA  C9 78      			cmp	#120
+         08:DEDC  F0 01      			beq	!+
+         08:DEDE  18         			clc
+         08:DEDF             	!:
+17737                        		__bfalse	.LL768
+         08:DEDF  90 3A      			bcc	.LL768
+17738                        	
+17739                        		.dbg	line,	"main.c", 198; {
+17740                        	
+17741                        		.dbg	line,	"main.c", 199; put_string("                     " ,  2 , 15);
+17742                        		__ld.wi		__const1+100
+         08:DEE1  A9 64      			lda.l	#__const1+100
+         08:DEE3  A0 60      			ldy.h	#__const1+100
+17743                        		__st.wmq	_bp
+         08:DEE5  85 EC      			sta.l	_bp
+         08:DEE7  84 ED      			sty.h	_bp
+17744                        		__st.umiq	2, _dil
+         08:DEE9  A9 02      			lda.l	#2
+         08:DEEB  85 F0      			sta	_dil
+17745                        		__st.umiq	15, _dih
+         08:DEED  A9 0F      			lda.l	#15
+         08:DEEF  85 F1      			sta	_dih
+17746                        		__call		_put_string.3
+         08:DEF1  20 68 E6   			call	_put_string.3
+17747                        	
+17748                        		.dbg	line,	"main.c", 200; put_string("            " , 18 , 16);
+17749                        		__ld.wi		__const1+122
+         08:DEF4  A9 7A      			lda.l	#__const1+122
+         08:DEF6  A0 60      			ldy.h	#__const1+122
+17750                        		__st.wmq	_bp
+         08:DEF8  85 EC      			sta.l	_bp
+         08:DEFA  84 ED      			sty.h	_bp
+17751                        		__st.umiq	18, _dil
+         08:DEFC  A9 12      			lda.l	#18
+         08:DEFE  85 F0      			sta	_dil
+17752                        		__st.umiq	16, _dih
+         08:DF00  A9 10      			lda.l	#16
+         08:DF02  85 F1      			sta	_dih
+17753                        		__call		_put_string.3
+         08:DF04  20 68 E6   			call	_put_string.3
+17754                        	
+17755                        		.dbg	line,	"main.c", 202; spr_x(24);
+17756                        		__ld.wi		24
+         08:DF07  A9 18      			lda.l	#24
+         08:DF09  C2         			cly
+17757                        		__call		_spr_x.1
+         08:DF0A  20 0A E8   			call	_spr_x.1
+17758                        	
+17759                        		.dbg	line,	"main.c", 203; spr_y(144);
+17760                        		__ld.wi		144
+         08:DF0D  A9 90      			lda.l	#144
+         08:DF0F  C2         			cly
+17761                        		__call		_spr_y.1
+         08:DF10  20 19 E8   			call	_spr_y.1
+17762                        	
+17763                        		.dbg	line,	"main.c", 204; satb_update();
+17764                        		__call		_satb_update
+         08:DF13  20 13 FF   			call	_satb_update
+17765                        	
+17766                        		.dbg	line,	"main.c", 206; shop_phase = SHOP_PHASE_BUY;
+17767                        		__st.umiq	1, _shop_phase
+         08:DF16  A9 01      			lda.l	#1
+         08:DF18  8D D8 23   			sta	_shop_phase
 17768                        	
-17769                        		.dbg	line,	"main.c", 204; satb_update();
-17770                        		__call		_satb_update
-         08:DF2C  20 13 FF   			call	_satb_update
-17771                        	
-17772                        		.dbg	line,	"main.c", 206; shop_phase = SHOP_PHASE_BUY;
-17773                        		__st.umiq	1, _shop_phase
-         08:DF2F  A9 01      			lda.l	#1
-         08:DF31  8D D8 23   			sta	_shop_phase
-17774                        	
-17775                        		.dbg	line,	"main.c", 207; }
-17776                        	
-17777                        		.dbg	line,	"main.c", 209; shop_counter++;
-17778    08:DF34             	.LL768:
-17779    08:DF34             	.LL767:
-17780                        		__inc.umq	_shop_counter
-         08:DF34  EE D9 23   			inc	_shop_counter
-17781                        	
-17782                        		.dbg	line,	"main.c", 211; break;
-17783                        		__bra		.LL764
-         08:DF37  4C EC DD   			bra	.LL764
+17769                        		.dbg	line,	"main.c", 207; }
+17770                        	
+17771                        		.dbg	line,	"main.c", 209; shop_counter++;
+17772    08:DF1B             	.LL768:
+17773    08:DF1B             	.LL767:
+17774                        		__inc.umq	_shop_counter
+         08:DF1B  EE D9 23   			inc	_shop_counter
+17775                        	
+17776                        		.dbg	line,	"main.c", 211; break;
+17777                        		__bra		.LL764
+         08:DF1E  4C EC DD   			bra	.LL764
+17778                        	
+17779                        		.dbg	line,	"main.c", 212; 
+17780                        	
+17781                        		.dbg	line,	"main.c", 214; case SHOP_PHASE_BUY:
+17782    08:DF21             	.LL769:
+17783                        		__case		1
 17784                        	
-17785                        		.dbg	line,	"main.c", 212; 
-17786                        	
-17787                        		.dbg	line,	"main.c", 214; case SHOP_PHASE_BUY:
-17788    08:DF3A             	.LL769:
-17789                        		__case		1
+17785                        		.dbg	line,	"main.c", 215; vsync();
+17786                        		__call		_vsync
+         08:DF21  20 09 E3   			call	_vsync
+17787                        	
+17788                        		.dbg	line,	"main.c", 217; joypad_BUTTONS_SHOP();
+17789                        		__call		_joypad_BUTTONS_SHOP
+         08:DF24  20 D3 FD   			call	_joypad_BUTTONS_SHOP
 17790                        	
-17791                        		.dbg	line,	"main.c", 215; vsync();
-17792                        		__call		_vsync
-         08:DF3A  20 09 E3   			call	_vsync
+17791                        		.dbg	line,	"main.c", 218; display_TIME_SHOP();
+17792                        		__call		_display_TIME_SHOP
+         08:DF27  20 C9 FD   			call	_display_TIME_SHOP
 17793                        	
-17794                        		.dbg	line,	"main.c", 217; joypad_BUTTONS_SHOP();
-17795                        		__call		_joypad_BUTTONS_SHOP
-         08:DF3D  20 D3 FD   			call	_joypad_BUTTONS_SHOP
+17794                        		.dbg	line,	"main.c", 219; satb_update();
+17795                        		__call		_satb_update
+         08:DF2A  20 13 FF   			call	_satb_update
 17796                        	
-17797                        		.dbg	line,	"main.c", 218; display_TIME_SHOP();
-17798                        		__call		_display_TIME_SHOP
-         08:DF40  20 C9 FD   			call	_display_TIME_SHOP
+17797                        		.dbg	line,	"main.c", 221; break;
+17798                        		__bra		.LL764
+         08:DF2D  4C EC DD   			bra	.LL764
 17799                        	
-17800                        		.dbg	line,	"main.c", 219; satb_update();
-17801                        		__call		_satb_update
-         08:DF43  20 13 FF   			call	_satb_update
-17802                        	
-17803                        		.dbg	line,	"main.c", 221; break;
-17804                        		__bra		.LL764
-         08:DF46  4C EC DD   			bra	.LL764
-17805                        	
-17806                        		.dbg	line,	"main.c", 224; case SHOP_PHASE_EXIT:
-17807    08:DF49             	.LL770:
-17808                        		__case		2
-17809                        	
-17810                        		.dbg	line,	"main.c", 225; vsync();
-17811                        		__call		_vsync
-         08:DF49  20 09 E3   			call	_vsync
+17800                        		.dbg	line,	"main.c", 224; case SHOP_PHASE_EXIT:
+17801    08:DF30             	.LL770:
+17802                        		__case		2
+17803                        	
+17804                        		.dbg	line,	"main.c", 225; vsync();
+17805                        		__call		_vsync
+         08:DF30  20 09 E3   			call	_vsync
+17806                        	
+17807                        		.dbg	line,	"main.c", 227; if(shop_counter == 0)
+17808                        		__not.um	_shop_counter
+         08:DF33  AD D9 23   			lda	_shop_counter
+         08:DF36  18         			clc
+         08:DF37  D0 01      			bne	!+
+         08:DF39  38         			sec
+         08:DF3A             	!:
+17809                        		__bfalse	.LL771
+         08:DF3A  90 1F      			bcc	.LL771
+17810                        	
+17811                        		.dbg	line,	"main.c", 228; {
 17812                        	
-17813                        		.dbg	line,	"main.c", 227; if(shop_counter == 0)
-17814                        		__not.um	_shop_counter
-         08:DF4C  AD D9 23   			lda	_shop_counter
-         08:DF4F  18         			clc
-         08:DF50  D0 01      			bne	!+
-         08:DF52  38         			sec
-         08:DF53             	!:
-17815                        		__bfalse	.LL771
-         08:DF53  90 1F      			bcc	.LL771
-17816                        	
-17817                        		.dbg	line,	"main.c", 228; {
-17818                        	
-17819                        		.dbg	line,	"main.c", 229; put_string("GOOD LUCK!" , 11 , 16);
-17820                        		__ld.wi		__const1+135
-         08:DF55  A9 87      			lda.l	#__const1+135
-         08:DF57  A0 60      			ldy.h	#__const1+135
-17821                        		__st.wmq	_bp
-         08:DF59  85 EC      			sta.l	_bp
-         08:DF5B  84 ED      			sty.h	_bp
-17822                        		__st.umiq	11, _dil
-         08:DF5D  A9 0B      			lda.l	#11
-         08:DF5F  85 F0      			sta	_dil
-17823                        		__st.umiq	16, _dih
-         08:DF61  A9 10      			lda.l	#16
-         08:DF63  85 F1      			sta	_dih
-17824                        		__call		_put_string.3
-         08:DF65  20 68 E6   			call	_put_string.3
+17813                        		.dbg	line,	"main.c", 229; put_string("GOOD LUCK!" , 11 , 16);
+17814                        		__ld.wi		__const1+135
+         08:DF3C  A9 87      			lda.l	#__const1+135
+         08:DF3E  A0 60      			ldy.h	#__const1+135
+17815                        		__st.wmq	_bp
+         08:DF40  85 EC      			sta.l	_bp
+         08:DF42  84 ED      			sty.h	_bp
+17816                        		__st.umiq	11, _dil
+         08:DF44  A9 0B      			lda.l	#11
+         08:DF46  85 F0      			sta	_dil
+17817                        		__st.umiq	16, _dih
+         08:DF48  A9 10      			lda.l	#16
+         08:DF4A  85 F1      			sta	_dih
+17818                        		__call		_put_string.3
+         08:DF4C  20 68 E6   			call	_put_string.3
+17819                        	
+17820                        		.dbg	line,	"main.c", 231; // HIDE CURSOR //
+17821                        	
+17822                        		.dbg	line,	"main.c", 232; spr_set(0);
+17823                        		__ld.uiq	0
+         08:DF4F  62         			cla
+17824                        		__call		_spr_set.1
+         08:DF50  20 DD E7   			call	_spr_set.1
 17825                        	
-17826                        		.dbg	line,	"main.c", 231; // HIDE CURSOR //
-17827                        	
-17828                        		.dbg	line,	"main.c", 232; spr_set(0);
-17829                        		__ld.uiq	0
-         08:DF68  62         			cla
-17830                        		__call		_spr_set.1
-         08:DF69  20 DD E7   			call	_spr_set.1
+17826                        		.dbg	line,	"main.c", 233; spr_hide();
+17827                        		__call		_spr_hide
+         08:DF53  20 F8 E7   			call	_spr_hide
+17828                        	
+17829                        		.dbg	line,	"main.c", 234; satb_update();
+17830                        		__call		_satb_update
+         08:DF56  20 13 FF   			call	_satb_update
 17831                        	
-17832                        		.dbg	line,	"main.c", 233; spr_hide();
-17833                        		__call		_spr_hide
-         08:DF6C  20 F8 E7   			call	_spr_hide
-17834                        	
-17835                        		.dbg	line,	"main.c", 234; satb_update();
-17836                        		__call		_satb_update
-         08:DF6F  20 13 FF   			call	_satb_update
-17837                        	
-17838                        		.dbg	line,	"main.c", 235; }
-17839                        	
-17840                        		.dbg	line,	"main.c", 237; else if(shop_counter == 120)
-17841                        		__bra		.LL772
-         08:DF72  80 22      			bra	.LL772
-17842    08:DF74             	.LL771:
-17843                        		__ld.umq	_shop_counter
-         08:DF74  AD D9 23   			lda	_shop_counter
-17844                        		__equ_b.uiq	120
-         08:DF77  C9 78      			cmp	#120
-         08:DF79  F0 01      			beq	!+
-         08:DF7B  18         			clc
-         08:DF7C             	!:
-17845                        		__bfalse	.LL773
-         08:DF7C  90 18      			bcc	.LL773
-17846                        	
-17847                        		.dbg	line,	"main.c", 238; {
-17848                        	
-17849                        		.dbg	line,	"main.c", 239; disp_off();
-17850                        		__call		_disp_off
-         08:DF7E  20 29 E4   			call	_disp_off
-17851                        	
-17852                        		.dbg	line,	"main.c", 241; // REINIT PLAYER //
+17832                        		.dbg	line,	"main.c", 235; }
+17833                        	
+17834                        		.dbg	line,	"main.c", 237; else if(shop_counter == 120)
+17835                        		__bra		.LL772
+         08:DF59  80 22      			bra	.LL772
+17836    08:DF5B             	.LL771:
+17837                        		__ld.umq	_shop_counter
+         08:DF5B  AD D9 23   			lda	_shop_counter
+17838                        		__equ_b.uiq	120
+         08:DF5E  C9 78      			cmp	#120
+         08:DF60  F0 01      			beq	!+
+         08:DF62  18         			clc
+         08:DF63             	!:
+17839                        		__bfalse	.LL773
+         08:DF63  90 18      			bcc	.LL773
+17840                        	
+17841                        		.dbg	line,	"main.c", 238; {
+17842                        	
+17843                        		.dbg	line,	"main.c", 239; disp_off();
+17844                        		__call		_disp_off
+         08:DF65  20 29 E4   			call	_disp_off
+17845                        	
+17846                        		.dbg	line,	"main.c", 241; // REINIT PLAYER //
+17847                        	
+17848                        		.dbg	line,	"main.c", 242; init_PLAYER();
+17849                        		__call		_init_PLAYER
+         08:DF68  20 55 FE   			call	_init_PLAYER
+17850                        	
+17851                        		.dbg	line,	"main.c", 244; shop_phase = SHOP_PHASE_EXIT;
+17852                        		__st.umiq	2, _shop_phase
+         08:DF6B  A9 02      			lda.l	#2
+         08:DF6D  8D D8 23   			sta	_shop_phase
 17853                        	
-17854                        		.dbg	line,	"main.c", 242; init_PLAYER();
-17855                        		__call		_init_PLAYER
-         08:DF81  20 55 FE   			call	_init_PLAYER
+17854                        		.dbg	line,	"main.c", 245; respawn = RESPAWN_SHOP;
+17855                        		__st.umiq	2, _respawn
+         08:DF70  A9 02      			lda.l	#2
+         08:DF72  8D 16 23   			sta	_respawn
 17856                        	
-17857                        		.dbg	line,	"main.c", 244; shop_phase = SHOP_PHASE_EXIT;
-17858                        		__st.umiq	2, _shop_phase
-         08:DF84  A9 02      			lda.l	#2
-         08:DF86  8D D8 23   			sta	_shop_phase
+17857                        		.dbg	line,	"main.c", 246; sequence_loaded = FALSE;
+17858                        		__st.umiq	0, _sequence_loaded
+         08:DF75  9C 14 23   			stz	_sequence_loaded
 17859                        	
-17860                        		.dbg	line,	"main.c", 245; respawn = RESPAWN_SHOP;
-17861                        		__st.umiq	2, _respawn
-         08:DF89  A9 02      			lda.l	#2
-         08:DF8B  8D 16 23   			sta	_respawn
+17860                        		.dbg	line,	"main.c", 247; sequence_id = SEQUENCE_GAME;
+17861                        		__st.umiq	2, _sequence_id
+         08:DF78  A9 02      			lda.l	#2
+         08:DF7A  8D 13 23   			sta	_sequence_id
 17862                        	
-17863                        		.dbg	line,	"main.c", 246; sequence_loaded = FALSE;
-17864                        		__st.umiq	0, _sequence_loaded
-         08:DF8E  9C 14 23   			stz	_sequence_loaded
-17865                        	
-17866                        		.dbg	line,	"main.c", 247; sequence_id = SEQUENCE_GAME;
-17867                        		__st.umiq	2, _sequence_id
-         08:DF91  A9 02      			lda.l	#2
-         08:DF93  8D 13 23   			sta	_sequence_id
-17868                        	
-17869                        		.dbg	line,	"main.c", 248; }
-17870                        	
-17871                        		.dbg	line,	"main.c", 250; shop_counter++;
-17872    08:DF96             	.LL773:
-17873    08:DF96             	.LL772:
-17874                        		__inc.umq	_shop_counter
-         08:DF96  EE D9 23   			inc	_shop_counter
-17875                        	
-17876                        		.dbg	line,	"main.c", 252; break;
-17877                        		__bra		.LL764
-         08:DF99  4C EC DD   			bra	.LL764
-17878                        	
-17879                        		.dbg	line,	"main.c", 253; }
-17880    08:DF9C             	.LL763:
-17881                        		__switch_r.ur	0, 2
-         08:DF9C  C9 03      			cmp	#(2 - 0) + 1
-         08:DF9E  90 02      			bcc	!found+
-         08:DFA0  A9 03      	!default:	lda	#(2 - 0) + 1
-         08:DFA2  0A         	!found:		asl	a
-         08:DFA3  AA         			tax
-         08:DFA4  7C A7 DF   			jmp	[!table+, x]
-17882                        	
-17883    08:DFA7  BC DE      	!table:		dw	.LL765, .LL769, .LL770
-         08:DFA9  3A DF       
-         08:DFAB  49 DF       
-17884    08:DFAD  EC DD      			dw	.LL764
-17885    08:DFAF             	.LL764	.alias		.LL744
+17863                        		.dbg	line,	"main.c", 248; }
+17864                        	
+17865                        		.dbg	line,	"main.c", 250; shop_counter++;
+17866    08:DF7D             	.LL773:
+17867    08:DF7D             	.LL772:
+17868                        		__inc.umq	_shop_counter
+         08:DF7D  EE D9 23   			inc	_shop_counter
+17869                        	
+17870                        		.dbg	line,	"main.c", 252; break;
+17871                        		__bra		.LL764
+         08:DF80  4C EC DD   			bra	.LL764
+17872                        	
+17873                        		.dbg	line,	"main.c", 253; }
+17874    08:DF83             	.LL763:
+17875                        		__switch_r.ur	0, 2
+         08:DF83  C9 03      			cmp	#(2 - 0) + 1
+         08:DF85  90 02      			bcc	!found+
+         08:DF87  A9 03      	!default:	lda	#(2 - 0) + 1
+         08:DF89  0A         	!found:		asl	a
+         08:DF8A  AA         			tax
+         08:DF8B  7C 8E DF   			jmp	[!table+, x]
+17876                        	
+17877    08:DF8E  A3 DE      	!table:		dw	.LL765, .LL769, .LL770
+         08:DF90  21 DF       
+         08:DF92  30 DF       
+17878    08:DF94  EC DD      			dw	.LL764
+17879    08:DF96             	.LL764	.alias		.LL744
+17880                        	
+17881                        		.dbg	line,	"main.c", 254; }
+17882    08:DF96             	.LL762	.alias		.LL744
+17883                        	
+17884                        		.dbg	line,	"main.c", 256; break;
+17885                        		__bra		.LL744
+         08:DF96  4C EC DD   			bra	.LL744
 17886                        	
-17887                        		.dbg	line,	"main.c", 254; }
-17888    08:DFAF             	.LL762	.alias		.LL744
-17889                        	
-17890                        		.dbg	line,	"main.c", 256; break;
-17891                        		__bra		.LL744
-         08:DFAF  4C EC DD   			bra	.LL744
-17892                        	
-17893                        		.dbg	line,	"main.c", 257; }
-17894    08:DFB2             	.LL743:
-17895                        		__switch_r.ur	0, 4
-         08:DFB2  C9 05      			cmp	#(4 - 0) + 1
-         08:DFB4  90 02      			bcc	!found+
-         08:DFB6  A9 05      	!default:	lda	#(4 - 0) + 1
-         08:DFB8  0A         	!found:		asl	a
-         08:DFB9  AA         			tax
-         08:DFBA  7C BD DF   			jmp	[!table+, x]
-17896                        	
-17897    08:DFBD  F2 DD      	!table:		dw	.LL745, .LL748, .LL749, .LL759, .LL760
-         08:DFBF  10 DE       
-         08:DFC1  12 DE       
-         08:DFC3  9F DE       
-         08:DFC5  A2 DE       
-17898    08:DFC7  EC DD      			dw	.LL744
-17899    08:DFC9             	.LL744	.alias		.LL741
-17900                        	
-17901                        		.dbg	line,	"main.c", 258; }
-17902                        		__bra		.LL741
-         08:DFC9  4C EC DD   			bra	.LL741
-17903    08:DFCC             	.LL742:
-17904                        	
-17905                        		.dbg	line,	"main.c", 259; }
-17906    08:DFCC             	.LL733:
-17907                        		__return	1
-         08:DFCC  AA         			tax
-         08:DFCD  4C EF FF   			jmp	leave_proc
-17908                        		.dbg	clear
-17909                        		.endp
-17910                        		.pceas
-17911                        	
-17912                        		.dbg	clear
-17913               6000     		.rodata
-17914    01:6000             	__const1:
-17915    01:6000  53 54 41 52			db	'S','T','A','R','T',' ','G','A'
+17887                        		.dbg	line,	"main.c", 257; }
+17888    08:DF99             	.LL743:
+17889                        		__switch_r.ur	0, 4
+         08:DF99  C9 05      			cmp	#(4 - 0) + 1
+         08:DF9B  90 02      			bcc	!found+
+         08:DF9D  A9 05      	!default:	lda	#(4 - 0) + 1
+         08:DF9F  0A         	!found:		asl	a
+         08:DFA0  AA         			tax
+         08:DFA1  7C A4 DF   			jmp	[!table+, x]
+17890                        	
+17891    08:DFA4  F2 DD      	!table:		dw	.LL745, .LL748, .LL749, .LL759, .LL760
+         08:DFA6  10 DE       
+         08:DFA8  12 DE       
+         08:DFAA  86 DE       
+         08:DFAC  89 DE       
+17892    08:DFAE  EC DD      			dw	.LL744
+17893    08:DFB0             	.LL744	.alias		.LL741
+17894                        	
+17895                        		.dbg	line,	"main.c", 258; }
+17896                        		__bra		.LL741
+         08:DFB0  4C EC DD   			bra	.LL741
+17897    08:DFB3             	.LL742:
+17898                        	
+17899                        		.dbg	line,	"main.c", 259; }
+17900    08:DFB3             	.LL733:
+17901                        		__return	1
+         08:DFB3  AA         			tax
+         08:DFB4  4C EF FF   			jmp	leave_proc
+17902                        		.dbg	clear
+17903                        		.endp
+17904                        		.pceas
+17905                        	
+17906                        		.dbg	clear
+17907               6000     		.rodata
+17908    01:6000             	__const1:
+17909    01:6000  53 54 41 52			db	'S','T','A','R','T',' ','G','A'
          01:6004  54 20 47 41 
-17916    01:6008  4D 45 00 4C			db	'M','E',$00,'L','I','F','E',$00
+17910    01:6008  4D 45 00 4C			db	'M','E',$00,'L','I','F','E',$00
          01:600C  49 46 45 00 
-17917    01:6010  43 52 45 44			db	'C','R','E','D','I','T','S',$00
+17911    01:6010  43 52 45 44			db	'C','R','E','D','I','T','S',$00
          01:6014  49 54 53 00 
-17918    01:6018  43 41 50 43			db	'C','A','P','C','O','M',' ','1'
+17912    01:6018  43 41 50 43			db	'C','A','P','C','O','M',' ','1'
          01:601C  4F 4D 20 31 
-17919    01:6020  39 38 37 00			db	'9','8','7',$00,'H','a','l','t'
+17913    01:6020  39 38 37 00			db	'9','8','7',$00,'H','a','l','t'
          01:6024  48 61 6C 74 
-17920    01:6028  3A 20 53 47			db	':',' ','S','G','X',' ','h','a'
+17914    01:6028  3A 20 53 47			db	':',' ','S','G','X',' ','h','a'
          01:602C  58 20 68 61 
-17921    01:6030  72 64 77 61			db	'r','d','w','a','r','e',' ','n'
+17915    01:6030  72 64 77 61			db	'r','d','w','a','r','e',' ','n'
          01:6034  72 65 20 6E 
-17922    01:6038  6F 74 20 66			db	'o','t',' ','f','o','u','n','d'
+17916    01:6038  6F 74 20 66			db	'o','t',' ','f','o','u','n','d'
          01:603C  6F 75 6E 64 
-17923    01:6040  00 4D 61 79			db	$00,'M','a','y','b','e',',',' '
+17917    01:6040  00 4D 61 79			db	$00,'M','a','y','b','e',',',' '
          01:6044  62 65 2C 20 
-17924    01:6048  69 20 63 61			db	'i',' ','c','a','n',' ','s','e'
+17918    01:6048  69 20 63 61			db	'i',' ','c','a','n',' ','s','e'
          01:604C  6E 20 73 65 
-17925    01:6050  6C 6C 20 79			db	'l','l',' ','y','o','u',$00,'s'
+17919    01:6050  6C 6C 20 79			db	'l','l',' ','y','o','u',$00,'s'
          01:6054  6F 75 00 73 
-17926    01:6058  6F 6D 65 74			db	'o','m','e','t','h','i','n','g'
+17920    01:6058  6F 6D 65 74			db	'o','m','e','t','h','i','n','g'
          01:605C  68 69 6E 67 
-17927    01:6060  2E 2E 2E 00			db	'.','.','.',$00,' ',' ',' ',' '
+17921    01:6060  2E 2E 2E 00			db	'.','.','.',$00,' ',' ',' ',' '
          01:6064  20 20 20 20 
-17928    01:6068  20 20 20 20			db	' ',' ',' ',' ',' ',' ',' ',' '
+17922    01:6068  20 20 20 20			db	' ',' ',' ',' ',' ',' ',' ',' '
          01:606C  20 20 20 20 
-17929    01:6070  20 20 20 20			db	' ',' ',' ',' ',' ',' ',' ',' '
+17923    01:6070  20 20 20 20			db	' ',' ',' ',' ',' ',' ',' ',' '
          01:6074  20 20 20 20 
-17930    01:6078  20 00 20 20			db	' ',$00,' ',' ',' ',' ',' ',' '
+17924    01:6078  20 00 20 20			db	' ',$00,' ',' ',' ',' ',' ',' '
          01:607C  20 20 20 20 
-17931    01:6080  20 20 20 20			db	' ',' ',' ',' ',' ',' ',$00,'G'
+17925    01:6080  20 20 20 20			db	' ',' ',' ',' ',' ',' ',$00,'G'
          01:6084  20 20 00 47 
-17932    01:6088  4F 4F 44 20			db	'O','O','D',' ','L','U','C','K'
+17926    01:6088  4F 4F 44 20			db	'O','O','D',' ','L','U','C','K'
          01:608C  4C 55 43 4B 
-17933    01:6090  21 00      			db	'!',$00
-17934    01:6092             	_TABLE_NPC_TYPE_LV1:
-17935    01:6092  01         			db	1
-17936    01:6093  00         			db	0
-17937    01:6094             	_TABLE_NPC_X_POS_REF_LV1:
-17938    01:6094  90 03      			dw	912
-17939    01:6096  D0 04      			dw	1232
-17940    01:6098             	_TABLE_NPC_Y_POS_REF_LV1:
-17941    01:6098  40 02      			dw	576
-17942    01:609A  90 01      			dw	400
-17943    01:609C             	_TABLE_OBJECT_TYPE_LV1:
-17944    01:609C  00         			db	0
-17945    01:609D  01         			db	1
-17946    01:609E  01         			db	1
-17947    01:609F  01         			db	1
-17948    01:60A0  01         			db	1
-17949    01:60A1  01         			db	1
-17950    01:60A2  01         			db	1
-17951    01:60A3  02         			db	2
-17952    01:60A4  01         			db	1
-17953    01:60A5  01         			db	1
-17954    01:60A6  01         			db	1
-17955    01:60A7  01         			db	1
-17956    01:60A8  01         			db	1
-17957    01:60A9  01         			db	1
-17958    01:60AA  01         			db	1
-17959    01:60AB  01         			db	1
-17960    01:60AC  01         			db	1
-17961    01:60AD  01         			db	1
-17962    01:60AE  01         			db	1
-17963    01:60AF  01         			db	1
-17964    01:60B0  01         			db	1
-17965    01:60B1  01         			db	1
-17966    01:60B2  01         			db	1
-17967    01:60B3             	_TABLE_OBJECT_X_POS_REF_LV1:
-17968    01:60B3  90 06      			dw	1680
-17969    01:60B5  00 05      			dw	1280
-17970    01:60B7  C0 05      			dw	1472
-17971    01:60B9  A0 05      			dw	1440
-17972    01:60BB  90 04      			dw	1168
-17973    01:60BD  B0 04      			dw	1200
-17974    01:60BF  C0 03      			dw	960
-17975    01:60C1  D8 03      			dw	984
-17976    01:60C3  50 05      			dw	1360
-17977    01:60C5  70 05      			dw	1392
-17978    01:60C7  10 06      			dw	1552
-17979    01:60C9  90 06      			dw	1680
-17980    01:60CB  B0 06      			dw	1712
-17981    01:60CD  D0 06      			dw	1744
-17982    01:60CF  E0 04      			dw	1248
-17983    01:60D1  00 05      			dw	1280
-17984    01:60D3  90 04      			dw	1168
-17985    01:60D5  10 04      			dw	1040
-17986    01:60D7  80 02      			dw	640
-17987    01:60D9  A0 02      			dw	672
-17988    01:60DB  50 01      			dw	336
-17989    01:60DD  70 01      			dw	368
-17990    01:60DF  A0 01      			dw	416
-17991    01:60E1             	_TABLE_OBJECT_Y_POS_REF_LV1:
-17992    01:60E1  80 01      			dw	384
-17993    01:60E3  A0 01      			dw	416
-17994    01:60E5  E0 01      			dw	480
-17995    01:60E7  F0 01      			dw	496
-17996    01:60E9  30 02      			dw	560
-17997    01:60EB  30 02      			dw	560
-17998    01:60ED  50 02      			dw	592
-17999    01:60EF  50 02      			dw	592
-18000    01:60F1  50 02      			dw	592
-18001    01:60F3  50 02      			dw	592
-18002    01:60F5  C0 02      			dw	704
-18003    01:60F7  D0 02      			dw	720
-18004    01:60F9  D0 02      			dw	720
-18005    01:60FB  D0 02      			dw	720
-18006    01:60FD  E0 02      			dw	736
-18007    01:60FF  E0 02      			dw	736
-18008    01:6101  F0 02      			dw	752
-18009    01:6103  50 03      			dw	848
-18010    01:6105  70 03      			dw	880
-18011    01:6107  70 03      			dw	880
-18012    01:6109  80 03      			dw	896
-18013    01:610B  80 03      			dw	896
-18014    01:610D  80 03      			dw	896
-18015    01:610F             	_TABLE_CHEST_X_POS_REF_LV1:
-18016    01:610F  30 04      			dw	1072
-18017    01:6111  30 03      			dw	816
-18018    01:6113             	_TABLE_CHEST_Y_POS_REF_LV1:
-18019    01:6113  40 03      			dw	832
-18020    01:6115  50 03      			dw	848
-18021    01:6117             	_TABLE_PLAYER_TILES_ADR:
-18022    01:6117  60 7A      			dw	_tiles_SPR_PLAYER_ARMOR
-18023    01:6119  60 6C      			dw	_tiles_SPR_PLAYER_NAKED
-18024    01:611B             	_TABLE_PLAYER_TILES_BANK:
-18025    01:611B  0F         			db	^_tiles_SPR_PLAYER_ARMOR
-18026    01:611C  11         			db	^_tiles_SPR_PLAYER_NAKED
-18027    01:611D             	_TABLE_PLAYER_JUMP_V:
-18028    01:611D  FC         			db	-4
-18029    01:611E  FB         			db	-5
-18030    01:611F  F6         			db	-10
-18031    01:6120  FC         			db	-4
-18032    01:6121  FC         			db	-4
-18033    01:6122  F9         			db	-7
-18034    01:6123  FA         			db	-6
-18035    01:6124  FD         			db	-3
-18036    01:6125  FB         			db	-5
-18037    01:6126  FE         			db	-2
-18038    01:6127  FC         			db	-4
-18039    01:6128  FF         			db	-1
-18040    01:6129  FF         			db	-1
-18041    01:612A  FF         			db	-1
-18042    01:612B  FF         			db	-1
-18043    01:612C  00         			db	0
-18044    01:612D  00         			db	0
-18045    01:612E  00         			db	0
-18046    01:612F  00         			db	0
-18047    01:6130  01         			db	1
-18048    01:6131  01         			db	1
-18049    01:6132  01         			db	1
-18050    01:6133  01         			db	1
-18051    01:6134  04         			db	4
-18052    01:6135  02         			db	2
-18053    01:6136  05         			db	5
-18054    01:6137  03         			db	3
-18055    01:6138  06         			db	6
-18056    01:6139  07         			db	7
-18057    01:613A  04         			db	4
-18058    01:613B  04         			db	4
-18059    01:613C  0A         			db	10
-18060    01:613D  04         			db	4
-18061    01:613E  04         			db	4
-18062    01:613F  05         			db	5
-18063    01:6140             	_TABLE_PLAYER_FALL:
-18064    01:6140  00         			db	0
-18065    01:6141  00         			db	0
-18066    01:6142  00         			db	0
-18067    01:6143  00         			db	0
-18068    01:6144  01         			db	1
-18069    01:6145  01         			db	1
-18070    01:6146  01         			db	1
-18071    01:6147  01         			db	1
-18072    01:6148  02         			db	2
-18073    01:6149  02         			db	2
-18074    01:614A  02         			db	2
-18075    01:614B  02         			db	2
-18076    01:614C  03         			db	3
-18077    01:614D  03         			db	3
-18078    01:614E  03         			db	3
-18079    01:614F  04         			db	4
-18080    01:6150  04         			db	4
-18081    01:6151  04         			db	4
-18082    01:6152  04         			db	4
-18083    01:6153  04         			db	4
-18084    01:6154  05         			db	5
-18085    01:6155             	_TABLE_PLAYER_JUMP_LADDER:
-18086    01:6155  FC         			db	-4
-18087    01:6156  FC         			db	-4
-18088    01:6157  FD         			db	-3
-18089    01:6158  FD         			db	-3
-18090    01:6159  FD         			db	-3
-18091    01:615A  FE         			db	-2
-18092    01:615B  FE         			db	-2
-18093    01:615C  FE         			db	-2
-18094    01:615D  FF         			db	-1
-18095    01:615E  FF         			db	-1
-18096    01:615F  FF         			db	-1
-18097    01:6160  FF         			db	-1
-18098    01:6161  FF         			db	-1
-18099    01:6162  00         			db	0
-18100    01:6163  00         			db	0
-18101    01:6164  00         			db	0
-18102    01:6165  00         			db	0
-18103    01:6166  01         			db	1
-18104    01:6167  01         			db	1
-18105    01:6168  01         			db	1
-18106    01:6169  01         			db	1
-18107    01:616A  01         			db	1
-18108    01:616B  02         			db	2
-18109    01:616C  02         			db	2
-18110    01:616D  02         			db	2
-18111    01:616E  03         			db	3
-18112    01:616F  03         			db	3
-18113    01:6170  03         			db	3
-18114    01:6171  04         			db	4
-18115    01:6172  04         			db	4
-18116    01:6173             	_TABLE_WEAPON_TILES_ADR:
-18117    01:6173  E0 66      			dw	_tiles_SPR_WEAPON_0
-18118    01:6175  60 69      			dw	_tiles_SPR_WEAPON_1
-18119    01:6177  E0 6B      			dw	_tiles_SPR_WEAPON_2
-18120    01:6179  60 6E      			dw	_tiles_SPR_WEAPON_3
-18121    01:617B  E0 70      			dw	_tiles_SPR_WEAPON_4
-18122    01:617D             	_TABLE_WEAPON_TILES_BANK:
-18123    01:617D  13         			db	^_tiles_SPR_WEAPON_0
-18124    01:617E  13         			db	^_tiles_SPR_WEAPON_1
-18125    01:617F  13         			db	^_tiles_SPR_WEAPON_2
-18126    01:6180  13         			db	^_tiles_SPR_WEAPON_3
-18127    01:6181  13         			db	^_tiles_SPR_WEAPON_4
-18128    01:6182             	_TABLE_SHOP_ITEMS_LV1:
-18129    01:6182  00         			db	0
-18130    01:6183  01         			db	1
-18131    01:6184  02         			db	2
-18132    01:6185  03         			db	3
-18133    01:6186  04         			db	4
-18134    01:6187  05         			db	5
-18135    01:6188  06         			db	6
-18136    01:6189  07         			db	7
-18137    01:618A  08         			db	8
-18138    01:618B  09         			db	9
-18139    01:618C             	_TABLE_SHOP_PRICES_LV1:
-18140    01:618C  64 00      			dw	100
-18141    01:618E  E8 03      			dw	1000
-18142    01:6190  60 09      			dw	2400
-18143    01:6192  80 25      			dw	9600
-18144    01:6194  1E 00      			dw	30
-18145    01:6196  50 00      			dw	80
-18146    01:6198  2C 01      			dw	300
-18147    01:619A  20 03      			dw	800
-18148    01:619C  40 06      			dw	1600
-18149    01:619E  96 00      			dw	150
-18150    01:61A0             	_TABLE_SHOP_ITEMS_TILES_ADR:
-18151    01:61A0  E0 70      			dw	_tiles_ITEM_WEAPON_2
-18152    01:61A2  60 71      			dw	_tiles_ITEM_WEAPON_3
-18153    01:61A4  E0 71      			dw	_tiles_ITEM_WEAPON_4
-18154    01:61A6  60 72      			dw	_tiles_ITEM_WEAPON_5
-18155    01:61A8  E0 72      			dw	_tiles_ITEM_KEY
-18156    01:61AA  60 73      			dw	_tiles_ITEM_ARMOR_2
-18157    01:61AC  E0 73      			dw	_tiles_ITEM_ARMOR_3
-18158    01:61AE  60 74      			dw	_tiles_ITEM_ARMOR_4
-18159    01:61B0  E0 74      			dw	_tiles_ITEM_ARMOR_5
-18160    01:61B2  60 75      			dw	_tiles_ITEM_POTION
-18161    01:61B4             	_TABLE_SHOP_ITEMS_TILES_BANK:
-18162    01:61B4  0F         			db	^_tiles_ITEM_WEAPON_2
-18163    01:61B5  0F         			db	^_tiles_ITEM_WEAPON_3
-18164    01:61B6  0F         			db	^_tiles_ITEM_WEAPON_4
-18165    01:61B7  0F         			db	^_tiles_ITEM_WEAPON_5
-18166    01:61B8  0F         			db	^_tiles_ITEM_KEY
-18167    01:61B9  0F         			db	^_tiles_ITEM_ARMOR_2
-18168    01:61BA  0F         			db	^_tiles_ITEM_ARMOR_3
-18169    01:61BB  0F         			db	^_tiles_ITEM_ARMOR_4
-18170    01:61BC  0F         			db	^_tiles_ITEM_ARMOR_5
-18171    01:61BD  0F         			db	^_tiles_ITEM_POTION
-18172    01:61BE             	_TABLE_CURSOR_POS_X:
-18173    01:61BE  18         			db	24
-18174    01:61BF  38         			db	56
-18175    01:61C0  60         			db	96
-18176    01:61C1  88         			db	136
-18177    01:61C2  B0         			db	176
-18178    01:61C3  18         			db	24
-18179    01:61C4  38         			db	56
-18180    01:61C5  60         			db	96
-18181    01:61C6  88         			db	136
-18182    01:61C7  B0         			db	176
-18183    01:61C8  D4         			db	212
-18184                        	
-18185               2313     		.bss
-18186    F8:2313             	_sequence_id:
-18187    F8:2313             			ds	1
-18188    F8:2314             	_sequence_loaded:
-18189    F8:2314             			ds	1
-18190    F8:2315             	_level_id:
-18191    F8:2315             			ds	1
-18192    F8:2316             	_respawn:
-18193    F8:2316             			ds	1
-18194    F8:2317             	_player_id:
-18195    F8:2317             			ds	1
-18196    F8:2318             	_player_state:
-18197    F8:2318             			ds	1
-18198    F8:2319             	_player_axis:
-18199    F8:2319             			ds	1
-18200    F8:231A             	_player_previous_axis:
-18201    F8:231A             			ds	1
-18202    F8:231B             	_player_counter_anim:
-18203    F8:231B             			ds	1
-18204    F8:231C             	_player_index_jump:
-18205    F8:231C             			ds	1
-18206    F8:231D             	_player_index_fall:
-18207    F8:231D             			ds	1
-18208    F8:231E             	_player_counter_attack:
-18209    F8:231E             			ds	1
-18210    F8:231F             	_player_naked:
-18211    F8:231F             			ds	1
-18212    F8:2320             	_player_attack:
-18213    F8:2320             			ds	1
-18214    F8:2321             	_jump_ladder:
-18215    F8:2321             			ds	1
-18216    F8:2322             	_jump_max_index:
-18217    F8:2322             			ds	1
-18218    F8:2323             	_fall_ladder:
-18219    F8:2323             			ds	1
-18220    F8:2324             	_hit_wall:
-18221    F8:2324             			ds	1
-18222    F8:2325             	_chain_id:
-18223    F8:2325             			ds	1
-18224    F8:2326             	_weapon_id:
-18225    F8:2326             			ds	1
-18226    F8:2327             	_armor_level:
-18227    F8:2327             			ds	1
-18228    F8:2328             	_weapon_level:
-18229    F8:2328             			ds	1
-18230    F8:2329             	_list_chain_active:
-18231    F8:2329             			ds	3
-18232    F8:232C             	_life_amount:
-18233    F8:232C             			ds	1
-18234    F8:232D             	_credits_amount:
-18235    F8:232D             			ds	1
-18236    F8:232E             	_key_amount:
-18237    F8:232E             			ds	1
-18238    F8:232F             	_potion_amount:
-18239    F8:232F             			ds	1
-18240    F8:2330             	_minutes:
-18241    F8:2330             			ds	1
-18242    F8:2331             	_seconds:
-18243    F8:2331             			ds	1
-18244    F8:2332             	_time_counter:
-18245    F8:2332             			ds	1
-18246    F8:2333             	_minutes_backup:
-18247    F8:2333             			ds	1
-18248    F8:2334             	_seconds_backup:
-18249    F8:2334             			ds	1
-18250    F8:2335             	_object_start_index:
-18251    F8:2335             			ds	1
-18252    F8:2336             	_level_object_number:
-18253    F8:2336             			ds	1
-18254    F8:2337             	_onscreen_object_number:
-18255    F8:2337             			ds	1
-18256    F8:2338             	_list_object_type:
-18257    F8:2338             			ds	25
-18258    F8:2351             	_list_object_state:
-18259    F8:2351             			ds	25
-18260    F8:236A             	_list_object_energy:
-18261    F8:236A             			ds	25
-18262    F8:2383             	_list_reward_type:
-18263    F8:2383             			ds	25
-18264    F8:239C             	_list_onscreen_object:
-18265    F8:239C             			ds	8
-18266    F8:23A4             	_chest_start_index:
-18267    F8:23A4             			ds	1
-18268    F8:23A5             	_level_chest_number:
-18269    F8:23A5             			ds	1
-18270    F8:23A6             	_onscreen_chest_number:
-18271    F8:23A6             			ds	1
-18272    F8:23A7             	_list_chest_state:
-18273    F8:23A7             			ds	8
-18274    F8:23AF             	_list_onscreen_chest:
-18275    F8:23AF             			ds	8
-18276    F8:23B7             	_npc_start_index:
-18277    F8:23B7             			ds	1
-18278    F8:23B8             	_level_npc_number:
-18279    F8:23B8             			ds	1
-18280    F8:23B9             	_onscreen_npc_number:
-18281    F8:23B9             			ds	1
-18282    F8:23BA             	_list_npc_type:
-18283    F8:23BA             			ds	9
-18284    F8:23C3             	_list_npc_state:
-18285    F8:23C3             			ds	9
-18286    F8:23CC             	_list_onscreen_npc:
-18287    F8:23CC             			ds	9
-18288    F8:23D5             	_index_x:
-18289    F8:23D5             			ds	1
-18290    F8:23D6             	_index_y:
-18291    F8:23D6             			ds	1
-18292    F8:23D7             	_item_index:
-18293    F8:23D7             			ds	1
-18294    F8:23D8             	_shop_phase:
-18295    F8:23D8             			ds	1
-18296    F8:23D9             	_shop_counter:
-18297    F8:23D9             			ds	1
-18298    F8:23DA             	_tilemap_mask:
-18299    F8:23DA             			ds	256
-18300    F8:24DA             	_player_pos_x:
-18301    F8:24DA             			ds	2
-18302    F8:24DC             	_player_pos_y:
-18303    F8:24DC             			ds	2
-18304    F8:24DE             	_camera_max_y_position:
-18305    F8:24DE             			ds	2
-18306    F8:24E0             	_camera_pos_x_backup:
-18307    F8:24E0             			ds	2
-18308    F8:24E2             	_camera_pos_y_backup:
-18309    F8:24E2             			ds	2
-18310    F8:24E4             	_list_object_x_pos:
-18311    F8:24E4             			ds	50
-18312    F8:2516             	_list_object_y_pos:
-18313    F8:2516             			ds	50
-18314    F8:2548             	_list_object_x_pos_ref:
-18315    F8:2548             			ds	50
-18316    F8:257A             	_list_object_y_pos_ref:
-18317    F8:257A             			ds	50
-18318    F8:25AC             	_list_chest_x_pos:
-18319    F8:25AC             			ds	16
-18320    F8:25BC             	_list_chest_y_pos:
-18321    F8:25BC             			ds	16
-18322    F8:25CC             	_list_chest_x_pos_ref:
-18323    F8:25CC             			ds	16
-18324    F8:25DC             	_list_chest_y_pos_ref:
-18325    F8:25DC             			ds	16
-18326    F8:25EC             	_list_npc_x_pos:
-18327    F8:25EC             			ds	18
-18328    F8:25FE             	_list_npc_y_pos:
-18329    F8:25FE             			ds	18
-18330    F8:2610             	_list_npc_x_pos_ref:
-18331    F8:2610             			ds	18
-18332    F8:2622             	_list_npc_y_pos_ref:
-18333    F8:2622             			ds	18
-18334    F8:2634             	_zenny_amount:
-18335    F8:2634             			ds	2
-18336    F8:2636             	_score:
-18337    F8:2636             			ds	2
-18338    F8:2638             	_shop_prices:
-18339    F8:2638             			ds	20
-18340    F8:264C             	_weapon_y_offset:
-18341    F8:264C             			ds	1
-18342    F8:264D             	_ptr_SHOP_ITEM_PRICES:
-18343    F8:264D             			ds	2
-18344                        	
-18345                        	
-18346                        	;0 error(s) in compilation
-18347                        	;	literal pool:146
-18348                        	;	constant pool:311
-18349                        	;	global pool:553
-18350                        	;	Macro pool:322
-18351    F8:264F             	leaf_loc:
-18352    F8:264F             			ds	4
-18353    F8:2653             	__hide_LEVEL_SPRITES_end:
-18354    F8:2653             	__scroll_object_end:
-18355    F8:2653             	__scroll_chest_end:
-18356    F8:2653             	__scroll_npc_end:
-18357    F8:2653             	__check_TILE_DEPTH_end:
-18358    F8:2653             	__check_BG_end:
-18359    F8:2653             	__check_NPC_end:
-18360    F8:2653             	__recenter_CAMERA_end:
-18361    F8:2653             	__joypad_BUTTONS_TITLE_end:
-18362    F8:2653             	__init_OBJECT_LV1_end:
-18363    F8:2653             	__init_CHEST_LV1_end:
-18364    F8:2653             	__init_NPC_LV1_end:
-18365                        	
-18366    F8:2653             	__bss_init:
-18367                        	
-18368    F8:2653             	__heap_start:
+17927    01:6090  21 00      			db	'!',$00
+17928    01:6092             	_TABLE_NPC_TYPE_LV1:
+17929    01:6092  01         			db	1
+17930    01:6093  00         			db	0
+17931    01:6094             	_TABLE_NPC_X_POS_REF_LV1:
+17932    01:6094  90 03      			dw	912
+17933    01:6096  D0 04      			dw	1232
+17934    01:6098             	_TABLE_NPC_Y_POS_REF_LV1:
+17935    01:6098  40 02      			dw	576
+17936    01:609A  90 01      			dw	400
+17937    01:609C             	_TABLE_OBJECT_TYPE_LV1:
+17938    01:609C  00         			db	0
+17939    01:609D  01         			db	1
+17940    01:609E  01         			db	1
+17941    01:609F  01         			db	1
+17942    01:60A0  01         			db	1
+17943    01:60A1  01         			db	1
+17944    01:60A2  01         			db	1
+17945    01:60A3  02         			db	2
+17946    01:60A4  01         			db	1
+17947    01:60A5  01         			db	1
+17948    01:60A6  01         			db	1
+17949    01:60A7  01         			db	1
+17950    01:60A8  01         			db	1
+17951    01:60A9  01         			db	1
+17952    01:60AA  01         			db	1
+17953    01:60AB  01         			db	1
+17954    01:60AC  01         			db	1
+17955    01:60AD  01         			db	1
+17956    01:60AE  01         			db	1
+17957    01:60AF  01         			db	1
+17958    01:60B0  01         			db	1
+17959    01:60B1  01         			db	1
+17960    01:60B2  01         			db	1
+17961    01:60B3             	_TABLE_OBJECT_X_POS_REF_LV1:
+17962    01:60B3  90 06      			dw	1680
+17963    01:60B5  00 05      			dw	1280
+17964    01:60B7  C0 05      			dw	1472
+17965    01:60B9  A0 05      			dw	1440
+17966    01:60BB  90 04      			dw	1168
+17967    01:60BD  B0 04      			dw	1200
+17968    01:60BF  C0 03      			dw	960
+17969    01:60C1  D8 03      			dw	984
+17970    01:60C3  50 05      			dw	1360
+17971    01:60C5  70 05      			dw	1392
+17972    01:60C7  10 06      			dw	1552
+17973    01:60C9  90 06      			dw	1680
+17974    01:60CB  B0 06      			dw	1712
+17975    01:60CD  D0 06      			dw	1744
+17976    01:60CF  E0 04      			dw	1248
+17977    01:60D1  00 05      			dw	1280
+17978    01:60D3  90 04      			dw	1168
+17979    01:60D5  10 04      			dw	1040
+17980    01:60D7  80 02      			dw	640
+17981    01:60D9  A0 02      			dw	672
+17982    01:60DB  50 01      			dw	336
+17983    01:60DD  70 01      			dw	368
+17984    01:60DF  A0 01      			dw	416
+17985    01:60E1             	_TABLE_OBJECT_Y_POS_REF_LV1:
+17986    01:60E1  80 01      			dw	384
+17987    01:60E3  A0 01      			dw	416
+17988    01:60E5  E0 01      			dw	480
+17989    01:60E7  F0 01      			dw	496
+17990    01:60E9  30 02      			dw	560
+17991    01:60EB  30 02      			dw	560
+17992    01:60ED  50 02      			dw	592
+17993    01:60EF  50 02      			dw	592
+17994    01:60F1  50 02      			dw	592
+17995    01:60F3  50 02      			dw	592
+17996    01:60F5  C0 02      			dw	704
+17997    01:60F7  D0 02      			dw	720
+17998    01:60F9  D0 02      			dw	720
+17999    01:60FB  D0 02      			dw	720
+18000    01:60FD  E0 02      			dw	736
+18001    01:60FF  E0 02      			dw	736
+18002    01:6101  F0 02      			dw	752
+18003    01:6103  50 03      			dw	848
+18004    01:6105  70 03      			dw	880
+18005    01:6107  70 03      			dw	880
+18006    01:6109  80 03      			dw	896
+18007    01:610B  80 03      			dw	896
+18008    01:610D  80 03      			dw	896
+18009    01:610F             	_TABLE_CHEST_X_POS_REF_LV1:
+18010    01:610F  30 04      			dw	1072
+18011    01:6111  30 03      			dw	816
+18012    01:6113             	_TABLE_CHEST_Y_POS_REF_LV1:
+18013    01:6113  40 03      			dw	832
+18014    01:6115  50 03      			dw	848
+18015    01:6117             	_TABLE_PLAYER_TILES_ADR:
+18016    01:6117  60 7A      			dw	_tiles_SPR_PLAYER_ARMOR
+18017    01:6119  60 6C      			dw	_tiles_SPR_PLAYER_NAKED
+18018    01:611B             	_TABLE_PLAYER_TILES_BANK:
+18019    01:611B  0F         			db	^_tiles_SPR_PLAYER_ARMOR
+18020    01:611C  11         			db	^_tiles_SPR_PLAYER_NAKED
+18021    01:611D             	_TABLE_PLAYER_JUMP_V:
+18022    01:611D  FC         			db	-4
+18023    01:611E  FB         			db	-5
+18024    01:611F  F6         			db	-10
+18025    01:6120  FC         			db	-4
+18026    01:6121  FC         			db	-4
+18027    01:6122  F9         			db	-7
+18028    01:6123  FA         			db	-6
+18029    01:6124  FD         			db	-3
+18030    01:6125  FB         			db	-5
+18031    01:6126  FE         			db	-2
+18032    01:6127  FC         			db	-4
+18033    01:6128  FF         			db	-1
+18034    01:6129  FF         			db	-1
+18035    01:612A  FF         			db	-1
+18036    01:612B  FF         			db	-1
+18037    01:612C  00         			db	0
+18038    01:612D  00         			db	0
+18039    01:612E  00         			db	0
+18040    01:612F  00         			db	0
+18041    01:6130  01         			db	1
+18042    01:6131  01         			db	1
+18043    01:6132  01         			db	1
+18044    01:6133  01         			db	1
+18045    01:6134  04         			db	4
+18046    01:6135  02         			db	2
+18047    01:6136  05         			db	5
+18048    01:6137  03         			db	3
+18049    01:6138  06         			db	6
+18050    01:6139  07         			db	7
+18051    01:613A  04         			db	4
+18052    01:613B  04         			db	4
+18053    01:613C  0A         			db	10
+18054    01:613D  04         			db	4
+18055    01:613E  04         			db	4
+18056    01:613F  05         			db	5
+18057    01:6140             	_TABLE_PLAYER_FALL:
+18058    01:6140  00         			db	0
+18059    01:6141  00         			db	0
+18060    01:6142  00         			db	0
+18061    01:6143  00         			db	0
+18062    01:6144  01         			db	1
+18063    01:6145  01         			db	1
+18064    01:6146  01         			db	1
+18065    01:6147  01         			db	1
+18066    01:6148  02         			db	2
+18067    01:6149  02         			db	2
+18068    01:614A  02         			db	2
+18069    01:614B  02         			db	2
+18070    01:614C  03         			db	3
+18071    01:614D  03         			db	3
+18072    01:614E  03         			db	3
+18073    01:614F  04         			db	4
+18074    01:6150  04         			db	4
+18075    01:6151  04         			db	4
+18076    01:6152  04         			db	4
+18077    01:6153  04         			db	4
+18078    01:6154  05         			db	5
+18079    01:6155             	_TABLE_PLAYER_JUMP_LADDER:
+18080    01:6155  FC         			db	-4
+18081    01:6156  FC         			db	-4
+18082    01:6157  FD         			db	-3
+18083    01:6158  FD         			db	-3
+18084    01:6159  FD         			db	-3
+18085    01:615A  FE         			db	-2
+18086    01:615B  FE         			db	-2
+18087    01:615C  FE         			db	-2
+18088    01:615D  FF         			db	-1
+18089    01:615E  FF         			db	-1
+18090    01:615F  FF         			db	-1
+18091    01:6160  FF         			db	-1
+18092    01:6161  FF         			db	-1
+18093    01:6162  00         			db	0
+18094    01:6163  00         			db	0
+18095    01:6164  00         			db	0
+18096    01:6165  00         			db	0
+18097    01:6166  01         			db	1
+18098    01:6167  01         			db	1
+18099    01:6168  01         			db	1
+18100    01:6169  01         			db	1
+18101    01:616A  01         			db	1
+18102    01:616B  02         			db	2
+18103    01:616C  02         			db	2
+18104    01:616D  02         			db	2
+18105    01:616E  03         			db	3
+18106    01:616F  03         			db	3
+18107    01:6170  03         			db	3
+18108    01:6171  04         			db	4
+18109    01:6172  04         			db	4
+18110    01:6173             	_TABLE_WEAPON_TILES_ADR:
+18111    01:6173  E0 66      			dw	_tiles_SPR_WEAPON_0
+18112    01:6175  60 69      			dw	_tiles_SPR_WEAPON_1
+18113    01:6177  E0 6B      			dw	_tiles_SPR_WEAPON_2
+18114    01:6179  60 6E      			dw	_tiles_SPR_WEAPON_3
+18115    01:617B  E0 70      			dw	_tiles_SPR_WEAPON_4
+18116    01:617D             	_TABLE_WEAPON_TILES_BANK:
+18117    01:617D  13         			db	^_tiles_SPR_WEAPON_0
+18118    01:617E  13         			db	^_tiles_SPR_WEAPON_1
+18119    01:617F  13         			db	^_tiles_SPR_WEAPON_2
+18120    01:6180  13         			db	^_tiles_SPR_WEAPON_3
+18121    01:6181  13         			db	^_tiles_SPR_WEAPON_4
+18122    01:6182             	_TABLE_SHOP_ITEMS_LV1:
+18123    01:6182  00         			db	0
+18124    01:6183  01         			db	1
+18125    01:6184  02         			db	2
+18126    01:6185  03         			db	3
+18127    01:6186  04         			db	4
+18128    01:6187  05         			db	5
+18129    01:6188  06         			db	6
+18130    01:6189  07         			db	7
+18131    01:618A  08         			db	8
+18132    01:618B  09         			db	9
+18133    01:618C             	_TABLE_SHOP_PRICES_LV1:
+18134    01:618C  64 00      			dw	100
+18135    01:618E  E8 03      			dw	1000
+18136    01:6190  60 09      			dw	2400
+18137    01:6192  80 25      			dw	9600
+18138    01:6194  1E 00      			dw	30
+18139    01:6196  50 00      			dw	80
+18140    01:6198  2C 01      			dw	300
+18141    01:619A  20 03      			dw	800
+18142    01:619C  40 06      			dw	1600
+18143    01:619E  96 00      			dw	150
+18144    01:61A0             	_TABLE_SHOP_ITEMS_TILES_ADR:
+18145    01:61A0  E0 70      			dw	_tiles_ITEM_WEAPON_2
+18146    01:61A2  60 71      			dw	_tiles_ITEM_WEAPON_3
+18147    01:61A4  E0 71      			dw	_tiles_ITEM_WEAPON_4
+18148    01:61A6  60 72      			dw	_tiles_ITEM_WEAPON_5
+18149    01:61A8  E0 72      			dw	_tiles_ITEM_KEY
+18150    01:61AA  60 73      			dw	_tiles_ITEM_ARMOR_2
+18151    01:61AC  E0 73      			dw	_tiles_ITEM_ARMOR_3
+18152    01:61AE  60 74      			dw	_tiles_ITEM_ARMOR_4
+18153    01:61B0  E0 74      			dw	_tiles_ITEM_ARMOR_5
+18154    01:61B2  60 75      			dw	_tiles_ITEM_POTION
+18155    01:61B4             	_TABLE_SHOP_ITEMS_TILES_BANK:
+18156    01:61B4  0F         			db	^_tiles_ITEM_WEAPON_2
+18157    01:61B5  0F         			db	^_tiles_ITEM_WEAPON_3
+18158    01:61B6  0F         			db	^_tiles_ITEM_WEAPON_4
+18159    01:61B7  0F         			db	^_tiles_ITEM_WEAPON_5
+18160    01:61B8  0F         			db	^_tiles_ITEM_KEY
+18161    01:61B9  0F         			db	^_tiles_ITEM_ARMOR_2
+18162    01:61BA  0F         			db	^_tiles_ITEM_ARMOR_3
+18163    01:61BB  0F         			db	^_tiles_ITEM_ARMOR_4
+18164    01:61BC  0F         			db	^_tiles_ITEM_ARMOR_5
+18165    01:61BD  0F         			db	^_tiles_ITEM_POTION
+18166    01:61BE             	_TABLE_CURSOR_POS_X:
+18167    01:61BE  18         			db	24
+18168    01:61BF  38         			db	56
+18169    01:61C0  60         			db	96
+18170    01:61C1  88         			db	136
+18171    01:61C2  B0         			db	176
+18172    01:61C3  18         			db	24
+18173    01:61C4  38         			db	56
+18174    01:61C5  60         			db	96
+18175    01:61C6  88         			db	136
+18176    01:61C7  B0         			db	176
+18177    01:61C8  D4         			db	212
+18178                        	
+18179               2313     		.bss
+18180    F8:2313             	_sequence_id:
+18181    F8:2313             			ds	1
+18182    F8:2314             	_sequence_loaded:
+18183    F8:2314             			ds	1
+18184    F8:2315             	_level_id:
+18185    F8:2315             			ds	1
+18186    F8:2316             	_respawn:
+18187    F8:2316             			ds	1
+18188    F8:2317             	_player_id:
+18189    F8:2317             			ds	1
+18190    F8:2318             	_player_state:
+18191    F8:2318             			ds	1
+18192    F8:2319             	_player_axis:
+18193    F8:2319             			ds	1
+18194    F8:231A             	_player_previous_axis:
+18195    F8:231A             			ds	1
+18196    F8:231B             	_player_counter_anim:
+18197    F8:231B             			ds	1
+18198    F8:231C             	_player_index_jump:
+18199    F8:231C             			ds	1
+18200    F8:231D             	_player_index_fall:
+18201    F8:231D             			ds	1
+18202    F8:231E             	_player_counter_attack:
+18203    F8:231E             			ds	1
+18204    F8:231F             	_player_naked:
+18205    F8:231F             			ds	1
+18206    F8:2320             	_player_attack:
+18207    F8:2320             			ds	1
+18208    F8:2321             	_jump_ladder:
+18209    F8:2321             			ds	1
+18210    F8:2322             	_jump_max_index:
+18211    F8:2322             			ds	1
+18212    F8:2323             	_fall_ladder:
+18213    F8:2323             			ds	1
+18214    F8:2324             	_hit_wall:
+18215    F8:2324             			ds	1
+18216    F8:2325             	_chain_id:
+18217    F8:2325             			ds	1
+18218    F8:2326             	_weapon_id:
+18219    F8:2326             			ds	1
+18220    F8:2327             	_armor_level:
+18221    F8:2327             			ds	1
+18222    F8:2328             	_weapon_level:
+18223    F8:2328             			ds	1
+18224    F8:2329             	_list_chain_active:
+18225    F8:2329             			ds	3
+18226    F8:232C             	_life_amount:
+18227    F8:232C             			ds	1
+18228    F8:232D             	_credits_amount:
+18229    F8:232D             			ds	1
+18230    F8:232E             	_key_amount:
+18231    F8:232E             			ds	1
+18232    F8:232F             	_potion_amount:
+18233    F8:232F             			ds	1
+18234    F8:2330             	_minutes:
+18235    F8:2330             			ds	1
+18236    F8:2331             	_seconds:
+18237    F8:2331             			ds	1
+18238    F8:2332             	_time_counter:
+18239    F8:2332             			ds	1
+18240    F8:2333             	_minutes_backup:
+18241    F8:2333             			ds	1
+18242    F8:2334             	_seconds_backup:
+18243    F8:2334             			ds	1
+18244    F8:2335             	_object_start_index:
+18245    F8:2335             			ds	1
+18246    F8:2336             	_level_object_number:
+18247    F8:2336             			ds	1
+18248    F8:2337             	_onscreen_object_number:
+18249    F8:2337             			ds	1
+18250    F8:2338             	_list_object_type:
+18251    F8:2338             			ds	25
+18252    F8:2351             	_list_object_state:
+18253    F8:2351             			ds	25
+18254    F8:236A             	_list_object_energy:
+18255    F8:236A             			ds	25
+18256    F8:2383             	_list_reward_type:
+18257    F8:2383             			ds	25
+18258    F8:239C             	_list_onscreen_object:
+18259    F8:239C             			ds	8
+18260    F8:23A4             	_chest_start_index:
+18261    F8:23A4             			ds	1
+18262    F8:23A5             	_level_chest_number:
+18263    F8:23A5             			ds	1
+18264    F8:23A6             	_onscreen_chest_number:
+18265    F8:23A6             			ds	1
+18266    F8:23A7             	_list_chest_state:
+18267    F8:23A7             			ds	8
+18268    F8:23AF             	_list_onscreen_chest:
+18269    F8:23AF             			ds	8
+18270    F8:23B7             	_npc_start_index:
+18271    F8:23B7             			ds	1
+18272    F8:23B8             	_level_npc_number:
+18273    F8:23B8             			ds	1
+18274    F8:23B9             	_onscreen_npc_number:
+18275    F8:23B9             			ds	1
+18276    F8:23BA             	_list_npc_type:
+18277    F8:23BA             			ds	9
+18278    F8:23C3             	_list_npc_state:
+18279    F8:23C3             			ds	9
+18280    F8:23CC             	_list_onscreen_npc:
+18281    F8:23CC             			ds	9
+18282    F8:23D5             	_index_x:
+18283    F8:23D5             			ds	1
+18284    F8:23D6             	_index_y:
+18285    F8:23D6             			ds	1
+18286    F8:23D7             	_item_index:
+18287    F8:23D7             			ds	1
+18288    F8:23D8             	_shop_phase:
+18289    F8:23D8             			ds	1
+18290    F8:23D9             	_shop_counter:
+18291    F8:23D9             			ds	1
+18292    F8:23DA             	_tilemap_mask:
+18293    F8:23DA             			ds	256
+18294    F8:24DA             	_player_pos_x:
+18295    F8:24DA             			ds	2
+18296    F8:24DC             	_player_pos_y:
+18297    F8:24DC             			ds	2
+18298    F8:24DE             	_camera_max_y_position:
+18299    F8:24DE             			ds	2
+18300    F8:24E0             	_camera_pos_x_backup:
+18301    F8:24E0             			ds	2
+18302    F8:24E2             	_camera_pos_y_backup:
+18303    F8:24E2             			ds	2
+18304    F8:24E4             	_list_object_x_pos:
+18305    F8:24E4             			ds	50
+18306    F8:2516             	_list_object_y_pos:
+18307    F8:2516             			ds	50
+18308    F8:2548             	_list_object_x_pos_ref:
+18309    F8:2548             			ds	50
+18310    F8:257A             	_list_object_y_pos_ref:
+18311    F8:257A             			ds	50
+18312    F8:25AC             	_list_chest_x_pos:
+18313    F8:25AC             			ds	16
+18314    F8:25BC             	_list_chest_y_pos:
+18315    F8:25BC             			ds	16
+18316    F8:25CC             	_list_chest_x_pos_ref:
+18317    F8:25CC             			ds	16
+18318    F8:25DC             	_list_chest_y_pos_ref:
+18319    F8:25DC             			ds	16
+18320    F8:25EC             	_list_npc_x_pos:
+18321    F8:25EC             			ds	18
+18322    F8:25FE             	_list_npc_y_pos:
+18323    F8:25FE             			ds	18
+18324    F8:2610             	_list_npc_x_pos_ref:
+18325    F8:2610             			ds	18
+18326    F8:2622             	_list_npc_y_pos_ref:
+18327    F8:2622             			ds	18
+18328    F8:2634             	_zenny_amount:
+18329    F8:2634             			ds	2
+18330    F8:2636             	_score:
+18331    F8:2636             			ds	2
+18332    F8:2638             	_shop_prices:
+18333    F8:2638             			ds	20
+18334    F8:264C             	_weapon_y_offset:
+18335    F8:264C             			ds	1
+18336    F8:264D             	_ptr_SHOP_ITEM_PRICES:
+18337    F8:264D             			ds	2
+18338                        	
+18339                        	
+18340                        	;0 error(s) in compilation
+18341                        	;	literal pool:146
+18342                        	;	constant pool:311
+18343                        	;	global pool:553
+18344                        	;	Macro pool:322
+18345    F8:264F             	leaf_loc:
+18346    F8:264F             			ds	4
+18347    F8:2653             	__hide_LEVEL_SPRITES_end:
+18348    F8:2653             	__scroll_object_end:
+18349    F8:2653             	__scroll_chest_end:
+18350    F8:2653             	__scroll_npc_end:
+18351    F8:2653             	__check_TILE_DEPTH_end:
+18352    F8:2653             	__check_BG_end:
+18353    F8:2653             	__check_NPC_end:
+18354    F8:2653             	__recenter_CAMERA_end:
+18355    F8:2653             	__joypad_BUTTONS_TITLE_end:
+18356    F8:2653             	__init_OBJECT_LV1_end:
+18357    F8:2653             	__init_CHEST_LV1_end:
+18358    F8:2653             	__init_NPC_LV1_end:
+18359                        	
+18360    F8:2653             	__bss_init:
+18361                        	
+18362    F8:2653             	__heap_start:
                              #[2]   "..\..\..\include\hucc\hucc-final.asm"
     1                        	; ***************************************************************************
     2                        	; ***************************************************************************
@@ -33347,23 +33331,23 @@
   186                        	; clear_vce - Clear all 512 of the VCE's palette entries.
   187                        	;
   188                        	
-  189    18:D3FE             	clear_vce	.proc
+  189    18:D3E9             	clear_vce	.proc
   190                        	
-  191    18:D3FE  08         			php				; Disable interrupts to avoid
-  192    18:D3FF  78         			sei				; VBLANK palette upload.
-  193    18:D400  C2         			cly
-  194    18:D401  9C 02 04   			stz	VCE_CTA+0		; Set VCE write address.
-  195    18:D404  9C 03 04   			stz	VCE_CTA+1
-  196    18:D407  9C 04 04   	.loop:		stz	VCE_CTW+0		; Set lo-byte of color.
-  197    18:D40A  9C 05 04   			stz	VCE_CTW+1		; Write 1 color value.
-  198    18:D40D  9C 04 04   			stz	VCE_CTW+0		; Set lo-byte of color.
-  199    18:D410  9C 05 04   			stz	VCE_CTW+1		; Write 1 color value.
-  200    18:D413  88         			dey
-  201    18:D414  D0 F1      			bne	.loop
-  202    18:D416  28         			plp
+  191    18:D3E9  08         			php				; Disable interrupts to avoid
+  192    18:D3EA  78         			sei				; VBLANK palette upload.
+  193    18:D3EB  C2         			cly
+  194    18:D3EC  9C 02 04   			stz	VCE_CTA+0		; Set VCE write address.
+  195    18:D3EF  9C 03 04   			stz	VCE_CTA+1
+  196    18:D3F2  9C 04 04   	.loop:		stz	VCE_CTW+0		; Set lo-byte of color.
+  197    18:D3F5  9C 05 04   			stz	VCE_CTW+1		; Write 1 color value.
+  198    18:D3F8  9C 04 04   			stz	VCE_CTW+0		; Set lo-byte of color.
+  199    18:D3FB  9C 05 04   			stz	VCE_CTW+1		; Write 1 color value.
+  200    18:D3FE  88         			dey
+  201    18:D3FF  D0 F1      			bne	.loop
+  202    18:D401  28         			plp
   203                        	
   204                        			leave				; All done, phew!
-         18:D417  4C EF FF   			jmp	leave_proc
+         18:D402  4C EF FF   			jmp	leave_proc
   205                        	
   206                        			.endp
   207                        	
@@ -33547,7 +33531,7 @@
   125                        	
   126                        	
   127                        	
-  128    18:D151             	vdc_clear_vram	.procgroup			; These routines share code!
+  128    08:DFB7             	vdc_clear_vram	.procgroup			; These routines share code!
   129                        	
   130                        	; ***************************************************************************
   131                        	; ***************************************************************************
@@ -33560,37 +33544,37 @@
   138                        	;
   139                        	
   140               0001     		.if	SUPPORT_SGX
-  141    18:D151             	clear_vram_sgx	.proc
+  141    08:DFB7             	clear_vram_sgx	.proc
   142                        	
-  143    18:D151  A2 10      			ldx	#SGX_VDC_OFFSET		; Offset to SGX VDC.
-  144    18:D153  F0         			db	$F0			; Turn "clx" into a "beq".
+  143    08:DFB7  A2 10      			ldx	#SGX_VDC_OFFSET		; Offset to SGX VDC.
+  144    08:DFB9  F0         			db	$F0			; Turn "clx" into a "beq".
   145                        	
-  146    18:D154             			.ref	clear_vram_vdc		; Need clear_vram_vdc
+  146    08:DFBA             			.ref	clear_vram_vdc		; Need clear_vram_vdc
   147                        			.endp
   148                        		.endif
   149                        	
-  150    18:D154             	clear_vram_vdc	.proc
+  150    08:DFBA             	clear_vram_vdc	.proc
   151                        	
-  152    18:D154  82         			clx				; Offset to PCE VDC.
+  152    08:DFBA  82         			clx				; Offset to PCE VDC.
   153                        	
-  154    18:D155  20 B5 FD   	clear_vram_x:	call	clear_bat_x		; Clear the BAT.
+  154    08:DFBB  20 B5 FD   	clear_vram_x:	call	clear_bat_x		; Clear the BAT.
   155                        	
-  156    18:D158  A9 80      			lda	#$80			; Xvert hi-byte of # words
-  157    18:D15A  38         			sec				; in screen to loop count.
-  158    18:D15B  E5 FA      			sbc	<_bl
-  159    18:D15D  4A         			lsr	a
+  156    08:DFBE  A9 80      			lda	#$80			; Xvert hi-byte of # words
+  157    08:DFC0  38         			sec				; in screen to loop count.
+  158    08:DFC1  E5 FA      			sbc	<_bl
+  159    08:DFC3  4A         			lsr	a
   160                        	
   161                        	;		cly				; Clear the rest of VRAM.
-  162    18:D15E  9E 02 02   			stz	VDC_DL, x
-  163    18:D161  9E 03 02   	.clr_loop:	stz	VDC_DH, x		; Seperate writes to minimize
-  164    18:D164  88         			dey				; VDC MWR penalty.
-  165    18:D165  9E 03 02   			stz	VDC_DH, x
-  166    18:D168  D0 F7      			bne	.clr_loop
-  167    18:D16A  3A         			dec	a
-  168    18:D16B  D0 F4      			bne	.clr_loop
+  162    08:DFC4  9E 02 02   			stz	VDC_DL, x
+  163    08:DFC7  9E 03 02   	.clr_loop:	stz	VDC_DH, x		; Seperate writes to minimize
+  164    08:DFCA  88         			dey				; VDC MWR penalty.
+  165    08:DFCB  9E 03 02   			stz	VDC_DH, x
+  166    08:DFCE  D0 F7      			bne	.clr_loop
+  167    08:DFD0  3A         			dec	a
+  168    08:DFD1  D0 F4      			bne	.clr_loop
   169                        	
   170                        			leave				; All done, phew!
-         18:D16D  4C EF FF   			jmp	leave_proc
+         08:DFD3  4C EF FF   			jmp	leave_proc
   171                        	
   172                        			.endp
   173                        	
@@ -33611,38 +33595,38 @@
   193                        			.endp
   194                        		.endif
   195                        	
-  196    18:D170             	clear_bat_vdc	.proc
+  196    08:DFD6             	clear_bat_vdc	.proc
   197                        	
-  198    18:D170  82         			clx				; Offset to PCE VDC.
+  198    08:DFD6  82         			clx				; Offset to PCE VDC.
   199                        	
-  200    18:D171             			.ref	clear_bat_x		; Need clear_bat_x
+  200    08:DFD7             			.ref	clear_bat_x		; Need clear_bat_x
   201                        			.endp
   202                        	
-  203    18:D171             	clear_bat_x	.proc				; HuCC uses this entry point.
+  203    08:DFD7             	clear_bat_x	.proc				; HuCC uses this entry point.
   204                        	
-  205    18:D171  64 F0      			stz	<_di + 0		; Set VDC or SGX destination
-  206    18:D173  64 F1      			stz	<_di + 1		; address.
-  207    18:D175  20 7F E3   			jsr	set_di_to_mawr
+  205    08:DFD7  64 F0      			stz	<_di + 0		; Set VDC or SGX destination
+  206    08:DFD9  64 F1      			stz	<_di + 1		; address.
+  207    08:DFDB  20 7F E3   			jsr	set_di_to_mawr
   208                        	
-  209    18:D178  A5 FA      			lda	<_bl			; Xvert hi-byte of # words
-  210    18:D17A  4A         			lsr	a			; in screen to loop count.
+  209    08:DFDE  A5 FA      			lda	<_bl			; Xvert hi-byte of # words
+  210    08:DFE0  4A         			lsr	a			; in screen to loop count.
   211                        	
-  212    18:D17B  C2         			cly
-  213    18:D17C  48         	.bat_loop:	pha
-  214    18:D17D  A5 F8      			lda	<_ax + 0
-  215    18:D17F  9D 02 02   			sta	VDC_DL, x
-  216    18:D182  A5 F9      			lda	<_ax + 1
-  217    18:D184  9D 03 02   	.bat_pair:	sta	VDC_DH, x		; Seperate writes to minimize
-  218    18:D187  88         			dey				; VDC MWR penalty.
-  219    18:D188  9D 03 02   			sta	VDC_DH, x
-  220    18:D18B  D0 F7      			bne	.bat_pair
+  212    08:DFE1  C2         			cly
+  213    08:DFE2  48         	.bat_loop:	pha
+  214    08:DFE3  A5 F8      			lda	<_ax + 0
+  215    08:DFE5  9D 02 02   			sta	VDC_DL, x
+  216    08:DFE8  A5 F9      			lda	<_ax + 1
+  217    08:DFEA  9D 03 02   	.bat_pair:	sta	VDC_DH, x		; Seperate writes to minimize
+  218    08:DFED  88         			dey				; VDC MWR penalty.
+  219    08:DFEE  9D 03 02   			sta	VDC_DH, x
+  220    08:DFF1  D0 F7      			bne	.bat_pair
   221                        	
-  222    18:D18D  68         			pla
-  223    18:D18E  3A         			dec	a
-  224    18:D18F  D0 EB      			bne	.bat_loop
+  222    08:DFF3  68         			pla
+  223    08:DFF4  3A         			dec	a
+  224    08:DFF5  D0 EB      			bne	.bat_loop
   225                        	
   226                        			leave
-         18:D191  4C EF FF   			jmp	leave_proc
+         08:DFF7  4C EF FF   			jmp	leave_proc
   227                        	
   228                        			.endp
   229                        	
@@ -33994,39 +33978,39 @@
   569                        	
   570               0001     		.if	SUPPORT_SGX
   571               0001     		.if	1
-  572    18:D194             	sgx_detect	.proc
+  572    18:D151             	sgx_detect	.proc
   573                        	
-  574    18:D194  A0 7F      			ldy	#$7F			; Use VRAM address $7F7F
-  575    18:D196  84 F0      			sty.l	<_di			; because it won't cause
-  576    18:D198  84 F1      			sty.h	<_di			; a screen glitch.
+  574    18:D151  A0 7F      			ldy	#$7F			; Use VRAM address $7F7F
+  575    18:D153  84 F0      			sty.l	<_di			; because it won't cause
+  576    18:D155  84 F1      			sty.h	<_di			; a screen glitch.
   577                        	
-  578    18:D19A  20 7B E3   			jsr	sgx_di_to_mawr		; Write $0001 to SGX VRAM.
-  579    18:D19D  A0 01      			ldy	#$01
-  580    18:D19F  8C 12 02   			sty	SGX_DL
-  581    18:D1A2  9C 13 02   			stz	SGX_DH
+  578    18:D157  20 7B E3   			jsr	sgx_di_to_mawr		; Write $0001 to SGX VRAM.
+  579    18:D15A  A0 01      			ldy	#$01
+  580    18:D15C  8C 12 02   			sty	SGX_DL
+  581    18:D15F  9C 13 02   			stz	SGX_DH
   582                        	
-  583    18:D1A5  20 7E E3   			jsr	vdc_di_to_mawr		; Write $0000 to VDC VRAM.
-  584    18:D1A8  9C 02 02   			stz	VDC_DL
-  585    18:D1AB  9C 03 02   			stz	VDC_DH
+  583    18:D162  20 7E E3   			jsr	vdc_di_to_mawr		; Write $0000 to VDC VRAM.
+  584    18:D165  9C 02 02   			stz	VDC_DL
+  585    18:D168  9C 03 02   			stz	VDC_DH
   586                        	
-  587    18:D1AE  20 6E E3   			jsr	sgx_di_to_marr		; Check value in SGX VRAM.
-  588    18:D1B1  AC 12 02   			ldy	SGX_DL			; $01 if found, $00 if not.
-  589    18:D1B4  8C E8 22   			sty	sgx_detected
-  590    18:D1B7  F0 10      			beq	!+			; Skip the rest if not SGX.
+  587    18:D16B  20 6E E3   			jsr	sgx_di_to_marr		; Check value in SGX VRAM.
+  588    18:D16E  AC 12 02   			ldy	SGX_DL			; $01 if found, $00 if not.
+  589    18:D171  8C E8 22   			sty	sgx_detected
+  590    18:D174  F0 10      			beq	!+			; Skip the rest if not SGX.
   591                        	
-  592    18:D1B9  20 7B E3   			jsr	sgx_di_to_mawr		; Write $0000 to SGX VRAM
-  593    18:D1BC  9C 12 02   			stz	SGX_DL			; to clean VRAM contents.
-  594    18:D1BF  9C 13 02   			stz	SGX_DH
+  592    18:D176  20 7B E3   			jsr	sgx_di_to_mawr		; Write $0000 to SGX VRAM
+  593    18:D179  9C 12 02   			stz	SGX_DL			; to clean VRAM contents.
+  594    18:D17C  9C 13 02   			stz	SGX_DH
   595                        	
-  596    18:D1C2  73 CF D1 08			tii	.vpc_mode, VPC_CR, 8	; Initialize the HuC6202 VPC.
-         18:D1C6  02 08 00    
+  596    18:D17F  73 8C D1 08			tii	.vpc_mode, VPC_CR, 8	; Initialize the HuC6202 VPC.
+         18:D183  02 08 00    
   597                        	
-  598    18:D1C9  98         	!:		tya
-  599    18:D1CA  AA         			tax				; "leave" copies X back to A.
-  600    18:D1CB  4A         			lsr	a			; Also CC if PCE, CS if SGX.
+  598    18:D186  98         	!:		tya
+  599    18:D187  AA         			tax				; "leave" copies X back to A.
+  600    18:D188  4A         			lsr	a			; Also CC if PCE, CS if SGX.
   601                        	
   602                        			leave				; All done, phew!
-         18:D1CC  4C EF FF   			jmp	leave_proc
+         18:D189  4C EF FF   			jmp	leave_proc
   603                        		.else
   618                        		.endif
   619                        	
@@ -34035,10 +34019,10 @@
   623                        	
   624               0000     		.if	SGX_PARALLAX
   629                        		.else
-  630    18:D1CF  00 30      	.vpc_mode:	dw	$3000			; Use SGX as the background
-  631    18:D1D1  00 00      			dw	$0000			; behind a fullscreen HUD.
-  632    18:D1D3  00 00      			dw	$0000
-  633    18:D1D5  00 00      			dw	$0000
+  630    18:D18C  00 30      	.vpc_mode:	dw	$3000			; Use SGX as the background
+  631    18:D18E  00 00      			dw	$0000			; behind a fullscreen HUD.
+  632    18:D190  00 00      			dw	$0000
+  633    18:D192  00 00      			dw	$0000
   634                        		.endif	SGX_PARALLAX
   635                        	
   636                        			.endp
@@ -34761,48 +34745,48 @@
    64                        	; CRC-32 code by Paul Guertin. See http://6502.org/source/integers/crc.htm
    65                        	;
    66                        	
-   67    18:D2D4             	init_random	.proc
+   67    18:D291             	init_random	.proc
    68                        	
-   69    18:D2D4  A9 01      			lda	#1			; Init CRC-32 table value.
-   70    18:D2D6  85 98      			sta	<random + 0
-   71    18:D2D8  98         			tya				; Get and check the seed value.
-   72    18:D2D9  D0 01      			bne	.reverse_seed
-   73    18:D2DB  3A         			dec	a			; Which must be non-zero!
-   74    18:D2DC  4A         	.reverse_seed:	lsr	a			; Reverse the bits so that small changes
-   75    18:D2DD  26 98      			rol	<random + 0		; in the seed make larger differences in
-   76    18:D2DF  90 FB      			bcc	.reverse_seed		; the initial state.
+   69    18:D291  A9 01      			lda	#1			; Init CRC-32 table value.
+   70    18:D293  85 98      			sta	<random + 0
+   71    18:D295  98         			tya				; Get and check the seed value.
+   72    18:D296  D0 01      			bne	.reverse_seed
+   73    18:D298  3A         			dec	a			; Which must be non-zero!
+   74    18:D299  4A         	.reverse_seed:	lsr	a			; Reverse the bits so that small changes
+   75    18:D29A  26 98      			rol	<random + 0		; in the seed make larger differences in
+   76    18:D29C  90 FB      			bcc	.reverse_seed		; the initial state.
    77                        	
-   78    18:D2E1  64 99      			stz	<random + 1		; A contains the high byte of the CRC-32.
-   79    18:D2E3  64 9A      			stz	<random + 2		; The other three bytes are in memory.
-   80    18:D2E5  62         			cla
+   78    18:D29E  64 99      			stz	<random + 1		; A contains the high byte of the CRC-32.
+   79    18:D2A0  64 9A      			stz	<random + 2		; The other three bytes are in memory.
+   80    18:D2A2  62         			cla
    81                        	
-   82    18:D2E6  A0 08      			ldy	#8			; Y counts bits in a byte.
-   83    18:D2E8  4A         	.bit_loop:	lsr	a			; The CRC-32 algorithm is similar to CRC-16
-   84    18:D2E9  66 9A      			ror	<random + 2		; except that it is reversed (originally for
-   85    18:D2EB  66 99      			ror	<random + 1		; hardware reasons). This is why we shift
-   86    18:D2ED  66 98      			ror	<random + 0		; right instead of left here.
-   87    18:D2EF  90 16      			bcc	.no_add			; Do nothing if no overflow,
-   88    18:D2F1  49 ED      			eor	#$ED			; else add CRC-32 polynomial $EDB88320.
+   82    18:D2A3  A0 08      			ldy	#8			; Y counts bits in a byte.
+   83    18:D2A5  4A         	.bit_loop:	lsr	a			; The CRC-32 algorithm is similar to CRC-16
+   84    18:D2A6  66 9A      			ror	<random + 2		; except that it is reversed (originally for
+   85    18:D2A8  66 99      			ror	<random + 1		; hardware reasons). This is why we shift
+   86    18:D2AA  66 98      			ror	<random + 0		; right instead of left here.
+   87    18:D2AC  90 16      			bcc	.no_add			; Do nothing if no overflow,
+   88    18:D2AE  49 ED      			eor	#$ED			; else add CRC-32 polynomial $EDB88320.
    89                        	
-   90    18:D2F3  48         			pha				; Save high byte while we do others.
-   91    18:D2F4  A5 9A      			lda	<random + 2
-   92    18:D2F6  49 B8      			eor	#$B8			; Most reference books give the CRC-32 poly
-   93    18:D2F8  85 9A      			sta	<random + 2		; as $04C11DB7. This is actually the same if
-   94    18:D2FA  A5 99      			lda	<random + 1		; you write it in binary and read it right-
-   95    18:D2FC  49 83      			eor	#$83			; to-left instead of left-to-right. Doing it
-   96    18:D2FE  85 99      			sta	<random + 1		; this way means we won't have to explicitly
-   97    18:D300  A5 98      			lda	<random + 0		; reverse things afterwards.
-   98    18:D302  49 20      			eor	#$20
-   99    18:D304  85 98      			sta	<random + 0
-  100    18:D306  68         			pla				; Restore high byte.
+   90    18:D2B0  48         			pha				; Save high byte while we do others.
+   91    18:D2B1  A5 9A      			lda	<random + 2
+   92    18:D2B3  49 B8      			eor	#$B8			; Most reference books give the CRC-32 poly
+   93    18:D2B5  85 9A      			sta	<random + 2		; as $04C11DB7. This is actually the same if
+   94    18:D2B7  A5 99      			lda	<random + 1		; you write it in binary and read it right-
+   95    18:D2B9  49 83      			eor	#$83			; to-left instead of left-to-right. Doing it
+   96    18:D2BB  85 99      			sta	<random + 1		; this way means we won't have to explicitly
+   97    18:D2BD  A5 98      			lda	<random + 0		; reverse things afterwards.
+   98    18:D2BF  49 20      			eor	#$20
+   99    18:D2C1  85 98      			sta	<random + 0
+  100    18:D2C3  68         			pla				; Restore high byte.
   101                        	
-  102    18:D307  88         	.no_add:	dey				; Do next bit.
-  103    18:D308  D0 DE      			bne	.bit_loop
+  102    18:D2C4  88         	.no_add:	dey				; Do next bit.
+  103    18:D2C5  D0 DE      			bne	.bit_loop
   104                        	
-  105    18:D30A  85 9B      			sta	<random + 3		; Save CRC-32 high-byte.
+  105    18:D2C7  85 9B      			sta	<random + 3		; Save CRC-32 high-byte.
   106                        	
   107                        			leave				; All done!
-         18:D30C  4C EF FF   			jmp	leave_proc
+         18:D2C9  4C EF FF   			jmp	leave_proc
   108                        	
   109                        			.endp
   110                        	
@@ -35179,57 +35163,57 @@
   492               20F8     	_gfx_load_bat_PARM_4	=	_al
   493               20F9     	_gfx_load_bat_PARM_5	=	_ah
   494                        	
-  495    18:D219             	load_bat_group	.procgroup			; These routines share code!
+  495    18:D1D6             	load_bat_group	.procgroup			; These routines share code!
   496                        	
   497               0001     		.if	SUPPORT_SGX
   498                        			.proc	_sgx_load_bat.4
   505                        			.endp
   506                        		.endif
   507                        	
-  508    18:D219             			.proc	_load_bat.4
-  509    18:D219             			.alias	_far_load_bat.3		= _load_bat.4
+  508    18:D1D6             			.proc	_load_bat.4
+  509    18:D1D6             			.alias	_far_load_bat.3		= _load_bat.4
   510                        	
-  511    18:D219  82         			clx				; Offset to PCE VDC.
+  511    18:D1D6  82         			clx				; Offset to PCE VDC.
   512                        	
-  513    18:D21A  43 08      			tma3
-  514    18:D21C  48         			pha
+  513    18:D1D7  43 08      			tma3
+  514    18:D1D9  48         			pha
   515                        	
-  516    18:D21D  A4 02      			ldy	<_bp_bank
-  517    18:D21F  20 2D E3   			jsr	map_bp_to_mpr3		; Map data to MPR3.
+  516    18:D1DA  A4 02      			ldy	<_bp_bank
+  517    18:D1DC  20 2D E3   			jsr	map_bp_to_mpr3		; Map data to MPR3.
   518                        	
-  519    18:D222  A4 EC      			ldy.l	<_bp
-  520    18:D224  64 EC      			stz.l	<_bp
+  519    18:D1DF  A4 EC      			ldy.l	<_bp
+  520    18:D1E1  64 EC      			stz.l	<_bp
   521                        	
-  522    18:D226  20 7F E3   	.line_loop:	jsr	set_di_to_mawr
+  522    18:D1E3  20 7F E3   	.line_loop:	jsr	set_di_to_mawr
   523                        	
-  524    18:D229  A5 F8      			lda	<_al
-  525    18:D22B  85 00      			sta	<__temp
-  526    18:D22D  B1 EC      	.tile_loop:	lda	[_bp], y
-  527    18:D22F  9D 02 02   			sta	VDC_DL, x
-  528    18:D232  C8         			iny
-  529    18:D233  B1 EC      			lda	[_bp], y
-  530    18:D235  9D 03 02   			sta	VDC_DH, x
-  531    18:D238  C8         			iny
-  532    18:D239  D0 03      			bne	!+
-  533    18:D23B  20 4C E3   			jsr	inc.h_bp_mpr3
-  534    18:D23E  C6 00      	!:		dec	<__temp
-  535    18:D240  D0 EB      			bne	.tile_loop
+  524    18:D1E6  A5 F8      			lda	<_al
+  525    18:D1E8  85 00      			sta	<__temp
+  526    18:D1EA  B1 EC      	.tile_loop:	lda	[_bp], y
+  527    18:D1EC  9D 02 02   			sta	VDC_DL, x
+  528    18:D1EF  C8         			iny
+  529    18:D1F0  B1 EC      			lda	[_bp], y
+  530    18:D1F2  9D 03 02   			sta	VDC_DH, x
+  531    18:D1F5  C8         			iny
+  532    18:D1F6  D0 03      			bne	!+
+  533    18:D1F8  20 4C E3   			jsr	inc.h_bp_mpr3
+  534    18:D1FB  C6 00      	!:		dec	<__temp
+  535    18:D1FD  D0 EB      			bne	.tile_loop
   536                        	
-  537    18:D242  BD 7E 26   			lda	vdc_bat_width, x
-  538    18:D245  18         			clc
-  539    18:D246  65 F0      			adc.l	<_di
-  540    18:D248  85 F0      			sta.l	<_di
-  541    18:D24A  90 02      			bcc	!+
-  542    18:D24C  E6 F1      			inc.h	<_di
+  537    18:D1FF  BD 7E 26   			lda	vdc_bat_width, x
+  538    18:D202  18         			clc
+  539    18:D203  65 F0      			adc.l	<_di
+  540    18:D205  85 F0      			sta.l	<_di
+  541    18:D207  90 02      			bcc	!+
+  542    18:D209  E6 F1      			inc.h	<_di
   543                        	
-  544    18:D24E  C6 F9      	!:		dec	<_ah
-  545    18:D250  D0 D4      			bne	.line_loop
+  544    18:D20B  C6 F9      	!:		dec	<_ah
+  545    18:D20D  D0 D4      			bne	.line_loop
   546                        	
-  547    18:D252  68         			pla
-  548    18:D253  53 08      			tam3
+  547    18:D20F  68         			pla
+  548    18:D210  53 08      			tam3
   549                        	
   550                        			leave
-         18:D255  4C EF FF   			jmp	leave_proc
+         18:D212  4C EF FF   			jmp	leave_proc
   551                        	
   552                        			.endp
   553                        	
@@ -35244,33 +35228,33 @@
   562                        	;
   563                        	; void __fastcall far_load_palette( unsigned char palette<_al>, unsigned char num_palettes<_ah> );
   564                        	
-  565    18:D30F             			.proc	_load_palette.3
-  566    18:D30F             			.alias	_far_load_palette.2	= _load_palette.3
+  565    18:D2FA             			.proc	_load_palette.3
+  566    18:D2FA             			.alias	_far_load_palette.2	= _load_palette.3
   567                        	
-  568    18:D30F  AC 55 26   			ldy	color_queue_w		; Get the queue's write index.
+  568    18:D2FA  AC 55 26   			ldy	color_queue_w		; Get the queue's write index.
   569                        	
-  570    18:D312  A5 EC      			lda.l	<_bp			; Add this set of palettes to
-  571    18:D314  99 66 26   			sta	color_addr_l, y		; the queue.
-  572    18:D317  A5 ED      			lda.h	<_bp
-  573    18:D319  99 6E 26   			sta	color_addr_h, y
-  574    18:D31C  A5 02      			lda	<_bp_bank
-  575    18:D31E  99 76 26   			sta	color_bank, y
-  576    18:D321  A5 F8      			lda	<_al
-  577    18:D323  99 56 26   			sta	color_index, y
-  578    18:D326  A5 F9      			lda	<_ah
-  579    18:D328  99 5E 26   			sta	color_count, y
+  570    18:D2FD  A5 EC      			lda.l	<_bp			; Add this set of palettes to
+  571    18:D2FF  99 66 26   			sta	color_addr_l, y		; the queue.
+  572    18:D302  A5 ED      			lda.h	<_bp
+  573    18:D304  99 6E 26   			sta	color_addr_h, y
+  574    18:D307  A5 02      			lda	<_bp_bank
+  575    18:D309  99 76 26   			sta	color_bank, y
+  576    18:D30C  A5 F8      			lda	<_al
+  577    18:D30E  99 56 26   			sta	color_index, y
+  578    18:D311  A5 F9      			lda	<_ah
+  579    18:D313  99 5E 26   			sta	color_count, y
   580                        	
-  581    18:D32B  C8         			iny				; Increment the queue index.
-  582    18:D32C  98         			tya
-  583    18:D32D  29 07      			and	#7
+  581    18:D316  C8         			iny				; Increment the queue index.
+  582    18:D317  98         			tya
+  583    18:D318  29 07      			and	#7
   584                        	
-  585    18:D32F  CD 54 26   	.wait:		cmp	color_queue_r		; If the queue is full, wait
-  586    18:D332  F0 FB      			beq	.wait			; for the next VBLANK.
+  585    18:D31A  CD 54 26   	.wait:		cmp	color_queue_r		; If the queue is full, wait
+  586    18:D31D  F0 FB      			beq	.wait			; for the next VBLANK.
   587                        	
-  588    18:D334  8D 55 26   			sta	color_queue_w		; Signal item is in the queue.
+  588    18:D31F  8D 55 26   			sta	color_queue_w		; Signal item is in the queue.
   589                        	
   590                        			leave				; All done, phew!
-         18:D337  4C EF FF   			jmp	leave_proc
+         18:D322  4C EF FF   			jmp	leave_proc
   591                        	
   592                        			.endp
   593                        	
@@ -35303,42 +35287,42 @@
   685                        			.endp
   686                        		.endif
   687                        	
-  688    18:D296             			.proc	_vram2vram.3
+  688    18:D253             			.proc	_vram2vram.3
   689                        	
-  690    18:D296  82         			clx				; Offset to PCE VDC.
+  690    18:D253  82         			clx				; Offset to PCE VDC.
   691                        	
-  692    18:D297  08         			php
-  693    18:D298  78         			sei
-  694    18:D299  A9 11      			lda	#VDC_DESR
-  695    18:D29B  9D 00 02   			sta	VDC_AR, x
-  696    18:D29E  A5 F8      			lda.l	<_ax
-  697    18:D2A0  9D 02 02   			sta	VDC_DL, x
-  698    18:D2A3  A5 F9      			lda.h	<_ax
-  699    18:D2A5  9D 03 02   			sta	VDC_DH, x
+  692    18:D254  08         			php
+  693    18:D255  78         			sei
+  694    18:D256  A9 11      			lda	#VDC_DESR
+  695    18:D258  9D 00 02   			sta	VDC_AR, x
+  696    18:D25B  A5 F8      			lda.l	<_ax
+  697    18:D25D  9D 02 02   			sta	VDC_DL, x
+  698    18:D260  A5 F9      			lda.h	<_ax
+  699    18:D262  9D 03 02   			sta	VDC_DH, x
   700                        	
-  701    18:D2A8  A9 10      			lda	#VDC_SOUR
-  702    18:D2AA  9D 00 02   			sta	VDC_AR, x
-  703    18:D2AD  A5 FA      			lda.l	<_bx
-  704    18:D2AF  9D 02 02   			sta	VDC_DL, x
-  705    18:D2B2  A5 FB      			lda.h	<_bx
-  706    18:D2B4  9D 03 02   			sta	VDC_DH, x
+  701    18:D265  A9 10      			lda	#VDC_SOUR
+  702    18:D267  9D 00 02   			sta	VDC_AR, x
+  703    18:D26A  A5 FA      			lda.l	<_bx
+  704    18:D26C  9D 02 02   			sta	VDC_DL, x
+  705    18:D26F  A5 FB      			lda.h	<_bx
+  706    18:D271  9D 03 02   			sta	VDC_DH, x
   707                        	
-  708    18:D2B7  A9 12      			lda	#VDC_LENR
-  709    18:D2B9  9D 00 02   			sta	VDC_AR, x
-  710    18:D2BC  18         			clc
-  711    18:D2BD  A5 FC      			lda.l	<_cx
-  712    18:D2BF  69 FF      			adc	#$FF
-  713    18:D2C1  9D 02 02   			sta	VDC_DL, x
-  714    18:D2C4  A5 FD      			lda.h	<_cx
-  715    18:D2C6  69 FF      			adc	#$FF
-  716    18:D2C8  9D 03 02   			sta	VDC_DH, x
+  708    18:D274  A9 12      			lda	#VDC_LENR
+  709    18:D276  9D 00 02   			sta	VDC_AR, x
+  710    18:D279  18         			clc
+  711    18:D27A  A5 FC      			lda.l	<_cx
+  712    18:D27C  69 FF      			adc	#$FF
+  713    18:D27E  9D 02 02   			sta	VDC_DL, x
+  714    18:D281  A5 FD      			lda.h	<_cx
+  715    18:D283  69 FF      			adc	#$FF
+  716    18:D285  9D 03 02   			sta	VDC_DH, x
   717                        	
-  718    18:D2CB  B5 F7      			lda	<vdc_reg, x
-  719    18:D2CD  8D 00 02   			sta	VDC_AR
-  720    18:D2D0  28         			plp
+  718    18:D288  B5 F7      			lda	<vdc_reg, x
+  719    18:D28A  8D 00 02   			sta	VDC_AR
+  720    18:D28D  28         			plp
   721                        	
   722                        			leave
-         18:D2D1  4C EF FF   			jmp	leave_proc
+         18:D28E  4C EF FF   			jmp	leave_proc
   723                        	
   724                        			.endp
   725                        	
@@ -40415,7 +40399,7 @@ Size: $02F0, Addr: $02:D17D,      .proc _init_HUD
 Size: $02C4, Addr: $02:D46D,      .proc _load_OBJECT_TILES
 Size: $0292, Addr: $02:D731, .procgroup chrmap_group
 Size: $0279, Addr: $02:D9C3,      .proc _joypad_BUTTONS
-Size: $0210, Addr: $08:DDC0,      .proc _main
+Size: $01F7, Addr: $08:DDC0,      .proc _main
 Size: $0197, Addr: $02:DC3C,      .proc _joypad_BUTTONS_TITLE
 Size: $0184, Addr: $02:DDD3,      .proc _check_OBJECT
 Size: $016F, Addr: $18:C000,      .proc _init_TITLE
@@ -40441,21 +40425,21 @@ Size: $0064, Addr: $18:CFF2,      .proc _check_BG
 Size: $0062, Addr: $18:D056,      .proc _init_256x224
 Size: $004E, Addr: $18:D0B8, .procgroup old_satb_group
 Size: $004B, Addr: $18:D106, .procgroup hucc_memcmp
-Size: $0043, Addr: $18:D151, .procgroup vdc_clear_vram
-Size: $0043, Addr: $18:D194,      .proc sgx_detect
-Size: $0042, Addr: $18:D1D7,      .proc _init_PLAYER
-Size: $003F, Addr: $18:D219, .procgroup load_bat_group
-Size: $003E, Addr: $18:D258,      .proc _init_VARIABLES
-Size: $003E, Addr: $18:D296,      .proc _vram2vram.3
-Size: $003B, Addr: $18:D2D4,      .proc init_random
-Size: $002E, Addr: $08:DFD0,      .proc _scroll_BG
-Size: $002B, Addr: $18:D30F,      .proc _load_palette.3
-Size: $0026, Addr: $18:D33A,      .proc _load_CHEST_TILES
-Size: $0026, Addr: $18:D360,      .proc _load_NPC_TILES
-Size: $0023, Addr: $18:D386,      .proc _hide_LEVEL_SPRITES
-Size: $001D, Addr: $18:D3A9,      .proc _init_SYSTEM
-Size: $001C, Addr: $18:D3C6,      .proc _display_SCORE
-Size: $001C, Addr: $18:D3E2,      .proc _display_ZENNY
-Size: $001C, Addr: $18:D3FE,      .proc clear_vce
-Size: $001A, Addr: $18:D41A,      .proc _display_KEY
-Size: $001A, Addr: $18:D434,      .proc _display_POTION
+Size: $0043, Addr: $08:DFB7, .procgroup vdc_clear_vram
+Size: $0043, Addr: $18:D151,      .proc sgx_detect
+Size: $0042, Addr: $18:D194,      .proc _init_PLAYER
+Size: $003F, Addr: $18:D1D6, .procgroup load_bat_group
+Size: $003E, Addr: $18:D215,      .proc _init_VARIABLES
+Size: $003E, Addr: $18:D253,      .proc _vram2vram.3
+Size: $003B, Addr: $18:D291,      .proc init_random
+Size: $002E, Addr: $18:D2CC,      .proc _scroll_BG
+Size: $002B, Addr: $18:D2FA,      .proc _load_palette.3
+Size: $0026, Addr: $18:D325,      .proc _load_CHEST_TILES
+Size: $0026, Addr: $18:D34B,      .proc _load_NPC_TILES
+Size: $0023, Addr: $18:D371,      .proc _hide_LEVEL_SPRITES
+Size: $001D, Addr: $18:D394,      .proc _init_SYSTEM
+Size: $001C, Addr: $18:D3B1,      .proc _display_SCORE
+Size: $001C, Addr: $18:D3CD,      .proc _display_ZENNY
+Size: $001C, Addr: $18:D3E9,      .proc clear_vce
+Size: $001A, Addr: $18:D405,      .proc _display_KEY
+Size: $001A, Addr: $18:D41F,      .proc _display_POTION

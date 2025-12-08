@@ -115,7 +115,7 @@ main()
 
                             update_PLAYER();
                             update_WEAPON();
-                            put_number(hit_wall,1,0,1);
+                            //put_number(hit_wall,1,0,1);
 
 
                             scroll_object();
