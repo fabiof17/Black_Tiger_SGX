@@ -8,7 +8,8 @@
 #include "include/variables.c"
 
 
-#include "include/gfx_BG.c"
+#include "include/gfx_BG_TITLE.c"
+#include "include/gfx_BG_LEVELS.c"
 #include "include/gfx_SPRITES.c"
 
 
@@ -21,6 +22,7 @@
 
 #include "include/routines_LEVELS.c"
 #include "include/routines_SHOP.c"
+#include "include/routines_TITLE.c"
 #include "include/init.c"
 
 
@@ -67,6 +69,22 @@ main()
             //                                    TITLE                                    //
             //-----------------------------------------------------------------------------//
             case SEQUENCE_TITLE:
+                if(sequence_loaded == FALSE)
+                {
+                    init_TITLE();
+
+                    sequence_loaded = TRUE;
+                }
+
+                else
+                {
+                    vsync();
+
+                    joypad_BUTTONS_TITLE();
+
+                    satb_update();
+                }
+
                 break;
 
 
@@ -88,7 +106,6 @@ main()
                     sequence_loaded = TRUE;
                 }
 
-
                 else
                 {
                     switch(level_id)
@@ -97,7 +114,8 @@ main()
                             vsync();
 
                             update_PLAYER();
-                            //put_number(player_state,1,0,0);
+                            update_WEAPON();
+                            //put_number(player_state,2,0,1);
 
 
                             scroll_object();

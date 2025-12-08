@@ -28,12 +28,15 @@
 #define TILES_8   128
 #define TILES_12  192
 #define TILES_16  256
+#define TILES_24  384
 #define TILES_32  512
 #define TILES_48  768
 #define TILES_64  1024
 #define TILES_80  1280
 #define TILES_96  1536
-#define TILES_352 5632
+#define TILES_144 2304
+#define TILES_160 2560
+#define TILES_400 6400
 
 
 
@@ -90,7 +93,7 @@
 
 
 
-#define PLAYER_VRAM_ADR                     0x1600
+#define PLAYER_VRAM_ADR                     0x1400
 #define PLAYER_IDLE_VRAM_ADR                PLAYER_VRAM_ADR
 #define PLAYER_WALK_1_VRAM_ADR              PLAYER_VRAM_ADR+TILES_16
 #define PLAYER_WALK_2_VRAM_ADR              PLAYER_WALK_1_VRAM_ADR+TILES_16
@@ -133,7 +136,7 @@
 //                                                                             //
 //-----------------------------------------------------------------------------//
 
-#define CHAIN_VRAM_ADR                  0x1400
+#define CHAIN_VRAM_ADR                  0x7C00
 #define WEAPON_VRAM_ADR                 CHAIN_VRAM_ADR+TILES_4
 #define CHAIN_START_INDEX               PLAYER_START_INDEX-3
 
@@ -303,6 +306,75 @@
 #define TYPE_ITEM_ARMOR_4       7
 #define TYPE_ITEM_ARMOR_5       8
 #define TYPE_ITEM_POTION        9
+
+
+
+
+//-----------------------------------------------------------------------------//
+//                                                                             //
+//                                   ENEMIES                                   //
+//                                                                             //
+//-----------------------------------------------------------------------------//
+
+//-----------------------------------------------------------------------------//
+//                                     ORC                                     //
+//-----------------------------------------------------------------------------//
+
+#define ORC_VRAM_ADR                     PLAYER_HANG_ATTACK_2_VRAM_ADR+TILES_16
+
+#define ORC_WALK_1_VRAM_ADR              ORC_VRAM_ADR
+#define ORC_WALK_2_VRAM_ADR              ORC_WALK_1_VRAM_ADR+TILES_16
+#define ORC_WALK_3_VRAM_ADR              ORC_WALK_2_VRAM_ADR+TILES_16
+#define ORC_ATTACK_1_VRAM_ADR            ORC_WALK_3_VRAM_ADR+TILES_16
+
+#define ORC_ATTACK_2_VRAM_ADR            ORC_ATTACK_1_VRAM_ADR+TILES_16
+#define ORC_ATTACK_3_VRAM_ADR            ORC_ATTACK_2_VRAM_ADR+TILES_16
+#define ORC_ATTACK_4_VRAM_ADR            ORC_ATTACK_3_VRAM_ADR+TILES_16
+#define ORC_ATTACK_5_VRAM_ADR            ORC_ATTACK_4_VRAM_ADR+TILES_16
+#define ORC_ATTACK_6_VRAM_ADR            ORC_ATTACK_5_VRAM_ADR+TILES_16
+
+#define ORC_DEAD_1_VRAM_ADR              ORC_ATTACK_6_VRAM_ADR+TILES_16
+#define ORC_DEAD_2_VRAM_ADR              ORC_DEAD_1_VRAM_ADR+TILES_16
+#define ORC_DEAD_3_VRAM_ADR              ORC_DEAD_2_VRAM_ADR+TILES_16
+#define ORC_DEAD_4_VRAM_ADR              ORC_DEAD_3_VRAM_ADR+TILES_16
+
+#define ORC_AXE_1_VRAM_ADR               ORC_DEAD_4_VRAM_ADR+TILES_16
+#define ORC_AXE_2_VRAM_ADR               ORC_AXE_1_VRAM_ADR+TILES_4
+#define ORC_AXE_3_VRAM_ADR               ORC_AXE_2_VRAM_ADR+TILES_4
+#define ORC_AXE_4_VRAM_ADR               ORC_AXE_3_VRAM_ADR+TILES_4
+#define ORC_AXE_5_VRAM_ADR               ORC_AXE_4_VRAM_ADR+TILES_4
+#define ORC_AXE_6_VRAM_ADR               ORC_AXE_5_VRAM_ADR+TILES_4
+
+
+//-----------------------------------------------------------------------------//
+//                                                                             //
+//                                   SERPENT                                   //
+//                                                                             //
+//-----------------------------------------------------------------------------//
+
+#define SERPENT_VRAM_ADR                    ORC_AXE_6_VRAM_ADR+TILES_4
+#define SERPENT_LEFT_VRAM_ADR               SERPENT_VRAM_ADR
+#define SERPENT_FRONT_VRAM_ADR              SERPENT_LEFT_VRAM_ADR+TILES_16
+#define SERPENT_RIGHT_VRAM_ADR              SERPENT_FRONT_VRAM_ADR+TILES_16
+#define SERPENT_ATTACK_LEFT_VRAM_ADR        SERPENT_RIGHT_VRAM_ADR+TILES_16
+#define SERPENT_ATTACK_FRONT_VRAM_ADR       SERPENT_ATTACK_LEFT_VRAM_ADR+TILES_16
+#define SERPENT_ATTACK_RIGHT_VRAM_ADR       SERPENT_ATTACK_FRONT_VRAM_ADR+TILES_16
+
+
+//-----------------------------------------------------------------------------//
+//                                                                             //
+//                                    PLANT                                    //
+//                                                                             //
+//-----------------------------------------------------------------------------//
+
+#define PLANT_VRAM_ADR                      SERPENT_ATTACK_RIGHT_VRAM_ADR+TILES_16
+#define PLANT_IDLE_VRAM_ADR                 PLANT_VRAM_ADR
+
+
+
+
+
+
 
 
 

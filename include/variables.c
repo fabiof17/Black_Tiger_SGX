@@ -41,6 +41,7 @@ unsigned char   sequence_id,
 
                 // HUD //
                 life_amount,
+                credits_amount,
                 key_amount,
                 potion_amount,
 

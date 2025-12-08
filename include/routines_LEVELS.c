@@ -537,47 +537,50 @@ void joypad_BUTTONS()
 
         else if(player_state == STATE_HANG || player_state == STATE_CLIMB_UP || player_state == STATE_CLIMB_DOWN)
         {
-            if(joy(JOYPAD_1) & JOY_RIGHT)
+            if(player_attack == FALSE)
             {
-                player_counter_anim = 0;
-
-                player_state = STATE_JUMP_RIGHT;
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x-5);
-            }
-
-            else if(joy(JOYPAD_1) & JOY_LEFT)
-            {
-                player_counter_anim = 0;
-
-                player_state = STATE_JUMP_LEFT;
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x+21);
-            }
-
-            else if(joy(JOYPAD_1) & JOY_UP)
-            {
-                player_counter_anim = 0;
-
-                check_BG( 15 , 8 );
-
-                if(map_blk_flag == TILE_EMPTY)
+                if(joy(JOYPAD_1) & JOY_RIGHT)
                 {
-                    player_state = STATE_JUMP_LADDER;
+                    player_counter_anim = 0;
+
+                    player_state = STATE_JUMP_RIGHT;
 
                     spr_set(weapon_id);
-                    spr_y(player_pos_y+8);
-                    
-                    if(player_axis == AXIS_RIGHT)
-                    {
-                        spr_x(player_pos_x-5);
-                    }
+                    spr_x(player_pos_x-5);
+                }
 
-                    else
+                else if(joy(JOYPAD_1) & JOY_LEFT)
+                {
+                    player_counter_anim = 0;
+
+                    player_state = STATE_JUMP_LEFT;
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x+21);
+                }
+
+                else if(joy(JOYPAD_1) & JOY_UP)
+                {
+                    player_counter_anim = 0;
+
+                    check_BG( 15 , 8 );
+
+                    if(map_blk_flag == TILE_EMPTY)
                     {
-                        spr_x(player_pos_x+21);
+                        player_state = STATE_JUMP_LADDER;
+
+                        spr_set(weapon_id);
+                        spr_y(player_pos_y+8);
+                        
+                        if(player_axis == AXIS_RIGHT)
+                        {
+                            spr_x(player_pos_x-5);
+                        }
+
+                        else
+                        {
+                            spr_x(player_pos_x+21);
+                        }
                     }
                 }
             }
@@ -593,10 +596,29 @@ void joypad_BUTTONS()
             player_state = STATE_ATTACK;
         }
 
+        else if(player_state == STATE_JUMP)
+        {
+            if(player_attack == FALSE)
+            {
+                player_counter_attack = 0;
+                player_attack = TRUE;
+            }
+        }
+
         else if(player_state == STATE_CROUCH)
         {
             player_counter_attack = 0;
             player_state = STATE_CROUCH_ATTACK;
+        }
+
+        else if(player_state == STATE_HANG || player_state == STATE_CLIMB_UP || player_state == STATE_CLIMB_DOWN)
+        {
+            if(player_attack == FALSE)
+            {
+                player_counter_attack = 0;
+                player_attack = TRUE;
+                player_state = STATE_HANG;
+            }
         }
     }
 }
@@ -677,27 +699,29 @@ void joypad_DIR()
 
         else if(player_state == STATE_JUMP)
         {
-            if(player_axis == AXIS_LEFT)
+            if(player_attack == FALSE)
             {
-                player_axis = AXIS_RIGHT;
-                player_previous_axis = player_axis;
+                if(player_axis == AXIS_LEFT)
+                {
+                    player_axis = AXIS_RIGHT;
+                    player_previous_axis = player_axis;
 
-                spr_set(player_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(player_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id+1);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id+1);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id+2);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id+2);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(weapon_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
-                spr_x(player_pos_x-5);
-            
+                    spr_set(weapon_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_x(player_pos_x-5);
+                }
 
                 if(player_index_jump > 11 && player_index_jump < 15)
                 {
@@ -761,52 +785,58 @@ void joypad_DIR()
 
         else if(player_state == STATE_FALL)
         {
-            if(player_axis == AXIS_LEFT)
+            if(player_attack == FALSE)
             {
-                player_axis = AXIS_RIGHT;
-                player_previous_axis = player_axis;
+                if(player_axis == AXIS_LEFT)
+                {
+                    player_axis = AXIS_RIGHT;
+                    player_previous_axis = player_axis;
 
-                spr_set(player_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(player_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id+1);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id+1);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id+2);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id+2);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(weapon_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
-                spr_x(player_pos_x-4);
+                    spr_set(weapon_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_x(player_pos_x-4);
+                }
             }
         }
 
 
         else if(player_state == STATE_HANG)
         {
-            if(player_axis == AXIS_LEFT)
+            if(player_attack == FALSE)
             {
-                player_axis = AXIS_RIGHT;
-                player_previous_axis = player_axis;
+                if(player_axis == AXIS_LEFT)
+                {
+                    player_axis = AXIS_RIGHT;
+                    player_previous_axis = player_axis;
 
-                spr_set(player_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(player_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id+1);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id+1);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id+2);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id+2);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(weapon_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
-                spr_x(player_pos_x+17);
+                    spr_set(weapon_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_x(player_pos_x+17);
+                }
             }
         }
 
@@ -1014,35 +1044,38 @@ void joypad_DIR()
 
     else if(joy(JOYPAD_1) & JOY_UP)
     {
-       if(player_state == STATE_HANG || player_state == STATE_CLIMB_UP || player_state == STATE_CLIMB_DOWN)
+        if(player_state == STATE_HANG || player_state == STATE_CLIMB_UP || player_state == STATE_CLIMB_DOWN)
         {
-            unsigned char i;
-
-            check_BG( 15 , 8 );
-
-            if(map_blk_flag == TILE_EMPTY)
+            if(player_attack == FALSE)
             {
-                for(i=1 ; i<3 ; i++)
-                {
-                    check_BG( 15 , 8 + i );
+                unsigned char i;
 
-                    if(map_blk_flag == TILE_LADDER)
+                check_BG( 15 , 8 );
+
+                if(map_blk_flag == TILE_EMPTY)
+                {
+                    for(i=1 ; i<3 ; i++)
                     {
-                        sgx_map_pxl_y -= (2 - i);
-                        break;
+                        check_BG( 15 , 8 + i );
+
+                        if(map_blk_flag == TILE_LADDER)
+                        {
+                            sgx_map_pxl_y -= (2 - i);
+                            break;
+                        }
                     }
                 }
+
+                else
+                {
+                    sgx_map_pxl_y -= 2;
+                }
+
+                spr_set(weapon_id);
+                spr_hide();
+
+                player_state = STATE_CLIMB_UP;
             }
-
-            else
-            {
-                sgx_map_pxl_y -= 2;
-            }
-
-            spr_set(weapon_id);
-            spr_hide();
-
-            player_state = STATE_CLIMB_UP;
         }
     }
 
@@ -1062,58 +1095,61 @@ void joypad_DIR()
 
         else if(player_state == STATE_HANG || player_state == STATE_CLIMB_UP || player_state == STATE_CLIMB_DOWN)
         {
-            unsigned char i;
-
-            check_BG( 15 , 10 );
-
-            if(map_blk_flag == TILE_EMPTY)
+            if(player_attack == FALSE)
             {
-                for(i=1 ; i<3 ; i++)
+                unsigned char i;
+
+                check_BG( 15 , 10 );
+
+                if(map_blk_flag == TILE_EMPTY)
                 {
-                    check_BG( 15 , 22 + i );
-
-                    if(map_blk_flag == TILE_LADDER)
+                    for(i=1 ; i<3 ; i++)
                     {
-                        sgx_map_pxl_y += (2 - i);
-                        break;
-                    }
+                        check_BG( 15 , 22 + i );
 
-                    else
-                    {
-                        spr_set(player_id);
-                        spr_pattern(PLAYER_FALL_VRAM_ADR);
-
-                        spr_set(weapon_id);
-                        spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
-                        spr_y(player_pos_y+4);
-
-                        if(player_axis == AXIS_RIGHT)
+                        if(map_blk_flag == TILE_LADDER)
                         {
-                            spr_x(player_pos_x-4);
+                            sgx_map_pxl_y += (2 - i);
+                            break;
                         }
-                        
+
                         else
                         {
-                            spr_x(player_pos_x+20);
-                        }
-                        
+                            spr_set(player_id);
+                            spr_pattern(PLAYER_FALL_VRAM_ADR);
 
-                        jump_ladder = FALSE;
-                        player_index_jump = 0;
-                        player_index_fall = 0;
-                        fall_ladder = TRUE;
-                        player_state = STATE_FALL;
+                            spr_set(weapon_id);
+                            spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
+                            spr_y(player_pos_y+4);
+
+                            if(player_axis == AXIS_RIGHT)
+                            {
+                                spr_x(player_pos_x-4);
+                            }
+                            
+                            else
+                            {
+                                spr_x(player_pos_x+20);
+                            }
+                            
+
+                            jump_ladder = FALSE;
+                            player_index_jump = 0;
+                            player_index_fall = 0;
+                            fall_ladder = TRUE;
+                            player_state = STATE_FALL;
+                        }
                     }
                 }
-            }
 
-            else
-            {
-                spr_set(weapon_id);
-                spr_hide();
-                
-                sgx_map_pxl_y += 2;
-                player_state = STATE_CLIMB_DOWN;
+                else
+                {
+                    spr_set(weapon_id);
+                    spr_hide();
+                    
+                    sgx_map_pxl_y += 2;
+                    player_state = STATE_CLIMB_DOWN;
+                }
             }
         }
     }
@@ -1134,11 +1170,6 @@ void update_PLAYER()
         {
             spr_set(player_id);
             spr_pattern(PLAYER_IDLE_VRAM_ADR);
-
-            /*spr_set(weapon_id);
-            spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
-            spr_x(player_pos_x+8);
-            spr_y(player_pos_y+16);*/
 
             player_counter_anim = 0;
         }
@@ -1418,147 +1449,6 @@ void update_PLAYER()
     }
 
 
-    else if(player_state == STATE_ATTACK)
-    {
-        if(player_counter_attack == 0)
-        {
-            spr_set(player_id);
-            spr_pattern(PLAYER_ATTACK_1_VRAM_ADR);
-
-            spr_set(weapon_id);
-            spr_pattern(WEAPON_ATTACK_1_VRAM_ADRESS);
-
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x-13);
-            }
-
-            else
-            {
-                spr_x(player_pos_x+29);
-            }
-
-            spr_y(player_pos_y-8);
-        }
-
-        else if(player_counter_attack == 6)
-        {
-            spr_set(player_id);
-            spr_pattern(PLAYER_ATTACK_2_VRAM_ADR);
-
-            spr_set(weapon_id);
-            spr_pattern(WEAPON_ATTACK_2_VRAM_ADRESS);
-
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x+32);
-                
-            }
-            
-            else
-            {
-                spr_x(player_pos_x-16);
-            }
-
-            spr_y(player_pos_y+6);
-        }
-
-        else if(player_counter_attack == 7)
-        {
-            spr_set(chain_id);
-            spr_y(player_pos_y);
-
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x+32);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x+48);
-            }
-            
-            else
-            {
-                spr_x(player_pos_x-16);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x-32);
-            }
-        }
-
-        else if(player_counter_attack == 8)
-        {
-            spr_set(chain_id+1);
-            spr_y(player_pos_y);
-
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x+48);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x+64);
-            }
-            
-            else
-            {
-                spr_x(player_pos_x-32);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x-48);
-            }
-        }
-
-        else if(player_counter_attack == 9)
-        {
-            spr_set(chain_id+2);
-            spr_y(player_pos_y);
-
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x+64);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x+80);
-            }
-            
-            else
-            {
-                spr_x(player_pos_x-48);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x-64);
-            }
-        }
-
-        else if(player_counter_attack == 23)
-        {
-            spr_set(chain_id);
-            spr_hide();
-
-            spr_set(chain_id+1);
-            spr_hide();
-
-            spr_set(chain_id+2);
-            spr_hide();
-
-            spr_set(player_id);
-            spr_pattern(PLAYER_IDLE_VRAM_ADR);
-
-            spr_set(weapon_id);
-            spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
-            spr_x(player_pos_x+8);
-            spr_y(player_pos_y+16);
-
-            player_attack = FALSE;
-            player_counter_attack = 1;
-            player_state = STATE_IDLE;
-            return;
-        }
-
-
-        player_counter_attack += 1;
-    }
-
-
     else if(player_state == STATE_JUMP)
     {
         unsigned char i;
@@ -1594,8 +1484,161 @@ void update_PLAYER()
             }
         }
 
-        spr_set(weapon_id);
-        spr_y(player_pos_y+8);
+
+        if(player_attack == FALSE)
+        {
+            spr_set(weapon_id);
+            spr_y(player_pos_y+8);
+        }
+
+        
+        else
+        {
+            if(player_counter_attack == 0)
+            {
+                spr_set(player_id);
+                spr_pattern(PLAYER_JUMP_ATTACK_1_VRAM_ADR);
+
+                spr_set(weapon_id);
+                spr_pattern(WEAPON_ATTACK_1_VRAM_ADRESS);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x-14);
+                }
+
+                else
+                {
+                    spr_x(player_pos_x+29);
+                }
+
+                spr_y(player_pos_y-8);
+            }
+
+            else if(player_counter_attack == 6)
+            {
+                spr_set(player_id);
+                spr_pattern(PLAYER_JUMP_ATTACK_2_VRAM_ADR);
+
+                spr_set(weapon_id);
+                spr_pattern(WEAPON_ATTACK_2_VRAM_ADRESS);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x+32);
+                    
+                }
+                
+                else
+                {
+                    spr_x(player_pos_x-16);
+                }
+
+                spr_y(player_pos_y+6);
+            }
+
+            else if(player_counter_attack == 7)
+            {
+                spr_set(chain_id);
+                spr_y(player_pos_y);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x+32);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x+48);
+                }
+                
+                else
+                {
+                    spr_x(player_pos_x-16);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x-32);
+                }
+            }
+
+            else if(player_counter_attack == 8)
+            {
+                spr_set(chain_id+1);
+                spr_y(player_pos_y);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x+48);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x+64);
+                }
+                
+                else
+                {
+                    spr_x(player_pos_x-32);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x-48);
+                }
+            }
+
+            else if(player_counter_attack == 9)
+            {
+                spr_set(chain_id+2);
+                spr_y(player_pos_y);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x+64);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x+80);
+                }
+                
+                else
+                {
+                    spr_x(player_pos_x-48);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x-64);
+                }
+            }
+
+            else if(player_counter_attack == 23)
+            {
+                spr_set(chain_id);
+                spr_hide();
+
+                spr_set(chain_id+1);
+                spr_hide();
+
+                spr_set(chain_id+2);
+                spr_hide();
+
+                spr_set(player_id);
+                spr_pattern(PLAYER_HANG_VRAM_ADR);
+
+                spr_set(weapon_id);
+                spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
+                spr_y(player_pos_y+5);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x+17);
+                }
+
+                else
+                {
+                    spr_x(player_pos_x-2);
+                }
+
+                player_attack = FALSE;
+                player_counter_attack = 0;
+                player_state = STATE_HANG;
+            }
+
+
+            player_counter_attack += 1;
+        }
 
         spr_set(player_id);
         spr_y(player_pos_y);
@@ -1604,7 +1647,6 @@ void update_PLAYER()
 
         if(player_index_jump < 34)
         {
-
             player_index_jump += 1;
         }
 
@@ -1639,13 +1681,21 @@ void update_PLAYER()
 
                 }
 
-                spr_set(weapon_id);
-                spr_x(player_pos_x+8);
-                spr_y(player_pos_y+16);
+                if(player_attack == FALSE)
+                {
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x+8);
+                    spr_y(player_pos_y+16);
+                }
 
                 player_counter_anim = 1;
                 player_index_jump = 0;
-                player_state = STATE_IDLE;
+
+                if(player_attack == FALSE)
+                {
+                    player_state = STATE_IDLE;
+                }
+                
                 return;
             }
 
@@ -1673,14 +1723,21 @@ void update_PLAYER()
 
                     }
 
-
-                    spr_set(weapon_id);
-                    spr_x(player_pos_x+8);
-                    spr_y(player_pos_y+16);
+                    if(player_attack == FALSE)
+                    {
+                        spr_set(weapon_id);
+                        spr_x(player_pos_x+8);
+                        spr_y(player_pos_y+16);
+                    }
 
                     player_counter_anim = 1;
                     player_index_jump = 0;
-                    player_state = STATE_IDLE;
+
+                    if(player_attack == FALSE)
+                    {
+                        player_state = STATE_IDLE;
+                    }
+
                     return;
                 }
             }
@@ -2242,157 +2299,6 @@ void update_PLAYER()
     }
 
 
-    else if(player_state == STATE_CROUCH_ATTACK)
-    {
-        if(player_counter_attack == 0)
-        {
-            spr_set(player_id);
-            spr_pattern(PLAYER_CROUCH_ATTACK_1_VRAM_ADR);
-
-            spr_set(weapon_id);
-            spr_pattern(WEAPON_ATTACK_1_VRAM_ADRESS);
-
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x-16);
-            }
-
-            else
-            {
-                spr_x(player_pos_x+32);
-            }
-
-            spr_y(player_pos_y);
-        }
-
-        else if(player_counter_attack == 6)
-        {
-            spr_set(player_id);
-            spr_pattern(PLAYER_CROUCH_ATTACK_2_VRAM_ADR);
-
-            spr_set(weapon_id);
-            spr_pattern(WEAPON_ATTACK_2_VRAM_ADRESS);
-
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x+32);
-                
-            }
-            
-            else
-            {
-                spr_x(player_pos_x-16);
-            }
-
-            spr_y(player_pos_y+14);
-        }
-
-        else if(player_counter_attack == 7)
-        {
-            spr_set(chain_id);
-            spr_y(player_pos_y+8);
-
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x+32);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x+48);
-            }
-            
-            else
-            {
-                spr_x(player_pos_x-16);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x-32);
-            }
-        }
-
-        else if(player_counter_attack == 8)
-        {
-            spr_set(chain_id+1);
-            spr_y(player_pos_y+8);
-
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x+48);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x+64);
-            }
-            
-            else
-            {
-                spr_x(player_pos_x-32);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x-48);
-            }
-        }
-
-        else if(player_counter_attack == 9)
-        {
-            spr_set(chain_id+2);
-            spr_y(player_pos_y+8);
-
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x+64);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x+80);
-            }
-            
-            else
-            {
-                spr_x(player_pos_x-48);
-
-                spr_set(weapon_id);
-                spr_x(player_pos_x-64);
-            }
-        }
-
-        else if(player_counter_attack == 23)
-        {
-            spr_set(chain_id);
-            spr_hide();
-
-            spr_set(chain_id+1);
-            spr_hide();
-
-            spr_set(chain_id+2);
-            spr_hide();
-
-            spr_set(player_id);
-            spr_pattern(PLAYER_CROUCH_VRAM_ADR);
-
-            spr_set(weapon_id);
-            spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
-            
-            if(player_axis == AXIS_RIGHT)
-            {
-                spr_x(player_pos_x-1);
-            }
-
-            else
-            {
-                spr_x(player_pos_x+17);
-            }
-
-            spr_y(player_pos_y+18);
-
-            player_attack = FALSE;
-            player_counter_attack = 1;
-            player_state = STATE_CROUCH;
-            return;
-        }
-
-
-        player_counter_attack += 1;
-    }
-
-
     else if(player_state == STATE_FALL)
     {
         unsigned char i, camera_y_move;
@@ -2469,11 +2375,6 @@ void update_PLAYER()
 
             spr_y(player_pos_y);
 
-            /*spr_set(weapon_id);
-            spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
-            spr_x(player_pos_x+8);
-            spr_y(player_pos_y+16);*/
-
             player_counter_anim = 1;
             player_index_jump = 0;
             player_index_fall = 0;
@@ -2516,12 +2417,9 @@ void update_PLAYER()
 
         spr_y(player_pos_y);
 
-        // IF PLAYER FALLS FROM A LADDER //
-        if(fall_ladder == TRUE)
-        {
-            spr_set(weapon_id);
-            spr_y(player_pos_y+8);
-        }
+        spr_set(weapon_id);
+        spr_y(player_pos_y+8);
+
     }
 
 
@@ -2529,11 +2427,8 @@ void update_PLAYER()
     {
         recenter_CAMERA();
 
-        //if(player_counter_anim == 1)
-        //{
-            //spr_set(player_id);
-            //spr_pattern(PLAYER_HANG_VRAM_ADR);
-
+        if(player_attack == FALSE)
+        {
             spr_set(weapon_id);
             spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
             spr_y(player_pos_y+5);
@@ -2549,7 +2444,7 @@ void update_PLAYER()
             }
             
             player_counter_anim = 0;
-        //}
+        }
     }
 
 
@@ -2766,4 +2661,452 @@ void update_PLAYER()
         spr_y(player_pos_y+8);
     }
 
+}
+
+
+void update_WEAPON()
+{
+    if(player_state == STATE_ATTACK)
+    {
+        if(player_counter_attack == 0)
+        {
+            spr_set(player_id);
+            spr_pattern(PLAYER_ATTACK_1_VRAM_ADR);
+
+            spr_set(weapon_id);
+            spr_pattern(WEAPON_ATTACK_1_VRAM_ADRESS);
+
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x-13);
+            }
+
+            else
+            {
+                spr_x(player_pos_x+29);
+            }
+
+            spr_y(player_pos_y-8);
+        }
+
+        else if(player_counter_attack == 6)
+        {
+            spr_set(player_id);
+            spr_pattern(PLAYER_ATTACK_2_VRAM_ADR);
+
+            spr_set(weapon_id);
+            spr_pattern(WEAPON_ATTACK_2_VRAM_ADRESS);
+
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x+32);
+                
+            }
+            
+            else
+            {
+                spr_x(player_pos_x-16);
+            }
+
+            spr_y(player_pos_y+6);
+        }
+
+        else if(player_counter_attack == 7)
+        {
+            spr_set(chain_id);
+            spr_y(player_pos_y);
+
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x+32);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x+48);
+            }
+            
+            else
+            {
+                spr_x(player_pos_x-16);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x-32);
+            }
+        }
+
+        else if(player_counter_attack == 8)
+        {
+            spr_set(chain_id+1);
+            spr_y(player_pos_y);
+
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x+48);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x+64);
+            }
+            
+            else
+            {
+                spr_x(player_pos_x-32);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x-48);
+            }
+        }
+
+        else if(player_counter_attack == 9)
+        {
+            spr_set(chain_id+2);
+            spr_y(player_pos_y);
+
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x+64);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x+80);
+            }
+            
+            else
+            {
+                spr_x(player_pos_x-48);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x-64);
+            }
+        }
+
+        else if(player_counter_attack == 23)
+        {
+            spr_set(chain_id);
+            spr_hide();
+
+            spr_set(chain_id+1);
+            spr_hide();
+
+            spr_set(chain_id+2);
+            spr_hide();
+
+            spr_set(player_id);
+            spr_pattern(PLAYER_IDLE_VRAM_ADR);
+
+            spr_set(weapon_id);
+            spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
+            spr_x(player_pos_x+8);
+            spr_y(player_pos_y+16);
+
+            player_attack = FALSE;
+            player_counter_attack = 0;
+            player_counter_anim = 1;
+            player_state = STATE_IDLE;
+            return;
+        }
+
+
+        player_counter_attack += 1;
+    }
+
+
+    else if(player_state == STATE_CROUCH_ATTACK)
+    {
+        if(player_counter_attack == 0)
+        {
+            spr_set(player_id);
+            spr_pattern(PLAYER_CROUCH_ATTACK_1_VRAM_ADR);
+
+            spr_set(weapon_id);
+            spr_pattern(WEAPON_ATTACK_1_VRAM_ADRESS);
+
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x-16);
+            }
+
+            else
+            {
+                spr_x(player_pos_x+32);
+            }
+
+            spr_y(player_pos_y);
+        }
+
+        else if(player_counter_attack == 6)
+        {
+            spr_set(player_id);
+            spr_pattern(PLAYER_CROUCH_ATTACK_2_VRAM_ADR);
+
+            spr_set(weapon_id);
+            spr_pattern(WEAPON_ATTACK_2_VRAM_ADRESS);
+
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x+32);
+                
+            }
+            
+            else
+            {
+                spr_x(player_pos_x-16);
+            }
+
+            spr_y(player_pos_y+14);
+        }
+
+        else if(player_counter_attack == 7)
+        {
+            spr_set(chain_id);
+            spr_y(player_pos_y+8);
+
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x+32);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x+48);
+            }
+            
+            else
+            {
+                spr_x(player_pos_x-16);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x-32);
+            }
+        }
+
+        else if(player_counter_attack == 8)
+        {
+            spr_set(chain_id+1);
+            spr_y(player_pos_y+8);
+
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x+48);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x+64);
+            }
+            
+            else
+            {
+                spr_x(player_pos_x-32);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x-48);
+            }
+        }
+
+        else if(player_counter_attack == 9)
+        {
+            spr_set(chain_id+2);
+            spr_y(player_pos_y+8);
+
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x+64);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x+80);
+            }
+            
+            else
+            {
+                spr_x(player_pos_x-48);
+
+                spr_set(weapon_id);
+                spr_x(player_pos_x-64);
+            }
+        }
+
+        else if(player_counter_attack == 23)
+        {
+            spr_set(chain_id);
+            spr_hide();
+
+            spr_set(chain_id+1);
+            spr_hide();
+
+            spr_set(chain_id+2);
+            spr_hide();
+
+            spr_set(player_id);
+            spr_pattern(PLAYER_CROUCH_VRAM_ADR);
+
+            spr_set(weapon_id);
+            spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
+            
+            if(player_axis == AXIS_RIGHT)
+            {
+                spr_x(player_pos_x-1);
+            }
+
+            else
+            {
+                spr_x(player_pos_x+17);
+            }
+
+            spr_y(player_pos_y+18);
+
+            player_attack = FALSE;
+            player_counter_attack = 1;
+            player_state = STATE_CROUCH;
+            return;
+        }
+
+
+        player_counter_attack += 1;
+    }
+
+
+    else if(player_state == STATE_HANG)
+    {
+        if(player_attack == TRUE)
+        {
+            if(player_counter_attack == 0)
+            {
+                spr_set(player_id);
+                spr_pattern(PLAYER_HANG_ATTACK_1_VRAM_ADR);
+
+                spr_set(weapon_id);
+                spr_pattern(WEAPON_ATTACK_1_VRAM_ADRESS);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x-14);
+                }
+
+                else
+                {
+                    spr_x(player_pos_x+29);
+                }
+
+                spr_y(player_pos_y-8);
+            }
+
+            else if(player_counter_attack == 6)
+            {
+                spr_set(player_id);
+                spr_pattern(PLAYER_HANG_ATTACK_2_VRAM_ADR);
+
+                spr_set(weapon_id);
+                spr_pattern(WEAPON_ATTACK_2_VRAM_ADRESS);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x+32);
+                    
+                }
+                
+                else
+                {
+                    spr_x(player_pos_x-16);
+                }
+
+                spr_y(player_pos_y+6);
+            }
+
+            else if(player_counter_attack == 7)
+            {
+                spr_set(chain_id);
+                spr_y(player_pos_y);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x+32);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x+48);
+                }
+                
+                else
+                {
+                    spr_x(player_pos_x-16);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x-32);
+                }
+            }
+
+            else if(player_counter_attack == 8)
+            {
+                spr_set(chain_id+1);
+                spr_y(player_pos_y);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x+48);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x+64);
+                }
+                
+                else
+                {
+                    spr_x(player_pos_x-32);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x-48);
+                }
+            }
+
+            else if(player_counter_attack == 9)
+            {
+                spr_set(chain_id+2);
+                spr_y(player_pos_y);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x+64);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x+80);
+                }
+                
+                else
+                {
+                    spr_x(player_pos_x-48);
+
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x-64);
+                }
+            }
+
+            else if(player_counter_attack == 23)
+            {
+                spr_set(chain_id);
+                spr_hide();
+
+                spr_set(chain_id+1);
+                spr_hide();
+
+                spr_set(chain_id+2);
+                spr_hide();
+
+                spr_set(player_id);
+                spr_pattern(PLAYER_HANG_VRAM_ADR);
+
+                spr_set(weapon_id);
+                spr_pattern(WEAPON_IDLE_VRAM_ADRESS);
+                spr_y(player_pos_y+5);
+
+                if(player_axis == AXIS_RIGHT)
+                {
+                    spr_x(player_pos_x+17);
+                }
+
+                else
+                {
+                    spr_x(player_pos_x-2);
+                }
+
+                player_attack = FALSE;
+                player_counter_attack = 0;
+                player_state = STATE_HANG;
+            }
+
+
+            player_counter_attack += 1;
+        } 
+    }
 }

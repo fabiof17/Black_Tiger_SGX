@@ -6,6 +6,8 @@
 
 
 
+#incspr(tiles_SPR_SELECTOR,"res/sprites/tiles_SPR_SELECTOR.png")
+
 
 // EXTRACT PLAYER TILES //
 #incspr(tiles_SPR_PLAYER_ARMOR,"res/sprites/tiles_SPR_PLAYER_ARMOR.png")
@@ -68,4 +70,18 @@
 
 // EXTRACT CURSOR TILES //
 #incspr(tiles_SPR_CURSOR,"res/sprites/tiles_SPR_CURSOR.png")
+
+
+
+
+// EXTRACT ENEMIES TILES //
+#incspr(tiles_SPR_ORC,"res/sprites/tiles_SPR_ORC.png")
+#incspr(tiles_SPR_SERPENT,"res/sprites/tiles_SPR_SERPENT.png")
+#incspr(tiles_SPR_PLANT,"res/sprites/tiles_SPR_PLANT.png")
+
+// EXTRACT ENEMIES PALETTES //
+#incpal(palette_SPR_ORC,"res/sprites/tiles_SPR_ORC.png")
+#incpal(palette_SPR_PLANT,"res/sprites/tiles_SPR_PLANT.png")
+
+
 

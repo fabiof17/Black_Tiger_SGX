@@ -42,10 +42,12 @@ void init_SYSTEM()
 
 void init_VARIABLES()
 {
-    sequence_id = SEQUENCE_GAME; //SEQUENCE_GAME | SEQUENCE_SHOP
+    sequence_id = SEQUENCE_GAME; // SEQUENCE_TITLE | SEQUENCE_GAME | SEQUENCE_SHOP
 
     level_id = 1;
 
+	life_amount = 3;
+	credits_amount = 2;
 	key_amount = 0;
 	potion_amount = 0;
 	zenny_amount = 25000;
@@ -84,6 +86,139 @@ void init_PLAYER()
 
 	chain_id = player_id - 3;
 }
+
+
+
+
+
+
+
+
+void init_TITLE()
+{
+	// DISABLE DISPLAY //
+	disp_off();
+	
+
+	// VSYNC //
+	vsync();
+
+
+	// SET VDC 1 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
+	set_screen_size(SCR_SIZE_32x32);
+
+
+
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                        VDC 1                                         //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	//--------------------------------------------------------------------------------------//
+	//                                      LOAD FONT                                       //
+	//--------------------------------------------------------------------------------------//
+
+	load_vram( 0x0800, tileset_FONT_TITLE, SIZEOF(tileset_FONT_TITLE) >> 1 );
+
+	set_font_pal(15);
+
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                    LOAD TILEMAP                                      //
+	//--------------------------------------------------------------------------------------//
+
+	load_vram( 0x0000, tilemap_TITLE_BG_B, SIZEOF(tilemap_TITLE_BG_B) >> 1 );
+
+	//--------------------------------------------------------------------------------------//
+	//                                    LOAD TILESET                                      //
+	//--------------------------------------------------------------------------------------//
+
+	load_vram( 0x1000, tileset_TITLE_BG_B, SIZEOF(tileset_TITLE_BG_B) >> 1 );
+
+
+
+
+	//put_string("PRESS RUN"   , 11 , 18);
+	put_string("START GAME"  	, 11 , 18);
+
+	put_string("LIFE"        	, 11 , 20);
+	put_number(life_amount   	,  1 , 20 , 20);
+
+	put_string("CREDITS"		, 11 , 21);
+	put_number(credits_amount   ,  1 , 20 , 21);
+
+	put_string("CAPCOM 1987" 	, 11 , 26);
+
+
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                   LOAD BG PALETTES                                   //
+	//--------------------------------------------------------------------------------------//
+
+	load_palette( 0, palette_TITLE, 16 );
+
+
+
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                       SPRITES                                        //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	//--------------------------------------------------------------------------------------//
+	//                                        CURSOR                                        //
+	//--------------------------------------------------------------------------------------//
+
+	// LOAD CURSOR TILES //
+	load_vram(0x2000, tiles_SPR_SELECTOR , SIZEOF(tiles_SPR_SELECTOR) >> 1 );
+
+
+	// SELECT CURSOR SPRITE //
+	spr_set(0);
+
+
+	spr_x(72);
+	spr_y(144);
+
+	// SET TILES DATA FOR THE CURSOR //
+	spr_pattern(0x2000);
+
+
+	spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_16x16);
+
+
+	spr_pal(16);
+	spr_pri(TRUE);
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                LOAD SPRITES PALETTES                                 //
+	//--------------------------------------------------------------------------------------//
+
+	load_palette( 16, palette_objects_2, 1 );
+
+
+
+
+	// UPDATE PCE SAT //
+	satb_update();
+
+
+
+
+	// VSYNC //
+	vsync();
+
+	// ENABLE DISPLAY //
+	disp_on();
+}
+
+
 
 
 
@@ -266,7 +401,7 @@ void init_HUD()
 	//                                      LOAD FONT                                       //
 	//--------------------------------------------------------------------------------------//
 
-	load_vram( 0x0800, tileset_FONT, SIZEOF(tileset_FONT) >> 1 );
+	load_vram( 0x0800, tileset_FONT_TITLE, SIZEOF(tileset_FONT_TITLE) >> 1 );
 
 	set_font_pal(15);
 
@@ -501,7 +636,7 @@ void init_LEVEL()
 
 		init_HUD();
 
-
+		
 
 
 		//**************************************************************************************//
@@ -543,7 +678,7 @@ void init_LEVEL()
 
 		// LOAD ALL PLAYER TILES //
 	    set_far_base(TABLE_PLAYER_TILES_BANK[player_naked],TABLE_PLAYER_TILES_ADR[player_naked]);
-        far_load_vram(PLAYER_VRAM_ADR,TILES_352);
+        far_load_vram(PLAYER_VRAM_ADR,TILES_400);
 
 
 		// SELECT PLAYER CORE SPRITE //
@@ -669,6 +804,17 @@ void init_LEVEL()
 
 
 
+		//--------------------------------------------------------------------------------------//
+		//                                       ENEMIES                                        //
+		//--------------------------------------------------------------------------------------//
+
+		load_vram(ORC_VRAM_ADR, tiles_SPR_ORC , SIZEOF(tiles_SPR_ORC) >> 1);
+		load_vram(SERPENT_VRAM_ADR, tiles_SPR_SERPENT , TILES_96);
+		load_vram(PLANT_VRAM_ADR, tiles_SPR_PLANT , TILES_160);
+
+
+
+
 		// UPDATE PCE SAT //
 		satb_update();
 
@@ -700,8 +846,10 @@ void init_LEVEL()
 		}
 
 
-		load_palette( 17, palette_objects_1, 1 );
-		load_palette( 18, palette_objects_2, 1 );
+		load_palette( 17, palette_objects_1,   1 );
+		load_palette( 18, palette_objects_2,   1 );
+		load_palette( 19, palette_SPR_ORC,  1 );
+		load_palette( 20, palette_SPR_PLANT,   1 );
 
 
 
