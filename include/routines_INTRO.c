@@ -434,6 +434,16 @@ void sequence_INTRO()
         load_palette( 0, palette_BLACK, 1 );
     }
 
+    else if(global_counter == 851)
+    {
+        // DISABLE DISPLAY //
+        disp_off();
+
+        sequence_loaded = FALSE;
+
+        sequence_id = SEQUENCE_GAME;
+    }
+
 
 
 
