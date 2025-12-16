@@ -12,7 +12,7 @@
 
 void joypad_BUTTONS_INTRO()
 {
-    if(joytrg(JOYPAD_1) & JOY_RUN)
+    if(joytrg(JOYPAD_1) & JOY_I || joytrg(JOYPAD_1) & JOY_II || joytrg(JOYPAD_1) & JOY_RUN)
     {
         // DISABLE DISPLAY //
         disp_off();

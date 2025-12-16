@@ -101,7 +101,7 @@ void joypad_BUTTONS_TITLE()
     }
 
 
-    else if(joytrg(JOYPAD_1) & JOY_I)
+    else if(joytrg(JOYPAD_1) & JOY_I || joytrg(JOYPAD_1) & JOY_II || joytrg(JOYPAD_1) & JOY_RUN)
     {
         spr_set(0);
         selector_pos = spr_get_y();
