@@ -6,6 +6,10 @@
 
 
 
+
+#incspr(tiles_SPR_DRAGON_INTRO,"res/sprites/tiles_SPR_DRAGON_INTRO.png")
+#incpal(palette_SPR_DRAGON_INTRO,"res/sprites/tiles_SPR_DRAGON_INTRO.png");
+
 #incspr(tiles_SPR_SELECTOR,"res/sprites/tiles_SPR_SELECTOR.png")
 
 

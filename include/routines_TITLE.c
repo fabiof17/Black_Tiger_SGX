@@ -11,7 +11,7 @@
 
 void joypad_BUTTONS_TITLE()
 {
-    char selector_pos;
+    int selector_pos;
     
     if(joytrg(JOYPAD_1) & JOY_RIGHT)
     {   
@@ -70,12 +70,14 @@ void joypad_BUTTONS_TITLE()
 
         if(selector_pos == 160)
         {
-            spr_y(144);
+            selector_pos = 144;
+            spr_y(selector_pos);
         }
 
         else if(selector_pos == 168)
         {
-            spr_y(160);
+            selector_pos = 160;
+            spr_y(selector_pos);
         }
     }
 
@@ -87,12 +89,14 @@ void joypad_BUTTONS_TITLE()
 
         if(selector_pos == 144)
         {
-            spr_y(160);
+            selector_pos = 160;
+            spr_y(selector_pos);
         }
 
         else if(selector_pos == 160)
         {
-            spr_y(168);
+            selector_pos = 168;
+            spr_y(selector_pos);
         }        
     }
 
@@ -101,6 +105,17 @@ void joypad_BUTTONS_TITLE()
     {
         spr_set(0);
         selector_pos = spr_get_y();
+
+        // IF CURSOR IS ON START GAME //
+        if(selector_pos == 144)
+        {
+            // DISABLE DISPLAY //
+            disp_off();
+
+            sequence_loaded = FALSE;
+
+            sequence_id = SEQUENCE_INTRO;
+        }
     }
 }
 

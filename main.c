@@ -8,11 +8,13 @@
 #include "include/variables.c"
 
 
-#include "include/gfx_BG_TITLE.c"
+#include "include/gfx_BG_INTRO.c"
 #include "include/gfx_BG_LEVELS.c"
+#include "include/gfx_BG_TITLE.c"
 #include "include/gfx_SPRITES.c"
 
 
+#include "include/tables_INTRO.c"
 #include "include/tables_NPC.c"
 #include "include/tables_OBJECT.c"
 #include "include/tables_PLAYER.c"
@@ -20,6 +22,7 @@
 
 
 
+#include "include/routines_INTRO.c"
 #include "include/routines_LEVELS.c"
 #include "include/routines_SHOP.c"
 #include "include/routines_TITLE.c"
@@ -81,7 +84,7 @@ main()
                     vsync();
 
                     joypad_BUTTONS_TITLE();
-
+                    
                     satb_update();
                 }
 
@@ -92,6 +95,25 @@ main()
             //                                    INTRO                                    //
             //-----------------------------------------------------------------------------//
             case SEQUENCE_INTRO:
+                if(sequence_loaded == FALSE)
+                {
+                    init_INTRO();
+
+                    sequence_loaded = TRUE;
+                }
+
+                else
+                {
+                    vsync();
+
+                    //put_number(vdc_map_pxl_x,3,0,0);
+                    sequence_INTRO();
+                    
+                    joypad_BUTTONS_INTRO();
+
+                    sgx_satb_update();
+                }
+
                 break;
 
 

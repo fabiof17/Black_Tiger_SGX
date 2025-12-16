@@ -42,7 +42,9 @@ void init_SYSTEM()
 
 void init_VARIABLES()
 {
-    sequence_id = SEQUENCE_GAME; // SEQUENCE_TITLE | SEQUENCE_GAME | SEQUENCE_SHOP
+    sequence_id = SEQUENCE_TITLE; // SEQUENCE_TITLE | SEQUENCE_INTRO | SEQUENCE_GAME | SEQUENCE_SHOP
+
+	letter_index = 0;
 
     level_id = 1;
 
@@ -57,6 +59,9 @@ void init_VARIABLES()
 	
 	player_naked = FALSE;
 
+	index_x = 0;
+	index_y = 0;
+	item_index = 0;
 	shop_counter = 0;
 	shop_phase = SHOP_PHASE_ENTER;
 
@@ -104,8 +109,11 @@ void init_TITLE()
 	vsync();
 
 
-	// SET VDC 1 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
+	// SET VDC 1 SCREEN SIZE (IN TILES) - 64x64 = 256 PIXELS
 	set_screen_size(SCR_SIZE_32x32);
+
+	// SET VDC 2 SCREEN SIZE (IN TILES) - 32x32 = 512 PIXELS
+	//sgx_set_screen_size(SCR_SIZE_32x32);
 
 
 
@@ -218,6 +226,170 @@ void init_TITLE()
 	disp_on();
 }
 
+
+
+
+
+void init_INTRO()
+{
+	char i;
+	
+	// DISABLE DISPLAY //
+	disp_off();
+	
+
+	// VSYNC //
+	vsync();
+
+
+	// SET VDC 1 SCREEN SIZE (IN TILES) - 64x64 = 256 PIXELS
+	set_screen_size(SCR_SIZE_64x64);
+
+	// SET VDC 2 SCREEN SIZE (IN TILES) - 32x32 = 256 PIXELS
+	sgx_set_screen_size(SCR_SIZE_32x32);
+
+
+
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                      VARIABLES                                       //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	global_counter = 1;
+
+	vdc_map_pxl_x = 0;
+	vdc_map_pxl_y = 0;
+
+
+
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                        VDC 1                                         //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	//--------------------------------------------------------------------------------------//
+	//                                    LOAD TILEMAP                                      //
+	//--------------------------------------------------------------------------------------//
+
+	load_vram( 0x0000, tilemap_INTRO_BG_A, SIZEOF(tilemap_INTRO_BG_A) >> 1 );
+
+	//--------------------------------------------------------------------------------------//
+	//                                    LOAD TILESET                                      //
+	//--------------------------------------------------------------------------------------//
+
+	load_vram( 0x1000, tileset_INTRO_BG_A, SIZEOF(tileset_INTRO_BG_A) >> 1 );
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                    SCROLL SPLIT                                      //
+	//--------------------------------------------------------------------------------------//
+
+	scroll_split(0,   0, vdc_map_pxl_x & (511), vdc_map_pxl_y & (511), BKG_ON | SPR_ON);
+
+
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                      LOAD FONT                                       //
+	//--------------------------------------------------------------------------------------//
+
+	set_font_addr(0x3000);
+	load_vram( 0x3000, tileset_FONT_INTRO, SIZEOF(tileset_FONT_INTRO) >> 1 );
+
+	set_font_pal(15);
+
+
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                        VDC 2                                         //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	//--------------------------------------------------------------------------------------//
+	//                                    LOAD TILEMAP                                      //
+	//--------------------------------------------------------------------------------------//
+
+	sgx_load_vram( 0x0000, tilemap_INTRO_BG_B, SIZEOF(tilemap_INTRO_BG_B) >> 1 );
+
+	//--------------------------------------------------------------------------------------//
+	//                                    LOAD TILESET                                      //
+	//--------------------------------------------------------------------------------------//
+
+	sgx_load_vram( 0x1000, tileset_INTRO_BG_B, SIZEOF(tileset_INTRO_BG_B) >> 1 );
+
+
+
+
+	//--------------------------------------------------------------------------------------//
+	//                                   LOAD BG PALETTES                                   //
+	//--------------------------------------------------------------------------------------//
+
+	// STORES DESTINATION PALETTE FOR FADE //
+	load_palette( 0, palette_INTRO_1, 1 );
+	load_palette( 15, palette_FONT_INTRO, 1 );
+
+
+
+
+	//**************************************************************************************//
+	//                                                                                      //
+	//                                       SPRITES                                        //
+	//                                                                                      //
+	//**************************************************************************************//
+
+	// HIDE CURSOR SPRITE FROM TITLE SCREEN //
+	spr_set(0);
+	spr_hide();
+
+	//--------------------------------------------------------------------------------------//
+	//                                        DRAGON                                        //
+	//--------------------------------------------------------------------------------------//
+
+	player_pos_x = 113;
+	player_pos_y = 81;
+
+	// LOAD DRAGON TILES //
+	sgx_load_vram(DRAGON_INTRO_VRAM_ADR, tiles_SPR_DRAGON_INTRO , SIZEOF(tiles_SPR_DRAGON_INTRO) >> 1);
+
+
+	for(i=0 ; i<8 ; i++)
+	{
+		sgx_spr_set(i);
+		sgx_spr_x(player_pos_x + (i*32) - ((i>>2)*128));
+		sgx_spr_y(player_pos_y + ((i>>2)*32));
+		sgx_spr_pattern(DRAGON_INTRO_VRAM_ADR + (i*TILES_16));
+		sgx_spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
+		sgx_spr_pal(16);
+		sgx_spr_pri(FALSE);
+	}
+	
+
+	//--------------------------------------------------------------------------------------//
+	//                                LOAD SPRITES PALETTES                                 //
+	//--------------------------------------------------------------------------------------//
+
+	load_palette( 16, palette_SPR_DRAGON_INTRO, 1 );
+
+
+
+	// UPDATE SGX SAT //
+	sgx_satb_update();
+
+	// UPDATE PCE SAT //
+	satb_update();
+
+
+	// VSYNC //
+	vsync();
+
+	// ENABLE DISPLAY //
+	disp_on();
+}
 
 
 
@@ -401,6 +573,8 @@ void init_HUD()
 	//                                      LOAD FONT                                       //
 	//--------------------------------------------------------------------------------------//
 
+	set_font_addr(0x0800);
+
 	load_vram( 0x0800, tileset_FONT_TITLE, SIZEOF(tileset_FONT_TITLE) >> 1 );
 
 	set_font_pal(15);
@@ -502,6 +676,7 @@ void init_HUD()
 
 	draw_map();
 
+	display_LIFE();
 	display_SCORE();
 	display_TIME_LEVEL();
 	display_KEY();
@@ -672,6 +847,13 @@ void init_LEVEL()
 		//                                                                                      //
 		//**************************************************************************************//
 
+		// HIDE DRAGON SPRITES FROM INTRO //
+		for(i=0 ; i<8 ; i++)
+		{
+			sgx_spr_set(i);
+			sgx_spr_hide();
+		}
+
 		//--------------------------------------------------------------------------------------//
 		//                                        PLAYER                                        //
 		//--------------------------------------------------------------------------------------//
@@ -818,7 +1000,8 @@ void init_LEVEL()
 		// UPDATE PCE SAT //
 		satb_update();
 
-
+		// UPDATE SGX SAT //
+		sgx_satb_update();
 
 
 		//--------------------------------------------------------------------------------------//

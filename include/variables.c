@@ -92,6 +92,8 @@ unsigned char   sequence_id,
 
                 shop_phase,
                 shop_counter,
+
+                palette_step,
                 
                 tilemap_mask[256];
 
@@ -126,10 +128,14 @@ signed int      player_pos_x,
 
 
 
-int             zenny_amount,
+int             global_counter,
+                letter_index,
+                letter_counter,
+                zenny_amount,
                 score,
 
-                shop_prices[10];
+                shop_prices[10],
+                palette_buffer[16];
 
 
 

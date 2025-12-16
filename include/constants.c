@@ -34,9 +34,13 @@
 #define TILES_64  1024
 #define TILES_80  1280
 #define TILES_96  1536
+#define TILES_128 2048
 #define TILES_144 2304
 #define TILES_160 2560
+#define TILES_256 4096
+#define TILES_384 6144
 #define TILES_400 6400
+
 
 
 
@@ -49,6 +53,17 @@
 
 
 #define CAMERA_RECENTER_VELOCITY    4
+
+
+
+
+//-----------------------------------------------------------------------------//
+//                                                                             //
+//                                    INTRO                                    //
+//                                                                             //
+//-----------------------------------------------------------------------------//
+
+#define DRAGON_INTRO_VRAM_ADR       0x2C00
 
 
 

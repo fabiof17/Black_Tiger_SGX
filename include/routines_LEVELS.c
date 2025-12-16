@@ -26,7 +26,7 @@ void hide_LEVEL_SPRITES()
 
 void display_LIFE()
 {
-    //
+    put_number(life_amount,1,1,0);
 }
 
 
@@ -418,7 +418,6 @@ void check_NPC()
 
 
 
-
 void scroll_BG()
 {
         // UPDATE VDC2 BG //
@@ -612,11 +611,11 @@ void joypad_BUTTONS()
 
         else if(player_state == STATE_JUMP)
         {
-            if(player_attack == FALSE)
+            /*if(player_attack == FALSE)
             {
                 player_counter_attack = 0;
                 player_attack = TRUE;
-            }
+            }*/
         }
 
         else if(player_state == STATE_CROUCH)
