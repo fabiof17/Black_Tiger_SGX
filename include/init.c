@@ -671,8 +671,8 @@ void init_HUD()
 	vdc_map_pxl_x = 0;
 	vdc_map_pxl_y = 0;
 
-	vdc_map_draw_w = 32;
-	vdc_map_draw_h = 28;
+	vdc_map_draw_w = 64;//32
+	vdc_map_draw_h = 32;//28
 
 	draw_map();
 

@@ -34509,14 +34509,14 @@
          1D:DDDA  9C B0 26   			stz.l	_vdc_map_pxl_y
          1D:DDDD  9C B1 26   			stz.h	_vdc_map_pxl_y
 18927                        	
-18928                        		.dbg	line,	"include\init.c", 674; vdc_map_draw_w = 32;
-18929                        		__st.umiq	32, _vdc_map_draw_w
-         1D:DDE0  A9 20      			lda.l	#32
+18928                        		.dbg	line,	"include\init.c", 674; vdc_map_draw_w = 64;//32
+18929                        		__st.umiq	64, _vdc_map_draw_w
+         1D:DDE0  A9 40      			lda.l	#64
          1D:DDE2  8D AA 26   			sta	_vdc_map_draw_w
 18930                        	
-18931                        		.dbg	line,	"include\init.c", 675; vdc_map_draw_h = 28;
-18932                        		__st.umiq	28, _vdc_map_draw_h
-         1D:DDE5  A9 1C      			lda.l	#28
+18931                        		.dbg	line,	"include\init.c", 675; vdc_map_draw_h = 32;//28
+18932                        		__st.umiq	32, _vdc_map_draw_h
+         1D:DDE5  A9 20      			lda.l	#32
          1D:DDE7  8D AB 26   			sta	_vdc_map_draw_h
 18933                        	
 18934                        		.dbg	line,	"include\init.c", 677; draw_map();

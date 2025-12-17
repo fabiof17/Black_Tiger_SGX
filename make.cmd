@@ -39,7 +39,7 @@ set rootdir="%~d0\"
 if not exist "%CD%\bin" goto :next
 if not exist "%CD%\bin\hucc.exe" goto :next
 set PATH=%CD%\bin;%PATH%
-set PCE_INCLUDE=%CD%\include\hucc
+set PCE_INCLUDE=%CD%\include\hucc;%CD%\include\lib
 goto :gotpath
 :next
 if not ["%CD%"] == [%rootdir%] (
