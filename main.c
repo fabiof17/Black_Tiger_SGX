@@ -134,7 +134,7 @@ main()
                         else
                         {
                             //
-                            while(level_start == TRUE)
+                            while(display_level_text == TRUE)
                             {
                                 vsync();
                                 
@@ -148,7 +148,7 @@ main()
                                     
                                     global_counter = 0;
 
-                                    level_start = FALSE;
+                                    display_level_text = FALSE;
                                 }
                             }
 
