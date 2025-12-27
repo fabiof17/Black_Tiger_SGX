@@ -38,7 +38,8 @@ unsigned char   sequence_id,
                 chain_id,
                 weapon_id,
                 armor_level,
-                weapon_level,                
+                weapon_level,
+                chain_unfold,
                 list_chain_active[3],
 
                 // HUD //
@@ -65,8 +66,9 @@ unsigned char   sequence_id,
                 list_object_state[25],
                 list_object_energy[25],
                 list_reward_type[25],
+                list_object_counter[25],
                 
-                list_onscreen_object[8],
+                list_onscreen_object[8],                
                 
                 // CHESTS //
                 chest_start_index,
@@ -153,7 +155,8 @@ extern unsigned char multimap_LV1_BG_A[];
 
 extern unsigned char tileset_SHOP_BG_B[];
 
-
+char *ptr_REWARD_TYPE;
+int *ptr_REWARD_VRAM_ADR;
 int *ptr_SHOP_ITEM_PRICES;
 
 

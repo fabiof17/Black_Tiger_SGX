@@ -139,13 +139,16 @@ main()
                             update_WEAPON();
                             //put_number(hit_wall,1,0,1);
 
+                        
 
                             scroll_object();
                             scroll_chest();
                             scroll_npc();
 
-                            check_OBJECT();
-                            check_NPC();
+                            collision_PLAYER_OBJECT();
+                            collision_PLAYER_NPC();
+
+                            anim_OBJECTS();
 
                             display_TIME_LEVEL();
 

@@ -66,7 +66,7 @@ const signed int        TABLE_OBJECT_X_POS_REF_LV1[OBJECT_NUMBER_LV1] =   {
                                                                             };
 
 
-const signed int        TABLE_OBJECT_Y_POS_REF_LV1[OBJECT_NUMBER_LV1] =   {
+const signed int        TABLE_OBJECT_Y_POS_REF_LV1[OBJECT_NUMBER_LV1] =     {
                                                                                 384,
                                                                                 416,
                                                                                 480,
@@ -97,27 +97,27 @@ const signed int        TABLE_OBJECT_Y_POS_REF_LV1[OBJECT_NUMBER_LV1] =   {
                                                                             };
 
 
-/*const char              TABLE_REWARD_TYPE_LV1[OBJECT_NUMBER_LV1]       =   {
-                                                                                TYPE_POT
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POW,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
+const char              TABLE_REWARD_TYPE_LV1[OBJECT_NUMBER_LV1]       =    {
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_NULL,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
 
                                                                                 //
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
-                                                                                TYPE_POT,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_GRAY_KEY,
 
                                                                                 //
                                                                                 TYPE_GRAY_KEY,
@@ -125,18 +125,49 @@ const signed int        TABLE_OBJECT_Y_POS_REF_LV1[OBJECT_NUMBER_LV1] =   {
                                                                                 TYPE_GRAY_KEY,
                                                                                 TYPE_COIN_5,
                                                                                 TYPE_GRAY_KEY
-                                                                            };*/
+                                                                            };
+
+
+const int              TABLE_REWARD_VRAM_ADR_LV1[OBJECT_NUMBER_LV1]  =     {
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                TYPE_NULL,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+
+                                                                                //
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+
+                                                                                //
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                COIN_5_VRAM_ADR,
+                                                                                GRAY_KEY_VRAM_ADR
+                                                                            };
 
 
 
 
-const signed int        TABLE_CHEST_X_POS_REF_LV1[CHEST_NUMBER_LV1]   =   {
+const signed int        TABLE_CHEST_X_POS_REF_LV1[CHEST_NUMBER_LV1]   =     {
                                                                                 1072,
                                                                                 816
                                                                             };
 
 
-const signed int        TABLE_CHEST_Y_POS_REF_LV1[CHEST_NUMBER_LV1]   =   {
+const signed int        TABLE_CHEST_Y_POS_REF_LV1[CHEST_NUMBER_LV1]   =     {
                                                                                 832,
                                                                                 848
                                                                             };

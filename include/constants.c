@@ -240,10 +240,13 @@
 #define TYPE_COIN_500           12
 #define TYPE_COIN_1000          13
 #define TYPE_YASHICHI           14
+#define TYPE_NULL               99
 
 
-#define STATE_ACTIVE            0
-#define STATE_INACTIVE          1
+#define STATE_FREE              0
+#define STATE_ACTIVE            1
+#define STATE_HIT               2
+#define STATE_DROPPED           3
 
 #define OBJECT_MARGIN           10//9
 
@@ -259,10 +262,11 @@
 
 #define POW_VRAM_ADR            POT8_VRAM_ADR+TILES_4
 #define GRAY_KEY_VRAM_ADR       POW_VRAM_ADR+TILES_4
-#define GOLD_KEY_VRAM_ADR       GRAY_KEY_VRAM_ADR+TILES_4
-#define LIFE_VRAM_ADR           GOLD_KEY_VRAM_ADR+TILES_4
+//#define GOLD_KEY_VRAM_ADR       GRAY_KEY_VRAM_ADR+TILES_4
+//#define LIFE_VRAM_ADR           GOLD_KEY_VRAM_ADR+TILES_4
 
-#define COIN_1_VRAM_ADR         LIFE_VRAM_ADR+TILES_4
+//#define COIN_1_VRAM_ADR         LIFE_VRAM_ADR+TILES_4
+#define COIN_1_VRAM_ADR         GRAY_KEY_VRAM_ADR+TILES_4
 #define COIN_5_VRAM_ADR         COIN_1_VRAM_ADR+TILES_4
 #define COIN_10_VRAM_ADR        COIN_5_VRAM_ADR+TILES_4
 #define COIN_50_VRAM_ADR        COIN_10_VRAM_ADR+TILES_4
@@ -282,7 +286,7 @@
 #define COW_VRAM_ADR            DRAGONFLY_VRAM_ADR+TILES_4
 #define MOBICHAN_VRAM_ADR       COW_VRAM_ADR+TILES_4
 
-#define CHEST_VRAM_ADR          0x7000
+#define CHEST_VRAM_ADR          0x6F00//0x7000
 #define NPC_VRAM_ADR            CHEST_VRAM_ADR+TILES_96
 
 

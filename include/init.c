@@ -52,7 +52,7 @@ void init_VARIABLES()
 	credits_amount = 2;
 	key_amount = 0;
 	potion_amount = 0;
-	zenny_amount = 25000;
+	zenny_amount = 0;
 
 	weapon_level = 0;
 	armor_level = 2;
@@ -402,8 +402,8 @@ void load_OBJECT_TILES()
 	sgx_load_vram(POT1_VRAM_ADR, tiles_SPR_POT , SIZEOF(tiles_SPR_POT) >> 1);
 	sgx_load_vram(POW_VRAM_ADR, tiles_SPR_POW , TILES_4);
 	sgx_load_vram(GRAY_KEY_VRAM_ADR, tiles_SPR_GRAY_KEY , TILES_4);
-	sgx_load_vram(GOLD_KEY_VRAM_ADR, tiles_SPR_GOLD_KEY , TILES_4);
-	sgx_load_vram(LIFE_VRAM_ADR, tiles_SPR_LIFE , TILES_4);
+	//sgx_load_vram(GOLD_KEY_VRAM_ADR, tiles_SPR_GOLD_KEY , TILES_4);
+	//sgx_load_vram(LIFE_VRAM_ADR, tiles_SPR_LIFE , TILES_4);
 	sgx_load_vram(COIN_1_VRAM_ADR, tiles_SPR_COIN_1 , TILES_4);
 	sgx_load_vram(COIN_5_VRAM_ADR, tiles_SPR_COIN_5 , TILES_4);
 	sgx_load_vram(COIN_10_VRAM_ADR, tiles_SPR_COIN_10 , TILES_4);
@@ -733,16 +733,20 @@ void init_LEVEL()
 			seconds = 59;
 		}
 
-		camera_max_y_position = 768;
-		jump_max_index = 34;
-		score = 0;
-		level_object_number = OBJECT_NUMBER_LV1;
-		level_chest_number = CHEST_NUMBER_LV1;
-		level_npc_number = NPC_NUMBER_LV1;
-		object_start_index = OBJECT_START_INDEX_LV1;
-		chest_start_index = CHEST_START_INDEX_LV1;
-		npc_start_index = NPC_START_INDEX_LV1;
-		jump_ladder = FALSE;
+		camera_max_y_position	= 768;
+		jump_max_index			= 34;
+		score					= 0;
+		level_object_number		= OBJECT_NUMBER_LV1;
+		level_chest_number		= CHEST_NUMBER_LV1;
+		level_npc_number		= NPC_NUMBER_LV1;
+		object_start_index		= OBJECT_START_INDEX_LV1;
+		chest_start_index		= CHEST_START_INDEX_LV1;
+		npc_start_index			= NPC_START_INDEX_LV1;
+		jump_ladder				= FALSE;
+
+		//
+		ptr_REWARD_TYPE     	= TABLE_REWARD_TYPE_LV1;
+		ptr_REWARD_VRAM_ADR 	= TABLE_REWARD_VRAM_ADR_LV1;
 
 
 
