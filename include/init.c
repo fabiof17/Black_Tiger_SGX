@@ -42,11 +42,12 @@ void init_SYSTEM()
 
 void init_VARIABLES()
 {
-    sequence_id = SEQUENCE_TITLE; // SEQUENCE_TITLE | SEQUENCE_INTRO | SEQUENCE_GAME | SEQUENCE_SHOP
+    sequence_id = SEQUENCE_TITLE; // SEQUENCE_TITLE | SEQUENCE_INTRO | SEQUENCE_LEVEL | SEQUENCE_SHOP
 
 	letter_index = 0;
 
     level_id = 1;
+	level_start = TRUE;
 
 	life_amount = 3;
 	credits_amount = 2;
@@ -814,6 +815,13 @@ void init_LEVEL()
 		//**************************************************************************************//
 
 		init_HUD();
+
+
+		put_string("ROUND",13, 8);
+		put_number(level_id,1,19,8);
+		put_string("READY PLAYER 1",10,13);
+		put_string("SAVE   LIVES",11,15);
+		put_number(life_amount,1,16,15);
 
 		
 

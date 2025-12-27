@@ -135,7 +135,6 @@ void scroll_object()
                             // WE STORE THE OBJECT ID //
                             list_onscreen_object[onscreen_object_number] = i;
                             onscreen_object_number += 1;
-                            //put_number(list_object_counter[i],1,0,i);
                             scroll_allowed = TRUE;
                         }
                     }
@@ -735,19 +734,13 @@ void anim_OBJECTS()
                     else if(list_object_counter[current_object_id] == 1)
                     {
                         object_pos_y = sgx_spr_get_y();
-                        sgx_spr_y(object_pos_y - 1);
+                        sgx_spr_y(object_pos_y - 2);
                     }
 
                     else if(list_object_counter[current_object_id] == 2)
                     {
                         object_pos_y = sgx_spr_get_y();
-                        sgx_spr_y(object_pos_y + 1);
-                    }
-
-                    else if(list_object_counter[current_object_id] == 3)
-                    {
-                        object_pos_y = sgx_spr_get_y();
-                        sgx_spr_y(object_pos_y + 1);
+                        sgx_spr_y(object_pos_y - 1);
                     }
 
                     else if(list_object_counter[current_object_id] == 4)
@@ -3032,6 +3025,7 @@ void update_WEAPON()
             }
 
             weapon_y_offset = -8;
+            spr_y(player_pos_y + weapon_y_offset);
         }
 
         else if(player_counter_attack == 23)
@@ -3082,6 +3076,7 @@ void update_WEAPON()
                 }
 
                 weapon_y_offset = 6;
+                spr_y(player_pos_y + weapon_y_offset);
 
                 collision_WEAPON_OBJECTS();
             }
@@ -3107,6 +3102,8 @@ void update_WEAPON()
                     spr_x(player_pos_x-32);
                 }
 
+                spr_y(player_pos_y + weapon_y_offset);
+
                 collision_WEAPON_OBJECTS();
             }
 
@@ -3130,6 +3127,8 @@ void update_WEAPON()
                     spr_set(weapon_id);
                     spr_x(player_pos_x-48);
                 }
+
+                spr_y(player_pos_y + weapon_y_offset);
 
                 collision_WEAPON_OBJECTS();
             }
@@ -3155,19 +3154,14 @@ void update_WEAPON()
                     spr_x(player_pos_x-64);
                 }
 
+                spr_y(player_pos_y + weapon_y_offset);
+
                 collision_WEAPON_OBJECTS();
             }
-        
-            //collision_WEAPON_OBJECTS();
         }
 
 
         player_counter_attack += 1;
-
-
-        // SET WEAPON Y POSITION //
-        spr_set(weapon_id);
-        spr_y(player_pos_y + weapon_y_offset);
 
 
         // SET CHAIN Y POSITION //
@@ -3205,6 +3199,7 @@ void update_WEAPON()
             }
 
             weapon_y_offset = 0;
+            spr_y(player_pos_y + weapon_y_offset);
         }
 
         else if(player_counter_attack == 23)
@@ -3265,6 +3260,7 @@ void update_WEAPON()
                 }
 
                 weapon_y_offset = 14;
+                spr_y(player_pos_y + weapon_y_offset);
 
                 collision_WEAPON_OBJECTS();
             }
@@ -3290,6 +3286,8 @@ void update_WEAPON()
                     spr_x(player_pos_x-32);
                 }
 
+                spr_y(player_pos_y + weapon_y_offset);
+
                 collision_WEAPON_OBJECTS();
             }
 
@@ -3313,6 +3311,8 @@ void update_WEAPON()
                     spr_set(weapon_id);
                     spr_x(player_pos_x-48);
                 }
+
+                spr_y(player_pos_y + weapon_y_offset);
 
                 collision_WEAPON_OBJECTS();
             }
@@ -3338,19 +3338,14 @@ void update_WEAPON()
                     spr_x(player_pos_x-64);
                 }
 
+                spr_y(player_pos_y + weapon_y_offset);
+
                 collision_WEAPON_OBJECTS();
             }
-
-            //collision_WEAPON_OBJECTS();
         }
 
 
         player_counter_attack += 1;
-
-
-        // SET WEAPON Y POSITION //
-        spr_set(weapon_id);
-        spr_y(player_pos_y + weapon_y_offset);
 
 
         // SET CHAIN Y POSITION //

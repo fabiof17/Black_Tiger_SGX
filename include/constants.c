@@ -45,11 +45,11 @@
 
 
 
-#define SEQUENCE_TITLE      0
-#define SEQUENCE_INTRO      1
-#define SEQUENCE_GAME       2
-#define SEQUENCE_NPC        3
-#define SEQUENCE_SHOP       4
+#define SEQUENCE_TITLE          0
+#define SEQUENCE_INTRO          1
+#define SEQUENCE_LEVEL          2
+#define SEQUENCE_NPC            3
+#define SEQUENCE_SHOP           4
 
 
 #define CAMERA_RECENTER_VELOCITY    4

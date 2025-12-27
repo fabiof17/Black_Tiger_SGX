@@ -14,6 +14,7 @@ unsigned char   sequence_id,
                 sequence_loaded,
 
                 level_id,
+                level_start,
 
                 // PLAYER //
                 respawn,

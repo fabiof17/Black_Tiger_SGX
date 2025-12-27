@@ -4,6 +4,7 @@
 //                                                                             //
 //-----------------------------------------------------------------------------//
 
+// DOES NOT INCLUDE HIDDEN OBJECTS //
 const char              TABLE_OBJECT_TYPE_LV1[OBJECT_NUMBER_LV1]      =   {
                                                                                 TYPE_HOURGLASS,
                                                                                 TYPE_POT,
@@ -34,7 +35,7 @@ const char              TABLE_OBJECT_TYPE_LV1[OBJECT_NUMBER_LV1]      =   {
                                                                                 TYPE_POT
                                                                             };
 
-
+// DOES NOT INCLUDE HIDDEN OBJECTS //
 const signed int        TABLE_OBJECT_X_POS_REF_LV1[OBJECT_NUMBER_LV1] =   {
                                                                                 1680,
                                                                                 1280,
@@ -65,7 +66,7 @@ const signed int        TABLE_OBJECT_X_POS_REF_LV1[OBJECT_NUMBER_LV1] =   {
                                                                                 416
                                                                             };
 
-
+// DOES NOT INCLUDE HIDDEN OBJECTS //
 const signed int        TABLE_OBJECT_Y_POS_REF_LV1[OBJECT_NUMBER_LV1] =     {
                                                                                 384,
                                                                                 416,
@@ -96,63 +97,103 @@ const signed int        TABLE_OBJECT_Y_POS_REF_LV1[OBJECT_NUMBER_LV1] =     {
                                                                                 896
                                                                             };
 
-
+// DOES NOT INCLUDE HIDDEN OBJECTS //
 const char              TABLE_REWARD_TYPE_LV1[OBJECT_NUMBER_LV1]       =    {
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
                                                                                 TYPE_NULL,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
 
                                                                                 //
                                                                                 TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
-                                                                                TYPE_GRAY_KEY,
+
+                                                                                //
+                                                                                TYPE_COIN_5,
+                                                                                TYPE_COIN_5,
 
                                                                                 //
                                                                                 TYPE_GRAY_KEY,
+                                                                                TYPE_COIN_10,
+
+                                                                                //
+                                                                                TYPE_COIN_10,
+                                                                                TYPE_NULL,
+
+                                                                                //
                                                                                 TYPE_GRAY_KEY,
+                                                                                TYPE_HOURGLASS,
+
+                                                                                //
+                                                                                TYPE_COIN_10,
+
+                                                                                //
+                                                                                TYPE_HOURGLASS,
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_COIN_10,
+
+                                                                                //
+                                                                                TYPE_GRAY_KEY,
+                                                                                TYPE_COIN_10,
+
+                                                                                //
+                                                                                TYPE_COIN_5,
+
+                                                                                //
+                                                                                TYPE_COIN_10,
+
+                                                                                //
+                                                                                TYPE_COIN_5,
+                                                                                TYPE_COIN_10,
+
+                                                                                //
                                                                                 TYPE_GRAY_KEY,
                                                                                 TYPE_COIN_5,
                                                                                 TYPE_GRAY_KEY
                                                                             };
 
-
+// DOES NOT INCLUDE HIDDEN OBJECTS //
 const int              TABLE_REWARD_VRAM_ADR_LV1[OBJECT_NUMBER_LV1]  =     {
-                                                                                GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
                                                                                 TYPE_NULL,
-                                                                                GRAY_KEY_VRAM_ADR,
+
+                                                                                //
                                                                                 GRAY_KEY_VRAM_ADR,
 
                                                                                 //
                                                                                 GRAY_KEY_VRAM_ADR,
                                                                                 GRAY_KEY_VRAM_ADR,
                                                                                 GRAY_KEY_VRAM_ADR,
+
+                                                                                //
                                                                                 GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                COIN_10_VRAM_ADR,
+
+                                                                                //
                                                                                 GRAY_KEY_VRAM_ADR,
 
                                                                                 //
                                                                                 GRAY_KEY_VRAM_ADR,
+                                                                                HOURGLASS_VRAM_ADR,
+
+                                                                                //
+                                                                                COIN_10_VRAM_ADR,
+
+                                                                                //
+                                                                                HOURGLASS_VRAM_ADR,
                                                                                 GRAY_KEY_VRAM_ADR,
+                                                                                COIN_10_VRAM_ADR,
+
+                                                                                //
+                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                COIN_10_VRAM_ADR,
+
+                                                                                //
+                                                                                COIN_5_VRAM_ADR,
+
+                                                                                //
+                                                                                COIN_10_VRAM_ADR,
+
+                                                                                //
+                                                                                COIN_5_VRAM_ADR,
+                                                                                COIN_10_VRAM_ADR,
+
+                                                                                //
                                                                                 GRAY_KEY_VRAM_ADR,
                                                                                 COIN_5_VRAM_ADR,
                                                                                 GRAY_KEY_VRAM_ADR

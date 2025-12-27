@@ -118,26 +118,47 @@ main()
 
 
             //-----------------------------------------------------------------------------//
-            //                                    GAME                                     //
+            //                                    LEVEL                                    //
             //-----------------------------------------------------------------------------//
-            case SEQUENCE_GAME:
-                if(sequence_loaded == FALSE)
+            case SEQUENCE_LEVEL:
+                switch(level_id)
                 {
-                    init_LEVEL();
+                    case 1:
+                        if(sequence_loaded == FALSE)
+                        {
+                            init_LEVEL();
 
-                    sequence_loaded = TRUE;
-                }
+                            sequence_loaded = TRUE;
+                        }
 
-                else
-                {
-                    switch(level_id)
-                    {
-                        case 1:
+                        else
+                        {
+                            //
+                            while(level_start == TRUE)
+                            {
+                                vsync();
+                                
+                                global_counter += 1;
+
+                                if(global_counter == 120)
+                                {
+                                    put_string("       ",13, 8);
+                                    put_string("              ",10,13);
+                                    put_string("            ",11,15);
+                                    
+                                    global_counter = 0;
+
+                                    level_start = FALSE;
+                                }
+                            }
+
+
+
                             vsync();
 
                             update_PLAYER();
                             update_WEAPON();
-                            //put_number(hit_wall,1,0,1);
+                            //put_number(player_counter_attack,2,0,6);
 
                         
 
@@ -159,30 +180,30 @@ main()
 
                             joypad_DIR();
                             joypad_BUTTONS();
+                        }
 
-                            break;
-
-
-                        case 2:
-                            vsync();
-                            break;
+                        break;
 
 
-                        case 3:
-                            vsync();
-                            break;
+                    case 2:
+                        vsync();
+                        break;
 
 
-                        case 4:
-                            vsync();
-                            break;
+                    case 3:
+                        vsync();
+                        break;
 
 
-                        case 5:
-                            vsync();
-                            break;
+                    case 4:
+                        vsync();
+                        break;
 
-                    }
+
+                    case 5:
+                        vsync();
+                        break;
+
                 }
 
                 break;
@@ -269,7 +290,7 @@ main()
                                 shop_phase = SHOP_PHASE_EXIT;
                                 respawn = RESPAWN_SHOP;
                                 sequence_loaded = FALSE;
-                                sequence_id = SEQUENCE_GAME;
+                                sequence_id = SEQUENCE_LEVEL;
                             }
 
                             shop_counter++;

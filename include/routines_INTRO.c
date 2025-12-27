@@ -19,7 +19,7 @@ void joypad_BUTTONS_INTRO()
 
         sequence_loaded = FALSE;
 
-        sequence_id = SEQUENCE_GAME;
+        sequence_id = SEQUENCE_LEVEL;
     }
 }
 
@@ -441,7 +441,7 @@ void sequence_INTRO()
 
         sequence_loaded = FALSE;
 
-        sequence_id = SEQUENCE_GAME;
+        sequence_id = SEQUENCE_LEVEL;
     }
 
 
