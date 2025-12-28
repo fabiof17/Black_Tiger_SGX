@@ -21,10 +21,9 @@
 #include "include/tables_SHOP.c"
 
 
-
-#include "include/routines_ENTER_SHOP.c"
 #include "include/routines_INTRO.c"
 #include "include/routines_LEVELS.c"
+#include "include/routines_NPC.c"
 #include "include/routines_SHOP.c"
 #include "include/routines_TITLE.c"
 #include "include/init.c"
@@ -213,14 +212,7 @@ main()
             //                                     NPC                                     //
             //-----------------------------------------------------------------------------//
             case SEQUENCE_NPC:
-                break;
-
-
-            //-----------------------------------------------------------------------------//
-            //                                     NPC                                     //
-            //-----------------------------------------------------------------------------//
-            case SEQUENCE_ENTER_SHOP:
-                sequence_ENTER_SHOP();
+                sequence_NPC();
                 break;
 
 

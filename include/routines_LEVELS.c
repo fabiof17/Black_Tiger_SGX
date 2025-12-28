@@ -497,21 +497,17 @@ void collision_PLAYER_NPC()
                     {
                         if(abs( (player_pos_y + 16) - (list_npc_y_pos[current_npc_id] + 16) ) < OBJECT_MARGIN)
                         {               
-                            switch(current_npc_type)
-                            {
-                                case TYPE_NPC_REWARD:
-                                    //
-                                    break;
+                            global_counter = 0;
+                            selected_npc = current_npc_id + npc_start_index;
+                            list_npc_state[current_npc_id] = STATE_FREE;
+                            sequence_id = SEQUENCE_NPC;
 
-                                case TYPE_NPC_SHOP:
-                                    selected_npc = current_npc_id + npc_start_index;                                
-                                    minutes_backup = minutes;
-                                    seconds_backup = seconds;
-                                    list_npc_state[current_npc_id] = STATE_FREE;
-                                    camera_pos_x_backup = sgx_map_pxl_x;
-                                    camera_pos_y_backup = list_npc_y_pos_ref[current_npc_id] - 128;
-                                    sequence_id = SEQUENCE_ENTER_SHOP;
-                                    break;
+                            if(current_npc_type == TYPE_NPC_SHOP)
+                            {                              
+                                minutes_backup = minutes;
+                                seconds_backup = seconds;
+                                camera_pos_x_backup = sgx_map_pxl_x;
+                                camera_pos_y_backup = list_npc_y_pos_ref[current_npc_id] - 128;
                             }
                         }
                     }

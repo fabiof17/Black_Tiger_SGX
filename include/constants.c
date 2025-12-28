@@ -44,13 +44,13 @@
 
 
 
-
 #define SEQUENCE_TITLE          0
 #define SEQUENCE_INTRO          1
 #define SEQUENCE_LEVEL          2
 #define SEQUENCE_NPC            3
-#define SEQUENCE_ENTER_SHOP     4
-#define SEQUENCE_SHOP           5
+#define SEQUENCE_SHOP           4
+
+
 
 
 #define CAMERA_RECENTER_VELOCITY    6
@@ -300,8 +300,9 @@
 //                                                                             //
 //-----------------------------------------------------------------------------//
 
-#define TYPE_NPC_REWARD         0
-#define TYPE_NPC_SHOP           1
+#define TYPE_NPC_ZENNY          0
+#define TYPE_NPC_TIME           1
+#define TYPE_NPC_SHOP           2
 
 
 

@@ -87,6 +87,7 @@ unsigned char   sequence_id,
 
                 list_npc_type[9],
                 list_npc_state[9],
+                list_npc_reward[9],
                 list_onscreen_npc[9],
 
                 // SHOPS //
