@@ -1054,26 +1054,57 @@ void joypad_DIR()
 
         else if(player_state == STATE_CROUCH)
         {
-            if(player_axis == AXIS_LEFT)
+            if(joy(JOYPAD_1) & JOY_DOWN)
+            {
+                if(player_axis == AXIS_LEFT)
+                {
+                    player_axis = AXIS_RIGHT;
+                    player_previous_axis = player_axis;
+
+                    spr_set(player_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
+
+                    spr_set(chain_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
+
+                    spr_set(chain_id+1);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
+
+                    spr_set(chain_id+2);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
+
+                    spr_set(weapon_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_x(player_pos_x-1);
+                }
+            }
+
+            else
             {
                 player_axis = AXIS_RIGHT;
-                player_previous_axis = player_axis;
+                
+                if(player_previous_axis != player_axis)
+                {
+                    player_previous_axis = player_axis;
 
-                spr_set(player_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(player_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id+1);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id+1);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(chain_id+2);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_set(chain_id+2);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
 
-                spr_set(weapon_id);
-                spr_ctrl(FLIP_MAS, NO_FLIP_X);
-                spr_x(player_pos_x-1);
+                    spr_set(weapon_id);
+                    spr_ctrl(FLIP_MAS, NO_FLIP_X);
+                    spr_x(player_pos_x+1);
+                }
+
+                player_state = STATE_WALK;
             }
         }
 
@@ -1247,26 +1278,57 @@ void joypad_DIR()
 
         else if(player_state == STATE_CROUCH)
         {
-            if(player_axis == AXIS_RIGHT)
+            if(joy(JOYPAD_1) & JOY_DOWN)
+            {
+                if(joy(JOYPAD_1) & JOY_DOWN)
+                {
+                    player_axis = AXIS_LEFT;
+                    player_previous_axis = player_axis;
+
+                    spr_set(player_id);
+                    spr_ctrl(FLIP_MAS, FLIP_X);
+
+                    spr_set(chain_id);
+                    spr_ctrl(FLIP_MAS, FLIP_X);
+
+                    spr_set(chain_id+1);
+                    spr_ctrl(FLIP_MAS, FLIP_X);
+
+                    spr_set(chain_id+2);
+                    spr_ctrl(FLIP_MAS, FLIP_X);
+
+                    spr_set(weapon_id);
+                    spr_ctrl(FLIP_MAS, FLIP_X);
+                    spr_x(player_pos_x+17);
+                }
+            }
+
+            else
             {
                 player_axis = AXIS_LEFT;
-                player_previous_axis = player_axis;
 
-                spr_set(player_id);
-                spr_ctrl(FLIP_MAS, FLIP_X);
+                if(player_previous_axis != player_axis)
+                {
+                    player_previous_axis = player_axis;
 
-                spr_set(chain_id);
-                spr_ctrl(FLIP_MAS, FLIP_X);
+                    spr_set(player_id);
+                    spr_ctrl(FLIP_MAS, FLIP_X);
 
-                spr_set(chain_id+1);
-                spr_ctrl(FLIP_MAS, FLIP_X);
+                    spr_set(chain_id);
+                    spr_ctrl(FLIP_MAS, FLIP_X);
 
-                spr_set(chain_id+2);
-                spr_ctrl(FLIP_MAS, FLIP_X);
+                    spr_set(chain_id+1);
+                    spr_ctrl(FLIP_MAS, FLIP_X);
 
-                spr_set(weapon_id);
-                spr_ctrl(FLIP_MAS, FLIP_X);
-                spr_x(player_pos_x+17);
+                    spr_set(chain_id+2);
+                    spr_ctrl(FLIP_MAS, FLIP_X);
+
+                    spr_set(weapon_id);
+                    spr_ctrl(FLIP_MAS, FLIP_X);
+                    spr_x(player_pos_x+15);
+                }
+
+                player_state = STATE_WALK;
             }
         }
 
