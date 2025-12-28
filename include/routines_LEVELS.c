@@ -504,15 +504,13 @@ void collision_PLAYER_NPC()
                                     break;
 
                                 case TYPE_NPC_SHOP:
-                                    disp_off();
-
+                                    selected_npc = current_npc_id + npc_start_index;                                
                                     minutes_backup = minutes;
                                     seconds_backup = seconds;
                                     list_npc_state[current_npc_id] = STATE_FREE;
                                     camera_pos_x_backup = sgx_map_pxl_x;
-                                    camera_pos_y_backup = list_npc_y_pos_ref[current_npc_id] - 128;                                    
-                                    sequence_loaded = FALSE;
-                                    sequence_id = SEQUENCE_SHOP;
+                                    camera_pos_y_backup = list_npc_y_pos_ref[current_npc_id] - 128;
+                                    sequence_id = SEQUENCE_ENTER_SHOP;
                                     break;
                             }
                         }
@@ -2039,7 +2037,6 @@ void update_PLAYER()
 
                     player_counter_anim = 1;
                     player_index_jump = 0;
-                    //hit_wall = FALSE;
 
                     if(player_attack == FALSE)
                     {
@@ -2053,7 +2050,11 @@ void update_PLAYER()
 
 
 
-        // CHECK COLLISION WITH LADDERS //
+
+		//--------------------------------------------------------------------------------------//
+		//                                   LADDER COLLISION                                   //
+		//--------------------------------------------------------------------------------------//
+
         collision_PLAYER_BG( 16 , 16 );
 
         // IF PLAYER HITS THE LADDER //
@@ -3006,7 +3007,7 @@ void update_WEAPON()
         
         recenter_CAMERA();
 
-        if(player_counter_attack == 0)
+        if(player_counter_attack < 7)
         {
             spr_set(player_id);
             spr_pattern(PLAYER_ATTACK_1_VRAM_ADR);
@@ -3180,7 +3181,7 @@ void update_WEAPON()
         
         recenter_CAMERA();
 
-        if(player_counter_attack == 0)
+        if(player_counter_attack < 7)
         {
             spr_set(player_id);
             spr_pattern(PLAYER_CROUCH_ATTACK_1_VRAM_ADR);
@@ -3362,9 +3363,7 @@ void update_WEAPON()
     {
         if(player_attack == TRUE)
         {
-            recenter_CAMERA();
-
-            if(player_counter_attack == 0)
+            if(player_counter_attack < 7)
             {
                 spr_set(player_id);
                 spr_pattern(PLAYER_HANG_ATTACK_1_VRAM_ADR);

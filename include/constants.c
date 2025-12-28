@@ -49,10 +49,11 @@
 #define SEQUENCE_INTRO          1
 #define SEQUENCE_LEVEL          2
 #define SEQUENCE_NPC            3
-#define SEQUENCE_SHOP           4
+#define SEQUENCE_ENTER_SHOP     4
+#define SEQUENCE_SHOP           5
 
 
-#define CAMERA_RECENTER_VELOCITY    4
+#define CAMERA_RECENTER_VELOCITY    6
 
 
 
@@ -108,7 +109,7 @@
 
 
 
-#define PLAYER_VRAM_ADR                     0x1400
+#define PLAYER_VRAM_ADR                     0x1800
 #define PLAYER_IDLE_VRAM_ADR                PLAYER_VRAM_ADR
 #define PLAYER_WALK_1_VRAM_ADR              PLAYER_VRAM_ADR+TILES_16
 #define PLAYER_WALK_2_VRAM_ADR              PLAYER_WALK_1_VRAM_ADR+TILES_16
@@ -262,10 +263,6 @@
 
 #define POW_VRAM_ADR            POT8_VRAM_ADR+TILES_4
 #define GRAY_KEY_VRAM_ADR       POW_VRAM_ADR+TILES_4
-//#define GOLD_KEY_VRAM_ADR       GRAY_KEY_VRAM_ADR+TILES_4
-//#define LIFE_VRAM_ADR           GOLD_KEY_VRAM_ADR+TILES_4
-
-//#define COIN_1_VRAM_ADR         LIFE_VRAM_ADR+TILES_4
 #define COIN_1_VRAM_ADR         GRAY_KEY_VRAM_ADR+TILES_4
 #define COIN_5_VRAM_ADR         COIN_1_VRAM_ADR+TILES_4
 #define COIN_10_VRAM_ADR        COIN_5_VRAM_ADR+TILES_4
@@ -286,8 +283,13 @@
 #define COW_VRAM_ADR            DRAGONFLY_VRAM_ADR+TILES_4
 #define MOBICHAN_VRAM_ADR       COW_VRAM_ADR+TILES_4
 
-#define CHEST_VRAM_ADR          0x6F00//0x7000
-#define NPC_VRAM_ADR            CHEST_VRAM_ADR+TILES_96
+#define CHEST_VRAM_ADR          MOBICHAN_VRAM_ADR+TILES_4
+#define NPC_1_VRAM_ADR          CHEST_VRAM_ADR+TILES_96
+#define NPC_2_VRAM_ADR          NPC_1_VRAM_ADR+TILES_16
+#define NPC_3_VRAM_ADR          NPC_2_VRAM_ADR+TILES_16
+#define NPC_4_VRAM_ADR          NPC_3_VRAM_ADR+TILES_16
+#define NPC_5_VRAM_ADR          NPC_4_VRAM_ADR+TILES_16
+#define NPC_6_VRAM_ADR          NPC_5_VRAM_ADR+TILES_16
 
 
 

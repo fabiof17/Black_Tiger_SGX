@@ -22,6 +22,7 @@
 
 
 
+#include "include/routines_ENTER_SHOP.c"
 #include "include/routines_INTRO.c"
 #include "include/routines_LEVELS.c"
 #include "include/routines_SHOP.c"
@@ -161,7 +162,6 @@ main()
                             //put_number(player_counter_attack,2,0,6);
 
                         
-
                             scroll_object();
                             scroll_chest();
                             scroll_npc();
@@ -213,6 +213,14 @@ main()
             //                                     NPC                                     //
             //-----------------------------------------------------------------------------//
             case SEQUENCE_NPC:
+                break;
+
+
+            //-----------------------------------------------------------------------------//
+            //                                     NPC                                     //
+            //-----------------------------------------------------------------------------//
+            case SEQUENCE_ENTER_SHOP:
+                sequence_ENTER_SHOP();
                 break;
 
 

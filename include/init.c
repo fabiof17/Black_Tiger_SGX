@@ -60,6 +60,7 @@ void init_VARIABLES()
 	
 	player_naked = FALSE;
 
+	selected_npc = 0;
 	index_x = 0;
 	index_y = 0;
 	item_index = 0;
@@ -434,7 +435,7 @@ void load_CHEST_TILES()
 
 void load_NPC_TILES()
 {
-	sgx_load_vram(NPC_VRAM_ADR, tiles_SPR_NPC , SIZEOF(tiles_SPR_NPC) >> 1);
+	sgx_load_vram(NPC_1_VRAM_ADR, tiles_SPR_NPC , SIZEOF(tiles_SPR_NPC) >> 1);
 }
 
 
@@ -552,7 +553,7 @@ void init_NPC_LV1()
 
 
 		sgx_spr_pal(17);
-		sgx_spr_pattern(NPC_VRAM_ADR);
+		sgx_spr_pattern(NPC_1_VRAM_ADR);
 		sgx_spr_ctrl(FLIP_MAS|SIZE_MAS, NO_FLIP|SZ_32x32);
 	}
 }
@@ -734,6 +735,7 @@ void init_LEVEL()
 			seconds = 59;
 		}
 
+		global_counter			= 0;
 		camera_max_y_position	= 768;
 		jump_max_index			= 34;
 		score					= 0;
@@ -844,6 +846,16 @@ void init_LEVEL()
 
 		sgx_scroll_split(0,   0, sgx_map_pxl_x & (BAT_SIZE_W - 1), sgx_map_pxl_y & (BAT_SIZE_H - 1), BKG_ON | SPR_ON);
 
+
+
+
+		//--------------------------------------------------------------------------------------//
+		//                                        VDC 1                                         //
+		//--------------------------------------------------------------------------------------//
+
+		scroll_split(0,   0, 0,  0, BKG_ON | SPR_ON);
+		scroll_split(1,  48, 0, 48, BKG_ON | SPR_ON);
+		scroll_split(2,  88, 0, 88, BKG_ON | SPR_ON);
 
 
 

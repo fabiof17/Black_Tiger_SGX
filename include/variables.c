@@ -83,6 +83,7 @@ unsigned char   sequence_id,
                 npc_start_index,
                 level_npc_number,
                 onscreen_npc_number,
+                selected_npc,
 
                 list_npc_type[9],
                 list_npc_state[9],
