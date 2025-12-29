@@ -152,8 +152,6 @@ main()
                                 }
                             }
 
-
-
                             vsync();
 
                             update_PLAYER();
@@ -212,6 +210,7 @@ main()
             //                                     NPC                                     //
             //-----------------------------------------------------------------------------//
             case SEQUENCE_NPC:
+                vsync();
                 sequence_NPC();
                 break;
 

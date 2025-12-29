@@ -12,8 +12,6 @@
 
 void sequence_NPC()
 {
-    vsync();
-    
     global_counter += 1;
 
     if(global_counter == 4)
@@ -158,7 +156,7 @@ void sequence_NPC()
         if(list_npc_type[selected_npc - npc_start_index] == TYPE_NPC_SHOP)
         {
             disp_off();
-                                         
+
             sequence_loaded = FALSE;
             sequence_id = SEQUENCE_SHOP;
         }
@@ -167,6 +165,28 @@ void sequence_NPC()
         {
             zenny_amount += list_npc_reward[selected_npc - npc_start_index];
             display_ZENNY();
+
+            sgx_spr_hide();
+
+            list_npc_state[selected_npc - npc_start_index] = STATE_FREE;
+            sequence_id = SEQUENCE_LEVEL;
+        }
+
+        else if(list_npc_type[selected_npc - npc_start_index] == TYPE_NPC_TIME)
+        {
+            if(seconds + list_npc_reward[selected_npc - npc_start_index] > 59)
+            {
+                minutes += 1;
+
+                seconds = seconds + list_npc_reward[selected_npc - npc_start_index] - 60;
+            }
+
+            else
+            {
+                seconds += list_npc_reward[selected_npc - npc_start_index];
+            }
+
+            display_TIME_LEVEL();
 
             sgx_spr_hide();
 
