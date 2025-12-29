@@ -99,7 +99,7 @@ const signed int        TABLE_OBJECT_Y_POS_REF_LV1[OBJECT_NUMBER_LV1] =     {
 
 // DOES NOT INCLUDE HIDDEN OBJECTS //
 const char              TABLE_REWARD_TYPE_LV1[OBJECT_NUMBER_LV1]       =    {
-                                                                                TYPE_NULL,
+                                                                                TYPE_NULL,//HOURGLASS
 
                                                                                 //
                                                                                 TYPE_GRAY_KEY,
@@ -114,7 +114,7 @@ const char              TABLE_REWARD_TYPE_LV1[OBJECT_NUMBER_LV1]       =    {
 
                                                                                 //
                                                                                 TYPE_COIN_10,
-                                                                                TYPE_NULL,
+                                                                                TYPE_NULL,//POW
 
                                                                                 //
                                                                                 TYPE_GRAY_KEY,
@@ -150,22 +150,22 @@ const char              TABLE_REWARD_TYPE_LV1[OBJECT_NUMBER_LV1]       =    {
 
 // DOES NOT INCLUDE HIDDEN OBJECTS //
 const int              TABLE_REWARD_VRAM_ADR_LV1[OBJECT_NUMBER_LV1]  =     {
-                                                                                TYPE_NULL,
+                                                                                TYPE_NULL,//HOURGLASS
 
                                                                                 //
                                                                                 GRAY_KEY_VRAM_ADR,
 
                                                                                 //
-                                                                                GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
-                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                COIN_5_VRAM_ADR,
+                                                                                COIN_5_VRAM_ADR,
 
                                                                                 //
                                                                                 GRAY_KEY_VRAM_ADR,
                                                                                 COIN_10_VRAM_ADR,
 
                                                                                 //
-                                                                                GRAY_KEY_VRAM_ADR,
+                                                                                COIN_10_VRAM_ADR,
+                                                                                TYPE_NULL,//POW
 
                                                                                 //
                                                                                 GRAY_KEY_VRAM_ADR,
