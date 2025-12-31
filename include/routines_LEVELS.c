@@ -2933,7 +2933,7 @@ void update_WEAPON()
         
         recenter_CAMERA();
 
-        if(player_counter_attack < 7)
+        if(player_counter_attack < 6)
         {
             spr_set(player_id);
             spr_pattern(PLAYER_ATTACK_1_VRAM_ADR);
@@ -2981,12 +2981,16 @@ void update_WEAPON()
         }
 
         // CHAIN ANIMATION //
-        if(chain_unfold == TRUE)
+        //if(chain_unfold == TRUE)
+        if(player_counter_attack > 5)
         {
+            spr_set(player_id);
+            spr_pattern(PLAYER_ATTACK_2_VRAM_ADR);
+
             if(player_counter_attack == 6)
             {
-                spr_set(player_id);
-                spr_pattern(PLAYER_ATTACK_2_VRAM_ADR);
+                //spr_set(player_id);
+                //spr_pattern(PLAYER_ATTACK_2_VRAM_ADR);
 
                 spr_set(weapon_id);
                 spr_pattern(WEAPON_ATTACK_2_VRAM_ADRESS);
@@ -3003,9 +3007,9 @@ void update_WEAPON()
                 }
 
                 weapon_y_offset = 6;
-                spr_y(player_pos_y + weapon_y_offset);
+                //spr_y(player_pos_y + weapon_y_offset);
 
-                collision_WEAPON_OBJECTS();
+                //collision_WEAPON_OBJECTS();
             }
 
             else if(player_counter_attack == 7)
@@ -3029,9 +3033,9 @@ void update_WEAPON()
                     spr_x(player_pos_x-32);
                 }
 
-                spr_y(player_pos_y + weapon_y_offset);
+                //spr_y(player_pos_y + weapon_y_offset);
 
-                collision_WEAPON_OBJECTS();
+                //collision_WEAPON_OBJECTS();
             }
 
             else if(player_counter_attack == 8)
@@ -3055,9 +3059,9 @@ void update_WEAPON()
                     spr_x(player_pos_x-48);
                 }
 
-                spr_y(player_pos_y + weapon_y_offset);
+                //spr_y(player_pos_y + weapon_y_offset);
 
-                collision_WEAPON_OBJECTS();
+                //collision_WEAPON_OBJECTS();
             }
 
             else if(player_counter_attack == 9)
@@ -3081,9 +3085,22 @@ void update_WEAPON()
                     spr_x(player_pos_x-64);
                 }
 
-                spr_y(player_pos_y + weapon_y_offset);
+                //spr_y(player_pos_y + weapon_y_offset);
 
-                collision_WEAPON_OBJECTS();
+                //collision_WEAPON_OBJECTS();
+            }
+
+            spr_set(weapon_id);
+            spr_y(player_pos_y + weapon_y_offset);
+        
+            collision_WEAPON_OBJECTS();
+
+            // SET CHAIN Y POSITION //
+            for(i=0 ; i<3 ; i++)
+            {
+                spr_set(chain_id+i);
+
+                spr_y( ((player_pos_y + 16) * list_chain_active[i]) - 16); //list_chain_active[0] = TRUE;
             }
         }
 
@@ -3091,13 +3108,7 @@ void update_WEAPON()
         player_counter_attack += 1;
 
 
-        // SET CHAIN Y POSITION //
-        for(i=0 ; i<3 ; i++)
-        {
-            spr_set(chain_id+i);
 
-            spr_y( ((player_pos_y + 16) * list_chain_active[i]) - 16); //list_chain_active[0] = TRUE;
-        }
     }
 
 
@@ -3275,6 +3286,7 @@ void update_WEAPON()
 
                     //collision_WEAPON_OBJECTS();
                 }
+                
                 spr_set(weapon_id);
                 spr_y(player_pos_y + weapon_y_offset);
             
