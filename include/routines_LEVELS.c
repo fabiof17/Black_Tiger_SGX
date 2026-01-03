@@ -1034,6 +1034,8 @@ void joypad_DIR()
 
                 if(player_index_jump > 10 && player_index_jump < 15)
                 {
+                    jump_max_index = 35;
+                    
                     player_state = STATE_JUMP_RIGHT;                        
                 }
             }
@@ -1046,6 +1048,8 @@ void joypad_DIR()
             {
                 if(player_axis == AXIS_LEFT)
                 {
+                    //jump_max_index = 43;
+                    
                     player_axis = AXIS_RIGHT;
                     player_previous_axis = player_axis;
 
@@ -1264,6 +1268,8 @@ void joypad_DIR()
 
                 if(player_index_jump > 10 && player_index_jump < 15)
                 {
+                    jump_max_index = 35;
+                    
                     player_state = STATE_JUMP_LEFT;                        
                 }
             }
@@ -1276,6 +1282,8 @@ void joypad_DIR()
             {
                 if(player_axis == AXIS_RIGHT)
                 {
+                    //jump_max_index = 43;
+                    
                     player_axis = AXIS_LEFT;
                     player_previous_axis = player_axis;
 
