@@ -826,6 +826,8 @@ void joypad_BUTTONS()
                 if(joy(JOYPAD_1) & JOY_RIGHT)
                 {
                     hit_wall = FALSE;
+
+                    jump_max_index = 29;
                     
                     player_counter_anim = 0;
 
@@ -838,6 +840,8 @@ void joypad_BUTTONS()
                 else if(joy(JOYPAD_1) & JOY_LEFT)
                 {
                     hit_wall = FALSE;
+
+                    jump_max_index = 29;
                     
                     player_counter_anim = 0;
 
