@@ -156,9 +156,10 @@ main()
 
                             update_PLAYER();
                             update_WEAPON();
+
                             //put_number(player_state,2,0,6);
-                            //put_number(player_counter_attack,2,0,7);
-                            //put_number(player_index_jump,2,0,8);
+                            //put_number(player_index_jump,2,0,7);
+                            //put_number(player_counter_attack,2,0,8);
 
                         
                             scroll_object();

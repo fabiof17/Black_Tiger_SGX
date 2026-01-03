@@ -40,7 +40,7 @@ unsigned char   sequence_id,
                 weapon_id,
                 armor_level,
                 weapon_level,
-                chain_unfold,
+                //chain_unfold,
                 list_chain_active[3],
 
                 // HUD //

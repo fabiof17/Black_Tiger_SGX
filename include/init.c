@@ -754,7 +754,6 @@ void init_LEVEL()
 
 		global_counter			= 0;
 		camera_max_y_position	= 768;
-		jump_max_index			= 34;
 		score					= 0;
 		level_object_number		= OBJECT_NUMBER_LV1;
 		level_chest_number		= CHEST_NUMBER_LV1;
