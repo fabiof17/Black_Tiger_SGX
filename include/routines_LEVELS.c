@@ -1046,14 +1046,12 @@ void joypad_DIR()
         }
 
 
-        else if(player_state == STATE_JUMP_LEFT)
+        else if(player_state == STATE_JUMP_RIGHT || player_state == STATE_JUMP_LEFT)
         {
             if(player_attack == FALSE)
             {
                 if(player_axis == AXIS_LEFT)
                 {
-                    //jump_max_index = 43;
-                    
                     player_axis = AXIS_RIGHT;
                     player_previous_axis = player_axis;
 
@@ -1280,14 +1278,12 @@ void joypad_DIR()
         }
 
 
-        else if(player_state == STATE_JUMP_RIGHT)
+        else if(player_state == STATE_JUMP_RIGHT || player_state == STATE_JUMP_LEFT)
         {
             if(player_attack == FALSE)
             {
                 if(player_axis == AXIS_RIGHT)
                 {
-                    //jump_max_index = 43;
-                    
                     player_axis = AXIS_LEFT;
                     player_previous_axis = player_axis;
 
@@ -3336,7 +3332,7 @@ void update_WEAPON()
 
                 player_attack = FALSE;
                 player_counter_attack = 0;
-                player_state = STATE_JUMP;
+                //player_state = STATE_JUMP;
                 return;
             }
 
