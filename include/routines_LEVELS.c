@@ -892,12 +892,11 @@ void joypad_BUTTONS()
             list_chain_active[1] = FALSE;
             list_chain_active[2] = FALSE;
 
-            //chain_unfold = TRUE;
             player_counter_attack = 0;
             player_state = STATE_ATTACK;
         }
 
-        else if(player_state == STATE_JUMP || player_state == STATE_JUMP_RIGHT || player_state == STATE_JUMP_LEFT)
+        else if(player_state == STATE_JUMP || player_state == STATE_JUMP_RIGHT || player_state == STATE_JUMP_LEFT || player_state == STATE_JUMP_LADDER)
         {
             if(player_attack == FALSE)
             {
@@ -906,7 +905,6 @@ void joypad_BUTTONS()
                 list_chain_active[2] = FALSE;
 
                 player_counter_attack = 0;
-                //chain_unfold = TRUE;
                 player_attack = TRUE;
             }
         }
@@ -917,7 +915,6 @@ void joypad_BUTTONS()
             list_chain_active[1] = FALSE;
             list_chain_active[2] = FALSE;
 
-            //chain_unfold = TRUE;
             player_counter_attack = 0;
             player_state = STATE_CROUCH_ATTACK;
         }
@@ -931,7 +928,6 @@ void joypad_BUTTONS()
                 list_chain_active[2] = FALSE;
                 
                 player_counter_attack = 0;
-                //chain_unfold = TRUE;
                 player_attack = TRUE;
                 player_state = STATE_HANG;
             }
@@ -3080,8 +3076,23 @@ void update_PLAYER()
                     sgx_map_pxl_x += 8;
                 }
 
-                //spr_set(player_id);
                 spr_pattern(PLAYER_HANG_VRAM_ADR);
+
+                spr_set(chain_id);
+                spr_hide();
+
+                spr_set(chain_id+1);
+                spr_hide();
+
+                spr_set(chain_id+2);
+                spr_hide();
+
+                list_chain_active[0] = FALSE;
+                list_chain_active[1] = FALSE;
+                list_chain_active[2] = FALSE;
+
+                player_attack = FALSE;
+                player_counter_attack = 0;
 
                 player_counter_anim = 0;//
                 player_index_jump = 0;
@@ -3283,7 +3294,7 @@ void update_WEAPON()
     }
 
 
-    else if(player_state == STATE_JUMP || player_state == STATE_JUMP_RIGHT || player_state == STATE_JUMP_LEFT)
+    else if(player_state == STATE_JUMP || player_state == STATE_JUMP_RIGHT || player_state == STATE_JUMP_LEFT || player_state == STATE_JUMP_LADDER)
     {
         char i;
         
