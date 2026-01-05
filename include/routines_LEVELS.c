@@ -863,6 +863,8 @@ void joypad_BUTTONS()
                     {
                         player_state = STATE_JUMP_LADDER;
 
+                        jump_max_index = 43;
+
                         spr_set(weapon_id);
                         spr_y(player_pos_y+8);
                         
@@ -1010,10 +1012,12 @@ void joypad_DIR()
         }
 
 
-        else if(player_state == STATE_JUMP)
+        else if(player_state == STATE_JUMP || player_state == STATE_JUMP_LADDER)
         {
             if(player_attack == FALSE)
             {
+                jump_ladder = FALSE;
+                
                 if(player_axis == AXIS_LEFT)
                 {
                     player_axis = AXIS_RIGHT;
@@ -1242,10 +1246,12 @@ void joypad_DIR()
         }
 
 
-        else if(player_state == STATE_JUMP)
+        else if(player_state == STATE_JUMP || player_state == STATE_JUMP_LADDER)
         {
             if(player_attack == FALSE)
             {
+                jump_ladder = FALSE;
+                
                 if(player_axis == AXIS_RIGHT)
                 {
                     player_axis = AXIS_LEFT;
@@ -3011,7 +3017,8 @@ void update_PLAYER()
             player_counter_anim = 1;
         }
 
-
+        
+        //player_pos_y += TABLE_PLAYER_JUMP_V_LADDER[player_index_jump];
         player_pos_y += TABLE_PLAYER_JUMP_V_GROUND[player_index_jump];
 
         // CHECK COLLISION WITH CEILING //
@@ -3019,6 +3026,8 @@ void update_PLAYER()
 
         if(map_blk_flag == TILE_BG)
         {
+            player_index_jump = 20;
+            
             for(i=1 ; i<8 ; i++)
             {
                 collision_PLAYER_BG( 15 , 8 + i );
