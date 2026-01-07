@@ -896,7 +896,7 @@ void joypad_BUTTONS()
             player_state = STATE_ATTACK;
         }
 
-        else if(player_state == STATE_JUMP || player_state == STATE_JUMP_RIGHT || player_state == STATE_JUMP_LEFT || player_state == STATE_JUMP_LADDER)
+        else if(player_state == STATE_JUMP || player_state == STATE_JUMP_RIGHT || player_state == STATE_JUMP_LEFT || player_state == STATE_FALL || player_state == STATE_JUMP_LADDER)
         {
             if(player_attack == FALSE)
             {
@@ -2702,12 +2702,12 @@ void update_PLAYER()
         i = 1;
 
 
-        spr_set(player_id);
+        //spr_set(player_id);
 
 
-        //--------------------------------------------------------------------------------------//
+		//**************************************************************************************//
 		//                                        V MOVE                                        //
-		//--------------------------------------------------------------------------------------//
+		//**************************************************************************************//
 
         // UPDATE PLAYER Y POSITION //
         player_pos_y += TABLE_PLAYER_FALL[player_index_fall];
@@ -2744,6 +2744,12 @@ void update_PLAYER()
         check_TILE_DEPTH( 15 , 0);
 
 
+
+
+		//--------------------------------------------------------------------------------------//
+		//                                   FLOOR COLLISION                                    //
+		//--------------------------------------------------------------------------------------//
+
         if(map_blk_flag == TILE_BG)
         {
             // CALCULATE HOW MANY PIXELS THE PLAYER MOVED INTO THE GROUND //
@@ -2771,7 +2777,8 @@ void update_PLAYER()
             }
 
 
-            // SET PLAYER SPRITE NEW POSITION //  
+            // SET PLAYER SPRITE NEW POSITION //
+            spr_set(player_id);
             spr_y(player_pos_y);
 
                   
@@ -2780,20 +2787,17 @@ void update_PLAYER()
                 // BY DEFAULT, WE ASSUME THE PLAYER WAS WALKING //
                 player_state = STATE_WALK;
                 
-                if(player_attack == FALSE)
+                if(fall_ladder == TRUE || hit_wall == TRUE)
                 {
-                    if(fall_ladder == TRUE || hit_wall == TRUE)
-                    {
-                        spr_pattern(PLAYER_IDLE_VRAM_ADR);
-                        
-                        spr_set(weapon_id);
-                        spr_x(player_pos_x+8);
-                        spr_y(player_pos_y+16);
+                    spr_pattern(PLAYER_IDLE_VRAM_ADR);
+                    
+                    spr_set(weapon_id);
+                    spr_x(player_pos_x+8);
+                    spr_y(player_pos_y+16);
 
-                        player_counter_anim = 1;
+                    player_counter_anim = 1;
 
-                        player_state = STATE_IDLE;
-                    }
+                    player_state = STATE_IDLE;
                 }
 
                 player_index_jump = 0;
@@ -2812,6 +2816,12 @@ void update_PLAYER()
             return;
         }
 
+
+
+
+		//--------------------------------------------------------------------------------------//
+		//                                   LADDER COLLISION                                   //
+		//--------------------------------------------------------------------------------------//
 
         collision_PLAYER_BG( 16 , 16 );
 
@@ -2832,21 +2842,43 @@ void update_PLAYER()
                 sgx_map_pxl_x += 8;
             }
 
+            spr_set(player_id);
             spr_pattern(PLAYER_HANG_VRAM_ADR);
+
+            spr_set(chain_id);
+            spr_hide();
+
+            spr_set(chain_id+1);
+            spr_hide();
+
+            spr_set(chain_id+2);
+            spr_hide();
+
+            list_chain_active[0] = FALSE;
+            list_chain_active[1] = FALSE;
+            list_chain_active[2] = FALSE;
+
+            player_attack = FALSE;
+            //player_counter_attack = 0;
+
             player_counter_anim = 0;//1
             player_index_jump = 0;
             player_index_fall = 0;
             jump_ladder = TRUE;
             jump_max_index = 29;
             player_state = STATE_HANG;
+
             return;
         }
 
         spr_set(player_id);
         spr_y(player_pos_y);
 
-        spr_set(weapon_id);
-        spr_y(player_pos_y+8);
+        if(fall_ladder == TRUE)
+        {
+            spr_set(weapon_id);
+            spr_y(player_pos_y+8);
+        }
     }
 
 
